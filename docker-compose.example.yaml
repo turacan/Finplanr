@@ -1,0 +1,45 @@
+# Generic example: serve the built site (dist/) with nginx, optionally behind a Cloudflare Tunnel.
+#
+#   1. cp config/operator.example.json config/operator.json   (edit it)
+#   2. python3 -I tools/build.py                              (creates ./dist)
+#   3. cp docker-compose.example.yaml docker-compose.yaml     (the copy is git-ignored)
+#   4. docker compose up -d
+#
+# The container publishes no port by default. Either uncomment the "ports" block below for a quick local
+# test (http://localhost:8080) or use the optional tunnel service.
+services:
+  finplanr:
+    image: nginx:stable-alpine
+    container_name: finplanr
+    restart: unless-stopped
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro
+      - ./config/default.conf:/etc/nginx/conf.d/default.conf:ro
+    # ports:
+    #   - "127.0.0.1:8080:80"
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: publish the site through a Cloudflare Tunnel instead of opening a port.
+  # Create tunnel.env from tunnel.env.example first (it holds the secret token and is git-ignored).
+  # cloudflared:
+  #   image: cloudflare/cloudflared:latest
+  #   container_name: finplanr-cloudflared
+  #   restart: unless-stopped
+  #   command: tunnel --no-autoupdate run
+  #   env_file:
+  #     - ./tunnel.env
+  #   depends_on:
+  #     - finplanr
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   logging:
+  #     driver: json-file
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "3"

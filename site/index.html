@@ -1,0 +1,1881 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!--
+    © 2026 {{COPYRIGHT_HOLDER}}. All rights reserved.
+    Unauthorised copying, hosting or redistribution of this application or its texts is not permitted.
+    Third-party names and logos belong to their respective owners.
+    https://finplanr.net
+  -->
+  <meta name="author" content="{{OPERATOR_NAME}}">
+  <meta name="copyright" content="© 2026 {{COPYRIGHT_HOLDER}}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <!-- seo:begin (English head block; tools/build.py regenerates it from STR meta.title/meta.desc and derives the /de/ variant - keep in sync via: python3 -I tools/build.py --update-source) -->
+  <title>Finplanr – Savings plan calculator for ETFs, crypto &amp; savings</title>
+  <meta name="description" content="Free savings plan calculator: split your monthly budget across ETFs, crypto, precious metals and a savings account. Set your allocation and see every amount.">
+  <link rel="canonical" href="https://finplanr.net/">
+  <link rel="alternate" hreflang="en" href="https://finplanr.net/">
+  <link rel="alternate" hreflang="de" href="https://finplanr.net/de/">
+  <link rel="alternate" hreflang="x-default" href="https://finplanr.net/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Finplanr">
+  <meta property="og:title" content="Finplanr – Savings plan calculator for ETFs, crypto &amp; savings">
+  <meta property="og:description" content="Free savings plan calculator: split your monthly budget across ETFs, crypto, precious metals and a savings account. Set your allocation and see every amount.">
+  <meta property="og:url" content="https://finplanr.net/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:image" content="https://finplanr.net/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Finplanr: savings plan calculator">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Finplanr – Savings plan calculator for ETFs, crypto &amp; savings">
+  <meta name="twitter:description" content="Free savings plan calculator: split your monthly budget across ETFs, crypto, precious metals and a savings account. Set your allocation and see every amount.">
+  <meta name="twitter:image" content="https://finplanr.net/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Finplanr",
+    "url": "https://finplanr.net/",
+    "description": "Free savings plan calculator: split your monthly budget across ETFs, crypto, precious metals and a savings account. Set your allocation and see every amount.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "en",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
+  <!-- seo:end -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <style>
+    :root { --navy:#15283b; --ink:#17263a; --muted:#69788a; --line:#e3e9f0; --paper:#fff; --bg:#f5f7fb; --purple:#8068d8; --teal:#218c83; --gold:#d9a33d; --blue:#6b98d4; --shadow:0 12px 42px rgba(24,42,67,.06); }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.seg,.legendline,.stackbar button,.section{transition:none!important}}
+    body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.48 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif}
+    button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b2c7ef;outline-offset:2px}
+    .wrap{max-width:1190px;margin:0 auto;padding:28px 28px 70px}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:27px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}.brandmark{width:40px;height:40px;display:grid;place-items:center;border-radius:13px;color:#fff;background:var(--navy);font-size:22px;font-weight:750;letter-spacing:-2px}
+    .brandtext strong{display:block;letter-spacing:-.4px;font-size:16px}.brandtext span{display:block;font-size:12px;color:var(--muted)}
+    .toolbar{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+    .btn{border:1px solid var(--line);background:#fff;color:#314156;padding:9px 12px;border-radius:11px;font-size:13px;font-weight:650;display:inline-flex;gap:7px;align-items:center;justify-content:center;transition:.15s ease}
+    .btn:hover{background:#f1f5fa;border-color:#bfcddf}.btn.primary{background:var(--navy);color:white;border-color:var(--navy)}.btn.primary:hover{background:#26445f}
+    .btn.soft{border-color:#cfdbeb;background:#eff4fa}.btn.danger{color:#9a3d43;border-color:#ead7d9}.btn.danger:hover{background:#fff2f2}
+    .btn.small{font-size:12px;padding:7px 10px}.btn.icononly{width:31px;height:31px;padding:0;font-size:15px}
+    .hidden{display:none!important}
+    .hero{background:linear-gradient(135deg,#192c42 0%,#233e56 65%,#2b455d 100%);color:#fff;border-radius:23px;padding:32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,.83fr);gap:20px;box-shadow:0 20px 46px #182e4430;overflow:hidden}
+    .eyebrow{text-transform:uppercase;letter-spacing:1.8px;font-size:11px;font-weight:800;opacity:.72}
+    h1{font-size:clamp(25px,3vw,38px);letter-spacing:-1.2px;line-height:1.14;margin:12px 0 20px;font-weight:770}
+    .budgetlabel{display:block;color:#d5e2ed;font-weight:600;font-size:12px;margin-bottom:7px}
+    .budgetbox{display:flex;align-items:center;gap:8px;max-width:290px;background:#ffffff13;border:1px solid #ffffff38;padding:6px 13px;border-radius:15px}
+    .budgetbox input{background:none;border:0;color:#fff;font-weight:760;font-size:34px;letter-spacing:-1px;min-width:0;width:100%;font-variant-numeric:tabular-nums;outline:none!important}
+    .budgetbox .currency{font-size:22px;font-weight:550;color:#b7cadb}
+    input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}
+    .herohint{font-size:12px;color:#bdd0df;margin:10px 0 0;max-width:350px}
+    .hero-info{display:flex;gap:20px;margin-top:30px;flex-wrap:wrap}.hero-info .v{font-size:22px;font-weight:750;letter-spacing:-.3px}.hero-info .k{font-size:12px;color:#b4c9d8;margin-top:0}
+    .visual{display:flex;align-items:center;gap:23px;justify-content:center;padding:6px 0}.donut{position:relative;flex:0 0 176px;width:176px;height:176px;display:grid;place-items:center}
+    /* SVG ring (viewBox 176): overflow visible so a popped segment may grow into the hero padding; ring thickness 25.5 */
+    .donutsvg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.donutsvg .track{fill:none;stroke:#e3eaf1;stroke-width:25.5;opacity:0}.donut.empty .track{opacity:1}
+    .seg{cursor:pointer;outline:none;transition:stroke-width .15s ease,transform .15s ease,opacity .15s ease,filter .15s ease}.seg.zero{display:none}
+    .seg.on{stroke-width:33;transform:translate(var(--tx,0),var(--ty,0));filter:drop-shadow(0 2px 5px #0009)}.seg:focus-visible{filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff) drop-shadow(0 2px 5px #0009)}
+    .donut.hasact .seg:not(.on){opacity:.55}
+    .donut-inner{position:relative;text-align:center;z-index:1;pointer-events:none;max-width:104px}.donut-inner strong{display:block;font-size:27px;letter-spacing:-.8px}.donut-inner span{display:block;color:#bbd0e0;font-size:11px}
+    .donut-inner .donut-name{color:#fff;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.donut-name:empty{display:none!important}
+    .legend{width:100%;display:flex;flex-direction:column;gap:12px;min-width:0}.legendline{display:flex;align-items:center;gap:9px;font-size:12px;width:calc(100% + 12px);margin:-3px -6px;padding:3px 6px;border:0;border-radius:8px;background:none;color:inherit;text-align:left;transition:background .15s ease}.legendline.on{background:#ffffff1c}.dot{width:9px;height:9px;border-radius:4px;flex:none}.legendname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e2eaf3}.legendline strong{font-variant-numeric:tabular-nums;font-weight:730}
+    .intro{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin:33px 0 17px}
+    h2{font-size:23px;letter-spacing:-.6px;margin:0;font-weight:780}.intro .sub{font-size:13px;color:var(--muted);margin-top:4px}
+    .stackbar{display:flex;overflow:hidden;height:11px;border-radius:99px;background:#e4eaf2;margin-bottom:22px}.stackbar button{height:100%;min-width:0;padding:0;margin:0;border:0;border-radius:0;transition:width .15s ease,filter .15s ease,opacity .15s ease}.stackbar button:focus-visible{outline-offset:-3px}.stackbar.hasact button:not(.on){opacity:.55}
+    .sections{display:grid;gap:17px}
+    .section{scroll-margin-top:18px;transition:box-shadow .5s ease;background:var(--paper);border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);padding:22px 24px 13px;--accent:var(--teal);overflow:hidden}
+    .sectionhead{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,420px);gap:20px;align-items:center;padding-bottom:19px;border-bottom:1px solid var(--line)}
+    .section-title{display:flex;align-items:center;gap:11px}.section-icon{width:38px;height:38px;flex:none;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 12%,white);color:var(--accent);font-size:20px}
+    .sectionname:focus-visible{outline:3px solid #b2c7ef;outline-offset:4px;border-radius:6px}.section.flash{box-shadow:0 0 0 3px var(--accent),var(--shadow)}.sectionname{font-size:19px;letter-spacing:-.3px;font-weight:770;margin:0}.categoryline{margin:2px 0 0 49px;font-size:12px;color:var(--muted)}
+    .categorymoney{font-size:20px;font-weight:790;font-variant-numeric:tabular-nums;letter-spacing:-.4px}
+    .catcontrols{display:grid;grid-template-columns:minmax(110px,1fr) 85px;gap:13px;align-items:center}.catcontrols .caption{font-size:11px;color:var(--muted);margin-bottom:5px;display:block}
+    input[type=range]{appearance:none;-webkit-appearance:none;width:100%;height:6px;background:linear-gradient(to right,var(--accent) 0 var(--fill,50%),#e3eaf1 var(--fill,50%) 100%);border-radius:99px;cursor:pointer;display:block;margin:10px 0;accent-color:var(--accent)}
+    input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;height:17px;width:17px;border-radius:50%;border:3px solid white;background:var(--accent);box-shadow:0 0 0 1px #d1d9e3,0 2px 5px #0002}
+    input[type=range]::-moz-range-thumb{height:12px;width:12px;border:3px solid #fff;border-radius:50%;background:var(--accent);box-shadow:0 0 0 1px #d1d9e3}
+    .pctinput{display:flex;align-items:center;border:1px solid #dbe3ed;border-radius:10px;background:#fbfcfe;padding:0 9px;height:37px;gap:2px}.pctinput input{min-width:0;width:100%;border:0;outline:0!important;background:transparent;text-align:right;font-size:14px;font-variant-numeric:tabular-nums;font-weight:760;color:var(--ink)}.pctinput span{color:var(--muted);font-size:12px}
+    .entries{display:grid}.entry{padding:15px 0;border-bottom:1px solid #edf0f5}.entry:last-child{border-bottom:0}
+    .entry-main{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(145px,1.2fr) minmax(100px,.65fr);gap:18px;align-items:center}
+    .entry-name{font-size:14px;font-weight:730;letter-spacing:-.1px;line-height:1.35}.meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.copychip{display:inline-flex;align-items:center;gap:5px;border:1px solid #e4e9f0;padding:3px 7px;border-radius:7px;background:#f7f9fc;color:#607086;font-size:10.8px;font-weight:650;max-width:100%;word-break:break-all}
+    .copychip:hover{background:#eaf1fb;color:#243a55;border-color:#b9cbe1}.copychip .copyicon{font-size:11px;opacity:.7}.entry-left{min-width:0}.item-slider .caption{font-size:11px;color:var(--muted);margin-bottom:5px;display:block}.item-slider-grid{display:grid;grid-template-columns:minmax(85px,1fr) 76px;align-items:center;gap:12px}.entry-end{text-align:right}.entry-end .value{font-size:19px;white-space:nowrap;font-weight:800;letter-spacing:-.4px;font-variant-numeric:tabular-nums}.entry-end .globalpct{font-size:11px;color:var(--muted);margin-top:2px}
+    .edit-fields{display:flex;gap:9px;flex-wrap:wrap;align-items:flex-end}.editfield{flex:1 1 130px;min-width:115px}.editfield.namefield{flex:2 1 210px}.editfield label{font-size:10px;color:var(--muted);font-weight:730;display:block;margin:0 0 4px}.text-input{height:36px;border:1px solid #dbe4ef;background:#fff;border-radius:9px;padding:8px 10px;color:var(--ink);width:100%;font-size:12px}.editfield .text-input{font-size:12px}
+    .rowedit{display:flex;gap:7px;align-items:flex-end}
+    .edit-head{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.edit-head input{width:190px}
+    .edittools{display:flex;gap:9px;align-items:center;margin:12px 0 4px}.muted{font-size:12px;color:var(--muted)}
+    .add-section{border:1px dashed #b8c8d9;border-radius:16px;padding:18px 20px;background:#fbfcff;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}.add-section .field{min-width:170px;flex:1}.add-section label{display:block;font-size:11px;font-weight:700;color:#65768b;margin-bottom:5px}.add-section select{height:36px}
+    .about{margin:42px auto 0;max-width:900px;padding:26px 28px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);color:#4a5a6e;font-size:14px;line-height:1.6}
+    .about h2{font-size:19px;letter-spacing:-.3px;color:var(--ink);margin:0 0 10px}.about h3{font-size:15px;color:var(--ink);margin:22px 0 4px}.about h4{font-size:14px;color:var(--ink);margin:14px 0 2px}.about p{margin:0 0 9px}.about h4+p{margin-bottom:0}
+    .footer{font-size:12px;color:#7b8796;text-align:center;margin:30px auto 0;max-width:900px;line-height:1.6}.footer a{color:#516a89}.footer .line{margin:3px 0}
+    .notice{background:#fff7e8;color:#825b1d;border:1px solid #f0dfbd;padding:12px 15px;font-size:12px;border-radius:11px;margin-bottom:15px}
+    #toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,10px);background:#172c42;color:white;padding:10px 15px;box-shadow:0 10px 35px #172c423d;border-radius:11px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:3}#toast.show{opacity:1;transform:translate(-50%,0)}
+    .settings-panel{border:1px solid #dce5ef;border-radius:16px;background:#fff;padding:17px 20px;margin:-10px 0 22px;box-shadow:var(--shadow)}
+    .settings-panel h2{font-size:16px;margin:0 0 8px}
+    .settings-control{display:flex;gap:11px;align-items:flex-start;font-weight:700;font-size:13px;cursor:pointer}
+    .settings-control input{width:17px;height:17px;accent-color:var(--navy);margin:2px 0 0;flex:none}
+    .settings-description{font-size:12px;font-weight:400;color:var(--muted);display:block;margin-top:3px}
+    .settings-control+.settings-control{margin-top:13px}
+    #sections{overflow-anchor:none}
+    /* Domain check: shown only on hosts that are not in ALLOWED_HOSTS (see script). Non-blocking, never hides the app. */
+    #copyBanner{position:fixed;top:0;left:0;right:0;z-index:40;background:#7a1f2b;color:#fff;padding:9px 16px;text-align:center;font-size:13px;font-weight:650;line-height:1.4;box-shadow:0 2px 12px #0005}
+    #copyBanner a{color:#fff;text-decoration:underline}
+    .sortbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+    .sortbar .sorttools{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+    .dragrow{display:flex;align-items:center;gap:7px;min-width:0}
+    .draghandle{width:28px;height:34px;border:1px dashed #b7c6d9;border-radius:9px;background:#f7f9fc;color:#71839b;font-size:18px;line-height:1;cursor:grab;touch-action:none;user-select:none;flex:none}
+    .draghandle:active{cursor:grabbing}
+    .move-buttons{display:inline-flex;gap:3px;flex:none}
+    .move-buttons button{width:24px;height:25px;padding:0;border:1px solid #e0e8f1;color:#60738d;border-radius:6px;background:#fafcfe;line-height:1;font-size:13px}
+    .move-buttons button:disabled{opacity:.26;cursor:default}
+    .dragging{opacity:.52;outline:2px dashed #6c85a5;outline-offset:-2px;pointer-events:none}
+    .drop-before{box-shadow:0 -4px 0 0 #597fb8!important}
+    .drop-after{box-shadow:0 4px 0 0 #597fb8!important}
+    .euroinput{border:1px solid #dbe3ed;border-radius:10px;background:#fbfcfe;height:37px;display:flex;align-items:center;padding:0 8px;gap:3px}
+    .euroinput input{min-width:0;width:100%;font-weight:770;border:0;background:transparent;text-align:right;outline:0!important;font-variant-numeric:tabular-nums;font-size:14px;color:var(--ink)}
+    .euroinput span{color:var(--muted);font-size:12px}
+    .catcontrols{grid-template-columns:minmax(110px,1fr) 82px 102px!important}
+    .item-slider-grid{grid-template-columns:minmax(85px,1fr) 76px}
+    .entry-end .value{margin-bottom:3px}
+    .entry-end .euroinput{max-width:110px;margin-left:auto}
+    .entry.editentry .rowedit{gap:6px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:940px){.hero{grid-template-columns:1fr}.visual{justify-content:flex-start}.sectionhead{grid-template-columns:1fr}.catcontrols{max-width:460px}.entry-main{grid-template-columns:minmax(0,1.2fr) minmax(120px,1fr) minmax(95px,.6fr);gap:12px}}
+    @media(max-width:940px){.catcontrols{max-width:none}}
+    @media(max-width:620px){.wrap{padding:16px 13px 52px}.top{gap:10px}.toolbar{width:100%}.toolbar .btn{flex:1}.toolbar .resetbtn{display:inline-flex}.hero{padding:23px 20px;border-radius:17px;gap:15px}.visual{gap:18px}.donut{width:132px;height:132px;flex-basis:132px}.donut-inner{max-width:78px}.donut-inner strong{font-size:22px}.donut-inner span{font-size:10px}.legend{gap:7px}.legendline{font-size:11px}h1{margin-bottom:18px}.budgetbox input{font-size:31px}.section{padding:18px 15px 7px;border-radius:15px}.sectionhead{gap:15px}.entry-main{grid-template-columns:minmax(0,1fr) minmax(92px,.58fr);gap:9px}.entry-left{grid-column:1}.entry-end{grid-column:2;grid-row:1}.item-slider{grid-column:1/-1;grid-row:2;margin:3px 0 0}.item-slider-grid{grid-template-columns:minmax(0,1fr) 78px}.entry-end .value{font-size:17px}.editentry .entry-main{grid-template-columns:minmax(0,1fr) minmax(92px,.6fr)}.editentry .entry-left{grid-column:1/-1}.editentry .entry-end{grid-column:2;grid-row:2}.editentry .item-slider{grid-column:1;grid-row:2}.entry-name{font-size:13px}.intro{margin-top:24px}h2{font-size:21px}.catcontrols{grid-template-columns:minmax(90px,1fr) 68px 90px!important;gap:7px}.pctinput{padding:0 5px}.euroinput{padding:0 5px}.dragrow{gap:5px}.section-title{gap:7px}.move-buttons button{width:23px}.entry-end .euroinput{max-width:100px}.sortbar{align-items:flex-start}}
+    .locktools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 0 48px;font-size:12px;color:var(--muted)}
+    .lockchip{border:1px solid #d7e0ea;background:#f8fafe;border-radius:9px;display:inline-flex;align-items:center;gap:6px;padding:6px 9px;font-size:12px;font-weight:700;color:#31475e;cursor:pointer}
+    .lockchip input{accent-color:#1a5679;width:15px;height:15px;margin:0}
+    .locked-ui{background:#fff6e7;color:#845d17;border-color:#efdcb7}
+    .peer-select{max-width:220px;min-width:135px;padding:6px 9px;height:32px;border-radius:8px;border:1px solid #d7e0ea;font-size:12px;background:#fff;color:var(--ink)}
+    .locknote{font-size:11px;color:var(--muted);margin-top:5px}
+    .icon-picker{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.symbol-field{max-width:70px;width:70px;text-align:center;font-size:19px}
+    .mini-icon{position:relative;width:30px;height:30px;border-radius:9px;object-fit:contain;display:inline-grid;place-items:center;flex:none;background:#f4f6fa;font-size:19px;overflow:hidden}
+    .itemidentity{display:flex;align-items:center;gap:10px}.entry-main .entry-left{min-width:0}
+    .itemidentity .itemtext{min-width:0}.itemidentity .itemtext .entry-name{word-break:break-word}
+    .settings-info{font-size:12px;color:var(--muted);max-width:890px;line-height:1.6;margin:9px 0 0}
+    .modalback{position:fixed;inset:0;background:#0c2036ad;z-index:20;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:5vh 16px 25px}
+    .modal{background:#fff;border-radius:20px;box-shadow:0 25px 70px #05101b5c;width:min(680px,100%);max-height:90vh;overflow:auto;padding:22px}
+    .modalhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.modalhead h2{font-size:21px}
+    .modal .searchline{display:flex;gap:8px;align-items:stretch}.modal .searchline input{flex:1}
+    .srcswitch{display:inline-flex;border:1px solid var(--line);border-radius:11px;background:#fff;padding:2px;gap:2px;margin-top:13px;max-width:100%}
+    .srcswitch button{border:0;background:transparent;color:#5a6b80;font-size:13px;font-weight:700;padding:7px 14px;border-radius:9px;min-width:0}
+    .srcswitch button:hover{background:#f1f5fa}.srcswitch button[aria-checked="true"]{background:var(--navy);color:#fff}
+    .srcswitch button:focus-visible{outline:2px solid #366a9c;outline-offset:1px}
+    .matchlist{display:grid;gap:7px;margin-top:13px}.match{width:100%;display:flex;gap:12px;align-items:center;text-align:left;border:1px solid #dce5ee;border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
+    .match:hover{border-color:#8db9db;background:#f4f9fe}.match small{display:block;color:var(--muted);margin-top:3px;line-height:1.35;font-weight:400}.matchtext{flex:1;min-width:0}
+    .modelinks{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0 0}.modelinks a{color:#366a9c;font-size:12px;font-weight:700}
+    .modalstatus{font-size:12px;color:var(--muted);margin:10px 0}
+    .credit{font-size:12px;color:var(--muted);margin:-4px 0 10px}.credit a{color:#366a9c;font-weight:700}
+    .matchrow{display:flex;gap:8px;align-items:center}.matchrow .match{flex:1;min-width:0;width:auto}.matchrow .filelink{flex:none;font-size:12px;font-weight:700;color:#366a9c;max-width:30%;text-align:right}
+    .iconoptions{display:flex;flex-wrap:wrap;gap:6px}.iconoption{width:39px;height:39px;font-size:20px;background:#f8fafc;border:1px solid #d9e2eb;border-radius:10px;display:grid;place-items:center;cursor:pointer}
+    .iconoption:hover{border-color:#6b94c7;background:#eef4fc}
+    .asset-tools{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:8px}
+    .asset-tools .btn{font-size:11px;padding:5px 8px}
+    .asseticon{border:1px solid #e5ecf2}.catsymbol{font-size:20px}
+    .branding-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .branding-controls label{font-size:11px;font-weight:700;color:var(--muted)}
+    .branding-controls input[type=color]{width:42px;height:32px;padding:2px;border:1px solid #d5dfea;border-radius:8px;background:#fff}
+    input[type=range]:disabled{opacity:.34;cursor:not-allowed}
+    .category-note{display:flex;gap:5px;align-items:center;flex-wrap:wrap;font-size:11px;color:#936a25;margin-top:6px}
+    @media(max-width:620px){.modal{padding:16px}.locktools{margin-left:0}.branding-controls{margin-left:0}.peer-select{max-width:190px}.sectionhead{gap:10px}.modalback{padding:10px}.match small{font-size:10px}}
+    .itemlock{width:30px;height:30px;display:inline-grid;place-items:center;border-radius:9px;border:1px solid #d8e2ef;background:#f9fbfe;font-size:15px;cursor:pointer;flex:none}
+    .itemlock[aria-pressed="true"]{background:#fff3da;border-color:#e9d3a2}
+    .itemlock:focus-visible{outline:3px solid #b2c7ef}
+    .item-slider-title{display:flex;align-items:center;justify-content:space-between;gap:7px;min-height:25px}
+    .item-slider-title .caption{margin:0}
+    .item-slider-grid{grid-template-columns:minmax(80px,1fr) 76px}
+    .reset-setup{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:14px 0}
+    .langswitch{display:inline-flex;border:1px solid var(--line);border-radius:11px;background:#fff;padding:2px;gap:2px}
+    .langswitch button{border:0;background:transparent;color:#5a6b80;font-size:12px;font-weight:750;letter-spacing:.4px;padding:6px 10px;border-radius:9px;min-width:36px}
+    .langswitch button:hover{background:#f1f5fa}
+    .langswitch button[aria-pressed="true"]{background:var(--navy);color:#fff}
+    .menuwrap{position:relative;display:inline-flex}
+    .menu{position:absolute;right:0;top:calc(100% + 6px);z-index:15;width:350px;max-width:calc(100vw - 26px);background:#fff;border:1px solid #d5dfea;border-radius:14px;box-shadow:0 18px 50px #182e4430;padding:6px}
+    .menuitem{display:block;width:100%;text-align:left;border:0;background:transparent;border-radius:10px;padding:10px 12px;color:var(--ink)}
+    .menuitem:hover,.menuitem:focus-visible{background:#eff4fa}
+    .menuitem .mi-title{display:block;font-weight:750;font-size:13px}
+    .menuitem .mi-title code{font-size:11px;font-weight:600;color:var(--muted);background:#f1f5fa;border-radius:5px;padding:1px 5px;margin-left:4px}
+    .menuitem .mi-desc{display:block;font-size:12px;color:var(--muted);line-height:1.45;margin-top:3px}
+    .entry-name-btn{border:0;background:none;padding:0;margin:0;font:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;color:inherit;text-align:left;cursor:inherit;word-break:break-word}
+    .entry-name-btn.chart-toggle{cursor:pointer;border-radius:4px;text-decoration:underline dotted #9bb0c8;text-underline-offset:3px}
+    .entry-name-btn.chart-toggle::after{content:"\2060▾";margin-left:4px;font-size:11px;color:var(--muted);text-decoration:none}
+    .entry-name-btn.chart-toggle[aria-expanded="true"]::after{content:"\2060▴";color:#1f5a8c}
+    .entry-name-btn.chart-toggle:hover{color:#1f5a8c;text-decoration-color:#1f5a8c}
+    .entry-name-btn.chart-toggle:focus-visible{outline:3px solid #b2c7ef;outline-offset:2px}
+    .chart-panel{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:#fbfcfe;padding:10px 12px 12px;min-width:0}
+    .chart-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .chart-title{font-size:13px;flex:1 1 180px;min-width:0;word-break:break-word}
+    .chart-link{font-size:12px;font-weight:700;color:#366a9c}
+    .chart-note,.chart-hint{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.5}
+    .chart-body{position:relative;height:380px;margin-top:10px;border-radius:10px;overflow:hidden;background:#fff;border:1px solid #edf0f5}
+    .chart-body .tradingview-widget-container{position:relative;z-index:1;width:100%;height:100%}
+    .chart-body .tradingview-widget-container__widget{width:100%;height:calc(100% - 32px)}
+    /* TradingView attribution under the chart (official widget markup; do not hide, crop or shrink it - their terms require it, min. 13px). */
+    .chart-body .tradingview-widget-copyright{height:32px;font-size:13px;line-height:32px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Trebuchet MS',Roboto,Ubuntu,sans-serif;color:#6b7686;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .chart-body .tradingview-widget-copyright a{text-decoration:none;color:#6b7686}.chart-body .tradingview-widget-copyright .blue-text{color:#2962ff}
+    .chart-body .tradingview-widget-copyright a:hover .blue-text{color:#1e53e5}
+    .chart-loading,.chart-error{position:absolute;inset:0;display:grid;place-items:center;padding:16px;text-align:center;font-size:12px;color:var(--muted)}
+    .consent-box{margin-top:10px;border:1px solid #d5e1ee;border-radius:10px;background:#f4f8fd;padding:14px 14px 12px;font-size:13px;line-height:1.55;color:var(--ink)}
+    .consent-box p{margin:0 0 8px}.consent-box a{color:#366a9c;font-weight:700}
+    .consent-actions{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin-top:12px}
+    .consent-actions .chart-link{font-size:13px}
+    .linkbtn{border:0;background:none;padding:0;margin:0;font:inherit;color:#516a89;text-decoration:underline;cursor:pointer}
+    .linkbtn:hover{color:#1f5a8c}
+    .searchnote{font-size:12px;color:var(--muted);line-height:1.5;margin:8px 0 0}.searchnote a{color:#366a9c;font-weight:700}
+    .privacy-status{font-size:14px;font-weight:700;margin:12px 0}.privacy-status.on{color:#1d6b48}
+    .privacy-actions{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:12px 0}
+    .privacy-actions a{font-size:13px;font-weight:700;color:#366a9c}
+    @media(max-width:620px){.chart-body{height:320px}}
+    @media(max-width:620px){.toolbar{position:relative}.menuwrap{display:contents}.menu{left:0;right:0;width:auto;max-width:none;top:calc(100% + 6px)}.langswitch{margin-left:auto}}
+    @media print{.seg,.legendline,.stackbar button{pointer-events:none;transition:none!important;filter:none!important;opacity:1!important}.toolbar,.copychip .copyicon,.add-section,.edittools,input[type=range],.chart-panel,.about,.footer .line{display:none!important}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff}.section{box-shadow:none;break-inside:avoid}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span class="brandmark"><span>F<span style="font-weight:300;color:#9ed9ce">/</span></span></span><div class="brandtext"><strong>Finplanr</strong><span data-i18n="brand.tagline">Your personal portfolio planner</span></div></div>
+    <div class="toolbar">
+      <button id="editToggle" class="btn primary" type="button">✎ Edit</button>
+      <button id="settingsToggle" class="btn" type="button" aria-controls="settingsPanel" aria-expanded="false" data-i18n="tb.settings">⚙ Settings</button>
+      <div class="menuwrap" id="exportWrap">
+        <button id="exportToggle" class="btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="exportMenu" data-i18n="tb.export">↓ Export ▾</button>
+        <div id="exportMenu" class="menu hidden" role="menu" data-i18n-attr="aria-label:export.menu">
+          <button id="exportJson" class="menuitem" role="menuitem" type="button" data-i18n-attr="title:export.json.desc"><span class="mi-title"><span data-i18n="export.json.title">JSON backup</span><code>.json</code></span><span class="mi-desc" data-i18n="export.json.desc">Complete portfolio incl. settings and reset point. The only file you can load back with Import — use it to back up or move your setup to another browser or device.</span></button>
+          <button id="exportCsv" class="menuitem" role="menuitem" type="button" data-i18n-attr="title:export.csv.desc"><span class="mi-title"><span data-i18n="export.csv.title">CSV table</span><code>.csv</code></span><span class="mi-desc" data-i18n="export.csv.desc">Read-only overview of the current plan (category, holding, ticker, ISIN, WKN, share %, € per month) for Excel or LibreOffice. Cannot be imported back.</span></button>
+        </div>
+      </div>
+      <button id="importJson" class="btn" type="button" data-i18n="tb.import" data-i18n-attr="title:tb.import.tip">↑ Import</button>
+      <button id="reset" class="btn danger resetbtn" type="button" data-i18n="tb.reset">↺ Reset</button>
+      <div class="langswitch" role="group" data-i18n-attr="aria-label:lang.group"><button type="button" data-lang="de" aria-pressed="false" title="Deutsch">DE</button><button type="button" data-lang="en" aria-pressed="true" title="English">EN</button></div>
+      <input id="importFile" type="file" accept="application/json,.json" class="hidden" data-i18n-attr="aria-label:file.aria">
+    </div>
+  </header>
+  <div class="settings-panel hidden" id="settingsPanel">
+    <h2 data-i18n="set.title">Calculation &amp; rounding</h2>
+    <label class="settings-control"><input type="checkbox" id="allowCents"><span><span data-i18n="set.cents">Allow cents</span> <span class="settings-description" data-i18n="set.cents.desc">Off by default. Amounts are set in whole euros; turn this on for €0.01 steps.</span></span></label>
+    <label class="settings-control"><input type="checkbox" id="autoSort" checked><span><span data-i18n="set.sort">Keep sorted by size, largest first</span> <span class="settings-description" data-i18n="set.sort.desc">On by default. Categories and holdings are ordered by amount once you finish a change (never while you drag a slider or type). Turn off to arrange them yourself in Edit mode.</span></span></label>
+    <p class="settings-info"><strong data-i18n="set.lock.title">Locking:</strong> <span data-i18n="set.lock.text">Locked categories and holdings keep their amounts when you change something else; only unlocked ones balance the change. For each category you choose one rebalancing partner or all flexible categories. With whole euros, rounding can be off by one step.</span></p>
+    <div class="reset-setup"><button id="saveResetPoint" type="button" class="btn primary" data-i18n="set.saveReset">★ Save current state as reset point</button><button id="factoryReset" type="button" class="btn danger small" data-i18n="set.factory">Restore factory defaults</button></div>
+    <p id="resetStateInfo" class="settings-info" aria-live="polite"></p>
+    <p class="settings-info" data-i18n="set.reset.explain">Reset returns to your saved reset point; “Restore factory defaults” returns to the built-in example and deletes the saved reset point.</p>
+    <p class="settings-info"><strong data-i18n="set.search.title">Online search:</strong> <span data-i18n="set.search.text">Crypto search uses CoinGecko, securities search uses Wikidata where available, and image search uses Wikimedia Commons. These services receive your search term. justETF and Finanzfluss cannot be queried directly and are only offered as links.</span></p>
+  </div>
+  <main>
+    <section class="hero" data-i18n-attr="aria-label:hero.aria">
+      <div>
+        <div class="eyebrow" data-i18n="hero.eyebrow">Portfolio · Monthly plan</div>
+        <h1 data-i18n="hero.h1">Your money. Your allocation.</h1>
+        <label class="budgetlabel" for="monthlyBudget" data-i18n="hero.budget">Monthly savings budget</label>
+        <div class="budgetbox"><input id="monthlyBudget" type="number" min="0" max="100000000" step="1" value="1200" inputmode="numeric" data-i18n-attr="aria-label:hero.budget.aria"><span class="currency">€</span></div>
+        <p class="herohint" data-i18n="hero.hint">All euro amounts update automatically with your monthly budget and the weights.</p>
+        <div class="hero-info"><div><div class="v" id="yearly">€12,000</div><div class="k" data-i18n="hero.yearly">Savings per year</div></div><div><div class="v" id="count">8</div><div class="k" data-i18n="hero.count">Holdings</div></div><div><div class="v" id="sumWeight">100%</div><div class="k" data-i18n="hero.alloc">Budget allocated</div></div></div>
+      </div>
+      <div class="visual"><div class="donut" id="donut"><svg class="donutsvg" viewBox="0 0 176 176" role="group" data-i18n-attr="aria-label:donut.aria"><circle class="track" cx="88" cy="88" r="75.25"/><g id="donutSegs" transform="rotate(-90 88 88)"></g></svg><div class="donut-inner"><span class="donut-name" id="donutName"></span><strong id="donutSum">100%</strong><span id="donutSub" data-i18n="hero.allocated">allocated</span></div></div><div class="legend" id="legend"></div></div>
+    </section>
+    <div class="intro"><div><h2 data-i18n="intro.title">Your categories</h2><p class="sub" data-i18n="intro.sub">Lock categories and single holdings with 🔒. Only unlocked amounts balance changes. Within each category, the holdings add up to 100%.</p></div><span class="muted" id="editLabel"></span></div>
+    <div class="sortbar hidden" id="globalSortBar"><span class="muted" id="sortHint" data-i18n="sort.auto">Sorted automatically by size — turn this off in Settings to arrange manually</span><div class="sorttools hidden" id="sortTools"><span class="muted" data-i18n="sort.all">All categories &amp; holdings:</span><button id="sortAllDesc" type="button" class="btn soft small" data-i18n="sort.desc">↓ Largest first</button><button id="sortAllAsc" type="button" class="btn soft small" data-i18n="sort.asc">↑ Smallest first</button></div></div>
+    <div class="stackbar" id="stackbar" role="group" data-i18n-attr="aria-label:stack.aria"></div>
+    <div id="notice" class="notice hidden" role="status"></div>
+    <div class="sections" id="sections"></div>
+    <div id="addCategory" class="add-section hidden">
+      <div class="field"><label for="catName" data-i18n="add.name">New category</label><input id="catName" class="text-input" data-i18n-attr="placeholder:add.placeholder" placeholder="e.g. Stocks"></div>
+      <div class="field"><label for="catType" data-i18n="add.type">Category type</label><select id="catType" class="text-input"><option value="stock" data-i18n="type.stock">Stocks / ticker, ISIN &amp; WKN</option><option value="etf" selected data-i18n="type.etf">ETF / ticker, ISIN &amp; WKN</option><option value="etc" data-i18n="type.etc">ETC / ticker, ISIN &amp; WKN</option><option value="crypto" data-i18n="type.crypto">Crypto / ticker</option><option value="cash" data-i18n="type.cash">Savings account / name</option><option value="other" data-i18n="type.other">Other / all fields</option></select></div>
+      <button id="createCategory" class="btn primary" type="button" data-i18n="add.btn">+ Add category</button>
+    </div>
+  </main>
+  <section class="about" id="about" aria-labelledby="aboutTitle">
+    <h2 id="aboutTitle" data-i18n="about.title">Finplanr: a free savings plan calculator</h2>
+    <p data-i18n="about.p1">Finplanr turns one monthly savings budget into a clear savings plan. Split your budget across ETFs, precious metals (ETCs), crypto and a savings account, and see at once how many euros go into each holding.</p>
+    <p data-i18n="about.p2">Every category and every holding has a weight. Move a slider and the rest is rebalanced automatically; lock the entries that should stay fixed. Inside each category the holdings add up to 100%, and all amounts update when you change the budget.</p>
+    <p data-i18n="about.p3">It is made for savers who already know what they want to buy and need a tidy allocation for the savings plans at their broker or bank. Finplanr is a planning tool: no price feeds, no bank connection, no account. Your plan stays in this browser.</p>
+    <h3 data-i18n="about.faq">Frequently asked questions</h3>
+    <h4 data-i18n="about.q1">Is Finplanr free?</h4>
+    <p data-i18n="about.a1">Yes. There is nothing to sign up for and no fee.</p>
+    <h4 data-i18n="about.q2">Where is my data stored?</h4>
+    <p data-i18n="about.a2">Only in the local storage of your browser. Nothing is stored on a server. Export a JSON backup to move your plan to another device.</p>
+    <h4 data-i18n="about.q3">Does Finplanr give investment advice?</h4>
+    <p data-i18n="about.a3">No. It only calculates planned amounts. The preset holdings are examples: check ISIN and WKN yourself and make your own decisions.</p>
+    <h4 data-i18n="about.q4">Can I use my own ETFs, coins or accounts?</h4>
+    <p data-i18n="about.a4">Yes. In edit mode you can rename holdings, add categories and enter ticker, ISIN, WKN and a logo of your choice.</p>
+    <h4 data-i18n="about.q5">Does Finplanr place orders or connect to my bank?</h4>
+    <p data-i18n="about.a5">No. You set up the actual savings plans yourself at your broker or bank.</p>
+  </section>
+  <footer class="footer">
+    <div class="line"><a id="guideLink" href="/en/anleitung.html" target="_blank" rel="noopener noreferrer" data-i18n="foot.guide">User guide</a> · <a id="legalLink" href="{{IMPRESSUM_URL}}" target="_blank" rel="noopener noreferrer" data-i18n="foot.legal">Legal notice (Impressum)</a> · <a id="privacyLink" data-privacy-link href="/en/datenschutz.html" target="_blank" rel="noopener noreferrer" data-i18n="foot.privacylink">Privacy policy</a> · <button type="button" id="privacySettingsBtn" class="linkbtn" aria-haspopup="dialog" data-i18n="foot.privacySettings">Privacy settings</button></div>
+    <div class="line" data-i18n="foot.note">Planning tool, not investment advice. Your data stays in this browser.</div>
+  </footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="searchModal" class="modalback hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modalhead"><h2 id="modalTitle"></h2><button id="modalClose" class="btn" type="button" data-i18n="modal.close" data-i18n-attr="aria-label:modal.close.aria">✕ Close</button></div>
+    <div id="modalHelp" class="settings-info"></div>
+    <div><div id="srcSwitch" class="srcswitch hidden" role="radiogroup" data-i18n-attr="aria-label:src.sel.aria"><button type="button" role="radio" aria-checked="true" data-src="stocks" data-i18n="src.sel.stocks">Stocks &amp; ETFs</button><button type="button" role="radio" aria-checked="false" data-src="crypto" data-i18n="src.sel.crypto">Crypto</button></div></div>
+    <div class="searchline" style="margin-top:13px"><input id="modalQuery"class="text-input" type="search" autocomplete="off"><button id="modalSearch" class="btn primary" type="button" data-i18n="modal.search">Search</button></div>
+    <p id="searchNote" class="searchnote hidden"></p>
+    <div id="modalStatus" class="modalstatus" aria-live="polite"></div>
+    <div id="cgCredit" class="credit hidden"><span data-i18n="cg.label">Crypto data:</span> <a href="https://www.coingecko.com/en/api?utm_source=finplanr&amp;utm_medium=referral" target="_blank" rel="noopener noreferrer" data-i18n="cg.link">Powered by CoinGecko API</a></div>
+    <div class="matchlist" id="modalResults"></div>
+    <div class="modelinks" id="modalLinks"></div>
+    <div id="imagePanel" class="hidden"><div class="divider" style="margin:20px 0;border-top:1px solid #e5eaf1"></div><strong data-i18n="img.title">Choose your own logo or image</strong><p class="settings-info" data-i18n="img.help">Use an icon, an image URL or a local picture. Images from Wikimedia Commons can be picked via the search; check the match yourself.</p>
+    <div class="iconoptions" id="emojiOptions" style="margin:13px 0"></div>
+    <div class="searchline" style="margin:0 0 10px"><input id="customSymbol" class="text-input" maxlength="8" data-i18n-attr="placeholder:img.customSymbol"><button id="applyCustomSymbol" class="btn small" type="button" data-i18n="img.useSymbol">Use icon</button></div>
+    <div class="searchline"><input id="imageUrl" class="text-input" data-i18n-attr="placeholder:img.urlPlaceholder"><button class="btn" id="applyImageUrl" type="button" data-i18n="img.useUrl">Use image URL</button></div>
+    <div class="asset-tools" style="margin:9px 0"><label class="btn small" for="imageFile" style="cursor:pointer" data-i18n="img.upload">↑ Upload image</label><input id="imageFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" class="hidden"><button class="btn small soft" id="searchCommons" type="button" data-i18n="img.find">Find images online</button><button class="btn small" id="clearImage" type="button" data-i18n="img.default">Use default logo</button></div>
+    <div id="imageMatches" class="matchlist"></div></div>
+  </div>
+</div>
+<div id="privacyModal" class="modalback hidden" role="dialog" aria-modal="true" aria-labelledby="privTitle">
+  <div class="modal">
+    <div class="modalhead"><h2 id="privTitle" data-i18n="priv.title">Privacy settings</h2><button id="privClose" class="btn" type="button" data-i18n="modal.close" data-i18n-attr="aria-label:modal.close.aria">✕ Close</button></div>
+    <p class="settings-info" data-i18n="priv.intro">Finplanr loads nothing from third parties by default. The only thing that needs your consent are TradingView charts.</p>
+    <p id="privStatus" class="privacy-status" aria-live="polite"></p>
+    <div class="privacy-actions"><button id="privToggle" class="btn" type="button"></button><a id="privPolicy" data-privacy-link href="/en/datenschutz.html" target="_blank" rel="noopener noreferrer" data-i18n="priv.policy">Privacy policy</a></div>
+    <p class="settings-info" data-i18n="priv.note">Withdrawing does not delete data TradingView may have stored in your browser; you can clear it in your browser settings (site data for tradingview-widget.com).</p>
+  </div>
+</div>
+<script>
+/* © 2026 {{COPYRIGHT_HOLDER}}. All rights reserved. Unauthorised copying, hosting or redistribution of this application or its texts is not permitted. Third-party names and logos belong to their respective owners. https://finplanr.net */
+(() => {
+  'use strict';
+  const STORAGE_KEY='mein-sparplan-portfolio-v1';
+  const RESET_KEY='mein-sparplan-reset-stand-v1';
+  const LANG_KEY='finplanr-lang';
+  // Consent record for loading TradingView charts (Art. 6(1)(a) GDPR, § 25(1) TDDDG): JSON {v:1,granted:true,ts:ISO}. No record = no request to TradingView.
+  const CONSENT_KEY='finplanr-consent-tv';
+  // Legal links: the Impressum is hosted externally (same URL in every language); the privacy policy lives on this site (/datenschutz.html, /en/datenschutz.html).
+  const IMPRESSUM_URL='{{IMPRESSUM_URL}}';
+  const privacyUrl=()=>lang==='en'?'/en/datenschutz.html':'/datenschutz.html';
+
+  // ---------------------------------------------------------------- i18n
+  // Key-based strings. English is the default language. Placeholders use {name};
+  // plural variants are stored as "key.one" / "key.other" and picked via {n}.
+  const STR={
+    en:{
+      'meta.title':'Finplanr – Savings plan calculator for ETFs, crypto & savings',
+      'meta.desc':'Free savings plan calculator: split your monthly budget across ETFs, crypto, precious metals and a savings account. Set your allocation and see every amount.',
+      'brand.tagline':'Your personal portfolio planner',
+      'about.title':'Finplanr: a free savings plan calculator',
+      'about.p1':'Finplanr turns one monthly savings budget into a clear savings plan. Split your budget across ETFs, precious metals (ETCs), crypto and a savings account, and see at once how many euros go into each holding.',
+      'about.p2':'Every category and every holding has a weight. Move a slider and the rest is rebalanced automatically; lock the entries that should stay fixed. Inside each category the holdings add up to 100%, and all amounts update when you change the budget.',
+      'about.p3':'It is made for savers who already know what they want to buy and need a tidy allocation for the savings plans at their broker or bank. Finplanr is a planning tool: no price feeds, no bank connection, no account. Your plan stays in this browser.',
+      'about.faq':'Frequently asked questions',
+      'about.q1':'Is Finplanr free?',
+      'about.a1':'Yes. There is nothing to sign up for and no fee.',
+      'about.q2':'Where is my data stored?',
+      'about.a2':'Only in the local storage of your browser. Nothing is stored on a server. Export a JSON backup to move your plan to another device.',
+      'about.q3':'Does Finplanr give investment advice?',
+      'about.a3':'No. It only calculates planned amounts. The preset holdings are examples: check ISIN and WKN yourself and make your own decisions.',
+      'about.q4':'Can I use my own ETFs, coins or accounts?',
+      'about.a4':'Yes. In edit mode you can rename holdings, add categories and enter ticker, ISIN, WKN and a logo of your choice.',
+      'about.q5':'Does Finplanr place orders or connect to my bank?',
+      'about.a5':'No. You set up the actual savings plans yourself at your broker or bank.',
+      'lang.group':'Language',
+      'tb.edit':'✎ Edit','tb.done':'✓ Finish editing','tb.settings':'⚙ Settings',
+      'tb.export':'↓ Export ▾','tb.import':'↑ Import','tb.reset':'↺ Reset',
+      'tb.import.tip':'Load a JSON backup (replaces the current portfolio)',
+      'tb.reset.saved':'Restore the saved reset point','tb.reset.none':'Restore the built-in example portfolio',
+      'file.aria':'Import JSON file',
+      'export.menu':'Export',
+      'export.json.title':'JSON backup',
+      'export.json.desc':'Complete portfolio incl. settings and reset point. The only file you can load back with Import — use it to back up or move your setup to another browser or device.',
+      'export.csv.title':'CSV table',
+      'export.csv.desc':'Read-only overview of the current plan (category, holding, ticker, ISIN, WKN, share %, € per month) for Excel or LibreOffice. Cannot be imported back.',
+      'csv.head':['Category','Holding','Ticker','ISIN','WKN','Share of category %','Share of total %','EUR per month'],
+      'toast.backup':'JSON backup downloaded.','toast.csv':'CSV table downloaded.',
+      'set.title':'Calculation & rounding',
+      'set.cents':'Allow cents','set.cents.desc':'Off by default. Amounts are set in whole euros; turn this on for €0.01 steps.',
+      'set.lock.title':'Locking:',
+      'set.lock.text':'Locked categories and holdings keep their amounts when you change something else; only unlocked ones balance the change. For each category you choose one rebalancing partner or all flexible categories. With whole euros, rounding can be off by one step.',
+      'set.saveReset':'★ Save current state as reset point','set.factory':'Restore factory defaults',
+      'set.sort':'Keep sorted by size, largest first',
+      'set.sort.desc':'On by default. Categories and holdings are ordered by amount once you finish a change (never while you drag a slider or type). Turn off to arrange them yourself in Edit mode.',
+      'toast.sort.on':'Sorting by size is on.','toast.sort.off':'Automatic sorting is off. You can arrange the order in Edit mode.',
+      'set.reset.explain':'Reset returns to your saved reset point; “Restore factory defaults” returns to the built-in example and deletes the saved reset point.',
+      'set.reset.info':'Reset point: {when} · budget {budget} · {count}.',
+      'reset.when.manual':'saved manually on {date}','reset.when.import':'created when you imported a backup on {date}',
+      'reset.when.legacy':'saved on {date}','reset.when.nodate':'saved earlier (date unknown)',
+      'set.reset.none':'No personal reset point saved. Reset restores the built-in example portfolio.',
+      'tb.reset.tip':'{what}. Reset returns to your saved reset point; “Restore factory defaults” (Settings) returns to the built-in example and deletes the saved reset point.',
+      'set.search.title':'Online search:',
+      'set.search.text':'Crypto search uses CoinGecko, securities search uses Wikidata where available, and image search uses Wikimedia Commons. These services receive your search term. justETF and Finanzfluss cannot be queried directly and are only offered as links.',
+      'toast.cents.on':'Cents enabled.','toast.cents.off':'Switched to whole euros.',
+      'toast.resetSaved':'Current state saved as reset point.','toast.resetDone':'Saved reset point restored.',
+      'toast.factoryDone':'Factory settings restored.',
+      'confirm.reset':'Restore your saved reset point ({when}; budget {budget}; {count})? Changes since then will be lost.',
+      'confirm.resetNone':'No personal reset point saved. Restore the built-in example portfolio?',
+      'confirm.factory':'Restore factory defaults: delete your portfolio and your reset point and restore the example? This cannot be undone. Your language setting is kept.',
+      'confirm.import':'Replace the current portfolio with the imported data? The imported portfolio will also become your reset point.',
+      'confirm.import.snap':'Replace the current portfolio with the imported data? The reset point saved in the file will also replace your current reset point.',
+      'import.failed':'Import failed: {msg}','toast.imported':'Portfolio imported.',
+      'err.invalidFile':'Invalid portfolio file.','err.invalidItems':'Invalid categories or holdings.',
+      'err.dupCat':'Duplicate category ID.','err.invalidItem':'Invalid holding.','err.dupItem':'Duplicate holding ID.',
+      'err.tooLarge':'The file is too large.',
+      'hero.aria':'Portfolio overview','hero.eyebrow':'Portfolio · Monthly plan','hero.h1':'Your money. Your allocation.',
+      'hero.budget':'Monthly savings budget','hero.budget.aria':'Monthly savings budget in euros',
+      'hero.hint':'All euro amounts update automatically with your monthly budget and the weights.',
+      'hero.yearly':'Savings per year','hero.count':'Holdings','hero.alloc':'Budget allocated','hero.allocated':'allocated',
+      'intro.title':'Your categories',
+      'intro.sub':'Lock categories and single holdings with 🔒. Only unlocked amounts balance changes. Within each category, the holdings add up to 100%.',
+      'mode.view':'View mode · click a name for its chart, identifiers to copy',
+      'mode.edit':'Edit mode · change names, identifiers and categories',
+      'sort.auto':'Sorted automatically by size — turn this off in Settings to arrange manually',
+      'banner.copy':'Unofficial copy of Finplanr. The original is at',
+      'sort.hint':'Reorder: drag ⠿ or use the arrows','sort.all':'All categories & holdings:',
+      'sort.desc':'↓ Largest first','sort.asc':'↑ Smallest first','sort.label':'Sort:',
+      'stack.aria':'Share of each category','stack.btn':'{name}: {pct}. Jump to category','donut.aria':'Allocation by category','donut.seg':'{name}, {pct}, {amount} per month. Jump to category',
+      'add.name':'New category','add.placeholder':'e.g. Stocks','add.type':'Category type','add.btn':'+ Add category',
+      'type.stock':'Stocks / ticker, ISIN & WKN','type.etf':'ETF / ticker, ISIN & WKN','type.etc':'ETC / ticker, ISIN & WKN','type.crypto':'Crypto / ticker',
+      'type.cash':'Savings account / name','type.other':'Other / all fields',
+      'cat.crypto':'Crypto','cat.etf':'ETF','cat.etc':'Precious metals (ETC)','cat.cash':'Savings','item.cash':'Savings account',
+      'cat.unnamed':'Category','item.new':'New holding','item.unnamed':'Unnamed',
+      'f.name':'Name','f.ticker':'Ticker','tip.wkn':'WKN – German securities code',
+      'f.tv':'Chart symbol (TradingView)',
+      'tip.tv':'Optional. Format EXCHANGE:TICKER, e.g. XETR:VWCE or KRAKEN:BTCEUR. Used for the price chart; if empty, it is derived from the ticker where possible.',
+      'toast.badTv':'Chart symbol not valid – use the format EXCHANGE:TICKER, e.g. XETR:VWCE.',
+      'cat.note.vgwl':'Xetra ticker is VGWL; VWRL is the London/Amsterdam ticker.',
+      'chart.toggleTip':'Show or hide the price chart','chart.aria':'Price chart for {name}',
+      'chart.title':'{symbol} · Daily chart','chart.open':'Open on TradingView ↗','chart.openHome':'Open TradingView ↗',
+      'chart.close':'Close chart','chart.loading':'Loading chart …',
+      'consent.text':'To show this chart, a widget from TradingView (TradingView Inc., USA) is loaded. This transmits your IP address and technical data to TradingView, and TradingView may store data in your browser. Details in our',
+      'consent.policy':'privacy policy.','consent.load':'Load chart','consent.cancel':'Cancel',
+      'priv.title':'Privacy settings','priv.intro':'Finplanr loads nothing from third parties by default. The only thing that needs your consent are TradingView charts.',
+      'priv.status.on':'TradingView charts: allowed since {date}','priv.status.off':'TradingView charts: not allowed',
+      'priv.withdraw':'Withdraw consent','priv.allow':'Allow charts',
+      'priv.note':'Withdrawing does not delete data TradingView may have stored in your browser; you can clear it in your browser settings (site data for tradingview-widget.com).',
+      'priv.policy':'Privacy policy','priv.close':'Close','priv.withdrawn':'Consent withdrawn. Charts are closed.','priv.allowed':'Charts allowed.',
+      'search.note.crypto':'Online search (Search button or Enter) sends your search term and your IP address to CoinGecko.',
+      'search.note.sec':'Online search (Search button or Enter) sends your search term and your IP address to Wikidata and its query service (Wikimedia Foundation).',
+      'search.note.img':'Image search (button or Enter) sends your search term and your IP address to Wikimedia Commons; images you pick are loaded from the internet.',
+      'search.note.link':'Privacy policy',
+      'chart.noSymbol':'No chart symbol set — add one in Edit mode, e.g. XETR:VWCE',
+      'chart.error':'The chart could not be loaded (offline, or blocked by a content blocker). You can open it on TradingView instead.',
+      'notice.empty':'No holdings yet. Turn on “Edit” and add some.',
+      'notice.zero':'Give at least one category a share above 0%.',
+      'sec.perMonth':'per month','sec.count.one':'{n} holding','sec.count.other':'{n} holdings',
+      'sec.share':'Share of total budget · {step} per step','item.share':'Share within {cat} · {step} per step',
+      'sec.empty.edit':'No holdings yet. Add one with the button below.',
+      'sec.empty.view':'No holdings yet. Turn on Edit to add a holding.',
+      'aria.catAmount':'Monthly amount for category {name} in euros','aria.catPct':'Share of category {name} in percent',
+      'aria.itemAmount':'Monthly amount for {name} in euros','aria.itemPct':'Share of {name} in percent',
+      'item.ofTotal':'{pct} of total',
+      'lock.catOn':'🔒 Locked','lock.catOff':'🔓 Flexible',
+      'lock.catTip':'Locked categories keep their amount when other categories change',
+      'lock.itemLock':'Lock holding','lock.itemUnlock':'Unlock holding',
+      'peer.label':'Rebalance only with:','peer.all':'All flexible categories','peer.gone':'Partner locked / removed',
+      'peer.fixed':'🔒 Locked – no rebalancing',
+      'peer.noteLocked':'🔒 Locked: no rebalancing, so the partner choice has no effect.',
+      'peer.noteOk':'Only the selected partner changes','peer.noteNone':'No flexible partner: pick another one',
+      'toast.catLocked':'Category locked – unlock it first.',
+      'toast.noPartnerCat':'No flexible partner available – unlock another category.',
+      'toast.limitedCat':'Amount capped: locked categories stay unchanged.',
+      'toast.itemLocked':'Holding locked – unlock it first.',
+      'toast.noPartnerItem':'No flexible partner within this category.',
+      'toast.limitedItem':'Amount capped: locked holdings stay unchanged.',
+      'toast.catLockOn':'🔒 {name} is locked.','toast.catLockOff':'🔓 {name} is flexible.',
+      'toast.itemLockOn':'🔒 Holding locked.','toast.itemLockOff':'🔓 Holding unlocked.',
+      'toast.newItem':'New holding: search for it or enter the details manually.',
+      'toast.itemRemoved':'Holding removed.','toast.catRemoved':'Category removed.',
+      'toast.sortedItems':'Holdings sorted.','toast.sortedAll':'Categories and holdings sorted.',
+      'toast.reordered':'Order changed.','toast.catCreated':'Category created. Now add a holding.',
+      'toast.catNameMissing':'Enter a category name.','toast.lastCat':'At least one category must remain.',
+      'toast.copied':'Copied: {value}','toast.copyFail':'Could not copy – please select the value manually.',
+      'confirm.removeItem':'Really remove “{name}”?',
+      'confirm.removeCat.one':'Delete category “{name}” and its {n} holding?',
+      'confirm.removeCat.other':'Delete category “{name}” and its {n} holdings?',
+      'copy.title':'Copy {field}','copy.aria':'Copy {field}: {value}','copy.name':'Copy name',
+      'edit.search':'⌕ Search','edit.searchTip':'Search for the asset or matching reference data',
+      'edit.logo':'◉ Logo','edit.logoTip':'Change logo','edit.remove':'Remove','edit.removeTip':'Remove holding',
+      'edit.addItem':'+ Add holding','edit.renameCat':'Rename category','edit.deleteCat':'Delete category',
+      'edit.colour':'Colour','edit.icon':'Icon','edit.pickIcon':'◉ Choose icon',
+      'edit.colourOf':'Colour of {name}','edit.iconOf':'Icon of {name}',
+      'move.catUp':'Move category up','move.catDown':'Move category down',
+      'move.catUpAria':'Move category {name} up','move.catDownAria':'Move category {name} down',
+      'move.itemUp':'Move holding up','move.itemDown':'Move holding down',
+      'move.itemUpAria':'Move {name} up','move.itemDownAria':'Move {name} down',
+      'drag.cat':'Drag to move category','drag.catAria':'Drag category {name}',
+      'drag.item':'Drag to reorder','drag.itemAria':'Drag {name}',
+      'modal.title.find':'Find a holding','modal.title.logo':'Change logo & icon','modal.title.cat':'Change category icon',
+      'modal.help.cat':'Pick an icon or enter your own character.',
+      'modal.help.logo':'Search for an image, use a link or upload your own logo.',
+      'modal.help.find':'Enter a name, ticker, ISIN or WKN. A result is only applied to your holding after you click “Use”.',
+      'modal.close':'✕ Close','modal.close.aria':'Close','modal.search':'Search',
+      'modal.ph.find':'Name, ISIN, WKN or ticker','modal.ph.image':'Search term for images',
+      'modal.iconTip':'Icon {icon}',
+      'modal.status.catalog':'Search the built-in catalog or start an online search.',
+      'modal.status.images':'Search Wikimedia Commons for images or pick an icon.',
+      'modal.status.typing':'Searching the catalog; click “Search” for more results.',
+      'modal.status.offline':'Offline: searching the built-in catalog only.',
+      'modal.status.running':'Showing local results. Searching online …',
+      'modal.status.failed':'Online data is currently unavailable (network, CORS or rate limit). The catalog and external links still work.',
+      'modal.status.found':'Results from the catalog and online search ({n} online). Only pick matching entries and check the identifiers.',
+      'modal.status.none':'Online search finished. No additional matches; the catalog and external search are still available.',
+      'modal.status.needImageTerm':'Enter a search term for images.','modal.status.needSymbol':'Enter an icon.',
+      'modal.status.needUrl':'Enter a valid https:// image URL.','modal.status.badFile':'Choose a PNG/JPG/WebP/GIF of at most 150 KB.',
+      'modal.status.fileFail':'The image could not be saved.',
+      'modal.none':'No match: try the exact company name, ticker or ISIN, or enter the details manually.',
+      'modal.none.crypto':'No match: try the coin name or ticker, or enter the details manually.',
+      'src.sel.aria':'Search source','src.sel.stocks':'Stocks & ETFs','src.sel.crypto':'Crypto',
+      'modal.status.src.stocks':'Source: Stocks & ETFs (built-in catalog, then Wikidata on Search).','modal.status.src.crypto':'Source: Crypto (built-in catalog, then CoinGecko on Search).',
+      'modal.use':'Use →','modal.unknown':'Unknown','modal.searchOn':'↗ Search on {name}',
+      'src.catalog':'Built-in catalog','src.wikidata':'Wikidata · verify ISIN',
+      'img.title':'Choose your own logo or image',
+      'img.help':'Use an icon, an image URL or a local picture. Images from Wikimedia Commons can be picked via the search; check the match yourself and the licence and attribution on the file page (logos are often trademarks).',
+      'img.customSymbol':'Your own icon or emoji','img.useSymbol':'Use icon',
+      'img.urlPlaceholder':'https://... image URL','img.useUrl':'Use image URL',
+      'img.upload':'↑ Upload image','img.find':'Find images online','img.default':'Use default logo',
+      'img.searching':'Searching Wikimedia Commons …','img.src':'Wikimedia Commons · only pick if it matches; check licence and attribution on the file page','img.filepage':'File page ↗',
+      'img.none':'No matching images found. Use an image URL or an upload.',
+      'img.unavailable':'Image search unavailable. Use your own file or an image URL.',
+      'toast.assetApplied':'Details applied – please check the identifiers.','toast.iconApplied':'Icon/logo applied.',
+      'cg.label':'Crypto data:','cg.link':'Powered by CoinGecko API','foot.legal':'Legal notice (Impressum)','foot.privacylink':'Privacy policy','foot.privacySettings':'Privacy settings',
+      'foot.note':'Planning tool, not investment advice. Your data stays in this browser.',
+      'foot.guide':'User guide'
+    },
+    de:{
+      'meta.title':'Finplanr – Sparplan-Rechner für ETF, Krypto & Tagesgeld',
+      'meta.desc':'Kostenloser Sparplan-Rechner: Verteile dein Monatsbudget auf ETFs, Krypto, Edelmetalle und Tagesgeld. Lege die Aufteilung fest und sieh jeden Betrag sofort.',
+      'brand.tagline':'Dein persönlicher Portfolio-Planer',
+      'about.title':'Finplanr: ein kostenloser Sparplan-Rechner',
+      'about.p1':'Finplanr macht aus einem monatlichen Sparbudget einen übersichtlichen Sparplan. Verteile dein Budget auf ETFs, Edelmetalle (ETCs), Krypto und Tagesgeld und sieh sofort, wie viele Euro in jede Position fließen.',
+      'about.p2':'Jede Kategorie und jede Position hat ein Gewicht. Bewegst du einen Regler, gleicht sich der Rest automatisch an; Einträge, die fest bleiben sollen, sperrst du. Innerhalb einer Kategorie ergeben die Positionen 100 %, und alle Beträge passen sich an, wenn du das Budget änderst.',
+      'about.p3':'Gedacht ist Finplanr für Sparer, die schon wissen, was sie kaufen wollen, und eine saubere Aufteilung für die Sparpläne bei Broker oder Bank brauchen. Es ist ein Planungswerkzeug: keine Kursdaten, keine Bankanbindung, kein Konto. Dein Plan bleibt in diesem Browser.',
+      'about.faq':'Häufige Fragen',
+      'about.q1':'Ist Finplanr kostenlos?',
+      'about.a1':'Ja. Du musst dich nirgends anmelden und zahlst nichts.',
+      'about.q2':'Wo werden meine Daten gespeichert?',
+      'about.a2':'Nur im lokalen Speicher deines Browsers. Auf einem Server wird nichts gespeichert. Mit einer JSON-Sicherung überträgst du deinen Plan auf ein anderes Gerät.',
+      'about.q3':'Gibt Finplanr Anlageberatung?',
+      'about.a3':'Nein. Es berechnet nur geplante Beträge. Die vorbelegten Positionen sind Beispiele: Prüfe ISIN und WKN selbst und entscheide eigenverantwortlich.',
+      'about.q4':'Kann ich eigene ETFs, Coins oder Konten verwenden?',
+      'about.a4':'Ja. Im Bearbeitungsmodus benennst du Positionen um, fügst Kategorien hinzu und trägst Kürzel, ISIN, WKN und ein Logo deiner Wahl ein.',
+      'about.q5':'Platziert Finplanr Orders oder verbindet sich mit meiner Bank?',
+      'about.a5':'Nein. Die eigentlichen Sparpläne richtest du selbst bei Broker oder Bank ein.',
+      'lang.group':'Sprache',
+      'tb.edit':'✎ Bearbeiten','tb.done':'✓ Bearbeitung beenden','tb.settings':'⚙ Einstellungen',
+      'tb.export':'↓ Export ▾','tb.import':'↑ Import','tb.reset':'↺ Reset',
+      'tb.import.tip':'JSON-Sicherung laden (ersetzt das aktuelle Portfolio)',
+      'tb.reset.saved':'Gespeicherten Reset-Stand wiederherstellen','tb.reset.none':'Eingebautes Beispielportfolio wiederherstellen',
+      'file.aria':'JSON-Datei importieren',
+      'export.menu':'Export',
+      'export.json.title':'JSON-Sicherung',
+      'export.json.desc':'Vollständiges Portfolio inkl. Einstellungen und Reset-Stand. Die einzige Datei, die du über Import wieder laden kannst – zum Sichern oder Umziehen auf einen anderen Browser/ein anderes Gerät.',
+      'export.csv.title':'CSV-Tabelle',
+      'export.csv.desc':'Reine Übersicht des aktuellen Plans (Kategorie, Position, Kürzel, ISIN, WKN, Anteil %, € pro Monat) für Excel/LibreOffice. Kann nicht wieder importiert werden.',
+      'csv.head':['Kategorie','Position','Kürzel','ISIN','WKN','Anteil Kategorie %','Anteil Gesamt %','Euro pro Monat'],
+      'toast.backup':'JSON-Sicherung heruntergeladen.','toast.csv':'CSV-Tabelle heruntergeladen.',
+      'set.title':'Berechnung & Rundung',
+      'set.cents':'Centbeträge erlauben','set.cents.desc':'Standardmäßig aus. Beträge werden in ganzen Euro festgelegt; optional sind 0,01-€-Schritte möglich.',
+      'set.lock.title':'Fixieren:',
+      'set.lock.text':'Fixierte Kategorien und Positionen behalten bei Änderungen ihren Betrag; nur nicht fixierte gleichen Änderungen aus. Pro Kategorie legst du einen Ausgleichspartner fest – oder alle flexiblen Kategorien. Bei ganzen Euro kann die Rundung um einen Schritt abweichen.',
+      'set.saveReset':'★ Aktuellen Stand als Reset-Stand speichern','set.factory':'Werkseinstellungen wiederherstellen',
+      'set.sort':'Nach Größe sortiert halten, größte zuerst',
+      'set.sort.desc':'Standardmäßig an. Kategorien und Positionen werden nach Betrag geordnet, sobald du eine Änderung abgeschlossen hast (nie während du einen Regler ziehst oder tippst). Ausschalten, um sie im Bearbeitungsmodus selbst anzuordnen.',
+      'toast.sort.on':'Sortierung nach Größe ist an.','toast.sort.off':'Automatische Sortierung ist aus. Die Reihenfolge kannst du im Bearbeitungsmodus festlegen.',
+      'set.reset.explain':'Reset führt zu deinem gespeicherten Reset-Stand zurück; „Werkseinstellungen wiederherstellen“ führt zum eingebauten Beispiel zurück und löscht den gespeicherten Reset-Stand.',
+      'set.reset.info':'Reset-Stand: {when} · Budget {budget} · {count}.',
+      'reset.when.manual':'manuell gespeichert am {date}','reset.when.import':'beim Import einer Sicherung erstellt am {date}',
+      'reset.when.legacy':'gespeichert am {date}','reset.when.nodate':'früher gespeichert (Datum unbekannt)',
+      'set.reset.none':'Kein eigener Reset-Stand gespeichert. Reset stellt das eingebaute Beispielportfolio wieder her.',
+      'tb.reset.tip':'{what}. Reset führt zu deinem gespeicherten Reset-Stand zurück; „Werkseinstellungen wiederherstellen“ (Einstellungen) führt zum eingebauten Beispiel zurück und löscht den gespeicherten Reset-Stand.',
+      'set.search.title':'Online-Suche:',
+      'set.search.text':'Die Krypto-Suche nutzt CoinGecko, die Wertpapier-Suche Wikidata (soweit verfügbar) und die Bildersuche Wikimedia Commons. Diese Dienste erhalten deinen Suchbegriff. justETF und Finanzfluss lassen sich nicht direkt abfragen und werden nur als Link angeboten.',
+      'toast.cents.on':'Centbeträge aktiviert.','toast.cents.off':'Auf ganze Euro umgestellt.',
+      'toast.resetSaved':'Aktueller Stand als Reset-Stand gespeichert.','toast.resetDone':'Gespeicherten Reset-Stand wiederhergestellt.',
+      'toast.factoryDone':'Werkseinstellungen wiederhergestellt.',
+      'confirm.reset':'Auf deinen gespeicherten Reset-Stand zurücksetzen ({when}; Budget {budget}; {count})? Änderungen seitdem gehen verloren.',
+      'confirm.resetNone':'Kein eigener Reset-Stand gespeichert. Das eingebaute Beispielportfolio wiederherstellen?',
+      'confirm.factory':'Werkseinstellungen wiederherstellen? Dein Portfolio und dein Reset-Stand werden gelöscht, das Beispielportfolio kehrt zurück. Das lässt sich nicht rückgängig machen. Die Spracheinstellung bleibt erhalten.',
+      'confirm.import':'Das aktuelle Portfolio durch die importierten Daten ersetzen? Das importierte Portfolio wird auch dein Reset-Stand.',
+      'confirm.import.snap':'Das aktuelle Portfolio durch die importierten Daten ersetzen? Der in der Datei gespeicherte Reset-Stand ersetzt auch deinen aktuellen Reset-Stand.',
+      'import.failed':'Import fehlgeschlagen: {msg}','toast.imported':'Portfolio importiert.',
+      'err.invalidFile':'Ungültige Portfolio-Datei.','err.invalidItems':'Ungültige Kategorien oder Positionen.',
+      'err.dupCat':'Doppelte Kategorie-ID.','err.invalidItem':'Ungültige Position.','err.dupItem':'Doppelte Positions-ID.',
+      'err.tooLarge':'Die Datei ist zu groß.',
+      'hero.aria':'Portfolio-Gesamtübersicht','hero.eyebrow':'Portfolio · Monatsplanung','hero.h1':'Dein Geld. Deine Aufteilung.',
+      'hero.budget':'Monatliches Sparbudget','hero.budget.aria':'Monatliches Sparbudget in Euro',
+      'hero.hint':'Alle Euro-Beträge passen sich automatisch deinem Monatsbudget und den Gewichtungen an.',
+      'hero.yearly':'Sparsumme pro Jahr','hero.count':'Positionen','hero.alloc':'Budget verteilt','hero.allocated':'verteilt',
+      'intro.title':'Deine Kategorien',
+      'intro.sub':'Fixiere Kategorien und einzelne Positionen mit 🔒. Nur nicht fixierte Beträge gleichen Änderungen aus. Innerhalb jeder Kategorie ergeben die Positionen 100 %.',
+      'mode.view':'Ansichtsmodus · Namen für den Chart, Kennungen zum Kopieren anklicken',
+      'mode.edit':'Bearbeitungsmodus · Namen, Kennungen und Kategorien anpassen',
+      'sort.auto':'Automatisch nach Größe sortiert – zum manuellen Anordnen in den Einstellungen ausschalten',
+      'banner.copy':'Inoffizielle Kopie von Finplanr. Das Original ist unter',
+      'sort.hint':'Reihenfolge ändern: ⠿ ziehen oder Pfeile nutzen','sort.all':'Alle Kategorien & Positionen:',
+      'sort.desc':'↓ Größte zuerst','sort.asc':'↑ Kleinste zuerst','sort.label':'Sortieren:',
+      'stack.aria':'Anteil jeder Kategorie','stack.btn':'{name}: {pct}. Zur Kategorie springen','donut.aria':'Aufteilung nach Kategorie','donut.seg':'{name}, {pct}, {amount} pro Monat. Zur Kategorie springen',
+      'add.name':'Neue Kategorie','add.placeholder':'z. B. Aktien','add.type':'Feldtyp','add.btn':'+ Kategorie hinzufügen',
+      'type.stock':'Aktien / Kürzel, ISIN & WKN','type.etf':'ETF / Kürzel, ISIN & WKN','type.etc':'ETC / Kürzel, ISIN & WKN','type.crypto':'Krypto / Kürzel',
+      'type.cash':'Tagesgeld / Name','type.other':'Sonstige / alle Felder',
+      'cat.crypto':'Krypto','cat.etf':'ETF','cat.etc':'Edelmetalle (ETC)','cat.cash':'Tagesgeld','item.cash':'Tagesgeld',
+      'cat.unnamed':'Kategorie','item.new':'Neue Position','item.unnamed':'Unbenannt',
+      'f.name':'Name','f.ticker':'Kürzel','tip.wkn':'WKN – Wertpapierkennnummer',
+      'f.tv':'Chart-Symbol (TradingView)',
+      'tip.tv':'Optional. Format BÖRSE:KÜRZEL, z. B. XETR:VWCE oder KRAKEN:BTCEUR. Wird für den Kurschart verwendet; ist das Feld leer, wird es nach Möglichkeit aus dem Kürzel abgeleitet.',
+      'toast.badTv':'Chart-Symbol ungültig – bitte im Format BÖRSE:KÜRZEL eingeben, z. B. XETR:VWCE.',
+      'cat.note.vgwl':'Das Xetra-Kürzel ist VGWL; VWRL ist das Kürzel in London/Amsterdam.',
+      'chart.toggleTip':'Kurschart ein- oder ausblenden','chart.aria':'Kurschart für {name}',
+      'chart.title':'{symbol} · Tageschart','chart.open':'Auf TradingView öffnen ↗','chart.openHome':'TradingView öffnen ↗',
+      'chart.close':'Chart schließen','chart.loading':'Chart wird geladen …',
+      'consent.text':'Um diesen Chart anzuzeigen, wird ein Widget von TradingView (TradingView Inc., USA) geladen. Dabei werden deine IP-Adresse und technische Daten an TradingView übermittelt, und TradingView kann Daten in deinem Browser speichern. Details in unserer',
+      'consent.policy':'Datenschutzerklärung.','consent.load':'Chart laden','consent.cancel':'Abbrechen',
+      'priv.title':'Datenschutz-Einstellungen','priv.intro':'Finplanr lädt standardmäßig nichts von Dritten. Einwilligungspflichtig sind nur die TradingView-Charts.',
+      'priv.status.on':'TradingView-Charts: erlaubt seit {date}','priv.status.off':'TradingView-Charts: nicht erlaubt',
+      'priv.withdraw':'Einwilligung widerrufen','priv.allow':'Charts erlauben',
+      'priv.note':'Der Widerruf löscht keine Daten, die TradingView in deinem Browser gespeichert haben könnte; du kannst sie in den Browser-Einstellungen entfernen (Websitedaten für tradingview-widget.com).',
+      'priv.policy':'Datenschutzerklärung','priv.close':'Schließen','priv.withdrawn':'Einwilligung widerrufen. Charts wurden geschlossen.','priv.allowed':'Charts erlaubt.',
+      'search.note.crypto':'Die Online-Suche (Button „Suchen“ oder Enter) sendet deinen Suchbegriff und deine IP-Adresse an CoinGecko.',
+      'search.note.sec':'Die Online-Suche (Button „Suchen“ oder Enter) sendet deinen Suchbegriff und deine IP-Adresse an Wikidata und dessen Abfragedienst (Wikimedia Foundation).',
+      'search.note.img':'Die Bildersuche (Button oder Enter) sendet deinen Suchbegriff und deine IP-Adresse an Wikimedia Commons; ausgewählte Bilder werden aus dem Internet geladen.',
+      'search.note.link':'Datenschutzerklärung',
+      'chart.noSymbol':'Kein Chart-Symbol hinterlegt – im Bearbeitungsmodus eintragen, z. B. XETR:VWCE',
+      'chart.error':'Der Chart konnte nicht geladen werden (offline oder durch einen Inhaltsblocker blockiert). Du kannst ihn stattdessen auf TradingView öffnen.',
+      'notice.empty':'Noch keine Positionen vorhanden. Aktiviere „Bearbeiten“ und lege Positionen an.',
+      'notice.zero':'Bitte weise mindestens einer Kategorie einen Anteil über 0 % zu.',
+      'sec.perMonth':'pro Monat','sec.count.one':'{n} Position','sec.count.other':'{n} Positionen',
+      'sec.share':'Anteil am Gesamtbudget · {step} pro Schritt','item.share':'Anteil innerhalb {cat} · {step} pro Schritt',
+      'sec.empty.edit':'Noch keine Positionen. Über den Button unten hinzufügen.',
+      'sec.empty.view':'Noch keine Positionen. Aktiviere „Bearbeiten“, um eine Position hinzuzufügen.',
+      'aria.catAmount':'Sparbetrag Kategorie {name} in Euro','aria.catPct':'Prozentanteil Kategorie {name}',
+      'aria.itemAmount':'Sparbetrag {name} in Euro','aria.itemPct':'Prozentanteil {name}',
+      'item.ofTotal':'{pct} gesamt',
+      'lock.catOn':'🔒 Fixiert','lock.catOff':'🔓 Flexibel',
+      'lock.catTip':'Fixierte Kategorien werden bei Änderungen an anderen Kategorien nicht umverteilt',
+      'lock.itemLock':'Position fixieren','lock.itemUnlock':'Position entsperren',
+      'peer.label':'Ausgleich nur mit:','peer.all':'Allen flexiblen Kategorien','peer.gone':'Partner fixiert / entfernt',
+      'peer.fixed':'🔒 Fixiert – kein Ausgleich',
+      'peer.noteLocked':'🔒 Fixiert: kein Ausgleich, die Partnerwahl hat derzeit keine Wirkung.',
+      'peer.noteOk':'Nur der gewählte Partner ändert sich','peer.noteNone':'Kein flexibler Partner: anderen wählen',
+      'toast.catLocked':'Kategorie fixiert – zuerst entsperren.',
+      'toast.noPartnerCat':'Kein flexibler Ausgleichspartner – eine andere Kategorie freigeben.',
+      'toast.limitedCat':'Betrag begrenzt: fixierte Kategorien bleiben unverändert.',
+      'toast.itemLocked':'Position fixiert – zuerst entsperren.',
+      'toast.noPartnerItem':'Kein flexibler Ausgleichspartner innerhalb dieser Kategorie.',
+      'toast.limitedItem':'Betrag begrenzt: fixierte Positionen bleiben unverändert.',
+      'toast.catLockOn':'🔒 {name} ist fixiert.','toast.catLockOff':'🔓 {name} ist flexibel.',
+      'toast.itemLockOn':'🔒 Position fixiert.','toast.itemLockOff':'🔓 Position entsperrt.',
+      'toast.newItem':'Neue Position: Anlage suchen oder manuell eintragen.',
+      'toast.itemRemoved':'Position entfernt.','toast.catRemoved':'Kategorie entfernt.',
+      'toast.sortedItems':'Positionen sortiert.','toast.sortedAll':'Kategorien und Positionen sortiert.',
+      'toast.reordered':'Reihenfolge geändert.','toast.catCreated':'Kategorie erstellt. Jetzt eine Position hinzufügen.',
+      'toast.catNameMissing':'Bitte einen Kategorienamen eintragen.','toast.lastCat':'Mindestens eine Kategorie muss bleiben.',
+      'toast.copied':'Kopiert: {value}','toast.copyFail':'Kopieren nicht möglich – bitte den Wert manuell markieren.',
+      'confirm.removeItem':'„{name}“ wirklich entfernen?',
+      'confirm.removeCat.one':'Kategorie „{name}“ mit {n} Position löschen?',
+      'confirm.removeCat.other':'Kategorie „{name}“ mit {n} Positionen löschen?',
+      'copy.title':'{field} kopieren','copy.aria':'{field} {value} kopieren','copy.name':'Name kopieren',
+      'edit.search':'⌕ Suchen','edit.searchTip':'Anlage oder passende Stammdaten suchen',
+      'edit.logo':'◉ Logo','edit.logoTip':'Logo ändern','edit.remove':'Entfernen','edit.removeTip':'Position entfernen',
+      'edit.addItem':'+ Position hinzufügen','edit.renameCat':'Kategoriename ändern','edit.deleteCat':'Kategorie löschen',
+      'edit.colour':'Farbe','edit.icon':'Symbol','edit.pickIcon':'◉ Symbol wählen',
+      'edit.colourOf':'Farbe von {name}','edit.iconOf':'Symbol von {name}',
+      'move.catUp':'Kategorie nach oben','move.catDown':'Kategorie nach unten',
+      'move.catUpAria':'Kategorie {name} nach oben','move.catDownAria':'Kategorie {name} nach unten',
+      'move.itemUp':'Position nach oben','move.itemDown':'Position nach unten',
+      'move.itemUpAria':'{name} nach oben','move.itemDownAria':'{name} nach unten',
+      'drag.cat':'Kategorie zum Verschieben ziehen','drag.catAria':'Kategorie {name} ziehen',
+      'drag.item':'Zum Verschieben ziehen','drag.itemAria':'{name} ziehen',
+      'modal.title.find':'Position finden','modal.title.logo':'Logo & Symbol ändern','modal.title.cat':'Kategoriesymbol ändern',
+      'modal.help.cat':'Wähle ein Symbol oder trage ein eigenes Zeichen ein.',
+      'modal.help.logo':'Suche ein Bild, verwende einen Link oder lade dein eigenes Logo hoch.',
+      'modal.help.find':'Gib Name, Kürzel, ISIN oder WKN ein. Ein Treffer wird erst nach Klick auf „Übernehmen“ in deine Position eingetragen.',
+      'modal.close':'✕ Schließen','modal.close.aria':'Schließen','modal.search':'Suchen',
+      'modal.ph.find':'Name, ISIN, WKN oder Kürzel','modal.ph.image':'Suchbegriff für Bilder',
+      'modal.iconTip':'Symbol {icon}',
+      'modal.status.catalog':'Integrierten Katalog durchsuchen oder eine Online-Suche starten.',
+      'modal.status.images':'Bilder über Wikimedia Commons suchen oder ein Symbol wählen.',
+      'modal.status.typing':'Katalog wird durchsucht; für weitere Treffer auf „Suchen“ klicken.',
+      'modal.status.offline':'Offline: Suche nur im integrierten Katalog.',
+      'modal.status.running':'Lokale Treffer angezeigt. Online-Suche läuft …',
+      'modal.status.failed':'Online-Daten sind gerade nicht verfügbar (Netzwerk, CORS oder Limit). Katalog und externe Links funktionieren weiterhin.',
+      'modal.status.found':'Treffer aus Katalog und Online-Suche ({n} online). Nur passende Einträge wählen und Kennungen prüfen.',
+      'modal.status.none':'Online-Suche abgeschlossen. Keine zusätzlichen Treffer; Katalog und externe Suche bleiben verfügbar.',
+      'modal.status.needImageTerm':'Bitte einen Suchbegriff für Bilder eingeben.','modal.status.needSymbol':'Bitte ein Symbol eingeben.',
+      'modal.status.needUrl':'Bitte eine gültige https://-Bildadresse eingeben.','modal.status.badFile':'Bitte PNG/JPG/WebP/GIF mit höchstens 150 KB auswählen.',
+      'modal.status.fileFail':'Das Bild konnte nicht gespeichert werden.',
+      'modal.none':'Kein Treffer: Versuche den genauen Firmennamen, das Kürzel oder die ISIN, oder trage die Angaben manuell ein.',
+      'modal.none.crypto':'Kein Treffer: Versuche den Coin-Namen oder das Kürzel, oder trage die Angaben manuell ein.',
+      'src.sel.aria':'Suchquelle','src.sel.stocks':'Aktien & ETFs','src.sel.crypto':'Krypto',
+      'modal.status.src.stocks':'Quelle: Aktien & ETFs (integrierter Katalog, bei „Suchen“ zusätzlich Wikidata).','modal.status.src.crypto':'Quelle: Krypto (integrierter Katalog, bei „Suchen“ zusätzlich CoinGecko).',
+      'modal.use':'Übernehmen →','modal.unknown':'Unbekannt','modal.searchOn':'↗ Bei {name} recherchieren',
+      'src.catalog':'Integrierter Katalog','src.wikidata':'Wikidata · ISIN prüfen',
+      'img.title':'Eigenes Logo oder Bild auswählen',
+      'img.help':'Ein Symbol, eine Bildadresse oder ein lokales Bild verwenden. Bilder aus Wikimedia Commons lassen sich über die Suche auswählen; prüfe die Zuordnung sowie Lizenz und Namensnennung auf der Dateiseite selbst (Logos sind oft Marken).',
+      'img.customSymbol':'Eigenes Symbol oder Emoji','img.useSymbol':'Symbol übernehmen',
+      'img.urlPlaceholder':'https://... Bildadresse','img.useUrl':'Bildadresse nutzen',
+      'img.upload':'↑ Eigenes Bild hochladen','img.find':'Bilder online finden','img.default':'Standardlogo verwenden',
+      'img.searching':'Wikimedia Commons wird durchsucht …','img.src':'Wikimedia Commons · nur bei richtiger Zuordnung wählen; Lizenz und Namensnennung auf der Dateiseite prüfen','img.filepage':'Dateiseite ↗',
+      'img.none':'Keine passenden Bilder gefunden. Bildadresse oder Upload verwenden.',
+      'img.unavailable':'Bildsuche nicht verfügbar. Eigene Datei oder Bildadresse verwenden.',
+      'toast.assetApplied':'Stammdaten übernommen – bitte Kennungen prüfen.','toast.iconApplied':'Symbol/Logo übernommen.',
+      'cg.label':'Kryptodaten:','cg.link':'Powered by CoinGecko API','foot.legal':'Impressum','foot.privacylink':'Datenschutz','foot.privacySettings':'Datenschutz-Einstellungen',
+      'foot.note':'Planungswerkzeug, keine Anlageberatung. Deine Daten bleiben in diesem Browser.',
+      'foot.guide':'Anleitung'
+    }
+  };
+  // The URL decides the language: /de/ is German, everything else (/) is English. No automatic redirect (crawler-safe).
+  let lang=/^\/de(\/|$)/.test(location.pathname)?'de':'en';
+  function t(key,params){
+    const table=STR[lang]||STR.en;
+    let k=key;
+    if(params&&typeof params.n==='number'){const pk=key+(params.n===1?'.one':'.other');if(pk in table||pk in STR.en)k=pk;}
+    let s=table[k]??STR.en[k];
+    if(s===undefined){console.warn('Missing i18n key',key);return key;}
+    if(typeof s!=='string')return s;
+    return params?s.replace(/\{(\w+)\}/g,(m,p)=>p in params?String(params[p]):m):s;
+  }
+  const locale=()=>lang==='de'?'de-DE':'en-IE';
+  function applyStatic(){
+    document.documentElement.lang=lang;
+    document.title=t('meta.title');
+    const md=document.querySelector('meta[name="description"]');if(md)md.setAttribute('content',t('meta.desc'));
+    document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n);});
+    document.querySelectorAll('[data-i18n-attr]').forEach(el=>el.dataset.i18nAttr.split(',').forEach(pair=>{
+      const i=pair.indexOf(':');if(i>0)el.setAttribute(pair.slice(0,i).trim(),t(pair.slice(i+1).trim()));
+    }));
+    document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
+    const guide=$('#guideLink');if(guide)guide.href=lang==='en'?'/en/anleitung.html':'/anleitung.html';
+    document.querySelectorAll('[data-privacy-link]').forEach(a=>{a.href=privacyUrl();});
+  }
+
+  // ---------------------------------------------------------------- data
+  // Built-in default names carry a nameKey and are shown in the active language until renamed.
+  // Weights are euro units: at the default budget of 1200 EUR every weight equals its monthly amount. Categories and items are listed largest first.
+  const DEFAULT={budget:1200,allowCents:false,categories:[
+    {id:'etf',name:'ETF',nameKey:'cat.etf',type:'etf',color:'#218c83',weight:750,items:[
+      {id:'allworld',name:'Vanguard FTSE All-World UCITS ETF (Acc)',ticker:'VWCE',tv:'XETR:VWCE',isin:'IE00BK5BQT80',wkn:'A2PKXG',weight:450},
+      {id:'smallcap',name:'iShares MSCI World Small Cap UCITS ETF (Acc)',ticker:'IUSN',tv:'XETR:IUSN',isin:'IE00BF4RFH31',wkn:'A2DWBY',weight:150},
+      {id:'emimi',name:'iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)',ticker:'IS3N',tv:'XETR:IS3N',isin:'IE00BKM4GZ66',wkn:'A111X9',weight:150}
+    ]},
+    {id:'cash',name:'Savings',nameKey:'cat.cash',type:'cash',color:'#6b98d4',weight:250,items:[{id:'tagesgeld',name:'Savings account',nameKey:'item.cash',ticker:'',tv:'',isin:'',wkn:'',weight:250}]},
+    {id:'krypto',name:'Crypto',nameKey:'cat.crypto',type:'crypto',color:'#8068d8',weight:100,items:[{id:'btc',name:'Bitcoin',ticker:'BTC',tv:'KRAKEN:BTCEUR',isin:'',wkn:'',weight:75},{id:'eth',name:'Ethereum',ticker:'ETH',tv:'KRAKEN:ETHEUR',isin:'',wkn:'',weight:25}]},
+    {id:'etc',name:'Precious metals (ETC)',nameKey:'cat.etc',type:'etc',color:'#d9a33d',weight:100,items:[
+      {id:'gold',name:'WisdomTree Core Physical Gold',ticker:'WGLD',tv:'XETR:WGLD',isin:'JE00BN2CJ301',wkn:'A3GNFN',weight:75},
+      {id:'silver',name:'WisdomTree Core Physical Silver',ticker:'WSLV',tv:'XETR:WSLV',isin:'JE00BQRFDY49',wkn:'A4AE1X',weight:25}
+    ]}
+  ]};
+  const CAT_NAME_KEYS=new Set(['cat.crypto','cat.etf','cat.etc','cat.cash']);
+  const ITEM_NAME_KEYS=new Set(['item.cash','item.new']);
+  // Old saved data stored the German default names as plain text; recognise them by id + exact name.
+  const LEGACY_CAT_DEFAULTS={krypto:['cat.crypto','Krypto'],etf:['cat.etf','ETF'],etc:['cat.etc','ETC'],cash:['cat.cash','Tagesgeld'],tagesgeld:['cat.cash','Tagesgeld']};
+  const LEGACY_ITEM_DEFAULTS={tagesgeld:['item.cash','Tagesgeld'],cash:['item.cash','Tagesgeld']};
+  const typeEmoji={crypto:'₿',stock:'▲',etf:'▥',etc:'◈',cash:'€',other:'◇'};
+  const colors=['#b76e86','#527cb8','#56998a','#986ebf','#cb8057','#6d96b4','#80a858','#a7873e'];
+  const $=s=>document.querySelector(s);
+  const numFmt=(opts)=>new Intl.NumberFormat(locale(),opts);
+  const money=n=>numFmt({style:'currency',currency:'EUR',minimumFractionDigits:state.allowCents?2:0,maximumFractionDigits:state.allowCents?2:0}).format(n);
+  const percent=n=>numFmt({maximumFractionDigits:2,minimumFractionDigits:0}).format(n)+(lang==='de'?' %':'%');
+  const formatPctInput=n=>String(Number(n.toFixed(2)));
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const clone=o=>JSON.parse(JSON.stringify(o));
+  const uid=()=>('id'+Math.random().toString(36).slice(2,10));
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const catName=c=>c.nameKey?t(c.nameKey):c.name;
+  const itemName=it=>it.nameKey?t(it.nameKey):it.name;
+    function cleanImg(input){
+    const s=String(input||'');
+    if(/^https:\/\/[^\s<>"']{3,500}$/i.test(s))return s;
+    if(/^data:image\/(png|jpeg|webp|gif);base64,[a-z0-9+/=]+$/i.test(s)&&s.length<250000)return s;
+    return '';
+  }
+  // Chart symbols: EXCHANGE:TICKER as used by TradingView. Anything else is dropped.
+  const cleanTv=v=>{const x=String(v??'').trim().slice(0,40).toUpperCase();return /^[A-Z0-9._\-]{1,30}:[A-Z0-9._\-!]{1,30}$/.test(x)?x:'';};
+  // Logos are resolved at render time and never written into the saved data (only user-picked logos live in iconUrl).
+  // Only bundled files in /logos/ are resolved automatically; there is NO remote fallback (no third-party request on page load).
+  // Anything else shows the emoji symbol until the user picks a logo (iconUrl) via the picker.
+  const LOCAL_LOGOS={bitcoin:'bitcoin.png',ethereum:'ethereum.png',solana:'solana.png',cardano:'cardano.png',ripple:'ripple.png',dogecoin:'dogecoin.png',vanguard:'vanguard.jpg',ishares:'ishares.png',wisdomtree:'wisdomtree.png',xtrackers:'xtrackers.png',amundi:'amundi.png',invesco:'invesco.png',spdr:'spdr.png',vaneck:'vaneck.png',hsbc:'hsbc.png',ubs:'ubs.png',jpmorgan:'jpmorgan.png'};
+  const BRANDS=[['vanguard',/vanguard/,'vanguard.com'],['ishares',/ishares|blackrock/,'ishares.com'],['wisdomtree',/wisdomtree/,'wisdomtree.com'],['xtrackers',/xtrackers/,'etf.dws.com'],['amundi',/amundi|lyxor/,'amundietf.de'],['invesco',/invesco/,'invesco.com'],['spdr',/\bspdr\b|state street|\bssga\b/,'ssga.com'],['vaneck',/van ?eck/,'vaneck.com'],['hsbc',/\bhsbc\b/,'hsbc.com'],['ubs',/\bubs\b/,'ubs.com'],['jpmorgan',/j\.? ?p\.? ?morgan/,'jpmorgan.com']];
+  const COINS={BTC:'bitcoin',ETH:'ethereum',SOL:'solana',ADA:'cardano',XRP:'ripple',DOGE:'dogecoin'};
+  const COIN_BY_NAME={bitcoin:'bitcoin',ethereum:'ethereum',solana:'solana',cardano:'cardano',xrp:'ripple',ripple:'ripple',dogecoin:'dogecoin'};
+  const coinLogo=id=>LOCAL_LOGOS[id]?'/logos/'+LOCAL_LOGOS[id]:'';
+  function brandLogo(name){
+    const lower=String(name||'').toLowerCase(),b=BRANDS.find(x=>x[1].test(lower));
+    if(!b)return '';
+    return LOCAL_LOGOS[b[0]]?'/logos/'+LOCAL_LOGOS[b[0]]:'';
+  }
+  // a: {name,ticker,coinId}. Cash and savings have no logo (emoji symbol only).
+  function autoLogo(type,a){
+    if(type==='cash')return '';
+    if(type==='crypto'||a.coinId){
+      const id=a.coinId||COINS[String(a.ticker||'').toUpperCase()]||COIN_BY_NAME[String(a.name||'').toLowerCase().trim()];
+      if(id)return coinLogo(id);
+    }
+    return brandLogo(a.name);
+  }
+  const ASSET_CATALOG=[
+    {type:'crypto',name:'Bitcoin',ticker:'BTC',coinId:'bitcoin',tv:'KRAKEN:BTCEUR'}, {type:'crypto',name:'Ethereum',ticker:'ETH',coinId:'ethereum',tv:'KRAKEN:ETHEUR'},
+    {type:'crypto',name:'Solana',ticker:'SOL',coinId:'solana',tv:'KRAKEN:SOLEUR'}, {type:'crypto',name:'Cardano',ticker:'ADA',coinId:'cardano',tv:'KRAKEN:ADAEUR'},
+    {type:'crypto',name:'XRP',ticker:'XRP',coinId:'ripple',tv:'KRAKEN:XRPEUR'}, {type:'crypto',name:'Dogecoin',ticker:'DOGE',coinId:'dogecoin',tv:'KRAKEN:DOGEEUR'},
+    {type:'etf',name:'iShares MSCI World Small Cap UCITS ETF (Acc)',isin:'IE00BF4RFH31',wkn:'A2DWBY',ticker:'IUSN',tv:'XETR:IUSN'},
+    {type:'etf',name:'iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)',isin:'IE00BKM4GZ66',wkn:'A111X9',ticker:'IS3N',tv:'XETR:IS3N'},
+    {type:'etf',name:'Vanguard FTSE All-World UCITS ETF (Acc)',isin:'IE00BK5BQT80',wkn:'A2PKXG',ticker:'VWCE',tv:'XETR:VWCE'},
+    {type:'etf',name:'iShares Core MSCI World UCITS ETF (Acc)',isin:'IE00B4L5Y983',wkn:'A0RPWH',ticker:'EUNL',tv:'XETR:EUNL'},
+    {type:'etf',name:'iShares Core S&P 500 UCITS ETF (Acc)',isin:'IE00B5BMR087',wkn:'A0YEDG',ticker:'SXR8',tv:'XETR:SXR8'},
+    {type:'etf',name:'Vanguard FTSE All-World UCITS ETF (Dist)',isin:'IE00B3RBWM25',wkn:'A1JX52',ticker:'VGWL',tv:'XETR:VGWL',aliases:['VWRL'],noteKey:'cat.note.vgwl'},
+    {type:'etf',name:'Xtrackers MSCI World UCITS ETF 1C',isin:'IE00BJ0KDQ92',wkn:'A1XB5U',ticker:'XDWD',tv:'XETR:XDWD'},
+    {type:'etf',name:'iShares Core DAX UCITS ETF (DE)',isin:'DE0005933931',wkn:'593393',ticker:'EXS1',tv:'XETR:EXS1'},
+    {type:'etf',name:'Vanguard S&P 500 UCITS ETF (Acc)',isin:'IE00BFMXXD54',ticker:'VUAA',tv:'XETR:VUAA'},
+    {type:'etf',name:'Xtrackers MSCI Emerging Markets UCITS ETF 1C',isin:'IE00BTJRMP35',ticker:'XMME',tv:'XETR:XMME'},
+    {type:'etc',name:'WisdomTree Core Physical Gold',isin:'JE00BN2CJ301',wkn:'A3GNFN',ticker:'WGLD',tv:'XETR:WGLD'},
+    {type:'etc',name:'WisdomTree Core Physical Silver',isin:'JE00BQRFDY49',wkn:'A4AE1X',ticker:'WSLV',tv:'XETR:WSLV'},
+    {type:'etc',name:'iShares Physical Gold ETC',isin:'IE00B4ND3602',ticker:'PPFB',tv:'XETR:PPFB'},
+    {type:'etc',name:'EUWAX Gold II',isin:'DE000EWG2LD7',wkn:'EWG2LD',ticker:'EWG2',tv:'TRADEGATE:EWG2'},
+    // Large listed companies (ISINs cross-checked against Wikidata, chart symbols against TradingView symbol pages).
+    {type:'stock',name:'Apple Inc.',isin:'US0378331005',ticker:'AAPL',tv:'NASDAQ:AAPL'}, {type:'stock',name:'Microsoft Corporation',isin:'US5949181045',ticker:'MSFT',tv:'NASDAQ:MSFT'},
+    {type:'stock',name:'NVIDIA Corporation',isin:'US67066G1040',ticker:'NVDA',tv:'NASDAQ:NVDA'}, {type:'stock',name:'Tesla, Inc.',isin:'US88160R1014',ticker:'TSLA',tv:'NASDAQ:TSLA'},
+    {type:'stock',name:'Amazon.com, Inc.',isin:'US0231351067',ticker:'AMZN',tv:'NASDAQ:AMZN'}, {type:'stock',name:'Alphabet Inc. (Class A)',isin:'US02079K3059',ticker:'GOOGL',tv:'NASDAQ:GOOGL',aliases:['Google']},
+    {type:'stock',name:'Meta Platforms, Inc.',isin:'US30303M1027',ticker:'META',tv:'NASDAQ:META',aliases:['Facebook']}, {type:'stock',name:'Berkshire Hathaway Inc. (Class B)',isin:'US0846707026',ticker:'BRK.B',tv:'NYSE:BRK.B'},
+    {type:'stock',name:'SAP SE',isin:'DE0007164600',wkn:'716460',ticker:'SAP',tv:'XETR:SAP'}, {type:'stock',name:'Siemens AG',isin:'DE0007236101',wkn:'723610',ticker:'SIE',tv:'XETR:SIE'},
+    {type:'stock',name:'Allianz SE',isin:'DE0008404005',wkn:'840400',ticker:'ALV',tv:'XETR:ALV'}, {type:'stock',name:'Deutsche Telekom AG',isin:'DE0005557508',wkn:'555750',ticker:'DTE',tv:'XETR:DTE'},
+    {type:'stock',name:'Volkswagen AG (Vz.)',isin:'DE0007664039',wkn:'766403',ticker:'VOW3',tv:'XETR:VOW3',aliases:['VW']}, {type:'stock',name:'Mercedes-Benz Group AG',isin:'DE0007100000',wkn:'710000',ticker:'MBG',tv:'XETR:MBG',aliases:['Daimler']},
+    {type:'stock',name:'BMW AG',isin:'DE0005190003',wkn:'519000',ticker:'BMW',tv:'XETR:BMW'}, {type:'stock',name:'BASF SE',isin:'DE000BASF111',wkn:'BASF11',ticker:'BAS',tv:'XETR:BAS'}
+  ];
+  const CATALOG_BY_ISIN=new Map(ASSET_CATALOG.filter(a=>a.isin).map(a=>[a.isin,a]));
+  // Accepts current files and older ones (format 'mein-sparplan-v2'); a stored `language` is ignored. `autoSort` (keep sorted by size) defaults to true when missing.
+  function validate(raw){
+    if(!raw||typeof raw!=='object'||!Array.isArray(raw.categories)||raw.categories.length>80||raw.categories.length<1)throw Error(t('err.invalidFile'));
+    const allowCents=raw.allowCents===true;
+    const amount=clamp(Number(raw.budget)||0,0,100000000);
+    const result={budget:allowCents?Math.round(amount*100)/100:Math.round(amount),allowCents,autoSort:raw.autoSort!==false,categories:[]};
+    const ids=new Set();
+    for(const c of raw.categories){
+      if(!c||typeof c!=='object'||!Array.isArray(c.items)||c.items.length>300)throw Error(t('err.invalidItems'));
+      const id=String(c.id||uid()).slice(0,80);if(ids.has(id))throw Error(t('err.dupCat'));ids.add(id);
+      const type=['crypto','stock','etf','etc','cash','other'].includes(c.type)?c.type:'other';
+      const color=/^#[0-9a-fA-F]{6}$/.test(c.color)?c.color:colors[result.categories.length%colors.length];
+      let nameKey=CAT_NAME_KEYS.has(c.nameKey)?c.nameKey:'';
+      if(!nameKey){
+        const legacy=LEGACY_CAT_DEFAULTS[id];
+        if(legacy&&c.name===legacy[1]&&(id!=='etc'||c.items.every(it=>it&&['gold','silver'].includes(it.id))))nameKey=legacy[0];
+      }
+      const category={id,name:String(c.name||t('cat.unnamed')).slice(0,100),type,color,icon:String(c.icon||typeEmoji[type]||'◇').slice(0,8),iconUrl:cleanImg(c.iconUrl),locked:!!c.locked,rebalanceWith:String(c.rebalanceWith||'auto').slice(0,80),weight:clamp(Number(c.weight)||0,0,1e9),items:[]};
+      if(nameKey)category.nameKey=nameKey;
+      const itemIds=new Set();
+      for(const it of c.items){
+        if(!it||typeof it!=='object')throw Error(t('err.invalidItem'));
+        const itemId=String(it.id||uid()).slice(0,80);if(itemIds.has(itemId))throw Error(t('err.dupItem'));itemIds.add(itemId);
+        let itemKey=ITEM_NAME_KEYS.has(it.nameKey)?it.nameKey:'';
+        if(!itemKey){const legacy=LEGACY_ITEM_DEFAULTS[itemId];if(legacy&&it.name===legacy[1])itemKey=legacy[0];else if(!it.name||Object.values(STR).some(l=>l['item.new']===it.name))itemKey='item.new';}
+        const item={id:itemId,name:String(it.name||t('item.new')).slice(0,150),ticker:String(it.ticker||'').slice(0,30),isin:String(it.isin||'').slice(0,32),wkn:String(it.wkn||'').slice(0,24),tv:cleanTv(it.tv),icon:String(it.icon||'').slice(0,8),iconUrl:cleanImg(it.iconUrl),locked:!!it.locked,weight:clamp(Number(it.weight)||0,0,1e9)};
+        // Older saved data has no ticker/chart symbol: fill empty values from the catalog (by ISIN) or the crypto ticker; never overwrite user values.
+        const known=CATALOG_BY_ISIN.get(item.isin.trim().toUpperCase());
+        if(known){if(!item.ticker&&known.ticker)item.ticker=known.ticker;if(!item.tv&&known.tv)item.tv=known.tv;}
+        else if(type==='crypto'&&!item.tv&&COINS[item.ticker.trim().toUpperCase()])item.tv='KRAKEN:'+item.ticker.trim().toUpperCase()+'EUR';
+        if(itemKey)item.nameKey=itemKey;
+        category.items.push(item);
+      }
+      result.categories.push(category);
+    }
+    return result;
+  }
+  let state=validate(clone(DEFAULT)),editMode=false,toastTimer,resetPoint=null,resetSavedAt=null,resetSource=null; // resetSource: 'manual' | 'import' | null (legacy record without a source)
+  const cleanSource=v=>v==='manual'||v==='import'?v:null;
+  try{const saved=localStorage.getItem(STORAGE_KEY);if(saved)state=validate(JSON.parse(saved));}catch(e){console.warn('Local data not loaded',e);}
+  try{const saved=localStorage.getItem(RESET_KEY);if(saved){const parsed=JSON.parse(saved);resetPoint=validate(parsed.portfolio||parsed);resetSavedAt=parsed.savedAt||null;resetSource=cleanSource(parsed.source);}}catch(e){console.warn('Reset point not loaded',e);}
+  function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){console.warn('Local storage not available',e);}}
+  function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2350);}
+  function ratios(items){if(!items.length)return [];const sum=items.reduce((s,c)=>s+Math.max(0,Number(c.weight)||0),0);return sum>0?items.map(c=>Math.max(0,Number(c.weight)||0)/sum):items.map(()=>1/items.length);}
+  function categoryRatios(){const active=state.categories.filter(c=>c.items.length);if(!active.length)return state.categories.map(()=>0);const positive=active.some(c=>c.weight>0);return ratios(state.categories.map(c=>({...c,weight:c.items.length?(positive?c.weight:1):0})));}
+  function setRelative(group,id,p){
+    if(group.length===1){group[0].weight=100;return;}
+    p=clamp(Number(p),0,100)/100;
+    const idx=group.findIndex(a=>a.id===id);if(idx<0)return;
+    const rel=ratios(group),sumOthers=1-rel[idx];
+    group.forEach((obj,i)=>{obj.weight=i===idx?p*100:((1-p)*(sumOthers>1e-12?rel[i]/sumOthers:1/(group.length-1)))*100;});
+  }
+  function allocate(total,fracs){
+    if(!fracs.length)return [];
+    const f=fracs.map(v=>Math.max(0,v));const totalF=f.reduce((a,b)=>a+b,0);if(!totalF)return f.map(()=>0);
+    const vals=f.map(v=>total*v/totalF),whole=vals.map(Math.floor);
+    let extra=total-whole.reduce((a,b)=>a+b,0);
+    const rank=vals.map((v,i)=>({i,rem:v-whole[i]})).sort((a,b)=>b.rem-a.rem||a.i-b.i);
+    for(let k=0;k<extra;k++)whole[rank[k%rank.length].i]++;
+    return whole;
+  }
+  function unitCents(){return state.allowCents?1:100;}
+  function budgetUnits(){return Math.round(state.budget*(state.allowCents?100:1));}
+  function info(){
+    const cr=categoryRatios(),unit=unitCents(),budget=budgetUnits(),catUnits=allocate(budget,cr);
+    return state.categories.map((c,i)=>{
+      const ir=ratios(c.items),itemUnits=allocate(catUnits[i],ir);
+      return {cat:c,catRatio:budget?catUnits[i]/budget:cr[i],cents:catUnits[i]*unit,
+        items:c.items.map((item,j)=>({item,ratio:catUnits[i]?itemUnits[j]/catUnits[i]:ir[j],
+          globalRatio:budget?itemUnits[j]/budget:cr[i]*ir[j],cents:itemUnits[j]*unit}))};
+    });
+  }
+  function currentUnits(cents){return Math.round(cents/unitCents());}
+  // Assign an exact integer amount to one entry; distribute the remaining units
+  // proportionally among siblings so every category/position total adds up exactly.
+  function redistribute(values,index,desired){
+    const total=values.reduce((a,b)=>a+b,0);
+    const target=clamp(Math.round(desired),0,total);
+    if(values.length<=1)return [total];
+    const others=values.map((value,i)=>i===index?0:value);
+    const remaining=allocate(total-target,others.some(x=>x>0)?others:others.map((_,i)=>i===index?0:1));
+    remaining[index]=target;
+    return remaining;
+  }
+  function otherItems(catId,itemId){
+    const cat=state.categories.find(c=>c.id===catId);
+    return cat?cat.items.filter(it=>it.id!==itemId&&!it.locked):[];
+  }
+  function itemSliderCapacity(catId,itemId){
+    const d=info().find(x=>x.cat.id===catId),item=d?.items.find(x=>x.item.id===itemId);
+    if(!d||!item||item.item.locked)return {max:0,disabled:true};
+    const peers=otherItems(catId,itemId);
+    const max=currentUnits(item.cents)+d.items.filter(x=>peers.includes(x.item)).reduce((sum,x)=>sum+currentUnits(x.cents),0);
+    return {max:max/(state.allowCents?100:1),disabled:!peers.length||!currentUnits(d.cents)};
+  }
+  function otherCategories(catId){
+    const c=state.categories.find(x=>x.id===catId);
+    if(!c)return [];
+    const candidates=state.categories.filter(x=>x.id!==catId&&x.items.length&&!x.locked);
+    if(c.rebalanceWith&&c.rebalanceWith!=='auto')return candidates.filter(x=>x.id===c.rebalanceWith);
+    return candidates;
+  }
+  function catSliderCapacity(catId){
+    const data=info(),source=data.find(d=>d.cat.id===catId);
+    const cat=source?.cat;
+    if(!source||!cat.items.length||cat.locked)return {max:0,disabled:true};
+    const peers=otherCategories(catId);
+    const max=currentUnits(source.cents)+peers.reduce((n,c)=>n+currentUnits(data.find(d=>d.cat.id===c.id)?.cents||0),0);
+    return {max:max/(state.allowCents?100:1),disabled:!peers.length||!budgetUnits()};
+  }
+  function setAmount(kind,catId,itemId,value){
+    const data=info();
+    if(kind==='cat'){
+      const c=state.categories.find(c=>c.id===catId);
+      if(!c||c.locked){toast(t('toast.catLocked'));return;}
+      const peers=otherCategories(catId);
+      if(!peers.length){toast(t('toast.noPartnerCat'));return;}
+      const affected=[c,...peers],amounts=affected.map(x=>currentUnits(data.find(d=>d.cat.id===x.id)?.cents||0));
+      const adjusted=redistribute(amounts,0,value);
+      const desired=clamp(Math.round(value),0,amounts.reduce((a,b)=>a+b,0));
+      if(desired!==Math.round(value))toast(t('toast.limitedCat'));
+      // Store ALL displayed units as weights, preserving locked and nonparticipating positions.
+      data.forEach(d=>d.cat.weight=currentUnits(d.cents));
+      affected.forEach((x,i)=>x.weight=adjusted[i]);
+    }else{
+      const d=data.find(d=>d.cat.id===catId);if(!d)return;
+      const index=d.items.findIndex(x=>x.item.id===itemId);if(index<0)return;
+      if(d.items[index].item.locked){toast(t('toast.itemLocked'));return;}
+      const peers=otherItems(catId,itemId);
+      if(!peers.length){toast(t('toast.noPartnerItem'));return;}
+      const affected=[d.items[index],...d.items.filter(x=>peers.includes(x.item))];
+      const amounts=affected.map(x=>currentUnits(x.cents));
+      const adjusted=redistribute(amounts,0,value);
+      if(adjusted[0]!==Math.round(value))toast(t('toast.limitedItem'));
+      // Freeze the effective allocation before changing the unlocked subset.
+      d.items.forEach(x=>x.item.weight=currentUnits(x.cents));
+      affected.forEach((x,i)=>x.item.weight=adjusted[i]);
+    }
+    persist();updateNumbers();
+  }
+  // Freeze current actual monthly allocations before changing only display order.
+  // This prevents equal remainders from moving one euro during a sort/reorder.
+  function freezeAllocations(){
+    if(budgetUnits()===0)return;
+    info().forEach(d=>{
+      d.cat.weight=d.cat.items.length?currentUnits(d.cents):0;
+      if(d.cents>0)d.items.forEach(x=>x.item.weight=currentUnits(x.cents));
+    });
+  }
+  const fieldDefs={crypto:['ticker'],stock:['ticker','isin','wkn'],etf:['ticker','isin','wkn'],etc:['ticker','isin','wkn'],cash:[],other:['ticker','isin','wkn']};
+  const fieldsFor=cat=>fieldDefs[cat.type]||fieldDefs.other;
+  // Edit mode adds the optional chart symbol (not useful for savings accounts).
+  const editFieldsFor=cat=>cat.type==='cash'?fieldsFor(cat):[...fieldsFor(cat),'tv'];
+  const fieldLabel=key=>key==='ticker'?t('f.ticker'):key==='tv'?t('f.tv'):key.toUpperCase();
+  const fieldTip=key=>key==='wkn'?t('tip.wkn'):key==='tv'?t('tip.tv'):'';
+  function visualIcon(img,emoji){
+    // Image is optional and may fail offline. The symbol below remains visible.
+    return `<span class="mini-icon asseticon" aria-hidden="true"><span>${esc(emoji)}</span>${img?`<img alt="" src="${esc(img)}" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#f4f6fa">`:''}</span>`;
+  }
+  function assetPic(cat,it){
+    // A user-picked logo (iconUrl) wins; a custom emoji suppresses the automatic one; otherwise resolve it now (not stored).
+    const img=cleanImg(it.iconUrl)||(it.icon?'':autoLogo(cat.type,it));
+    return visualIcon(img,it.icon||typeEmoji[cat.type]||'◇');
+  }
+  function catPic(cat){return visualIcon(cleanImg(cat.iconUrl),cat.icon||typeEmoji[cat.type]||'◇');}
+  function copyChip(key,value){
+    if(!value)return '';
+    const field=fieldLabel(key),tip=fieldTip(key);
+    const title=(tip?tip+' · ':'')+t('copy.title',{field});
+    return `<button class="copychip" type="button" data-copy="${esc(value)}" aria-label="${esc(t('copy.aria',{field,value}))}" title="${esc(title)}"><span>${esc(field)}: ${esc(value)}</span><span class="copyicon">⧉</span></button>`;
+  }
+  function editFields(cat,it){
+    const defs=['name',...editFieldsFor(cat)];
+    const fields=defs.map(key=>{
+      const label=key==='name'?t('f.name'):fieldLabel(key),tip=fieldTip(key);
+      const inputId=`input-${esc(cat.id)}-${esc(it.id)}-${key}`;
+      const value=key==='name'?itemName(it):it[key];
+      const ph=key==='tv'?(cat.type==='crypto'?'KRAKEN:BTCEUR':cat.type==='stock'?'NASDAQ:AAPL':'XETR:VWCE'):'';
+      return `<div class="editfield ${key==='name'?'namefield':''}"><label for="${inputId}"${tip?` title="${esc(tip)}"`:''}>${esc(label)}</label><input class="text-input" id="${inputId}" data-field="${key}" data-cat="${esc(cat.id)}" data-item="${esc(it.id)}" value="${esc(value)}" maxlength="${key==='name'?150:key==='tv'?40:32}" ${key==='isin'||key==='wkn'||key==='ticker'||key==='tv'?'autocapitalize="characters"':''}${key==='tv'?` placeholder="${ph}" spellcheck="false"`:''}${key==='tv'&&tip?` title="${esc(tip)}"`:''}></div>`;
+    }).join('');
+    return `<div class="edit-fields">${fields}<button type="button" class="btn small soft" data-find-item="${esc(it.id)}" data-cat="${esc(cat.id)}" title="${esc(t('edit.searchTip'))}">${esc(t('edit.search'))}</button><button type="button" class="btn small" data-asset-logo="${esc(it.id)}" data-cat="${esc(cat.id)}" title="${esc(t('edit.logoTip'))}">${esc(t('edit.logo'))}</button><button type="button" class="btn danger small" data-remove-item="${esc(it.id)}" data-cat="${esc(cat.id)}" title="${esc(t('edit.removeTip'))}">${esc(t('edit.remove'))}</button></div>`;
+  }
+  function entryHtml(cat,obj){const it=obj.item,ed=editMode,name=itemName(it);
+    const amount=obj.cents/100,step=state.allowCents?'0.01':'1';
+    const index=cat.items.findIndex(x=>x.id===it.id),cap=itemSliderCapacity(cat.id,it.id);
+    const manual=!state.autoSort,moves=ed&&manual?`<div class="move-buttons"><button type="button" data-move-item="-1" data-cat="${esc(cat.id)}" data-item="${esc(it.id)}" title="${esc(t('move.itemUp'))}" aria-label="${esc(t('move.itemUpAria',{name}))}" ${index===0?'disabled':''}>↑</button><button type="button" data-move-item="1" data-cat="${esc(cat.id)}" data-item="${esc(it.id)}" title="${esc(t('move.itemDown'))}" aria-label="${esc(t('move.itemDownAria',{name}))}" ${index===cat.items.length-1?'disabled':''}>↓</button></div>`:'';
+    const left=ed
+      ?`<div class="dragrow">${manual?`<button type="button" class="draghandle" data-drag-item="${esc(it.id)}" data-cat="${esc(cat.id)}" aria-label="${esc(t('drag.itemAria',{name}))}" title="${esc(t('drag.item'))}">⠿</button>`:''}${assetPic(cat,it)}<div style="flex:1;min-width:0">${editFields(cat,it)}</div>${moves}</div>`
+      :`<div class="itemidentity">${assetPic(cat,it)}<div class="itemtext"><div class="entry-name">${cat.type==='cash'?`<span class="entry-name-btn">${esc(name||t('item.unnamed'))}</span>`:`<button type="button" class="entry-name-btn chart-toggle" data-chart-toggle="${esc(it.id)}" data-cat="${esc(cat.id)}" aria-expanded="false" title="${esc(t('chart.toggleTip'))}">${esc(name||t('item.unnamed'))}</button>`} <button class="copychip" type="button" data-copy="${esc(name)}" title="${esc(t('copy.name'))}" aria-label="${esc(t('copy.name'))}" style="padding:1px 5px;vertical-align:1px">⧉</button></div><div class="meta">${fieldsFor(cat).map(key=>copyChip(key,it[key])).join('')}</div></div></div>`;
+    const lockLabel=it.locked?t('lock.itemUnlock'):t('lock.itemLock');
+    return `<div class="entry ${ed?'editentry':''}" data-entry="${esc(it.id)}" data-cat="${esc(cat.id)}"><div class="entry-main">
+      <div class="entry-left">${left}</div>
+      <div class="item-slider"><div class="item-slider-title"><span class="caption">${esc(t('item.share',{cat:catName(cat),step:money(state.allowCents?0.01:1)}))}</span><button type="button" class="itemlock" data-item-lock="${esc(it.id)}" data-cat="${esc(cat.id)}" aria-pressed="${it.locked?'true':'false'}" title="${esc(lockLabel)}" aria-label="${esc(lockLabel+': '+name)}">${it.locked?'🔒':'🔓'}</button></div><div class="item-slider-grid"><input type="range" min="0" max="${cap.max}" step="${step}" data-item-range="${esc(it.id)}" data-cat="${esc(cat.id)}" value="${amount}" aria-label="${esc(t('aria.itemAmount',{name}))}" style="--fill:${obj.ratio*100}%" ${cap.disabled?'disabled':''}><label class="pctinput"><span class="sr-only">${esc(t('aria.itemPct',{name}))}</span><input type="number" min="0" max="100" step="0.01" inputmode="decimal" data-item-number="${esc(it.id)}" data-cat="${esc(cat.id)}" value="${formatPctInput(obj.ratio*100)}" ${cap.disabled?'disabled':''}><span>%</span></label></div></div>
+      <div class="entry-end"><div class="value" data-item-euro="${esc(it.id)}">${money(amount)}</div><label class="euroinput"><span class="sr-only">${esc(t('aria.itemAmount',{name}))}</span><input type="number" min="0" max="${cap.max}" step="${step}" inputmode="${state.allowCents?'decimal':'numeric'}" data-item-euro-input="${esc(it.id)}" data-cat="${esc(cat.id)}" value="${amount}" ${cap.disabled?'disabled':''}><span>€</span></label><div class="globalpct" data-item-global="${esc(it.id)}">${esc(t('item.ofTotal',{pct:percent(obj.globalRatio*100)}))}</div></div>
+    </div></div>`;
+  }
+  function sectionHtml(obj){const c=obj.cat,name=catName(c);
+    const index=state.categories.findIndex(x=>x.id===c.id),amount=obj.cents/100,step=state.allowCents?'0.01':'1',cap=catSliderCapacity(c.id),max=cap.max;
+    const move=editMode&&!state.autoSort?`<div class="move-buttons"><button type="button" data-move-category="-1" data-cat="${esc(c.id)}" title="${esc(t('move.catUp'))}" aria-label="${esc(t('move.catUpAria',{name}))}" ${index===0?'disabled':''}>↑</button><button type="button" data-move-category="1" data-cat="${esc(c.id)}" title="${esc(t('move.catDown'))}" aria-label="${esc(t('move.catDownAria',{name}))}" ${index===state.categories.length-1?'disabled':''}>↓</button></div>`:'';
+    const partners=state.categories.filter(x=>x.id!==c.id&&x.items.length&&!x.locked);
+    const peerOptions=c.locked
+      ?`<option value="fixed" selected>${esc(t('peer.fixed'))}</option>`
+      :`<option value="auto" ${!c.rebalanceWith||c.rebalanceWith==='auto'?'selected':''}>${esc(t('peer.all'))}</option>${c.rebalanceWith!=='auto'&&!partners.some(x=>x.id===c.rebalanceWith)?`<option value="${esc(c.rebalanceWith)}" selected disabled>${esc(t('peer.gone'))}</option>`:''}${partners.map(x=>`<option value="${esc(x.id)}" ${c.rebalanceWith===x.id?'selected':''}>${esc(catName(x))}</option>`).join('')}`;
+    const peerNote=c.locked?t('peer.noteLocked'):(otherCategories(c.id).length?t('peer.noteOk'):t('peer.noteNone'));
+    const step$=money(state.allowCents?0.01:1);
+    return `<section class="section" data-section="${esc(c.id)}" style="--accent:${esc(c.color)}"><div class="sectionhead">
+      <div><div class="section-title">${editMode&&!state.autoSort?`<button type="button" class="draghandle" data-drag-cat="${esc(c.id)}" title="${esc(t('drag.cat'))}" aria-label="${esc(t('drag.catAria',{name}))}">⠿</button>`:''}<div class="section-icon"><span class="catsymbol">${catPic(c)}</span></div><div><h3 class="sectionname" tabindex="-1">${esc(name)}</h3></div>${move}</div><div class="categoryline"><span data-cat-total="${esc(c.id)}" class="categorymoney">${money(amount)}</span> <span>${esc(t('sec.perMonth'))} · <span data-cat-items="${esc(c.id)}">${esc(t('sec.count',{n:c.items.length}))}</span></span></div>${editMode?`<div class="edit-head"><label class="sr-only" for="catname-${esc(c.id)}">${esc(t('edit.renameCat'))}</label><input class="text-input" data-rename-cat="${esc(c.id)}" id="catname-${esc(c.id)}" value="${esc(name)}" maxlength="100"><button class="btn danger small" type="button" data-remove-category="${esc(c.id)}">${esc(t('edit.deleteCat'))}</button></div><div class="branding-controls"><label>${esc(t('edit.colour'))} <input aria-label="${esc(t('edit.colourOf',{name}))}" type="color" value="${esc(c.color)}" data-cat-color="${esc(c.id)}"></label><label>${esc(t('edit.icon'))} <input class="text-input symbol-field" maxlength="8" aria-label="${esc(t('edit.iconOf',{name}))}" value="${esc(c.icon||typeEmoji[c.type]||'◇')}" data-cat-icon="${esc(c.id)}"></label><button type="button" class="btn small" data-category-icons="${esc(c.id)}">${esc(t('edit.pickIcon'))}</button></div>`:''}</div>
+      <div class="catcontrols"><div><span class="caption">${esc(t('sec.share',{step:step$}))}</span><input type="range" min="0" max="${max}" step="${step}" data-cat-range="${esc(c.id)}" value="${amount}" style="--fill:${obj.catRatio*100}%" aria-label="${esc(t('aria.catAmount',{name}))}" ${cap.disabled?'disabled':''}></div><label class="pctinput"><span class="sr-only">${esc(t('aria.catPct',{name}))}</span><input type="number" min="0" max="100" step="0.01" inputmode="decimal" data-cat-number="${esc(c.id)}" value="${formatPctInput(obj.catRatio*100)}" ${cap.disabled?'disabled':''}><span>%</span></label><label class="euroinput"><span class="sr-only">${esc(t('aria.catAmount',{name}))}</span><input type="number" min="0" max="${max}" step="${step}" inputmode="${state.allowCents?'decimal':'numeric'}" data-cat-euro-input="${esc(c.id)}" value="${amount}" ${cap.disabled?'disabled':''}><span>€</span></label></div>
+    </div>
+    <div class="locktools"><label class="lockchip ${c.locked?'locked-ui':''}" title="${esc(t('lock.catTip'))}"><input type="checkbox" data-cat-lock="${esc(c.id)}" ${c.locked?'checked':''} ${!c.items.length?'disabled':''}><span>${esc(c.locked?t('lock.catOn'):t('lock.catOff'))}</span></label><label for="peer-${esc(c.id)}">${esc(t('peer.label'))}</label><select id="peer-${esc(c.id)}" class="peer-select" data-cat-peer="${esc(c.id)}" ${c.locked||!c.items.length?'disabled':''}>${peerOptions}</select><span class="muted">${esc(peerNote)}</span></div>
+    <div class="entries">${obj.items.length?obj.items.map(it=>entryHtml(c,it)).join(''):`<p class="muted" style="margin:17px 0">${esc(editMode?t('sec.empty.edit'):t('sec.empty.view'))}</p>`}</div>
+    ${editMode?`<div class="edittools"><button type="button" class="btn soft small" data-add-item="${esc(c.id)}">${esc(t('edit.addItem'))}</button>${state.autoSort?'':`<span class="muted">${esc(t('sort.label'))}</span><button class="btn small" type="button" data-sort-items="desc" data-cat="${esc(c.id)}">${esc(t('sort.desc'))}</button><button class="btn small" type="button" data-sort-items="asc" data-cat="${esc(c.id)}">${esc(t('sort.asc'))}</button>`}</div>`:''}</section>`;
+  }
+  // ---------------------------------------------------------------- price chart (TradingView Advanced Chart widget)
+  // Nothing from TradingView is requested until the user opens a chart AND has given consent (consent box in the panel, or Privacy settings).
+  // One panel at a time, shown below the entry row.
+  // updateNumbers() never touches the panel, so sliders and number inputs do not reload the widget.
+  const TV_SCRIPT='https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+  let openChart=null; // openChart: {catId,itemId}
+  function chartSymbol(cat,it){
+    const tv=cleanTv(it.tv);if(tv)return tv;
+    const tk=String(it.ticker||'').trim().toUpperCase();
+    if(!/^[A-Z0-9._\-]{1,30}$/.test(tk))return '';
+    if(cat.type==='crypto')return 'KRAKEN:'+tk+'EUR';
+    if(cat.type==='etf'||cat.type==='etc')return 'XETR:'+tk;
+    return '';
+  }
+  // Consent for TradingView. Stored as {v:1,granted:true,ts}; if storage is unavailable, consent only lasts for this page view.
+  let memConsent=null;
+  function getConsent(){
+    try{const r=JSON.parse(localStorage.getItem(CONSENT_KEY)||'null');return r&&r.v===1&&r.granted===true?{ts:typeof r.ts==='string'?r.ts:''}:null;}
+    catch(e){return memConsent;}
+  }
+  function grantConsent(){
+    const rec={v:1,granted:true,ts:new Date().toISOString()};
+    memConsent={ts:rec.ts};
+    try{localStorage.setItem(CONSENT_KEY,JSON.stringify(rec));}catch(e){}
+  }
+  function withdrawConsent(){
+    memConsent=null;
+    try{localStorage.removeItem(CONSENT_KEY);}catch(e){}
+    // Remove any open chart (panel, TradingView script and iframe nodes) immediately.
+    if(openChart){closeChart();}
+    document.querySelectorAll('.chart-panel,.tradingview-widget-container,iframe[src*="tradingview"]').forEach(n=>n.remove());
+  }
+  const chartEntry=(catId,itemId)=>[...document.querySelectorAll('[data-entry]')].find(e=>e.dataset.entry===itemId&&e.dataset.cat===catId)||null;
+  function closeChart(focus){
+    if(!openChart)return;
+    const entry=chartEntry(openChart.catId,openChart.itemId);
+    entry?.querySelector('.chart-panel')?.remove();
+    const btn=entry?.querySelector('[data-chart-toggle]');
+    if(btn){btn.setAttribute('aria-expanded','false');btn.removeAttribute('aria-controls');if(focus)btn.focus();}
+    openChart=null;
+  }
+  // Re-create the open panel (e.g. right after consent was given) so the widget loads.
+  function remountChart(focus){
+    if(!openChart)return;
+    chartEntry(openChart.catId,openChart.itemId)?.querySelector('.chart-panel')?.remove();
+    mountChart(false);
+    const panel=$('#chartPanel');if(focus&&panel){panel.tabIndex=-1;panel.focus({preventScroll:true});}
+  }
+  function loadChartWidget(body,sym){
+    const wrap=document.createElement('div');wrap.className='tradingview-widget-container';
+    const inner=document.createElement('div');inner.className='tradingview-widget-container__widget';
+    const s=document.createElement('script');
+    s.src=TV_SCRIPT;s.async=true;
+    s.textContent=JSON.stringify({autosize:true,symbol:sym,interval:'D',timezone:'Europe/Berlin',theme:'light',style:'2',locale:lang==='de'?'de_DE':'en',hide_side_toolbar:true,allow_symbol_change:false,save_image:false,calendar:false,withdateranges:true,support_host:'https://www.tradingview.com'});
+    s.onerror=()=>{if(body.isConnected)body.innerHTML=`<div class="chart-error" role="alert">${esc(t('chart.error'))}</div>`;};
+    // Official TradingView attribution (markup as generated by their widget wizard): must stay visible below the chart (their terms, section 4).
+    const cr=document.createElement('div');cr.className='tradingview-widget-copyright';
+    cr.innerHTML='<a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets</span></a><span class="trademark"> on TradingView</span>';
+    wrap.append(inner,cr,s);body.appendChild(wrap);
+  }
+  function mountChart(userOpen){
+    if(!openChart)return;
+    const cat=state.categories.find(c=>c.id===openChart.catId),it=cat?.items.find(x=>x.id===openChart.itemId),entry=chartEntry(openChart.catId,openChart.itemId);
+    if(!cat||!it||!entry||editMode){openChart=null;return;}
+    const sym=chartSymbol(cat,it),name=itemName(it);
+    const link=sym?'https://www.tradingview.com/chart/?symbol='+encodeURIComponent(sym):'https://www.tradingview.com/';
+    const panel=document.createElement('div');
+    panel.className='chart-panel';panel.id='chartPanel';panel.setAttribute('role','region');panel.setAttribute('aria-label',t('chart.aria',{name}));
+    const consent=sym?getConsent():null;
+    const head=`<div class="chart-head"><strong class="chart-title">${esc(sym?t('chart.title',{symbol:sym}):name)}</strong>${!sym||consent?`<a class="chart-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${esc(t(sym?'chart.open':'chart.openHome'))}</a>`:''}<button type="button" class="btn small icononly" data-chart-close aria-label="${esc(t('chart.close'))}" title="${esc(t('chart.close'))}">✕</button></div>`;
+    const consentBox=`<div class="consent-box" data-consent-box><p>${esc(t('consent.text'))} <a href="${esc(privacyUrl())}" target="_blank" rel="noopener noreferrer">${esc(t('consent.policy'))}</a></p><div class="consent-actions"><button type="button" class="btn primary small" data-chart-consent>${esc(t('consent.load'))}</button><a class="chart-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${esc(t('chart.open'))}</a><button type="button" class="btn small" data-chart-close>${esc(t('consent.cancel'))}</button></div></div>`;
+    panel.innerHTML=head+(sym?(consent?`<div class="chart-body"><div class="chart-loading">${esc(t('chart.loading'))}</div></div>`:consentBox):`<p class="chart-hint">${esc(t('chart.noSymbol'))}</p>`);
+    entry.appendChild(panel);
+    const btn=entry.querySelector('[data-chart-toggle]');
+    if(btn){btn.setAttribute('aria-expanded','true');btn.setAttribute('aria-controls','chartPanel');}
+    if(sym&&consent)loadChartWidget(panel.querySelector('.chart-body'),sym);
+    if(userOpen)panel.scrollIntoView({block:'nearest',behavior:'smooth'});
+  }
+  function toggleChart(btn){
+    const catId=btn.dataset.cat,itemId=btn.dataset.chartToggle;
+    if(openChart&&openChart.catId===catId&&openChart.itemId===itemId){closeChart();return;}
+    closeChart();
+    const cat=state.categories.find(c=>c.id===catId),it=cat?.items.find(x=>x.id===itemId);if(!it)return;
+    openChart={catId,itemId};
+    mountChart(true);
+  }
+  // "sec.count" resolves to the plural variants via {n}.
+  function render(keepChart){
+    if(state.autoSort&&applyAutoSort())persist(); // standing behaviour: every full render shows categories/holdings sorted by size
+    // An open chart panel is kept only across a language switch (re-created with the new locale); every other render closes it.
+    if(keepChart!==true||editMode)openChart=null;
+    applyStatic();
+    $('#editToggle').textContent=editMode?t('tb.done'):t('tb.edit');
+    $('#editToggle').classList.toggle('primary',!editMode);
+    $('#editLabel').textContent=editMode?t('mode.edit'):t('mode.view');
+    $('#addCategory').classList.toggle('hidden',!editMode);
+    $('#globalSortBar').classList.toggle('hidden',!editMode);
+    $('#autoSort').checked=state.autoSort;$('#sortTools').classList.toggle('hidden',state.autoSort);if(!state.autoSort)$('#sortHint').textContent=t('sort.hint');
+    $('#allowCents').checked=state.allowCents;
+    $('#monthlyBudget').step=state.allowCents?'0.01':'1';
+    $('#monthlyBudget').inputMode=state.allowCents?'decimal':'numeric';
+    $('#monthlyBudget').value=state.budget;
+    $('#sections').innerHTML=info().map(sectionHtml).join('');
+    updateNumbers();updateResetLabel();
+    if(openChart)mountChart(false);
+  }
+  /* Allocation visuals: SVG donut + legend + stack bar share one [data-seg=categoryId] element per category.
+     They are built once per category set (id+colour) and then only updated in place, so hover/focus survive slider ticks.
+     Segments are circle strokes (pathLength=100) inside a group rotated -90deg: dash length = share in %. */
+  const RING={sw:25.5,pop:33,min:1.2}; // ring thickness, popped thickness, minimum visual share in % (keeps tiny slices hoverable)
+  let allocKey='',allocData=[],allocHover=null,allocFocus=null,flashEl=null,flashTimer=0;
+  function buildAlloc(data){
+    const key=data.map(d=>d.cat.id+'|'+d.cat.color).join('\n');
+    if(key===allocKey)return;allocKey=key;allocHover=allocFocus=null;
+    $('#donutSegs').innerHTML=data.map(d=>`<circle class="seg" data-seg="${esc(d.cat.id)}" role="link" tabindex="0" cx="88" cy="88" r="75.25" pathLength="100" fill="none" stroke="${esc(d.cat.color)}" stroke-width="${RING.sw}"/>`).join('');
+    $('#legend').innerHTML=data.map(d=>`<button type="button" class="legendline" data-seg="${esc(d.cat.id)}"><span class="dot" style="background:${esc(d.cat.color)}"></span><span class="legendname"></span><strong></strong></button>`).join('');
+    $('#stackbar').innerHTML=data.map(d=>`<button type="button" data-seg="${esc(d.cat.id)}" style="background:${esc(d.cat.color)}"></button>`).join('');
+  }
+  function updateAlloc(data,active){
+    buildAlloc(data);allocData=data;
+    const pcts=data.map(d=>d.catRatio*100),small=pcts.filter(p=>p>0&&p<RING.min).length,rest=pcts.reduce((a,p)=>a+(p>=RING.min?p:0),0);
+    const k=rest?Math.max(0,100-small*RING.min)/rest:1;
+    let vis=pcts.map(p=>p<=0?0:p<RING.min?RING.min:p*k);const tot=vis.reduce((a,v)=>a+v,0);vis=vis.map(v=>tot?v*100/tot:0);
+    const pop=(RING.pop-RING.sw)/2,seg=id=>`[data-seg="${CSS.escape(id)}"]`;let from=0;
+    data.forEach((d,i)=>{
+      const id=d.cat.id,v=vis[i],name=catName(d.cat),pct=percent(pcts[i]),mid=(from+v/2)/100*2*Math.PI;
+      const c=$('#donutSegs '+seg(id));
+      c.setAttribute('stroke-dasharray',`${v} ${100-v}`);c.setAttribute('stroke-dashoffset',-from);c.dataset.pct=pcts[i];
+      c.style.setProperty('--tx',(Math.cos(mid)*pop).toFixed(2)+'px');c.style.setProperty('--ty',(Math.sin(mid)*pop).toFixed(2)+'px'); // pop outward along the mid angle (in the rotated frame)
+      c.classList.toggle('zero',v<=0);c.setAttribute('aria-label',t('donut.seg',{name,pct,amount:money(d.cents/100)}));
+      const l=$('#legend '+seg(id));l.querySelector('.legendname').textContent=name;l.querySelector('.legendname').title=name;l.querySelector('strong').textContent=pct;
+      l.setAttribute('aria-label',t('donut.seg',{name,pct,amount:money(d.cents/100)}));
+      const b=$('#stackbar '+seg(id));b.style.width=pcts[i]+'%';b.hidden=pcts[i]<=0;b.title=name+': '+pct;b.setAttribute('aria-label',t('stack.btn',{name,pct}));
+      from+=v;
+    });
+    $('#donut').classList.toggle('empty',!(tot>0));
+    allocPaint(active);
+  }
+  // pop the active category everywhere (hover wins over keyboard focus) and show it in the centre of the donut
+  function allocPaint(active=state.categories.some(c=>c.items.length)){
+    const id=allocHover||allocFocus,d=id&&allocData.find(x=>x.cat.id===id);
+    document.querySelectorAll('[data-seg]').forEach(el=>el.classList.toggle('on',el.dataset.seg===id));
+    ['#donut','#stackbar'].forEach(q=>$(q).classList.toggle('hasact',!!d));
+    $('#donutName').textContent=d?catName(d.cat):'';
+    $('#donutSum').textContent=d?percent(d.catRatio*100):percent(active?100:0);
+    $('#donutSub').textContent=d?money(d.cents/100):t('hero.allocated');
+  }
+  function jumpToCategory(id){
+    const sec=document.querySelector(`[data-section="${CSS.escape(id)}"]`);if(!sec)return;
+    allocHover=allocFocus=null;allocPaint();
+    sec.scrollIntoView({block:'start'}); // smooth unless prefers-reduced-motion (see CSS); scroll-margin-top keeps it off the edge
+    sec.querySelector('.sectionname')?.focus({preventScroll:true});
+    flashEl?.classList.remove('flash');flashEl=sec;sec.classList.add('flash');clearTimeout(flashTimer);flashTimer=setTimeout(()=>{sec.classList.remove('flash');flashEl=null;},1200);
+  }
+  ['#donut','#legend','#stackbar'].forEach(q=>{
+    const box=$(q),segOf=e=>e.target.closest?.('[data-seg]');
+    box.addEventListener('pointerover',e=>{if(e.pointerType==='touch')return;allocHover=segOf(e)?.dataset.seg||null;allocPaint();}); // touch: a tap just jumps, no sticky hover
+    box.addEventListener('pointerleave',()=>{allocHover=null;allocPaint();});
+    box.addEventListener('focusin',e=>{const el=segOf(e);allocFocus=el&&el.matches(':focus-visible')?el.dataset.seg:null;allocPaint();});
+    box.addEventListener('focusout',()=>{allocFocus=null;allocPaint();});
+    box.addEventListener('click',e=>{const el=segOf(e);if(el)jumpToCategory(el.dataset.seg);});
+  });
+  $('#donut').addEventListener('keydown',e=>{const el=e.target.closest?.('.seg');if(el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();jumpToCategory(el.dataset.seg);}});
+  function updateNumbers(){
+    const data=info(),count=state.categories.reduce((s,c)=>s+c.items.length,0),active=state.categories.filter(c=>c.items.length).length;
+    $('#yearly').textContent=money(state.budget*12);
+    $('#count').textContent=count;
+    $('#sumWeight').textContent=active?percent(100):percent(0);
+    updateAlloc(data,active);
+    const notice=$('#notice');
+    if(count===0){notice.textContent=t('notice.empty');notice.classList.remove('hidden');}
+    else if(data.every(d=>d.catRatio===0)){notice.textContent=t('notice.zero');notice.classList.remove('hidden');}
+    else notice.classList.add('hidden');
+    data.forEach(d=>{
+      const id=d.cat.id,catAmount=d.cents/100,cap=catSliderCapacity(id);
+      const total=document.querySelector(`[data-cat-total="${CSS.escape(id)}"]`);if(total)total.textContent=money(catAmount);
+      document.querySelectorAll(`[data-cat-range="${CSS.escape(id)}"]`).forEach(el=>{el.max=cap.max;el.disabled=cap.disabled;el.value=catAmount;el.style.setProperty('--fill',`${d.catRatio*100}%`);});
+      document.querySelectorAll(`[data-cat-number="${CSS.escape(id)}"]`).forEach(el=>{el.disabled=cap.disabled;if(document.activeElement!==el)el.value=formatPctInput(d.catRatio*100);});
+      document.querySelectorAll(`[data-cat-euro-input="${CSS.escape(id)}"]`).forEach(el=>{el.max=cap.max;el.disabled=cap.disabled;if(document.activeElement!==el)el.value=catAmount;});
+      d.items.forEach(item=>{
+        const x=item.item.id,query=id=>document.querySelector(`[${id}="${CSS.escape(x)}"]`),amount=item.cents/100,ic=itemSliderCapacity(id,x);
+        let el=query('data-item-euro');if(el)el.textContent=money(amount);
+        el=query('data-item-global');if(el)el.textContent=t('item.ofTotal',{pct:percent(item.globalRatio*100)});
+        el=query('data-item-range');if(el){el.max=ic.max;el.disabled=ic.disabled;el.value=amount;el.style.setProperty('--fill',`${item.ratio*100}%`);}
+        el=query('data-item-number');if(el){el.disabled=ic.disabled;if(document.activeElement!==el)el.value=formatPctInput(item.ratio*100);}
+        el=query('data-item-euro-input');if(el){el.max=ic.max;el.disabled=ic.disabled;if(document.activeElement!==el)el.value=amount;}
+      });
+    });
+  }
+  function adjustValue(el){
+    const val=Number(String(el.value).replace(',','.'));if(!Number.isFinite(val))return;
+    const kind=el.hasAttribute('data-cat-range')||el.hasAttribute('data-cat-number')||el.hasAttribute('data-cat-euro-input')?'cat':'item';
+    const catId=el.dataset.catRange||el.dataset.catNumber||el.dataset.catEuroInput||el.dataset.cat;
+    const itemId=el.dataset.itemRange||el.dataset.itemNumber||el.dataset.itemEuroInput;
+    const units=kind==='cat'?budgetUnits():currentUnits(info().find(d=>d.cat.id===catId)?.cents||0);
+    const isPercent=el.hasAttribute('data-cat-number')||el.hasAttribute('data-item-number');
+    const target=isPercent?Math.round(clamp(val,0,100)*units/100):Math.round(clamp(val,0,100000000)*(state.allowCents?100:1));
+    setAmount(kind,catId,itemId,target);
+  }
+  $('#editToggle').addEventListener('click',()=>{editMode=!editMode;render();});
+  $('#settingsToggle').addEventListener('click',()=>{
+    const panel=$('#settingsPanel');const show=panel.classList.contains('hidden');
+    panel.classList.toggle('hidden',!show);$('#settingsToggle').setAttribute('aria-expanded',String(show));
+  });
+  $('#allowCents').addEventListener('change',e=>{
+    freezeAllocations();state.allowCents=e.target.checked;
+    if(!state.allowCents){state.budget=Math.round(state.budget);}
+    state.budget=Math.round(state.budget*(state.allowCents?100:1))/(state.allowCents?100:1);
+    persist();render();toast(state.allowCents?t('toast.cents.on'):t('toast.cents.off'));
+  });
+  $('#monthlyBudget').addEventListener('input',e=>{if(e.target.value==='')return;const value=Number(e.target.value);if(!Number.isFinite(value))return;state.budget=clamp(Math.round(value*(state.allowCents?100:1))/(state.allowCents?100:1),0,100000000);persist();updateNumbers();});
+  $('#monthlyBudget').addEventListener('change',e=>{const value=Number(e.target.value);state.budget=Number.isFinite(value)?clamp(Math.round(value*(state.allowCents?100:1))/(state.allowCents?100:1),0,100000000):0;e.target.value=state.budget;persist();updateNumbers();});
+  $('#sections').addEventListener('input',e=>{
+    const el=e.target;
+    if(['data-cat-range','data-cat-number','data-cat-euro-input','data-item-range','data-item-number','data-item-euro-input'].some(x=>el.hasAttribute(x))){
+      if(el.value===''||el.value==='-')return;
+      adjustValue(el);
+    }else if(editMode&&el.hasAttribute('data-field')){
+      const c=state.categories.find(c=>c.id===el.dataset.cat);const it=c?.items.find(it=>it.id===el.dataset.item);
+      if(it){it[el.dataset.field]=el.value;if(el.dataset.field==='name')delete it.nameKey;persist();}
+    }else if(editMode&&el.hasAttribute('data-cat-color')){
+      const c=state.categories.find(c=>c.id===el.dataset.catColor);if(c&&/^#[0-9a-f]{6}$/i.test(el.value)){c.color=el.value;persist();const sec=el.closest('.section');if(sec)sec.style.setProperty('--accent',c.color);updateNumbers();}
+    }else if(editMode&&el.hasAttribute('data-cat-icon')){
+      const c=state.categories.find(c=>c.id===el.dataset.catIcon);if(c){c.icon=el.value.slice(0,8);c.iconUrl='';persist();const symbol=el.closest('.section')?.querySelector('.catsymbol');if(symbol)symbol.innerHTML=catPic(c);}
+    }else if(editMode&&el.hasAttribute('data-rename-cat')){
+      const c=state.categories.find(c=>c.id===el.dataset.renameCat);if(c){c.name=el.value;delete c.nameKey;persist();}
+    }
+  });
+  $('#sections').addEventListener('change',e=>{
+    const el=e.target;
+    if(el.hasAttribute('data-cat-lock')){
+      const c=state.categories.find(x=>x.id===el.dataset.catLock);if(!c)return;
+      c.locked=el.checked;
+      persist();render();toast(t(c.locked?'toast.catLockOn':'toast.catLockOff',{name:catName(c)}));return;
+    }
+    if(el.hasAttribute('data-cat-peer')){
+      const c=state.categories.find(x=>x.id===el.dataset.catPeer);if(c){c.rebalanceWith=el.value;persist();render();}return;
+    }
+    if(['data-cat-number','data-item-number','data-cat-euro-input','data-item-euro-input'].some(x=>el.hasAttribute(x))){updateNumbers();return;}
+    if(el.dataset.field==='tv'){
+      const it=state.categories.find(c=>c.id===el.dataset.cat)?.items.find(x=>x.id===el.dataset.item);
+      if(it){const raw=el.value.trim();it.tv=cleanTv(raw);if(raw&&!it.tv)toast(t('toast.badTv'));persist();}
+    }
+    if(['data-rename-cat','data-field','data-cat-icon','data-cat-color'].some(x=>el.hasAttribute(x))){setTimeout(render,0);}
+  });
+  $('#sections').addEventListener('click',async e=>{
+    const b=e.target.closest('button');if(!b)return;
+    if(b.hasAttribute('data-copy')){
+      const value=b.getAttribute('data-copy');
+      try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(value);else{const ta=document.createElement('textarea');ta.value=value;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.focus();ta.select();if(!document.execCommand('copy'))throw Error('copy failed');ta.remove();}toast(t('toast.copied',{value}));}catch(err){toast(t('toast.copyFail'));}
+      return;
+    }
+    if(b.hasAttribute('data-item-lock')){
+      const cat=state.categories.find(c=>c.id===b.dataset.cat);
+      const item=cat?.items.find(x=>x.id===b.dataset.itemLock);
+      if(item){freezeAllocations();item.locked=!item.locked;persist();render();toast(t(item.locked?'toast.itemLockOn':'toast.itemLockOff'));}
+      return;
+    }
+    if(b.hasAttribute('data-chart-close')){closeChart(true);return;}
+    if(b.hasAttribute('data-chart-consent')){grantConsent();remountChart(true);return;}
+    if(b.hasAttribute('data-chart-toggle')){if(!editMode)toggleChart(b);return;}
+    if(!editMode)return;
+    if(b.hasAttribute('data-find-item')){openSearchModal(b.dataset.cat,b.dataset.findItem,false);return;}
+    if(b.hasAttribute('data-asset-logo')){openSearchModal(b.dataset.cat,b.dataset.assetLogo,true);return;}
+    if(b.hasAttribute('data-category-icons')){openSearchModal(b.dataset.categoryIcons,null,true);return;}
+    if(b.hasAttribute('data-move-category')){
+      moveCategory(b.dataset.cat,Number(b.dataset.moveCategory));return;
+    }
+    if(b.hasAttribute('data-move-item')){
+      moveItem(b.dataset.cat,b.dataset.item,Number(b.dataset.moveItem));return;
+    }
+    if(b.hasAttribute('data-sort-items')){
+      sortItems(b.dataset.cat,b.dataset.sortItems);return;
+    }
+    if(b.hasAttribute('data-add-item')){
+      const c=state.categories.find(c=>c.id===b.dataset.addItem);if(!c)return;
+      const newId=uid();c.items.push({id:newId,name:t('item.new'),nameKey:'item.new',ticker:'',tv:'',isin:'',wkn:'',icon:'',iconUrl:'',locked:false,weight:0});
+      if(c.items.length===1)c.items[0].weight=100;
+      if(state.categories.filter(x=>x.items.length).length===1)c.weight=100;
+      persist();render();openSearchModal(c.id,newId,false);toast(t('toast.newItem'));return;
+    }
+    if(b.hasAttribute('data-remove-item')){
+      const c=state.categories.find(c=>c.id===b.dataset.cat);const item=c?.items.find(x=>x.id===b.dataset.removeItem);if(!item)return;
+      if(!confirm(t('confirm.removeItem',{name:itemName(item)})))return;
+      c.items=c.items.filter(it=>it.id!==item.id);
+      if(!c.items.length){c.weight=0;c.locked=false;}
+      persist();render();toast(t('toast.itemRemoved'));return;
+    }
+    if(b.hasAttribute('data-remove-category')){
+      const c=state.categories.find(c=>c.id===b.dataset.removeCategory);if(!c||state.categories.length===1)return toast(t('toast.lastCat'));
+      if(!confirm(t('confirm.removeCat',{name:catName(c),n:c.items.length})))return;
+      state.categories=state.categories.filter(x=>x.id!==c.id);persist();render();toast(t('toast.catRemoved'));
+    }
+  });
+  function moveInArray(array,id,delta){
+    const index=array.findIndex(x=>x.id===id);if(index<0)return false;
+    const next=clamp(index+delta,0,array.length-1);
+    if(index===next)return false;
+    array.splice(next,0,array.splice(index,1)[0]);return true;
+  }
+  function moveCategory(id,delta){freezeAllocations();if(moveInArray(state.categories,id,delta)){persist();render();}}
+  function moveItem(catId,id,delta){const cat=state.categories.find(c=>c.id===catId);if(!cat)return;freezeAllocations();if(moveInArray(cat.items,id,delta)){persist();render();}}
+  function sortItems(catId,direction){
+    const cat=state.categories.find(c=>c.id===catId);if(!cat)return;
+    freezeAllocations();const sign=direction==='asc'?1:-1;
+    cat.items.sort((a,b)=>sign*(a.weight-b.weight));persist();render();toast(t('toast.sortedItems'));
+  }
+  function sortAll(direction){
+    freezeAllocations();const sign=direction==='asc'?1:-1;
+    state.categories.forEach(cat=>cat.items.sort((a,b)=>sign*(a.weight-b.weight)));
+    state.categories.sort((a,b)=>sign*(a.weight-b.weight));
+    persist();render();toast(t('toast.sortedAll'));
+  }
+  // ---------------------------------------------------------------- automatic sorting (setting autoSort, default on)
+  // Categories and the holdings inside each category are kept ordered by their current amount, largest first; ties keep the stored order (stable sort).
+  // freezeAllocations() runs first so equal remainders cannot shift by one unit. render() applies the sort (load, reset, import, add/remove, Edit toggle).
+  // After an amount change the sort runs only once the change has SETTLED (slider released / field committed, then a short debounce), never during
+  // a slider drag or while typing, so sections do not jump under the pointer. The DOM is reordered in place and focus + scroll position are restored.
+  const orderSig=()=>state.categories.map(c=>c.id+':'+c.items.map(i=>i.id).join(',')).join('|');
+  function applyAutoSort(){
+    if(!state.autoSort)return false;
+    const before=orderSig();
+    freezeAllocations();
+    const data=info(),withBudget=budgetUnits()>0,catKey=new Map(),itemKey=new Map();
+    data.forEach(d=>{catKey.set(d.cat,withBudget?d.cents:d.catRatio);d.items.forEach(x=>itemKey.set(x.item,d.cents>0?x.cents:x.ratio));});
+    state.categories.forEach(c=>c.items.sort((a,b)=>itemKey.get(b)-itemKey.get(a)));
+    state.categories.sort((a,b)=>catKey.get(b)-catKey.get(a));
+    return orderSig()!==before;
+  }
+  let sortTimer=0,pointerIsDown=false;
+  const AMOUNT_ATTRS=['data-cat-range','data-cat-number','data-cat-euro-input','data-item-range','data-item-number','data-item-euro-input'];
+  const isAmountField=el=>!!el&&!!el.hasAttribute&&AMOUNT_ATTRS.some(a=>el.hasAttribute(a));
+  const cancelSort=()=>{clearTimeout(sortTimer);sortTimer=0;};
+  function scheduleSort(delay){
+    if(!state.autoSort)return;
+    clearTimeout(sortTimer);
+    const tick=()=>{if(pointerIsDown){sortTimer=setTimeout(tick,250);return;}sortTimer=0;settleSort();};
+    sortTimer=setTimeout(tick,delay);
+  }
+  function reorderSections(){
+    const box=$('#sections'),secs=new Map([...box.children].map(el=>[el.dataset.section,el]));
+    state.categories.forEach((c,i)=>{const el=secs.get(c.id);if(el&&box.children[i]!==el)box.insertBefore(el,box.children[i]||null);});
+    const rank=id=>state.categories.findIndex(x=>x.id===id);
+    state.categories.forEach(c=>{
+      const ents=secs.get(c.id)?.querySelector('.entries');if(!ents)return;
+      const m=new Map([...ents.children].filter(e=>e.dataset.entry).map(e=>[e.dataset.entry,e]));
+      c.items.forEach((it,i)=>{const el=m.get(it.id);if(el&&ents.children[i]!==el)ents.insertBefore(el,ents.children[i]||null);});
+    });
+    // keep the "rebalance only with" option lists in the same order as the sections
+    box.querySelectorAll('select[data-cat-peer]').forEach(sel=>{
+      const opts=[...sel.options],key=o=>{const r=rank(o.value);return r<0?-1:r;};
+      opts.map((o,i)=>({o,i})).sort((a,b)=>key(a.o)-key(b.o)||a.i-b.i).forEach(x=>sel.appendChild(x.o));
+    });
+  }
+  function settleSort(){
+    cancelSort();
+    if(!state.autoSort)return;
+    const box=$('#sections'),active=document.activeElement;
+    const focusEl=active&&active!==document.body&&box.contains(active)?active:null;
+    const anchor=focusEl||[...box.children].find(el=>el.getBoundingClientRect().bottom>0)||null;
+    const top0=anchor?anchor.getBoundingClientRect().top:0;
+    if(!applyAutoSort())return;
+    persist();reorderSections();updateNumbers();
+    if(focusEl&&focusEl.isConnected&&document.activeElement!==focusEl)focusEl.focus({preventScroll:true});
+    if(anchor){const d=anchor.getBoundingClientRect().top-top0;if(Math.abs(d)>.5)window.scrollBy({top:d,left:0,behavior:'instant'});}
+  }
+  const flushSort=()=>{if(sortTimer)settleSort();};
+  document.addEventListener('pointerdown',()=>{pointerIsDown=true;},true);
+  ['pointerup','pointercancel'].forEach(ev=>document.addEventListener(ev,()=>{pointerIsDown=false;},true));
+  window.addEventListener('blur',()=>{pointerIsDown=false;});
+  $('#sections').addEventListener('input',e=>{if(isAmountField(e.target))cancelSort();});
+  $('#sections').addEventListener('change',e=>{if(isAmountField(e.target))scheduleSort(450);});
+  $('#monthlyBudget').addEventListener('input',cancelSort);
+  $('#monthlyBudget').addEventListener('change',()=>scheduleSort(450));
+  ['#exportJson','#exportCsv'].forEach(q=>$(q).addEventListener('click',flushSort));
+  $('#autoSort').addEventListener('change',e=>{state.autoSort=e.target.checked;cancelSort();persist();render();toast(t(state.autoSort?'toast.sort.on':'toast.sort.off'));});
+  $('#sortAllAsc').addEventListener('click',()=>sortAll('asc'));
+  $('#sortAllDesc').addEventListener('click',()=>sortAll('desc'));
+  // Pointer Events: same handle-based drag interaction with mouse, pen and touch.
+  // Only allow item movement within its own category, preserving identifier types.
+  let drag=null;
+  $('#sections').addEventListener('pointerdown',e=>{
+    if(!editMode||e.button!==0)return;
+    const handle=e.target.closest('[data-drag-cat],[data-drag-item]');if(!handle)return;
+    const category=handle.hasAttribute('data-drag-cat');
+    const el=handle.closest(category?'.section':'.entry');if(!el)return;
+    drag={pointer:e.pointerId,handle,source:el,category,catId:handle.dataset.cat,sourceId:category?handle.dataset.dragCat:handle.dataset.dragItem,startX:e.clientX,startY:e.clientY,active:false,target:null,before:false};
+    handle.setPointerCapture(e.pointerId);
+  });
+  $('#sections').addEventListener('pointermove',e=>{
+    if(!drag||drag.pointer!==e.pointerId)return;
+    if(!drag.active){if(Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)<7)return;drag.active=true;drag.source.classList.add('dragging');document.body.style.userSelect='none';}
+    clearDrop();
+    const hit=document.elementFromPoint(e.clientX,e.clientY);
+    const target=hit?.closest(drag.category?'.section':'.entry');
+    if(!target||target===drag.source||(!drag.category&&target.dataset.cat!==drag.catId)){drag.target=null;return;}
+    drag.target=target;
+    const bounds=target.getBoundingClientRect();drag.before=e.clientY<(bounds.top+bounds.height/2);
+    target.classList.add(drag.before?'drop-before':'drop-after');
+    if(e.cancelable)e.preventDefault();
+  });
+  function clearDrop(){document.querySelectorAll('.drop-before,.drop-after').forEach(el=>el.classList.remove('drop-before','drop-after'));}
+  function finishDrag(e){
+    if(!drag||drag.pointer!==e.pointerId)return;
+    const d=drag;drag=null;
+    clearDrop();d.source.classList.remove('dragging');document.body.style.userSelect='';
+    try{if(d.handle.hasPointerCapture(e.pointerId))d.handle.releasePointerCapture(e.pointerId);}catch(err){}
+    if(!d.active||!d.target)return;
+    freezeAllocations();
+    const array=d.category?state.categories:state.categories.find(c=>c.id===d.catId)?.items;
+    if(!array)return;
+    const from=array.findIndex(x=>x.id===d.sourceId),targetId=d.category?d.target.dataset.section:d.target.dataset.entry;
+    const to=array.findIndex(x=>x.id===targetId);
+    if(from<0||to<0)return;
+    const moved=array.splice(from,1)[0];let insertion=array.findIndex(x=>x.id===targetId)+(d.before?0:1);
+    array.splice(insertion,0,moved);persist();render();toast(t('toast.reordered'));
+  }
+  $('#sections').addEventListener('pointerup',finishDrag);
+  $('#sections').addEventListener('pointercancel',e=>{if(drag&&drag.pointer===e.pointerId){clearDrop();drag.source.classList.remove('dragging');document.body.style.userSelect='';drag=null;}});
+  $('#createCategory').addEventListener('click',()=>{
+    const name=$('#catName').value.trim();if(!name){$('#catName').focus();return toast(t('toast.catNameMissing'));}
+    const type=$('#catType').value;const id=uid();state.categories.push({id,name:name.slice(0,100),type,color:colors[(state.categories.length-4+colors.length)%colors.length],icon:typeEmoji[type],iconUrl:'',locked:false,rebalanceWith:'auto',weight:0,items:[]});
+    $('#catName').value='';persist();render();toast(t('toast.catCreated'));
+    document.querySelector(`[data-section="${CSS.escape(id)}"]`)?.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+  $('#catName').addEventListener('keydown',e=>{if(e.key==='Enter')$('#createCategory').click();});
+
+  // ---------------------------------------------------------------- search & image picker
+  // No scraped ETF portals: they generally disallow cross-origin browser access.
+  let modalCtx=null,requestSeq=0,modalMatches=[],modalStatusState=null,imageView=null;
+  const $modal=$('#searchModal');
+  const iconPicks=['₿','◎','€','▥','◈','◆','◇','💰','🏦','📈','🌍','🥇','🥈','🪙','💎','📊','🌱','🚀','💵','🏅'];
+  function modalCategory(){return state.categories.find(c=>c.id===modalCtx?.catId);}
+  function modalItem(){return modalCategory()?.items.find(x=>x.id===modalCtx?.itemId);}
+  function statusModal(key,params){modalStatusState=key?[key,params]:null;$('#modalStatus').textContent=key?t(key,params):'';}
+  // Search source of the item dialog: 'stocks' (stocks, ETFs, ETCs: catalog + Wikidata) or 'crypto' (catalog + CoinGecko).
+  // The default follows the category type, but the user can switch it independently of the type.
+  const defaultSource=type=>type==='crypto'?'crypto':'stocks';
+  const modalSource=()=>modalCtx?.src==='crypto'?'crypto':'stocks';
+  function syncSrcSwitch(){
+    const show=!!modalCtx?.itemId&&!modalCtx.logoOnly;$('#srcSwitch').classList.toggle('hidden',!show);
+    $('#srcSwitch').querySelectorAll('[data-src]').forEach(b=>{const on=b.dataset.src===modalSource();b.setAttribute('aria-checked',String(on));b.tabIndex=on?0:-1;});
+  }
+  function makeLinks(query,src){
+    const q=encodeURIComponent(query);
+    const links=src==='crypto'?
+      [['CoinGecko','https://www.coingecko.com/en/search?query='+q]]:
+      [['justETF','https://www.justetf.com/'+(lang==='de'?'de':'en')+'/search.html?search=ETFS&query='+q],['Finanzfluss','https://www.finanzfluss.de/informer/etf/suche/?q='+q]];
+    $('#modalLinks').innerHTML=links.map(([name,url])=>`<a target="_blank" rel="noopener noreferrer" href="${esc(url)}">${esc(t('modal.searchOn',{name}))}</a>`).join('');
+  }
+  function setModalTexts(){
+    const c=modalCategory();if(!c||!modalCtx)return;
+    const {itemId,logoOnly}=modalCtx;
+    $('#modalTitle').textContent=t(itemId?(logoOnly?'modal.title.logo':'modal.title.find'):'modal.title.cat');
+    $('#modalHelp').textContent=t(!itemId?'modal.help.cat':logoOnly?'modal.help.logo':'modal.help.find');
+    $('#modalQuery').placeholder=t(logoOnly?'modal.ph.image':'modal.ph.find');
+    document.querySelectorAll('#emojiOptions [data-emoji]').forEach(b=>{b.title=t('modal.iconTip',{icon:b.dataset.emoji});});
+    makeLinks($('#modalQuery').value||catName(c),modalSource());syncSrcSwitch();
+    // Persistent notice: which third party an online search contacts (shown before any request can happen); it follows the selected source.
+    const key=logoOnly?'search.note.img':!itemId?null:modalSource()==='crypto'?'search.note.crypto':'search.note.sec';
+    const note=$('#searchNote');note.classList.toggle('hidden',!key);
+    note.innerHTML=key?`${esc(t(key))} <a href="${esc(privacyUrl())}" data-privacy-link target="_blank" rel="noopener noreferrer">${esc(t('search.note.link'))}</a>`:'';
+  }
+  function openSearchModal(catId,itemId,logoOnly){
+    const c=state.categories.find(x=>x.id===catId);if(!c)return;
+    modalCtx={catId,itemId,logoOnly,seq:++requestSeq,src:defaultSource(c.type)};
+    const it=itemId?c.items.find(x=>x.id===itemId):null;
+    $('#modalQuery').value=it&&it.nameKey!=='item.new'?itemName(it):'';
+    $('#modalResults').innerHTML='';$('#imageMatches').innerHTML='';modalMatches=[];imageView=null;
+    $('#imageUrl').value=it?.iconUrl||c.iconUrl||'';$('#customSymbol').value=it?.icon||c.icon||'';
+    $('#imagePanel').classList.toggle('hidden',!logoOnly);
+    $('#modalSearch').classList.toggle('hidden',!itemId||logoOnly);
+    $('#emojiOptions').innerHTML=logoOnly?iconPicks.map(i=>`<button type="button" class="iconoption" data-emoji="${esc(i)}">${esc(i)}</button>`).join(''):'';
+    setModalTexts();
+    statusModal(itemId&&!logoOnly?'modal.status.catalog':'modal.status.images');
+    $modal.classList.remove('hidden');
+    document.body.style.overflow='hidden';$('#modalQuery').focus();
+    // Only the local catalog is searched on open; the online request starts on the Search button or Enter.
+    if(itemId&&!logoOnly&&$('#modalQuery').value.trim()){
+      const q=$('#modalQuery').value.trim();
+      renderMatches(localMatches(q));makeLinks(q,modalSource());statusModal('modal.status.typing');
+    }
+  }
+  function closeSearchModal(){
+    ++requestSeq;modalCtx=null;modalMatches=[];imageView=null;modalStatusState=null;$modal.classList.add('hidden');document.body.style.overflow='';
+    ['#modalResults','#imageMatches','#modalLinks','#modalStatus','#emojiOptions'].forEach(sel=>{$(sel).innerHTML='';});
+    $('#modalTitle').textContent='';$('#modalHelp').textContent='';$('#modalQuery').placeholder='';$('#searchNote').innerHTML='';
+  }
+  // Local catalog search: the 'stocks' source covers every catalog type except crypto (stocks, ETFs, ETCs), 'crypto' only the coins.
+  function assetMatches(term,src){
+    const q=term.toLocaleLowerCase('de').trim();if(!q)return [];
+    return ASSET_CATALOG.filter(a=>(a.type==='crypto')===(src==='crypto')).map(a=>{
+      const hay=[a.name,a.ticker,a.isin,a.wkn,...(a.aliases||[])].filter(Boolean).join(' ').toLocaleLowerCase('de');
+      const score=[a.isin,a.wkn,a.ticker,...(a.aliases||[])].some(v=>v?.toLowerCase()===q)?110:a.name.toLowerCase()===q?105:hay.includes(q)?80: q.split(/\s+/).filter(t=>hay.includes(t)).length*14;
+      return {a,score};
+    }).filter(o=>o.score>0).sort((a,b)=>b.score-a.score).map(o=>o.a).slice(0,12);
+  }
+  const sourceLabel=s=>s==='catalog'||!s?t('src.catalog'):s==='wikidata'?t('src.wikidata'):s;
+  function renderMatches(items){
+    modalMatches=items.slice(0,16);
+    // CoinGecko's terms require visible attribution wherever their data is shown.
+    $('#cgCredit').classList.toggle('hidden',!modalMatches.some(a=>a.source==='CoinGecko'));
+    $('#modalResults').innerHTML=items.length?modalMatches.map((a,i)=>{
+      const logo=a.iconUrl||autoLogo(a.type,a);
+      const pic=logo?`<img class="mini-icon" alt="" loading="lazy" src="${esc(logo)}" onerror="this.style.display='none'">`:`<span class="mini-icon">◇</span>`;
+      return `<button type="button" class="match" data-pick-result="${i}">${pic}<span class="matchtext"><strong>${esc(a.name||t('modal.unknown'))}</strong><small>${esc([a.ticker,a.isin,a.wkn].filter(Boolean).join(' · '))} · ${esc(sourceLabel(a.source))}${a.noteKey||a.note?`<br>${esc(a.noteKey?t(a.noteKey):a.note)}`:''}</small></span><strong style="font-size:12px;color:#4475a3">${esc(t('modal.use'))}</strong></button>`;
+    }).join(''):`<p class="muted">${esc(t(modalSource()==='crypto'?'modal.none.crypto':'modal.none'))}</p>`;
+  }
+  function applyAsset(data){const it=modalItem(),c=modalCategory();if(!it||!c)return;
+    it.name=String(data.name||itemName(it)).slice(0,150);delete it.nameKey;
+    // A newly picked asset replaces ticker/identifiers/chart symbol of the previous one; blanks are never invented.
+    it.ticker=data.ticker?String(data.ticker).toUpperCase().slice(0,30):'';
+    it.isin=data.isin?String(data.isin).toUpperCase().slice(0,32):'';
+    it.wkn=data.wkn?String(data.wkn).toUpperCase().slice(0,24):'';
+    it.tv=cleanTv(data.tv);
+    // Logos of known assets are resolved automatically at render time; only a logo URL delivered by the search result is stored.
+    it.iconUrl=cleanImg(data.iconUrl);it.icon='';
+    persist();render();closeSearchModal();toast(t('toast.assetApplied'));
+  }
+  async function fetchJson(url,timeout=6500){
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);
+    try{const r=await fetch(url,{signal:controller.signal,headers:{'Accept':'application/json'}});if(!r.ok)throw Error('HTTP '+r.status);return await r.json();}
+    finally{clearTimeout(timer);}
+  }
+  const localMatches=q=>assetMatches(q,modalSource()).map(a=>({...a,source:'catalog'}));
+  // ---- Securities search via Wikidata (CC0, no API key, CORS-enabled). OpenFIGI was tested but sends no CORS headers, so browsers cannot use it.
+  // Stage 1 finds candidate items (prefix search by name + full-text search limited to items that carry an ISIN, P946).
+  // Stage 2 is ONE compact SPARQL request for ISIN (P946), stock exchange (P414) and ticker (qualifier P249); fallback: wbgetentities claims.
+  // Wikidata exchange item -> TradingView exchange prefix. Only these three are mapped (symbol pages checked: NASDAQ:AAPL, NYSE:IBM, XETR:SAP/SIE/TL0/ENR).
+  const WD_TV={Q82059:'NASDAQ',Q13677:'NYSE',Q151139:'XETR'};
+  function isinValid(v){
+    if(!/^[A-Z]{2}[A-Z0-9]{9}[0-9]$/.test(v))return false;
+    const digits=[...v].map(ch=>parseInt(ch,36)).join('');let sum=0;
+    for(let i=0;i<digits.length;i++){let d=Number(digits[digits.length-1-i]);if(i%2===1){d*=2;if(d>9)d-=9;}sum+=d;}
+    return sum%10===0;
+  }
+  // A German ISIN is DE + 000 + the 6-character WKN + check digit. Only that shape allows deriving a WKN; otherwise it stays empty.
+  const wknFromIsin=isin=>{const m=/^DE000([A-Z0-9]{6})[0-9]$/.exec(isin);return m?m[1]:'';};
+  // records: [{id,name,desc,isins:[],listings:[{ex,tick}]}] -> result rows; nothing is invented (no ISIN, no row).
+  function wdResults(records){
+    return records.flatMap(r=>{
+      const isins=[...new Set(r.isins)].filter(isinValid).sort();
+      if(!isins.length||!r.name||/^Q\d+$/.test(r.name))return [];
+      const listings=r.listings.filter(l=>WD_TV[l.ex]&&/^[A-Z0-9][A-Z0-9.\-]{0,11}$/.test(l.tick));
+      const order=isins.some(i=>i.startsWith('DE'))?['Q151139','Q13677','Q82059']:['Q82059','Q13677','Q151139'];
+      const pick=order.map(ex=>listings.find(l=>l.ex===ex)).find(Boolean);
+      const isin=isins.find(i=>i.startsWith(pick?.ex==='Q151139'?'DE':pick?'US':''))||isins[0];
+      return [{type:'stock',name:r.name,isin,wkn:wknFromIsin(isin),ticker:pick?pick.tick:'',tv:pick?WD_TV[pick.ex]+':'+pick.tick:'',note:r.desc||'',source:'wikidata'}];
+    });
+  }
+  async function wdLookupSparql(ids){
+    const query='SELECT ?item ?itemLabel ?itemDescription ?isin ?exch ?tick WHERE{VALUES ?item{'+ids.map(i=>'wd:'+i).join(' ')+'} ?item wdt:P946 ?isin. OPTIONAL{?item p:P414 ?st. ?st ps:P414 ?exch. OPTIONAL{?st pq:P249 ?tick}} SERVICE wikibase:label{bd:serviceParam wikibase:language "'+lang+',en".}}';
+    const r=await fetchJson('https://query.wikidata.org/sparql?format=json&query='+encodeURIComponent(query),12000);
+    const qid=u=>String(u||'').split('/').pop(),map=new Map();
+    for(const b of r.results?.bindings||[]){
+      const id=qid(b.item?.value);if(!ids.includes(id))continue;
+      const rec=map.get(id)||{id,name:b.itemLabel?.value||'',desc:b.itemDescription?.value||'',isins:[],listings:[]};
+      if(b.isin?.value)rec.isins.push(b.isin.value);
+      if(b.exch?.value&&b.tick?.value)rec.listings.push({ex:qid(b.exch.value),tick:b.tick.value.toUpperCase()});
+      map.set(id,rec);
+    }
+    return ids.filter(i=>map.has(i)).map(i=>map.get(i));
+  }
+  async function wdLookupEntities(ids){
+    if(!ids.length)return [];
+    const d=await fetchJson('https://www.wikidata.org/w/api.php?action=wbgetentities&ids='+ids.join('|')+'&props=claims|labels|descriptions&languages='+lang+'|en&format=json&origin=*',12000);
+    const val=c=>c.mainsnak?.datavalue?.value;
+    return ids.flatMap(id=>{
+      const e=d.entities?.[id];if(!e)return [];const cl=e.claims||{};
+      return [{id,name:(e.labels?.[lang]||e.labels?.en)?.value||'',desc:(e.descriptions?.[lang]||e.descriptions?.en)?.value||'',
+        isins:(cl.P946||[]).map(val).filter(v=>typeof v==='string'),
+        listings:(cl.P414||[]).flatMap(c=>{const ex=val(c)?.id;return (c.qualifiers?.P249||[]).map(x=>x.datavalue?.value).filter(v=>typeof v==='string').map(tick=>({ex,tick:tick.toUpperCase()}));})}];
+    });
+  }
+  async function wdSearchStocks(q){
+    const isinLike=/^[A-Z]{2}[A-Z0-9]{9}[0-9]$/i.test(q),base='https://www.wikidata.org/w/api.php?format=json&origin=*&';
+    const calls=[fetchJson(base+'action=query&list=search&srlimit=15&srprop=&srsearch='+encodeURIComponent(isinLike?'haswbstatement:P946='+q.toUpperCase():q+' haswbstatement:P946'))];
+    if(!isinLike)calls.push(fetchJson(base+'action=wbsearchentities&type=item&limit=15&language='+lang+'&uselang='+lang+'&search='+encodeURIComponent(q)));
+    const [full,pre]=await Promise.allSettled(calls);
+    if(full.status==='rejected'&&(!pre||pre.status==='rejected'))throw full.reason;
+    const isId=i=>/^Q\d+$/.test(i);
+    const fullIds=full.status==='fulfilled'?(full.value.query?.search||[]).map(x=>x.title).filter(isId):[];
+    const preIds=pre&&pre.status==='fulfilled'?(pre.value.search||[]).map(x=>x.id).filter(isId):[];
+    const ids=[...new Set([...preIds,...fullIds])].slice(0,30);
+    if(!ids.length)return [];
+    let records;
+    try{records=await wdLookupSparql(ids);}catch(e){records=await wdLookupEntities(fullIds.slice(0,5));} // heavier fallback if the query service is limited/unavailable
+    // Full-text hits that only mention the term somewhere (e.g. in a description) are dropped unless their name contains all words.
+    const words=q.toLocaleLowerCase('de').split(/\s+/).filter(Boolean),prefixHits=new Set(preIds);
+    const relevant=records.filter(r=>isinLike||prefixHits.has(r.id)||words.every(w=>r.name.toLocaleLowerCase('de').includes(w)));
+    return wdResults(relevant).slice(0,12);
+  }
+  async function searchAssets(){
+    if(!modalCtx?.itemId)return;
+    const q=$('#modalQuery').value.trim();if(!q){renderMatches([]);return;}
+    const c=modalCategory();if(!c)return;
+    const seq=++requestSeq,src=modalSource();
+    const local=localMatches(q);
+    renderMatches(local);makeLinks(q,src);
+    if(!navigator.onLine){statusModal('modal.status.offline');return;}
+    statusModal('modal.status.running');
+    let online=[];let ok=false;
+    try{
+      if(src==='crypto'){
+        const result=await fetchJson('https://api.coingecko.com/api/v3/search?query='+encodeURIComponent(q));
+        // A chart symbol is only set for the few coins whose Kraken pair is known; everything else stays empty.
+        online=(result.coins||[]).slice(0,15).map(co=>{const sym=String(co.symbol||'').toUpperCase();return {type:'crypto',name:co.name,ticker:sym,coinId:co.id,tv:COINS[sym]===co.id?'KRAKEN:'+sym+'EUR':'',iconUrl:co.large||co.thumb||'',source:'CoinGecko'};});
+      }else{
+        online=await wdSearchStocks(q);
+      }
+      ok=true;
+    }catch(err){if(seq!==requestSeq)return;statusModal('modal.status.failed');}
+    if(seq!==requestSeq)return;
+    const seen=new Set();const combined=[...local,...online].filter(a=>{const key=(a.isin||a.coinId||a.name).toLowerCase();if(seen.has(key))return false;seen.add(key);return true;});
+    renderMatches(combined);
+    if(ok)online.length?statusModal('modal.status.found',{n:online.length}):statusModal('modal.status.none');
+  }
+  function setAssetImage(url,emoji){
+    const c=modalCategory(),it=modalItem();if(!c)return;
+    if(it){it.icon=emoji||'';it.iconUrl=url||'';}else{c.icon=emoji||typeEmoji[c.type]||'◇';c.iconUrl=url||'';}
+    persist();render();closeSearchModal();toast(t('toast.iconApplied'));
+  }
+  // imageView: null | {msg:key} | {images:[...]}
+  function renderImageView(){
+    const el=$('#imageMatches');
+    if(!imageView){el.innerHTML='';return;}
+    if(imageView.msg){el.innerHTML=`<p class="muted">${esc(t(imageView.msg))}</p>`;return;}
+    el.innerHTML=imageView.images.length?imageView.images.map((im,i)=>`<div class="matchrow"><button class="match" type="button" data-image-pick="${i}"><img class="mini-icon" src="${esc(im.image)}" alt=""><span class="matchtext"><strong>${esc(im.name)}</strong><small>${esc(t('img.src'))}</small></span>${esc(t('modal.use'))}</button><a class="filelink" href="https://commons.wikimedia.org/wiki/${esc(encodeURIComponent(String(im.name).replace(/ /g,'_')).replace(/%3A/g,':').replace(/%2F/g,'/'))}" target="_blank" rel="noopener noreferrer">${esc(t('img.filepage'))}</a></div>`).join(''):`<p class="muted">${esc(t('img.none'))}</p>`;
+  }
+  async function searchImages(){
+    if(!modalCtx)return;
+    const q=$('#modalQuery').value.trim()||(modalItem()?itemName(modalItem()):'')||(modalCategory()?catName(modalCategory()):'');
+    if(!q)return statusModal('modal.status.needImageTerm');
+    imageView={msg:'img.searching'};renderImageView();
+    const seq=++requestSeq;
+    try{
+      const url='https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch='+encodeURIComponent(q+' logo')+'&gsrnamespace=6&gsrlimit=12&prop=imageinfo&iiprop=url&iiurlwidth=96&format=json&origin=*';
+      const result=await fetchJson(url);if(seq!==requestSeq)return;
+      const images=Object.values(result.query?.pages||{}).flatMap(p=>p.imageinfo?.[0]?.thumburl||p.imageinfo?.[0]?.url?[{name:p.title,image:p.imageinfo[0].thumburl||p.imageinfo[0].url}]:[]).filter(v=>/^https:\/\//.test(v.image)).slice(0,12);
+      imageView={images};renderImageView();
+    }catch(e){if(seq===requestSeq){imageView={msg:'img.unavailable'};renderImageView();}}
+  }
+  $('#modalClose').addEventListener('click',closeSearchModal);
+  $modal.addEventListener('click',e=>{if(e.target===$modal)closeSearchModal();});
+  $('#modalSearch').addEventListener('click',searchAssets);
+  $('#modalQuery').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();modalCtx?.logoOnly?searchImages():searchAssets();}});
+  $('#modalQuery').addEventListener('input',()=>{if(modalCtx?.itemId&&!modalCtx.logoOnly){const q=$('#modalQuery').value.trim();++requestSeq;renderMatches(localMatches(q));makeLinks(q,modalSource());statusModal('modal.status.typing');}});
+  // Source selector (radio group): switching drops online results of the other source and never starts a request by itself.
+  function setSource(src){
+    if(!modalCtx?.itemId||modalCtx.logoOnly||modalSource()===src)return;
+    modalCtx.src=src;++requestSeq;
+    const q=$('#modalQuery').value.trim();
+    setModalTexts();if(q)renderMatches(localMatches(q));else{modalMatches=[];$('#modalResults').innerHTML='';$('#cgCredit').classList.add('hidden');}makeLinks(q||catName(modalCategory()),src);statusModal('modal.status.src.'+src);
+  }
+  $('#srcSwitch').addEventListener('click',e=>{const b=e.target.closest('[data-src]');if(b){setSource(b.dataset.src);b.focus();}});
+  $('#srcSwitch').addEventListener('keydown',e=>{
+    if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;
+    e.preventDefault();const next=modalSource()==='crypto'?'stocks':'crypto';setSource(next);$('#srcSwitch').querySelector('[data-src="'+next+'"]').focus();
+  });
+  $('#modalResults').addEventListener('click',e=>{const el=e.target.closest('[data-pick-result]');if(el)applyAsset(modalMatches[Number(el.dataset.pickResult)]);});
+  $('#emojiOptions').addEventListener('click',e=>{const btn=e.target.closest('[data-emoji]');if(btn)setAssetImage('',btn.dataset.emoji);});
+  $('#applyCustomSymbol').addEventListener('click',()=>{const e=$('#customSymbol').value.trim().slice(0,8);if(e)setAssetImage('',e);else statusModal('modal.status.needSymbol');});
+  $('#applyImageUrl').addEventListener('click',()=>{const url=cleanImg($('#imageUrl').value.trim());if(!url)return statusModal('modal.status.needUrl');setAssetImage(url,'');});
+  $('#clearImage').addEventListener('click',()=>setAssetImage('',''));
+  $('#searchCommons').addEventListener('click',searchImages);
+  $('#imageMatches').addEventListener('click',e=>{const el=e.target.closest('[data-image-pick]');if(el&&imageView?.images)setAssetImage(imageView.images[Number(el.dataset.imagePick)].image,'');});
+  $('#imageFile').addEventListener('change',e=>{
+    const f=e.target.files?.[0];if(!f||!modalCtx)return;
+    if(f.size>150000||!['image/png','image/jpeg','image/webp','image/gif'].includes(f.type)){statusModal('modal.status.badFile');e.target.value='';return;}
+    const reader=new FileReader();reader.onload=()=>{const url=cleanImg(reader.result);if(url)setAssetImage(url,'');else statusModal('modal.status.fileFail');};reader.readAsDataURL(f);e.target.value='';
+  });
+
+  // ---------------------------------------------------------------- privacy settings dialog
+  const $priv=$('#privacyModal');let privOpener=null;
+  function renderPrivacy(){
+    const c=getConsent(),st=$('#privStatus');
+    let date='';try{const d=new Date(c?.ts);if(!isNaN(d))date=d.toLocaleDateString(locale(),{dateStyle:'medium'});}catch(e){}
+    st.textContent=c?t('priv.status.on',{date:date||'–'}):t('priv.status.off');
+    st.classList.toggle('on',!!c);
+    const tg=$('#privToggle');tg.textContent=t(c?'priv.withdraw':'priv.allow');
+    tg.classList.toggle('danger',!!c);tg.classList.toggle('primary',!c);
+  }
+  const privOpen=()=>!$priv.classList.contains('hidden');
+  function openPrivacy(){
+    privOpener=document.activeElement;
+    renderPrivacy();$priv.classList.remove('hidden');document.body.style.overflow='hidden';$('#privToggle').focus();
+  }
+  function closePrivacy(){
+    $priv.classList.add('hidden');document.body.style.overflow='';
+    if(privOpener&&privOpener.isConnected)privOpener.focus();privOpener=null;
+  }
+  $('#privacySettingsBtn').addEventListener('click',openPrivacy);
+  $('#privClose').addEventListener('click',closePrivacy);
+  $priv.addEventListener('click',e=>{if(e.target===$priv)closePrivacy();});
+  $('#privToggle').addEventListener('click',()=>{
+    if(getConsent()){withdrawConsent();toast(t('priv.withdrawn'));}
+    else{grantConsent();remountChart(false);toast(t('priv.allowed'));}
+    renderPrivacy();
+  });
+  // Keep Tab inside the dialog.
+  $priv.addEventListener('keydown',e=>{
+    if(e.key!=='Tab')return;
+    const f=[...$priv.querySelectorAll('button,a[href]')].filter(x=>x.offsetParent!==null);if(!f.length)return;
+    const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  });
+
+  // ---------------------------------------------------------------- export / import
+  const exportWrap=$('#exportWrap'),exportToggle=$('#exportToggle'),exportMenu=$('#exportMenu');
+  const exportItems=()=>[...exportMenu.querySelectorAll('[role="menuitem"]')];
+  const exportOpen=()=>!exportMenu.classList.contains('hidden');
+  function setExportMenu(open,focusFirst){
+    exportMenu.classList.toggle('hidden',!open);exportToggle.setAttribute('aria-expanded',String(open));
+    if(open&&focusFirst)exportItems()[0]?.focus();
+  }
+  exportToggle.addEventListener('click',e=>setExportMenu(!exportOpen(),e.detail===0));
+  exportToggle.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();setExportMenu(true,true);}});
+  exportMenu.addEventListener('keydown',e=>{
+    const items=exportItems(),i=items.indexOf(document.activeElement);
+    if(e.key==='ArrowDown'){e.preventDefault();items[(i+1)%items.length].focus();}
+    else if(e.key==='ArrowUp'){e.preventDefault();items[(i-1+items.length)%items.length].focus();}
+    else if(e.key==='Home'){e.preventDefault();items[0].focus();}
+    else if(e.key==='End'){e.preventDefault();items[items.length-1].focus();}
+    else if(e.key==='Tab'){setExportMenu(false);}
+  });
+  document.addEventListener('click',e=>{if(exportOpen()&&!exportWrap.contains(e.target))setExportMenu(false);});
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+    if(privOpen()){closePrivacy();}
+    else if(exportOpen()){setExportMenu(false);exportToggle.focus();}
+    else if(!$modal.classList.contains('hidden'))closeSearchModal();
+    else if(openChart)closeChart(true);
+  });
+  function download(filename,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+  // Default names keep their nameKey; the stored name is refreshed so older readers still see readable text.
+  function exportPortfolio(portfolio){
+    const copy=clone(portfolio);
+    copy.categories.forEach(c=>{if(c.nameKey)c.name=t(c.nameKey);c.items.forEach(it=>{if(it.nameKey)it.name=t(it.nameKey);});});
+    return copy;
+  }
+  $('#exportJson').addEventListener('click',()=>{
+    setExportMenu(false);
+    const data={format:'finplanr-v1',...exportPortfolio(state),resetSnapshot:resetPoint?{portfolio:exportPortfolio(resetPoint),savedAt:resetSavedAt,source:resetSource||undefined}:null};
+    download('finplanr-backup.json',JSON.stringify(data,null,2),'application/json;charset=utf-8');toast(t('toast.backup'));
+  });
+  $('#exportCsv').addEventListener('click',()=>{
+    setExportMenu(false);
+    const sep=lang==='de'?';':',',dec=lang==='de'?',':'.';
+    const safe=v=>{const s=String(v??'');return '"'+(/^[=+@\-\t\r]/.test(s)?"'"+s:s).replaceAll('"','""')+'"';};
+    const rows=[t('csv.head')];
+    info().forEach(d=>d.items.forEach(x=>rows.push([catName(d.cat),itemName(x.item),x.item.ticker,x.item.isin,x.item.wkn,(x.ratio*100).toFixed(4).replace('.',dec),(x.globalRatio*100).toFixed(4).replace('.',dec),(x.cents/100).toFixed(state.allowCents?2:0).replace('.',dec)])));
+    download('finplanr-plan.csv','﻿'+rows.map(row=>row.map(safe).join(sep)).join('\r\n'),'text/csv;charset=utf-8');toast(t('toast.csv'));
+  });
+  $('#importJson').addEventListener('click',()=>$('#importFile').click());
+  $('#importFile').addEventListener('change',async e=>{
+    const f=e.target.files?.[0];if(!f)return;
+    try{if(f.size>1024*1024)throw Error(t('err.tooLarge'));const parsed=JSON.parse(await f.text()),imported=validate(parsed);if(!confirm(t(parsed.resetSnapshot?'confirm.import.snap':'confirm.import')))return;state=imported;editMode=false;
+      const prior=parsed.resetSnapshot;
+      resetPoint=prior?validate(prior.portfolio||prior):clone(imported);
+      resetSavedAt=prior?(prior.savedAt||null):new Date().toISOString();
+      resetSource=prior?cleanSource(prior.source):'import';
+      saveResetPointToStorage();persist();render();toast(t('toast.imported'));}catch(err){alert(t('import.failed',{msg:err.message}));}finally{e.target.value='';}
+  });
+  function saveResetPointToStorage(){try{if(resetPoint)localStorage.setItem(RESET_KEY,JSON.stringify({portfolio:resetPoint,savedAt:resetSavedAt,source:resetSource||undefined}));else localStorage.removeItem(RESET_KEY);}catch(e){console.warn('Reset point could not be saved',e);}}
+  // What the Reset button will restore (shown in the confirm dialog, the Settings info line and the button tooltip).
+  function resetFacts(){
+    const d=resetSavedAt?new Date(resetSavedAt):null,date=d&&!isNaN(d)?d.toLocaleString(locale(),{dateStyle:'medium',timeStyle:'short'}):'';
+    const when=!date?t('reset.when.nodate'):t(resetSource==='manual'?'reset.when.manual':resetSource==='import'?'reset.when.import':'reset.when.legacy',{date});
+    const cents=resetPoint.allowCents,budget=numFmt({style:'currency',currency:'EUR',minimumFractionDigits:cents?2:0,maximumFractionDigits:cents?2:0}).format(resetPoint.budget);
+    return {when,budget,count:t('sec.count',{n:resetPoint.categories.reduce((s,c)=>s+c.items.length,0)})};
+  }
+  function updateResetLabel(){
+    const f=resetPoint?resetFacts():null;
+    $('#resetStateInfo').textContent=f?t('set.reset.info',f):t('set.reset.none');
+    $('#reset').title=t('tb.reset.tip',{what:f?t('tb.reset.saved')+' ('+f.when+')':t('tb.reset.none')});
+  }
+  $('#saveResetPoint').addEventListener('click',()=>{resetPoint=validate(clone(state));resetSavedAt=new Date().toISOString();resetSource='manual';saveResetPointToStorage();updateResetLabel();toast(t('toast.resetSaved'));});
+  $('#reset').addEventListener('click',()=>{
+    if(!confirm(resetPoint?t('confirm.reset',resetFacts()):t('confirm.resetNone')))return;
+    state=validate(clone(resetPoint||DEFAULT));editMode=false;persist();render();toast(t('toast.resetDone'));
+  });
+  $('#factoryReset').addEventListener('click',()=>{
+    if(!confirm(t('confirm.factory')))return;
+    state=validate(clone(DEFAULT));resetPoint=null;resetSavedAt=null;resetSource=null;saveResetPointToStorage();editMode=false;persist();render();toast(t('toast.factoryDone'));
+  });
+
+  // ---------------------------------------------------------------- language switch
+  // The switch navigates between / (English) and /de/ (German). The plan lives in localStorage (same origin), so it carries over.
+  // LANG_KEY only remembers the last explicit choice (not used for any redirect).
+  function setLang(next){
+    if((next!=='en'&&next!=='de')||next===lang)return;
+    try{localStorage.setItem(LANG_KEY,next);}catch(e){}
+    location.assign((next==='de'?'/de/':'/')+location.search+location.hash);
+  }
+  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+  // ---------------------------------------------------------------- domain check (soft copy protection)
+  // The original lives at OFFICIAL_URL. On any other host a visible, non-blocking banner points visitors there; the app itself keeps working.
+  // OWNER: to allow another host (e.g. a staging domain) add it to ALLOWED_HOSTS ('*.example.org' = every subdomain of example.org).
+  // Always allowed without listing: localhost / *.localhost, private LAN addresses (10.x, 172.16-31.x, 192.168.x, 169.254.x, fc00::/7, fe80::/10),
+  // single-label intranet names (e.g. http://intranet-host/) and file: (empty hostname).
+  const OFFICIAL_URL='https://finplanr.net';
+  const ALLOWED_HOSTS=['finplanr.net','www.finplanr.net','localhost','127.0.0.1','[::1]','*.localhost','*.local'];
+  function isAllowedHost(host){
+    const h=String(host||'').toLowerCase().replace(/\.$/,'');
+    if(!h||ALLOWED_HOSTS.some(a=>a.startsWith('*.')?h.endsWith(a.slice(1)):h===a))return true;
+    if(h.startsWith('['))return /^\[(::1|f[cd][0-9a-f]{2}:|fe80:)/.test(h);
+    const m=h.match(/^(\d{1,3})\.(\d{1,3})\.\d{1,3}\.\d{1,3}$/);
+    if(m){const a=+m[1],b=+m[2];return a===10||a===127||(a===172&&b>=16&&b<=31)||(a===192&&b===168)||(a===169&&b===254);}
+    return !h.includes('.');
+  }
+  function showCopyBanner(){
+    const el=document.createElement('div');el.id='copyBanner';el.setAttribute('role','status');
+    el.append(t('banner.copy')+' ');
+    const a=document.createElement('a');a.href=OFFICIAL_URL;a.rel='noopener';a.textContent=OFFICIAL_URL;el.appendChild(a);
+    document.body.prepend(el);
+    const fit=()=>{document.body.style.paddingTop=el.offsetHeight+'px';};fit();window.addEventListener('resize',fit);
+  }
+  try{if(!isAllowedHost(location.hostname))showCopyBanner();}catch(e){console.warn('Domain check skipped',e);}
+  render();
+})();
+</script>
+</body>
+</html>

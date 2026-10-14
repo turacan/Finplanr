@@ -1,0 +1,24 @@
+{
+  "operator_name": "Jane Example",
+  "address_lines": [
+    "Example Street 1",
+    "12345 Example City"
+  ],
+  "country_de": "Deutschland",
+  "country_en": "Germany",
+  "email": "contact@example.org",
+  "impressum_url": "https://impressum.example.org/finplanr",
+  "impressum_provider_name": "Example Impressum Service",
+  "copyright_holder": "Jane Example",
+  "mailbox_provider_name": "Example Mail Provider Ltd.",
+  "mailbox_provider_address_de": "Beispielweg 2, 1234 Beispielstadt, Land",
+  "mailbox_provider_address_en": "Example Road 2, 1234 Example Town, Country",
+  "mailbox_recipient_de": "**Example Mail Provider Ltd.** (Land): Anbieter des Betreiber-Postfachs, nur wenn du per E-Mail Kontakt aufnimmst, Abschnitt 9",
+  "mailbox_recipient_en": "**Example Mail Provider Ltd.** (Country): provider of the operator's mailbox, only if you contact us by email, section 9",
+  "mailbox_transfer_de": "**Example Mail Provider Ltd.:** Beschreibe hier Vertragspartner, mögliche Drittlandübermittlung und Garantien (Art. 13 Abs. 1 lit. f DSGVO). Übermittlung nur, wenn du per E-Mail schreibst (Abschnitt 9).",
+  "mailbox_transfer_en": "**Example Mail Provider Ltd.:** Describe here the contracting party, any third-country transfer and safeguards (Art. 13(1)(f) GDPR). A transfer only happens if you write by email (section 9).",
+  "forbidden_extra": [
+    "example-internal-hostname",
+    "/path/to/private/dir"
+  ]
+}

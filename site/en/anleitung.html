@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!--
+  © 2026 {{COPYRIGHT_HOLDER}}. All rights reserved.
+  Unauthorised copying, hosting or redistribution of this application or its texts is not permitted.
+  Third-party names and logos belong to their respective owners.
+  https://finplanr.net
+-->
+<meta name="author" content="{{OPERATOR_NAME}}">
+<meta name="copyright" content="© 2026 {{COPYRIGHT_HOLDER}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User guide | Finplanr</title>
+<meta name="description" content="User guide for Finplanr, the free savings plan calculator: set your budget and allocation, edit and lock holdings, export and back up your data.">
+<link rel="canonical" href="https://finplanr.net/en/anleitung.html">
+<link rel="alternate" hreflang="de" href="https://finplanr.net/anleitung.html">
+<link rel="alternate" hreflang="en" href="https://finplanr.net/en/anleitung.html">
+<link rel="alternate" hreflang="x-default" href="https://finplanr.net/en/anleitung.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="/">Finplanr</a>
+<nav aria-label="Main navigation"><a href="/">Open app</a></nav>
+<div class="language-switch" aria-label="Language"><a lang="de" href="/anleitung.html">DE</a><a lang="en" aria-current="page" href="/en/anleitung.html">EN</a></div>
+</header>
+<main>
+<h1>User guide</h1>
+<p>Finplanr splits a monthly savings budget across categories and holdings. It is a planning tool and does not place orders.</p>
+
+<h2>Basics</h2>
+<ul>
+<li><strong>Budget:</strong> Enter the amount you want to save each month. The categories (for example equity ETFs, ETCs (exchange-traded commodities), crypto, savings account (Tagesgeld)) add up to 100%.</li>
+<li><strong>Weights:</strong> Move the sliders to change the shares. The remainder is redistributed automatically across the other entries.</li>
+<li><strong>Language:</strong> The English app is at <code>finplanr.net/</code>, the German one at <code>finplanr.net/de/</code>. Use the DE/EN switch in the top-right corner to move between them; your plan is kept.</li>
+<li><strong>Whole euros or cents:</strong> In Settings, choose whether amounts are rounded to whole euros or include cents.</li>
+</ul>
+
+<h2>Edit mode</h2>
+<p>In Edit mode you can:</p>
+<ul>
+<li>change names and identifiers: ticker, ISIN and WKN (German securities number),</li>
+<li>change logos,</li>
+<li>reorder categories and holdings by drag &amp; drop (only if you turned off automatic sorting in Settings; by default everything is sorted by size, largest first).</li>
+</ul>
+<p>The optional online search (stocks, ETFs, crypto, images) may return matches. In the search dialog you pick the source: "Stocks &amp; ETFs" (built-in catalog, plus Wikidata on "Search", giving ticker, ISIN and, for German ISINs, the WKN) or "Crypto" (CoinGecko). The source defaults to the category type (new type "Stocks") and can be switched in any category. Wikidata is not exhaustive: if nothing turns up, try the exact company name, the ticker or the ISIN, or enter the details by hand. Always verify identifiers yourself before setting up a real savings plan.</p>
+
+<h2>Locks and balancing partners</h2>
+<ul>
+<li><strong>Lock:</strong> A locked entry (category or holding) keeps its value while you move other sliders.</li>
+<li><strong>Balancing partner:</strong> Defines which entries absorb a change. Without partners, the adjustment is spread across all unlocked entries.</li>
+</ul>
+
+<h2>Charts</h2>
+<p>Click the name of a holding to open a TradingView chart panel below its row, showing a daily chart for the ticker. The TradingView widget loads only after that click <em>and</em> your consent: the panel first shows a short notice with a "Load chart" button. Only then does it contact TradingView, which receives your IP address. Without consent, no connection is made; you can also open the chart directly on TradingView. You can withdraw consent at any time under "Privacy settings" in the footer. TradingView's notice "Track all markets on TradingView" stays visible below the chart (attribution required by their terms). Crypto data from the online search comes from CoinGecko ("Powered by CoinGecko API"); images from Wikimedia Commons have their own licences (check the file page), and company and coin logos are trademarks of their owners, shown here only for identification.</p>
+
+<h2>Logos</h2>
+<p>For the default assets the app shows logos automatically: coin logos for crypto and issuer logos for ETFs. Logos for the common coins and ETF issuers are bundled with the app (no external request). For everything else the app shows an icon; if you want a logo, pick one yourself via the logo picker (online image search, image URL or upload). Picked logos load from their source.</p>
+
+<h2>Export and import</h2>
+<p>The Export menu has two entries:</p>
+<ul>
+<li><strong>JSON backup:</strong> The complete portfolio including settings and reset point. This is the only file that can be re-imported with <em>Import</em>. Use it to move your plan to another browser or device.</li>
+<li><strong>CSV table:</strong> A read-only spreadsheet export of the current plan for Excel or LibreOffice, with the columns category, holding, ticker, ISIN, WKN, share % and euros per month. It cannot be imported back.</li>
+</ul>
+<p><strong>Import</strong> accepts JSON backups only.</p>
+
+<h2>Reset</h2>
+<ul>
+<li><strong>Reset point:</strong> Save your current plan as a personal reset point and return to it later. The <em>Reset</em> button restores exactly this saved reset point; its confirmation shows when it was saved, its budget and number of holdings. Importing a JSON backup also sets the reset point (to the one stored in the file, or to the imported plan).</li>
+<li><strong>Restore factory defaults:</strong> Returns to the built-in example and deletes the saved reset point. Create a JSON backup first.</li>
+<li><strong>Sorting:</strong> By default categories and holdings are kept sorted by amount, largest first (Settings: &ldquo;Keep sorted by size&rdquo;). The order updates once you finish a change, never while you drag a slider or type.</li>
+</ul>
+
+<h2>Data storage</h2>
+<p>Your data is stored only in your browser's localStorage. There are no accounts and nothing is stored on the server. Other browsers and devices have their own data, and clearing site data deletes your plan, so back it up regularly as JSON.</p>
+<p>The footer of the app links to the <a href="{{IMPRESSUM_URL}}" target="_blank" rel="noopener noreferrer">legal notice (Impressum)</a> and the <a href="/en/datenschutz.html">privacy policy</a>. Under "Privacy settings" you can allow or withdraw consent for TradingView charts at any time.</p>
+
+<h2>Data sources</h2>
+<p>The preset instrument data (names, tickers, ISIN, WKN) was checked against <a href="https://live.deutsche-boerse.com/" target="_blank" rel="noopener noreferrer">Deutsche Börse</a>, <a href="https://global.vanguard.com/de-de/investment-products/etf/equities/9679/ftse-all-world-ucits-etf-usd-accumulating.html" target="_blank" rel="noopener noreferrer">Vanguard</a>, <a href="https://www.wisdomtree.com/de/products/commodities/wisdomtree-core-physical-gold" target="_blank" rel="noopener noreferrer">WisdomTree</a>, as of 13 Oct 2026. Finplanr uses no price data. Check the ISIN and WKN with your broker or the issuer before you buy.</p>
+
+<h2>Note</h2>
+<p>Securities, commodities and crypto can lose value. Finplanr only calculates planned savings amounts and does not provide investment or tax advice.</p>
+</main>
+<footer><p>Planning tool, not investment advice.</p></footer>
+</body>
+</html>

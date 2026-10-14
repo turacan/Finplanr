@@ -1,0 +1,19 @@
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#16283a;background:#f7f9fc}
+*{box-sizing:border-box}
+body{margin:0;line-height:1.65}
+a{color:#165d9a}
+header,main,footer{max-width:980px;margin:auto;padding:24px}
+header{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+nav{display:flex;gap:16px;flex-wrap:wrap}
+nav a{text-decoration:none}
+nav a:hover{text-decoration:underline}
+.brand{font-weight:800;font-size:1.35rem;color:#142b43;text-decoration:none}
+h2{margin-top:34px}
+footer{border-top:1px solid #d8e2ed;margin-top:40px;color:#486079;font-size:0.93rem}
+li{margin-bottom:7px}
+@media(max-width:680px){header{padding:18px}main{padding:18px}}
+.language-switch{display:flex;align-items:center;gap:7px;font-size:.87rem;font-weight:750;margin-left:auto}
+.language-switch a{min-width:36px;text-align:center;text-decoration:none;padding:5px 8px;border:1px solid #d8e2ed;border-radius:7px}
+.language-switch a[aria-current="page"]{color:#fff;background:#175e9e;border-color:#175e9e}
+.language-switch a:hover{text-decoration:underline}
+@media(max-width:680px){.language-switch{margin-left:0}}

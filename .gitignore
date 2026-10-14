@@ -1,0 +1,34 @@
+# SECRETS and local-only configuration: never commit
+tunnel.env
+*.env
+.env*
+!tunnel.env.example
+config/operator.json
+compose.yaml
+docker-compose.yaml
+private/
+dist/
+site/logos
+
+# OS / editor / Windows download markers
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+*.lnk
+.vscode/
+.idea/
+
+# Python / test artefacts
+__pycache__/
+*.pyc
+.venv/
+
+# Local working documents (never commit)
+parked-for-later/README.md
+parked-for-later/LEGAL-CHECK.md
+parked-for-later/ART13-CHECKLIST.md
+parked-for-later/ADS-AND-SEO.md
+parked-for-later/COPYRIGHT-AND-COPIES.md
+parked-for-later/datenschutz-ads-module.*
+parked-for-later/legacy/
+parked-for-later/site/

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<!--
+  © 2026 {{COPYRIGHT_HOLDER}}. All rights reserved.
+  Unauthorised copying, hosting or redistribution of this application or its texts is not permitted.
+  Third-party names and logos belong to their respective owners.
+  https://finplanr.net
+-->
+<meta name="author" content="{{OPERATOR_NAME}}">
+<meta name="copyright" content="© 2026 {{COPYRIGHT_HOLDER}}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anleitung | Finplanr</title>
+<meta name="description" content="Anleitung zu Finplanr, dem kostenlosen Sparplan-Rechner: Budget und Aufteilung festlegen, Positionen bearbeiten, sperren, exportieren und Daten sichern.">
+<link rel="canonical" href="https://finplanr.net/anleitung.html">
+<link rel="alternate" hreflang="de" href="https://finplanr.net/anleitung.html">
+<link rel="alternate" hreflang="en" href="https://finplanr.net/en/anleitung.html">
+<link rel="alternate" hreflang="x-default" href="https://finplanr.net/en/anleitung.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+<a class="brand" href="/de/">Finplanr</a>
+<nav aria-label="Hauptnavigation"><a href="/de/">App öffnen</a></nav>
+<div class="language-switch" aria-label="Sprache"><a lang="de" aria-current="page" href="/anleitung.html">DE</a><a lang="en" href="/en/anleitung.html">EN</a></div>
+</header>
+<main>
+<h1>Anleitung</h1>
+<p>Finplanr verteilt ein monatliches Sparbudget auf Kategorien und Positionen. Es ist ein Planungswerkzeug und platziert keine Orders.</p>
+
+<h2>Grundlagen</h2>
+<ul>
+<li><strong>Budget:</strong> Gib den Betrag ein, den du monatlich sparen möchtest. Die Kategorien (zum Beispiel Aktien-ETFs, ETCs, Krypto, Tagesgeld) ergeben zusammen 100 %.</li>
+<li><strong>Gewichtung:</strong> Mit den Schiebereglern änderst du die Anteile. Der Rest verteilt sich automatisch auf die übrigen Einträge.</li>
+<li><strong>Sprache:</strong> Die deutsche App findest du unter <code>finplanr.net/de/</code>, die englische unter <code>finplanr.net/</code>. Oben rechts wechselst du mit dem DE/EN-Schalter zwischen beiden; dein Plan bleibt dabei erhalten.</li>
+<li><strong>Ganze Euro oder Cent:</strong> In den Einstellungen wählst du, ob nur ganze Euro oder auch Cent-Beträge verwendet werden.</li>
+</ul>
+
+<h2>Bearbeitungsmodus</h2>
+<p>Im Bearbeitungsmodus kannst du:</p>
+<ul>
+<li>Namen und Kennungen ändern: Kürzel (Ticker), ISIN und WKN (Wertpapierkennnummer),</li>
+<li>Logos anpassen,</li>
+<li>Kategorien und Positionen per Drag &amp; Drop umsortieren (nur wenn du die automatische Sortierung in den Einstellungen ausgeschaltet hast; standardmäßig ist alles nach Größe sortiert, größte zuerst).</li>
+</ul>
+<p>Die optionale Online-Suche (Aktien, ETFs, Krypto, Bilder) kann Treffer liefern. Im Suchdialog wählst du die Quelle: „Aktien &amp; ETFs“ (integrierter Katalog, bei „Suchen“ zusätzlich Wikidata mit Kürzel, ISIN und bei deutschen ISINs der WKN) oder „Krypto“ (CoinGecko). Voreingestellt ist die Quelle nach dem Typ der Kategorie (neuer Typ „Aktien“), du kannst sie in jeder Kategorie umschalten. Wikidata ist nicht lückenlos: Findest du nichts, probiere den genauen Firmennamen, das Kürzel oder die ISIN oder trage die Angaben von Hand ein. Prüfe Kennungen immer selbst, bevor du echte Sparpläne einrichtest.</p>
+
+<h2>Schlösser und Ausgleichspartner</h2>
+<ul>
+<li><strong>Schloss:</strong> Ein gesperrter Eintrag (Kategorie oder Position) behält seinen Wert, wenn du andere Regler bewegst.</li>
+<li><strong>Ausgleichspartner:</strong> Legt fest, welche Einträge eine Änderung ausgleichen. Ohne Partner verteilt sich der Ausgleich auf alle nicht gesperrten Einträge.</li>
+</ul>
+
+<h2>Chart anzeigen</h2>
+<p>Ein Klick auf den Namen einer Position öffnet unter der Zeile ein TradingView-Chart-Panel mit dem Tageschart zum Kürzel. Das TradingView-Widget wird erst nach diesem Klick <em>und</em> deiner Einwilligung geladen: Das Panel zeigt zuerst einen kurzen Hinweis mit der Schaltfläche „Chart laden“. Erst dann wird TradingView kontaktiert und erhält deine IP-Adresse. Ohne Einwilligung findet keine Verbindung statt; du kannst den Chart auch direkt auf TradingView öffnen. Deine Einwilligung kannst du jederzeit unter „Datenschutz-Einstellungen“ im Seitenfuß widerrufen. Unter dem Chart bleibt der Hinweis „Track all markets on TradingView“ von TradingView sichtbar (Quellenangabe laut deren Nutzungsbedingungen). Kryptodaten der Online-Suche stammen von CoinGecko („Powered by CoinGecko API“); Bilder aus Wikimedia Commons unterliegen eigenen Lizenzen (Dateiseite prüfen), und Firmen- und Coin-Logos sind Marken ihrer Inhaber, die hier nur zur Kennzeichnung dienen.</p>
+
+<h2>Logos</h2>
+<p>Für die Standardwerte zeigt die App automatisch Logos an: Coin-Logos für Krypto und Anbieter-Logos für ETFs. Logos der gängigen Coins und ETF-Anbieter sind in der App enthalten (keine externe Anfrage). Für alles andere zeigt die App ein Symbol; wenn du ein Logo möchtest, wählst du es selbst über die Logo-Auswahl (Online-Bildersuche, Bildadresse oder Upload). Gewählte Logos werden von ihrer jeweiligen Quelle geladen.</p>
+
+<h2>Export und Import</h2>
+<p>Das Export-Menü hat zwei Einträge:</p>
+<ul>
+<li><strong>JSON-Sicherung:</strong> Das vollständige Portfolio inklusive Einstellungen und Reset-Stand. Nur diese Datei lässt sich über <em>Import</em> wieder einlesen. Du brauchst sie, um die Planung in einen anderen Browser oder auf ein anderes Gerät zu übertragen.</li>
+<li><strong>CSV-Tabelle:</strong> Eine reine Lese-Ansicht des aktuellen Plans für Excel oder LibreOffice, mit den Spalten Kategorie, Position, Kürzel, ISIN, WKN, Anteil in % und Euro pro Monat. Sie kann nicht wieder importiert werden.</li>
+</ul>
+<p><strong>Import</strong> akzeptiert ausschließlich die JSON-Sicherung.</p>
+
+<h2>Zurücksetzen</h2>
+<ul>
+<li><strong>Reset-Stand:</strong> Du kannst deinen aktuellen Plan als persönlichen Reset-Stand speichern und später dorthin zurückkehren. Der Button <em>Reset</em> stellt genau diesen gespeicherten Reset-Stand wieder her; die Rückfrage zeigt, wann er gespeichert wurde, sein Budget und die Zahl der Positionen. Auch ein Import einer JSON-Sicherung setzt den Reset-Stand (auf den in der Datei gespeicherten oder auf den importierten Plan).</li>
+<li><strong>Werkseinstellungen wiederherstellen:</strong> Setzt die App auf das eingebaute Beispiel zurück und löscht den gespeicherten Reset-Stand. Erstelle vorher eine JSON-Sicherung.</li>
+<li><strong>Sortierung:</strong> Standardmäßig bleiben Kategorien und Positionen nach Betrag sortiert, größte zuerst (Einstellungen: „Nach Größe sortiert halten“). Die Reihenfolge aktualisiert sich, sobald du eine Änderung abgeschlossen hast, nie während du einen Regler ziehst oder tippst.</li>
+</ul>
+
+<h2>Datenspeicherung</h2>
+<p>Deine Daten liegen ausschließlich im lokalen Speicher (localStorage) deines Browsers. Es gibt keine Konten und keine Speicherung auf dem Server. Andere Browser und Geräte haben eigene Daten, und das Löschen der Website-Daten löscht auch deinen Plan. Sichere ihn deshalb regelmäßig als JSON.</p>
+<p>Im Seitenfuß der App findest du das <a href="{{IMPRESSUM_URL}}" target="_blank" rel="noopener noreferrer">Impressum</a> und die <a href="/datenschutz.html">Datenschutzerklärung</a>. Unter „Datenschutz-Einstellungen“ kannst du die Einwilligung für TradingView-Charts jederzeit erteilen oder widerrufen.</p>
+
+<h2>Datenquellen</h2>
+<p>Die vorbelegten Instrumentdaten (Namen, Kürzel, ISIN, WKN) wurden anhand von <a href="https://live.deutsche-boerse.com/" target="_blank" rel="noopener noreferrer">Deutsche Börse</a>, <a href="https://global.vanguard.com/de-de/investment-products/etf/equities/9679/ftse-all-world-ucits-etf-usd-accumulating.html" target="_blank" rel="noopener noreferrer">Vanguard</a>, <a href="https://www.wisdomtree.com/de/products/commodities/wisdomtree-core-physical-gold" target="_blank" rel="noopener noreferrer">WisdomTree</a> geprüft, Stand 13.10.2026. Finplanr verwendet keine Kursdaten. Prüfe ISIN und WKN vor jedem Kauf bei deinem Broker oder beim Anbieter.</p>
+
+<h2>Hinweis</h2>
+<p>Wertpapiere, Rohstoffe und Kryptowerte können stark im Wert schwanken. Finplanr berechnet nur geplante Sparraten und bietet weder Anlage- noch Steuerberatung.</p>
+</main>
+<footer><p>Planungswerkzeug, keine Anlageberatung.</p></footer>
+</body>
+</html>
