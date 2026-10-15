@@ -39,8 +39,19 @@
 <li><strong>Whole euros or cents:</strong> In Settings, choose whether amounts are rounded to whole euros or include cents.</li>
 </ul>
 
+<h2>Example plan and your own plan</h2>
+<ul>
+<li><strong>Example plan:</strong> The plan you see at first start is only an example, marked with an &ldquo;Example plan&rdquo; chip. It shows how the app works and is not tailored to you.</li>
+<li><strong>Create my own plan:</strong> The button <em>Create my own plan</em> starts an empty plan. Your budget and settings are kept. You can bring the previous plan back with <em>Reset</em>, your reset point or a JSON backup.</li>
+<li><strong>First category:</strong> An empty plan shows a row of type buttons: ETF, Stocks, Crypto, Precious metals (ETC), Savings account and Other. One tap creates the first category and opens the holding search.</li>
+<li><strong>Add and remove freely:</strong> Categories and holdings can be changed, added or removed at any time. The plan is your own.</li>
+</ul>
+
+<h2>Adding and editing</h2>
+<p>Adding works without Edit mode: <em>+ Add holding</em> inside each category and <em>+ Add category</em> below the list are always visible.</p>
+
 <h2>Edit mode</h2>
-<p>In Edit mode you can:</p>
+<p>Edit mode is for renaming, colours, symbols, ordering and deleting. In Edit mode you can:</p>
 <ul>
 <li>change names and identifiers: ticker, ISIN and WKN (German securities number),</li>
 <li>change logos,</li>
@@ -62,15 +73,15 @@
 <p><strong>Logo offer when adding a holding:</strong> If you apply a search result that has no logo (not for savings accounts), the dialog switches to a second step, &ldquo;Choose a logo for &hellip;&rdquo;. If you have allowed online search, it looks for matching images on Wikimedia Commons (for example &ldquo;Apple logo&rdquo;) and shows up to 12; pick one only if it matches, or choose <em>Skip</em> (or press Esc) to keep the letter badge. If you have not allowed online search yet, nothing is requested: the step shows the permission box with <em>Allow online search</em> and <em>Skip</em>. Tick &ldquo;Don&rsquo;t offer a logo search when adding holdings&rdquo; to stop the offer; you can turn it on again in Settings (&ldquo;Offer a logo search when I add a holding&rdquo;). The &ldquo;&#9673; Logo&rdquo; button in Edit mode works as before.</p>
 
 <h2>Rebalance with my current holdings</h2>
-<p>The card below your categories (closed by default; open it with its heading) helps you spread <em>this month&rsquo;s</em> budget when your portfolio has already drifted away from your plan. Your plan above stays the target; the card only reads it.</p>
+<p>The optional card below your categories (closed by default; open it with its heading) compares what your holdings are worth today with the target shares of your plan above and calculates what it takes to reach them. Your plan stays the target; the card only reads it and changes nothing in it.</p>
 <ul>
-<li><strong>How to use it:</strong> Enter the current value of each holding in euros. The table shows each holding&rsquo;s share now, its target share, the amount from your plan and the <strong>calculated</strong> amount this month, with the difference to the plan. The calculation gives more to holdings that are further below their target.</li>
-<li><strong>New money only:</strong> The calculation distributes the amount you enter. A holding above its target gets nothing this month in this calculation (marked &ldquo;Above target&rdquo;); with new money only, reaching the target can take several months. If you enter nothing, the result equals your plan.</li>
-<li><strong>What counts:</strong> Untick &ldquo;Count in rebalancing&rdquo; for a holding, or &ldquo;Count this category&rdquo; for a whole category (for example a savings account or an emergency fund). Such holdings are ignored in the comparison and keep exactly their planned amount.</li>
-<li><strong>Current value today:</strong> Enter what each holding is worth now, including gains, not what you paid in.</li>
-<li><strong>Reaching your target:</strong> Below the table, <em>Needed in total (one-time)</em> shows the total amount that, distributed across the holdings below target, puts every counted holding exactly on its target share. Optionally add an <em>extra one-time amount</em> (for example a bonus, added to the first month) and choose a horizon: <em>This month only</em>, <em>As soon as possible</em> with your monthly budget, or <em>In N months</em>. For the last two a month-by-month schedule is shown (month 1 is what the calculation above uses) and it ends with &ldquo;Target reached after K months&rdquo;; if your budget is too small for N months, Finplanr shows the monthly amount required for N months instead. The schedule assumes the values stay as entered (no price changes), so enter your current values again every month.</li>
-<li><strong>Copy and export:</strong> &ldquo;Copy result&rdquo; puts a plain list (name: amount) for the first month on the clipboard; &ldquo;Download schedule (CSV)&rdquo; saves the month-by-month table; &ldquo;Download CSV&rdquo; saves the table; &ldquo;Clear current values&rdquo; deletes your entries after a confirmation.</li>
-<li><strong>Local only:</strong> The values are stored in your plan in your browser and are included in the JSON backup. Nothing is sent anywhere. The result is an illustration, not investment advice.</li>
+<li><strong>Current values:</strong> Enter what each holding is worth <em>today</em> in euros, including gains, not what you paid in. Leave a field empty or enter 0 for a holding you have not invested in yet. Your plan above defines the target shares.</li>
+<li><strong>Counted or not:</strong> Each holding and each category has a checkbox. Untick it to leave something out of the comparison, for example a savings account or an emergency fund. Holdings that are not counted are ignored in the calculation and keep their planned amount.</li>
+<li><strong>The table:</strong> For each holding it shows the <em>current value</em>, the <em>share now</em> and the <em>target share</em>. <em>Difference to target</em> is the current value minus the value at the target share, in euros and marked &ldquo;above&rdquo; or &ldquo;below&rdquo; the target. <em>To reach target, one-time (&euro;)</em> is the amount that one-time payment would add to that holding; holdings above their target get 0. The sum of this column is shown as <em>Needed in total</em>: the one-time amount that, distributed this way, puts every counted holding exactly on its target share.</li>
+<li><strong>Reaching your target:</strong> Optionally add an <em>extra one-time amount</em> (for example a bonus) and choose a horizon: <em>This month only</em>, <em>As soon as possible with my monthly budget</em> (the default) or <em>In N months</em>. For the last two, a month-by-month table shows the calculated amounts per holding; month 1 is this month. A comparison row, <em>Plan (no rebalancing)</em>, shows your plan for the same months. Once the target is reached, the amounts equal your plan. If the budget is too small for the chosen N months, Finplanr shows the monthly amount that N months would take.</li>
+<li><strong>Assumption:</strong> The calculation assumes that the values stay as entered (no price changes). It is shown as a highlighted notice on the card. To update it, enter your current values again each month.</li>
+<li><strong>Downloads:</strong> <em>Download table (CSV)</em> saves the current values, shares, difference to target and one-time amounts per holding; <em>Download month-by-month (CSV)</em> saves the amounts per holding for each month until the target is reached; <em>Clear current values</em> deletes your entries after a confirmation.</li>
+<li><strong>Local only:</strong> Everything stays in your browser. The entries are stored together with your plan and are included in the JSON backup. Nothing is sent anywhere. The result is a calculation from your entries, not investment advice.</li>
 </ul>
 
 <h2>Export and import</h2>
@@ -84,7 +95,7 @@
 <h2>Reset</h2>
 <ul>
 <li><strong>Reset point:</strong> Save your current plan as a personal reset point and return to it later. The <em>Reset</em> button restores exactly this saved reset point; its confirmation shows when it was saved, its budget and number of holdings. Importing a JSON backup also sets the reset point (to the one stored in the file, or to the imported plan).</li>
-<li><strong>Restore factory defaults:</strong> Returns to the built-in example and deletes the saved reset point. Create a JSON backup first.</li>
+<li><strong>Restore factory defaults:</strong> Returns to the built-in example plan and deletes the saved reset point. Create a JSON backup first.</li>
 <li><strong>Logo offer:</strong> Settings: &ldquo;Offer a logo search when I add a holding&rdquo; (on by default). The online search itself only runs after your permission.</li>
 <li><strong>Sorting:</strong> By default categories and holdings are kept sorted by amount, largest first (Settings: &ldquo;Keep sorted by size&rdquo;). The order updates once you finish a change, never while you drag a slider or type.</li>
 </ul>

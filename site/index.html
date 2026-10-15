@@ -70,6 +70,7 @@
     .btn{border:1px solid var(--line);background:#fff;color:#314156;padding:9px 12px;border-radius:11px;font-size:13px;font-weight:650;display:inline-flex;gap:7px;align-items:center;justify-content:center;transition:.15s ease}
     .btn:hover{background:#f1f5fa;border-color:#bfcddf}.btn.primary{background:var(--navy);color:white;border-color:var(--navy)}.btn.primary:hover{background:#26445f}
     .btn.soft{border-color:#cfdbeb;background:#eff4fa}.btn.danger{color:#9a3d43;border-color:#ead7d9}.btn.danger:hover{background:#fff2f2}
+    .btn.primary-outline{border-color:var(--navy);color:var(--navy);background:#fff}.btn.primary-outline:hover{background:#eaf0f8;border-color:var(--navy)}
     .btn.small{font-size:12px;padding:7px 10px}.btn.icononly{width:31px;height:31px;padding:0;font-size:15px}
     .hidden{display:none!important}
     .hero{background:linear-gradient(135deg,#192c42 0%,#233e56 65%,#2b455d 100%);color:#fff;border-radius:23px;padding:32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,.83fr);gap:20px;box-shadow:0 20px 46px #182e4430;overflow:hidden}
@@ -114,6 +115,26 @@
     .edit-head{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.edit-head input{width:190px}
     .edittools{display:flex;gap:9px;align-items:center;margin:12px 0 4px}.muted{font-size:12px;color:var(--muted)}
     .add-section{border:1px dashed #b8c8d9;border-radius:16px;padding:18px 20px;background:#fbfcff;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}.add-section .field{min-width:170px;flex:1}.add-section label{display:block;font-size:11px;font-weight:700;color:#65768b;margin-bottom:5px}.add-section select{height:36px}
+    /* Onboarding: example chip, "create my own plan", empty state, always-visible add controls */
+    .introtitle{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap}
+    .chip{display:inline-flex;align-items:center;font-size:12px;font-weight:700;line-height:1.3;color:#2f5b8a;background:#eef4fb;border:1px solid #cfe0f1;border-radius:99px;padding:3px 11px}
+    .intro>div:first-child{flex:1 1 440px;min-width:0}.introactions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:300px;text-align:right}
+    .introactions .plus{font-size:15px;line-height:1}
+    .typerow{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px}
+    .typebtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:86px;padding:12px 8px;border:1px solid #cfdbeb;border-radius:14px;background:#fff;color:var(--ink);font-weight:700;font-size:14px;line-height:1.25;text-align:center;transition:.15s ease}
+    .typebtn .ticon{font-size:26px;line-height:1;color:var(--navy)}
+    .typebtn:hover{background:#eef4fb;border-color:#8fa9c8}
+    .emptystate{background:var(--paper);border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);padding:24px 24px 26px}
+    .emptystate h3{margin:0 0 4px;font-size:21px;letter-spacing:-.4px;font-weight:780}.emptystate p{margin:0 0 16px}
+    .addcat{margin-top:17px;border:1px dashed #b0c2d6;border-radius:16px;padding:14px 18px 18px;background:#fbfcff}
+    .addcat-h{font-size:15px;font-weight:770;margin:0 0 11px;color:#31475e}
+    .addcat .typerow{grid-template-columns:repeat(auto-fit,minmax(138px,1fr))}
+    .addcat .typebtn{flex-direction:row;gap:9px;min-height:46px;padding:8px 10px;font-size:13px;border-style:dashed;background:#fff}
+    .addcat .typebtn .ticon{font-size:18px}
+    .addquick-row{padding:2px 0 12px}
+    @media(max-width:620px){.introactions{align-items:flex-start;text-align:left;max-width:none}}
+    .addquick{display:inline-flex;align-items:center;gap:7px;border:1px dashed #b0c2d6;background:#fbfcff;color:#31475e;border-radius:10px;padding:8px 13px;font-size:13px;font-weight:700}
+    .addquick:hover{background:#eef4fb;border-color:#6f8fb3}
     .about{margin:42px auto 0;max-width:900px;padding:26px 28px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);color:#4a5a6e;font-size:14px;line-height:1.6}
     .about h2{font-size:19px;letter-spacing:-.3px;color:var(--ink);margin:0 0 10px}.about h3{font-size:15px;color:var(--ink);margin:22px 0 4px}.about h4{font-size:14px;color:var(--ink);margin:14px 0 2px}.about p{margin:0 0 9px}.about h4+p{margin-bottom:0}
     .footer{font-size:12px;color:#7b8796;text-align:center;margin:30px auto 0;max-width:900px;line-height:1.6}.footer a{color:#516a89}.footer .line{margin:3px 0}
@@ -270,7 +291,7 @@
     .rebal-table th,.rebal-table td{padding:8px 8px;text-align:right;vertical-align:middle;font-weight:400}
     .rebal-table thead th{font-size:11px;font-weight:730;color:var(--muted);border-bottom:1px solid var(--line);vertical-align:bottom;padding-bottom:7px;line-height:1.3}
     .rebal-table th:first-child,.rebal-table td:first-child{text-align:left}
-    .rebal-table col.c-nm{width:auto}.rebal-table col.c-in{width:138px}.rebal-table col.c-ck{width:58px}.rebal-table col.c-pc{width:84px}.rebal-table col.c-eu{width:98px}.rebal-table col.c-sg{width:156px}
+    .rebal-table col.c-nm{width:auto}.rebal-table col.c-in{width:138px}.rebal-table col.c-ck{width:58px}.rebal-table col.c-pc{width:80px}.rebal-table col.c-df{width:172px}.rebal-table col.c-on{width:124px}
     .rebal-table .c-ck{text-align:center}
     .rebal-table tbody.grp tr.rebal-cat th,.rebal-table tbody.grp tr.rebal-cat td{background:color-mix(in srgb,var(--accent) 8%,white);border-top:1px solid var(--line);font-weight:730;padding-top:10px;padding-bottom:10px}
     .rebal-table tbody.grp:first-of-type tr.rebal-cat th,.rebal-table tbody.grp:first-of-type tr.rebal-cat td{border-top:0}
@@ -287,16 +308,18 @@
     .rebal-in input{font-size:14px}.rebal-in:focus-within{border-color:#8db9db;box-shadow:0 0 0 3px #b2c7ef66}
     .rebal-chk{display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;min-height:28px;min-width:28px}
     .rebal-chk-t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-    .rebal-sg{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:3px 6px}.rebal-sg .rebal-sug{flex:0 0 100%;text-align:right}
-    .rebal-sug{font-size:15.5px;font-weight:800;letter-spacing:-.2px}
-    .rebal-chip{display:inline-block;font-size:11px;font-weight:700;border-radius:99px;padding:1px 8px;border:1px solid #d9e0e8;background:#f4f6f9;color:#516173}
-    .rebal-chip.pos{background:#e9f6ef;border-color:#bfe2cd;color:#1d6b48}.rebal-chip.neg{background:#fdf0ef;border-color:#f0cdc9;color:#9a3d43}
-    .rebal-over{display:inline-block;font-size:10.5px;font-weight:750;border-radius:6px;padding:1px 7px;border:1px solid #efdcb7;background:#fff6e7;color:#845d17;white-space:nowrap}
-    .rebal-table tr.off .rebal-nm,.rebal-table tr.off td:not(.c-ck):not(.c-in),.rebal-table tr.off .rebal-name .mini-icon{opacity:.5}
+    .rebal-df{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:3px 6px}
+    .rebal-dv{font-size:14.5px;font-weight:760;letter-spacing:-.2px}.rebal-once{font-size:14.5px;font-weight:760;letter-spacing:-.2px}
+    .rebal-dir{display:inline-block;font-size:10.5px;font-weight:700;border-radius:99px;padding:1px 8px;border:1px solid #d9e0e8;background:#f4f6f9;color:#516173;white-space:nowrap}
+    .rebal-dir.up{background:#fff6e7;border-color:#efdcb7;color:#845d17}.rebal-dir.dn{background:#eef4fb;border-color:#cfe0f1;color:#2f5b8a}
+    .rebal-table tr.off .rebal-nm,.rebal-table tr.off td:not(.c-ck):not(.c-in):not(.c-ex),.rebal-table tr.off .rebal-name .mini-icon{opacity:.5}
     .rebal-table tr.off .rebal-in{background:#f3f5f8}
-    .rebal-actions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 10px}
+    .rebal-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:16px 0 14px}
     .rebal-actions .btn:disabled{opacity:.45;cursor:not-allowed}
-    .rebal-disc{font-size:12px;color:var(--muted);margin:6px 0 0}
+    .rebal-actions #rebalClear{margin-left:auto}
+    /* assumption notice: clearly visible, calm info colour (not a warning) */
+    .rebal-disc{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 15px;border-left:4px solid #2f5b8a;border-radius:4px 11px 11px 4px;background:#eaf2fb;color:#1c3550;font-size:13.5px;font-weight:700;line-height:1.5}
+    .rebal-disc-ico{flex:none;display:inline-grid;place-items:center;width:19px;height:19px;margin-top:1px;border:2px solid #2f5b8a;border-radius:50%;color:#2f5b8a;font:italic 700 12px/1 Georgia,'Times New Roman',serif} /* drawn circled "i" (no dependence on a symbol font) */
     .rebal-summary{margin:0 0 14px;padding:12px 15px;border-radius:12px;background:#eef6f3;border:1px solid #cfe6de;color:#1d4d41;font-size:14px;font-weight:650;line-height:1.5}
     .rebal-note.ok{background:#eef6f3;border-color:#cfe6de;color:#1d4d41;font-weight:650}
     .rebal-plan{margin-top:22px;border-top:1px solid var(--line);padding-top:6px}
@@ -313,16 +336,13 @@
     .rp-tip{margin:-4px 0 0;font-size:12px;color:var(--muted);max-width:760px;line-height:1.5}
     .rp-h{font-size:14px;margin:10px 0 0}
     .rebal-fine{margin:0;font-size:12px;color:var(--muted)}
-    .rebal-mini{border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:min(100%,360px);font-size:13px}
-    .rebal-mini th,.rebal-mini td{padding:6px 12px 6px 0;text-align:left;font-weight:400;border-bottom:1px solid #edf0f5}.rebal-mini td{text-align:right;padding-right:0;font-weight:700}
-    .rebal-mini thead th{font-size:11px;font-weight:730;color:var(--muted)}.rebal-mini thead th:last-child{text-align:right}.rebal-mini tfoot th,.rebal-mini tfoot td{font-weight:800;border-bottom:0}
-    .rebal-mini th[scope=row]{padding-right:28px}
     .rebal-sched{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:12.5px}
     .rebal-sched th,.rebal-sched td{padding:6px 8px;text-align:right;border-bottom:1px solid #edf0f5;font-weight:400;vertical-align:bottom}
     .rebal-sched thead th{font-size:11px;font-weight:730;color:var(--muted);line-height:1.25;word-break:break-word}
     .rebal-sched th:first-child,.rebal-sched td:first-child{text-align:left;white-space:nowrap}
     .rebal-sched td.z{color:#a3aebb}.rebal-sched td.tot{font-weight:750}
     .rebal-sched tr.late{display:none}
+    .rebal-sched tr.sch-plan th,.rebal-sched tr.sch-plan td{border-top:2px solid #cdd7e4;background:#fafbfd;color:#516173;font-weight:650}
     .rebal-sched tr.sch-mark td{text-align:left;background:#eef6f3;color:#1d4d41;font-weight:700;padding:8px 10px;white-space:normal}
     .rebal-sched tfoot th,.rebal-sched tfoot td{font-weight:700;background:#fafbfd;border-bottom:0}
     .rebal-sched tfoot tr.sch-foot+tr.sch-foot th,.rebal-sched tfoot tr.sch-foot+tr.sch-foot td{border-top:1px solid #edf0f5}
@@ -338,18 +358,19 @@
       .rebal-sched td.tot{border-top:1px solid #edf0f5!important;margin-top:3px;padding-top:5px;font-weight:800}
       .rebal-sched tr.sch-foot{background:#fafbfd}.rebal-sched tr.sch-foot td.tot{display:none}.rebal-sched tr.sch-foot td.z{display:flex}
       .rebal-sched tr.sch-mark{background:#eef6f3}
-      .rebal-mini{width:100%}
+      .rebal-sched tr.sch-plan{border-style:dashed;background:#fafbfd}
     }
     @media(max-width:700px){.rebal-totals{grid-template-columns:1fr}}
-    @media(max-width:1060px){.rebal-table col.c-in{width:120px}.rebal-table col.c-sg{width:132px}.rebal-table col.c-pc{width:74px}.rebal-table col.c-eu{width:84px}}
+    @media(max-width:1060px){.rebal-table col.c-in{width:120px}.rebal-table col.c-df{width:134px}.rebal-table col.c-on{width:108px}.rebal-table col.c-pc{width:70px}}
+    .rebal-table tfoot th,.rebal-table tfoot td{border-top:2px solid var(--line);font-weight:800;padding-top:11px;padding-bottom:11px}.rebal-table tfoot th{font-size:13px;color:#31475e}
     @media(max-width:900px){
-      .rebal-table,.rebal-table tbody,.rebal-table tr,.rebal-table th,.rebal-table td{display:block}
+      .rebal-table,.rebal-table tbody,.rebal-table tfoot,.rebal-table tr,.rebal-table th,.rebal-table td{display:block}
       .rebal-table colgroup{display:none}
       .rebal-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
       .rebal-table tbody.grp{margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
       .rebal-table tr{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px 12px;padding:11px 13px;text-align:left}
-      .rebal-table th.c-name{grid-column:span 6}.rebal-table td.c-in,.rebal-table td.c-ck{grid-column:span 3}.rebal-table td[data-c=now],.rebal-table td[data-c=tgt],.rebal-table td[data-c=plan]{grid-column:span 2}.rebal-table td.c-sg{grid-column:span 6}
-      .rebal-cat td.c-in{grid-column:span 2}.rebal-cat td[data-c=plan],.rebal-cat td.c-sg{grid-column:span 3}
+      .rebal-table th.c-name{grid-column:span 6}.rebal-table td.c-in,.rebal-table td.c-ck,.rebal-table td.c-pc,.rebal-table td.c-df,.rebal-table td.c-on{grid-column:span 3}
+      .rebal-table tfoot tr{background:#fafbfd;border:1px solid var(--line);border-radius:14px;margin-top:14px}.rebal-table tfoot th,.rebal-table tfoot td{border:0!important;padding:0!important;text-align:left!important}.rebal-table tfoot th{grid-column:span 3;align-self:center}.rebal-table tfoot td.c-on{grid-column:span 3}
       .rebal-table tr.rebal-item{border-top:1px solid #edf0f5}
       .rebal-table tbody.grp tr.rebal-cat th,.rebal-table tbody.grp tr.rebal-cat td,.rebal-table tr.rebal-item th,.rebal-table tr.rebal-item td{border:0!important;background:none;padding:0;text-align:left}
       .rebal-table tr.rebal-cat{background:color-mix(in srgb,var(--accent) 9%,white)}
@@ -358,12 +379,12 @@
       .rebal-table td.c-ck::before{display:none}
       .rebal-table td.c-ck{text-align:left}
       .rebal-table td.c-gap{display:none}
-      .rebal-sg{justify-content:flex-start}.rebal-sg .rebal-sug{flex:0 0 auto;text-align:left;font-size:17px}
+      .rebal-df{justify-content:flex-start}.rebal-dv,.rebal-once{font-size:16px}
       .rebal-in{max-width:none;margin-left:0}
       .rebal-chk{justify-content:flex-start}.rebal-chk-t{position:static;width:auto;height:auto;clip:auto;white-space:normal;font-size:12.5px;font-weight:650;color:#31475e}
     }
-    @media(max-width:620px){.rebal-toggle{padding:16px 15px;gap:11px}.rebal-body{padding:2px 15px 18px}.rebal-title{font-size:17px}.rebal-ico{width:34px;height:34px}.rebal-actions .btn{flex:1 1 100%}}
-    @media print{.mini-icon.monogram{print-color-adjust:exact;-webkit-print-color-adjust:exact}.seg,.legendline,.stackbar button{pointer-events:none;transition:none!important;filter:none!important;opacity:1!important}.toolbar,.copychip .copyicon,.add-section,.edittools,input[type=range],.chart-panel,.rebal,.about,.footer .line{display:none!important}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff}.section{box-shadow:none;break-inside:avoid}}
+    @media(max-width:620px){.rebal-toggle{padding:16px 15px;gap:11px}.rebal-body{padding:2px 15px 18px}.rebal-title{font-size:17px}.rebal-ico{width:34px;height:34px}.rebal-actions .btn{flex:1 1 100%}.rebal-actions #rebalClear{margin-top:8px}.rebal-disc{font-size:13px}.addcat{padding:12px 12px 14px}.emptystate{padding:20px 15px 22px}}
+    @media print{.mini-icon.monogram{print-color-adjust:exact;-webkit-print-color-adjust:exact}.seg,.legendline,.stackbar button{pointer-events:none;transition:none!important;filter:none!important;opacity:1!important}.toolbar,.copychip .copyicon,.add-section,.addcat,.addquick-row,.emptystate,#newPlan,.edittools,input[type=range],.chart-panel,.rebal,.about,.footer .line{display:none!important}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff}.section{box-shadow:none;break-inside:avoid}}
   </style>
 </head>
 <body>
@@ -371,7 +392,7 @@
   <header class="top">
     <div class="brand"><span class="brandmark"><span>F<span style="font-weight:300;color:#9ed9ce">/</span></span></span><div class="brandtext"><strong>Finplanr</strong><span data-i18n="brand.tagline">Your personal portfolio planner</span></div></div>
     <div class="toolbar">
-      <button id="editToggle" class="btn primary" type="button">✎ Edit</button>
+      <button id="editToggle" class="btn primary" type="button" data-i18n-attr="title:tb.edit.tip">✎ Edit</button>
       <button id="settingsToggle" class="btn" type="button" aria-controls="settingsPanel" aria-expanded="false" data-i18n="tb.settings">⚙ Settings</button>
       <div class="menuwrap" id="exportWrap">
         <button id="exportToggle" class="btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="exportMenu" data-i18n="tb.export">↓ Export ▾</button>
@@ -409,11 +430,20 @@
       </div>
       <div class="visual"><div class="donut" id="donut"><svg class="donutsvg" viewBox="0 0 176 176" role="group" data-i18n-attr="aria-label:donut.aria"><circle class="track" cx="88" cy="88" r="75.25"/><g id="donutSegs" transform="rotate(-90 88 88)"></g></svg><div class="donut-inner"><span class="donut-name" id="donutName"></span><strong id="donutSum">100%</strong><span id="donutSub" data-i18n="hero.allocated">allocated</span></div></div><div class="legend" id="legend"></div></div>
     </section>
-    <div class="intro"><div><h2 data-i18n="intro.title">Your categories</h2><p class="sub" data-i18n="intro.sub">Lock categories and single holdings with 🔒. Only unlocked amounts balance changes. Within each category, the holdings add up to 100%.</p></div><span class="muted" id="editLabel"></span></div>
+    <div class="intro"><div><div class="introtitle"><h2 data-i18n="intro.title">Your categories</h2><span class="chip hidden" id="exampleChip" data-i18n="chip.example">Example plan – not a recommendation</span></div><p class="sub" id="introSub" data-i18n="intro.sub">Lock categories and single holdings with 🔒. Only unlocked amounts balance changes. Within each category, the holdings add up to 100%.</p></div><div class="introactions"><button id="newPlan" class="btn primary-outline" type="button" data-i18n-attr="title:plan.new.tip"><span class="plus" aria-hidden="true">✚</span><span data-i18n="plan.new">Create my own plan</span></button><span class="muted" id="editLabel"></span></div></div>
     <div class="sortbar hidden" id="globalSortBar"><span class="muted" id="sortHint" data-i18n="sort.auto">Sorted automatically by size — turn this off in Settings to arrange manually</span><div class="sorttools hidden" id="sortTools"><span class="muted" data-i18n="sort.all">All categories &amp; holdings:</span><button id="sortAllDesc" type="button" class="btn soft small" data-i18n="sort.desc">↓ Largest first</button><button id="sortAllAsc" type="button" class="btn soft small" data-i18n="sort.asc">↑ Smallest first</button></div></div>
     <div class="stackbar" id="stackbar" role="group" data-i18n-attr="aria-label:stack.aria"></div>
     <div id="notice" class="notice hidden" role="status"></div>
     <div class="sections" id="sections"></div>
+    <section class="emptystate hidden" id="emptyState" aria-labelledby="emptyTitle">
+      <h3 id="emptyTitle" data-i18n="empty.title">Add your first category</h3>
+      <p class="muted" data-i18n="empty.help">Pick a type to start. You can rename, recolour and reorder later.</p>
+      <div class="typerow"><button type="button" class="typebtn" data-new-cat="etf"><span class="ticon" aria-hidden="true">▥</span><span data-i18n="pick.etf">ETF</span></button><button type="button" class="typebtn" data-new-cat="stock"><span class="ticon" aria-hidden="true">▲</span><span data-i18n="pick.stock">Stocks</span></button><button type="button" class="typebtn" data-new-cat="crypto"><span class="ticon" aria-hidden="true">₿</span><span data-i18n="pick.crypto">Crypto</span></button><button type="button" class="typebtn" data-new-cat="etc"><span class="ticon" aria-hidden="true">◈</span><span data-i18n="pick.etc">Precious metals (ETC)</span></button><button type="button" class="typebtn" data-new-cat="cash"><span class="ticon" aria-hidden="true">€</span><span data-i18n="pick.cash">Savings account</span></button><button type="button" class="typebtn" data-new-cat="other"><span class="ticon" aria-hidden="true">◇</span><span data-i18n="pick.other">Other</span></button></div>
+    </section>
+    <div class="addcat hidden" id="addCatQuick" role="group" aria-labelledby="addCatTitle">
+      <div class="addcat-h" id="addCatTitle" data-i18n="add.btn">+ Add category</div>
+      <div class="typerow"><button type="button" class="typebtn" data-new-cat="etf"><span class="ticon" aria-hidden="true">▥</span><span data-i18n="pick.etf">ETF</span></button><button type="button" class="typebtn" data-new-cat="stock"><span class="ticon" aria-hidden="true">▲</span><span data-i18n="pick.stock">Stocks</span></button><button type="button" class="typebtn" data-new-cat="crypto"><span class="ticon" aria-hidden="true">₿</span><span data-i18n="pick.crypto">Crypto</span></button><button type="button" class="typebtn" data-new-cat="etc"><span class="ticon" aria-hidden="true">◈</span><span data-i18n="pick.etc">Precious metals (ETC)</span></button><button type="button" class="typebtn" data-new-cat="cash"><span class="ticon" aria-hidden="true">€</span><span data-i18n="pick.cash">Savings account</span></button><button type="button" class="typebtn" data-new-cat="other"><span class="ticon" aria-hidden="true">◇</span><span data-i18n="pick.other">Other</span></button></div>
+    </div>
     <div id="addCategory" class="add-section hidden">
       <div class="field"><label for="catName" data-i18n="add.name">New category</label><input id="catName" class="text-input" data-i18n-attr="placeholder:add.placeholder" placeholder="e.g. Stocks"></div>
       <div class="field"><label for="catType" data-i18n="add.type">Category type</label><select id="catType" class="text-input"><option value="stock" data-i18n="type.stock">Stocks / ticker, ISIN &amp; WKN</option><option value="etf" selected data-i18n="type.etf">ETF / ticker, ISIN &amp; WKN</option><option value="etc" data-i18n="type.etc">ETC / ticker, ISIN &amp; WKN</option><option value="crypto" data-i18n="type.crypto">Crypto / ticker</option><option value="cash" data-i18n="type.cash">Savings account / name</option><option value="other" data-i18n="type.other">Other / all fields</option></select></div>
@@ -425,31 +455,32 @@
         <p class="rebal-intro" data-i18n="rebal.intro">Your plan above is the target. Enter the current value of each holding: what it is worth today, including gains, not what you paid in. Untick holdings or whole categories you do not want to count, for example a savings account. Everything stays in your browser.</p>
         <div class="rebal-totals">
           <div class="rt"><div class="rt-k" data-i18n="rebal.t.now">Portfolio now</div><div class="rt-v" id="rebalNow">–</div></div>
-          <div class="rt"><div class="rt-k" data-i18n="rebal.t.after">After this month</div><div class="rt-v" id="rebalAfter">–</div></div>
+          <div class="rt"><div class="rt-k" data-i18n="rebal.t.after">After month 1</div><div class="rt-v" id="rebalAfter">–</div></div>
           <div class="rt"><div class="rt-k" data-i18n="rebal.t.budget">Budget to distribute</div><div class="rt-v" id="rebalBudget">–</div><div class="rt-n hidden" id="rebalBudgetNote"></div></div>
         </div>
         <p class="rebal-summary hidden" id="rebalSummary" role="status"></p>
         <div class="rebal-notes" id="rebalNotes" role="status" aria-live="polite"></div>
         <div class="rebal-scroll"><table class="rebal-table" id="rebalTable"></table></div>
+        <span hidden id="rebalTipDiff" data-i18n="rebal.tip.diff">Current value minus the value this holding would have at its target share</span><span hidden id="rebalTipOnce" data-i18n="rebal.tip.once">Amount added to this holding at once so that it sits exactly on its target share</span>
         <div class="rebal-plan" id="rebalPlan">
           <h3 class="rp-title" data-i18n="rebal.plan.title">Reaching your target</h3>
           <div class="rp-inputs">
             <div class="rp-f"><label for="rebalLump" data-i18n="rebal.plan.lump">Extra one-time amount (€)</label><label class="euroinput rebal-in"><input type="number" id="rebalLump" min="0" max="1000000000" step="1" inputmode="decimal" placeholder="0" aria-describedby="rebalLumpHelp"><span>€</span></label><small id="rebalLumpHelp" data-i18n="rebal.plan.lump.help">For example a bonus. It is added to the first month only.</small></div>
             <fieldset class="rp-f rp-hz"><legend data-i18n="rebal.plan.horizon">Horizon</legend>
-              <label class="rp-radio"><input type="radio" name="rebalHorizon" value="month" checked><span data-i18n="rebal.h.month">This month only</span></label>
-              <label class="rp-radio"><input type="radio" name="rebalHorizon" value="asap"><span data-i18n="rebal.h.asap">As soon as possible with my monthly budget</span></label>
+              <label class="rp-radio"><input type="radio" name="rebalHorizon" value="month"><span data-i18n="rebal.h.month">This month only</span></label>
+              <label class="rp-radio"><input type="radio" name="rebalHorizon" value="asap" checked><span data-i18n="rebal.h.asap">As soon as possible with my monthly budget</span></label>
               <label class="rp-radio"><input type="radio" name="rebalHorizon" value="months"><span data-i18n="rebal.h.months.pre">In</span><input type="number" id="rebalMonths" class="rp-n" min="1" max="60" step="1" value="6" inputmode="numeric" data-i18n-attr="aria-label:rebal.h.months.aria"><span data-i18n="rebal.h.months.post">months</span></label>
             </fieldset>
           </div>
           <div class="rp-out" id="rebalPlanOut"></div>
         </div>
         <div class="rebal-actions">
-          <button type="button" class="btn primary" id="rebalCopy" data-i18n="rebal.copy">Copy result</button>
-          <button type="button" class="btn" id="rebalCsv" data-i18n="rebal.csv">Download CSV</button>
-          <button type="button" class="btn hidden" id="rebalSchedCsv" data-i18n="rebal.sched.csv">Download schedule (CSV)</button>
+          <button type="button" class="btn primary" id="rebalCsv" aria-describedby="rebalCsvTip" data-i18n="rebal.csv" data-i18n-attr="title:rebal.csv.tip">Download table (CSV)</button>
+          <button type="button" class="btn hidden" id="rebalSchedCsv" aria-describedby="rebalSchedCsvTip" data-i18n="rebal.sched.csv" data-i18n-attr="title:rebal.sched.csv.tip">Download month-by-month (CSV)</button>
           <button type="button" class="btn danger" id="rebalClear" data-i18n="rebal.clear">Clear current values</button>
+          <span hidden id="rebalCsvTip" data-i18n="rebal.csv.tip">Current values, shares, difference to target and one-time amounts per holding</span><span hidden id="rebalSchedCsvTip" data-i18n="rebal.sched.csv.tip">Amounts per holding for each month until the target is reached</span>
         </div>
-        <p class="rebal-disc" data-i18n="rebal.assume">Assumes your holdings' values stay as entered (no price changes). Re-enter your current values each month to update the calculation.</p>
+        <p class="rebal-disc" role="note"><span class="rebal-disc-ico" aria-hidden="true">i</span><span data-i18n="rebal.assume">Assumes your holdings' values stay as entered (no price changes). Re-enter your current values each month to update the calculation.</span></p>
       </div>
     </section>
   </main>
@@ -472,7 +503,7 @@
   </section>
   <footer class="footer">
     <div class="line"><a id="guideLink" href="/en/anleitung.html" target="_blank" rel="noopener noreferrer" data-i18n="foot.guide">User guide</a> · <a id="legalLink" href="{{IMPRESSUM_URL}}" target="_blank" rel="noopener noreferrer" data-i18n="foot.legal">Legal notice (Impressum)</a> · <a id="privacyLink" data-privacy-link href="/en/datenschutz.html" target="_blank" rel="noopener noreferrer" data-i18n="foot.privacylink">Privacy policy</a> · <button type="button" id="privacySettingsBtn" class="linkbtn" aria-haspopup="dialog" data-i18n="foot.privacySettings">Privacy settings</button></div>
-    <div class="line" data-i18n="foot.note">Planning tool, not investment advice.</div>
+    <div class="line" data-i18n="foot.note">Planning tool, not investment advice. © 2026 {{COPYRIGHT_HOLDER}}</div>
   </footer>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -647,12 +678,12 @@
       'search.note.link':'Privacy policy',
       'chart.noSymbol':'No chart symbol set — add one in Edit mode, e.g. XETR:VWCE',
       'chart.error':'The chart could not be loaded (offline, or blocked by a content blocker). You can open it on TradingView instead.',
-      'notice.empty':'No holdings yet. Turn on “Edit” and add some.',
+      'notice.empty':'No holdings yet. Use “+ Add holding” in a category.',
       'notice.zero':'Give at least one category a share above 0%.',
       'sec.perMonth':'per month','sec.count.one':'{n} holding','sec.count.other':'{n} holdings',
       'sec.share':'Share of total budget · {step} per step','item.share':'Share within {cat} · {step} per step',
       'sec.empty.edit':'No holdings yet. Add one with the button below.',
-      'sec.empty.view':'No holdings yet. Turn on Edit to add a holding.',
+      'sec.empty.view':'No holdings yet. Add one with the button below.',
       'aria.catAmount':'Monthly amount for category {name} in euros','aria.catPct':'Share of category {name} in percent',
       'aria.itemAmount':'Monthly amount for {name} in euros','aria.itemPct':'Share of {name} in percent',
       'item.ofTotal':'{pct} of total',
@@ -675,7 +706,7 @@
       'toast.itemRemoved':'Holding removed.','toast.catRemoved':'Category removed.',
       'toast.sortedItems':'Holdings sorted.','toast.sortedAll':'Categories and holdings sorted.',
       'toast.reordered':'Order changed.','toast.catCreated':'Category created. Now add a holding.',
-      'toast.catNameMissing':'Enter a category name.','toast.lastCat':'At least one category must remain.',
+      'toast.catNameMissing':'Enter a category name.',
       'toast.copied':'Copied: {value}','toast.copyFail':'Could not copy – please select the value manually.',
       'confirm.removeItem':'Really remove “{name}”?',
       'confirm.removeCat.one':'Delete category “{name}” and its {n} holding?',
@@ -752,17 +783,17 @@
       'rebal.h.months.pre':'In','rebal.h.months.post':'months','rebal.h.months.aria':'Number of months (1 to 60)',
       'rebal.plan.hint':'Enter your current values above to see what it takes to reach your target.',
       'rebal.plan.pick':'Choose a horizon above to see a month-by-month schedule.',
-      'rebal.sum.reach.one':'Amount needed to reach the target with new money only: {need}. At your budget of {budget} per month that takes about {n} month.',
-      'rebal.sum.reach.other':'Amount needed to reach the target with new money only: {need}. At your budget of {budget} per month that takes about {n} months.',
+      'rebal.sum.reach.one':'Amount needed to reach the target with new money only: {need}. At your budget of {budget} per month this takes about {n} month.',
+      'rebal.sum.reach.other':'Amount needed to reach the target with new money only: {need}. At your budget of {budget} per month this takes about {n} months.',
       'rebal.sum.never':'Amount needed to reach the target with new money only: {need}. At your budget of {budget} per month that is not possible within 5 years.',
       'rebal.sum.need.one':'Amount needed to reach the target with new money only: {need}. Reaching the target in {n} month takes about {r} per month (instead of {budget}).',
       'rebal.sum.need.other':'Amount needed to reach the target with new money only: {need}. Reaching the target in {n} months takes about {r} per month (instead of {budget}).',
       'rebal.sum.on':'Your holdings already match your target. This month\'s amounts equal your plan.',
       'rebal.sum.lump':' Your one-time amount of {lump} is included.',
-      'rebal.need.label':'Needed in total (one-time)',
+      'rebal.need.label':'Needed in total',
       'rebal.need.tip':'Distributed across the holdings below target, this amount puts every holding exactly on its target share.',
-      'rebal.once.title':'As a one-time amount','rebal.col.amount':'Amount','rebal.total':'Total',
-      'rebal.sched.title':'Month by month','rebal.sched.month':'Month','rebal.sched.monthN':'Month {n}',
+      'rebal.total':'Total',
+      'rebal.sched.title':'Month by month','rebal.sched.month':'Month','rebal.sched.monthN':'Month {n}','rebal.sched.month1':'Month 1 (this month)','rebal.sched.plan':'Plan (no rebalancing)',
       'rebal.sched.target':'Target share','rebal.sched.after':'Share after month {k}',
       'rebal.sched.reached.one':'Target reached after {n} month. From month {m} on, the amounts equal your plan.',
       'rebal.sched.reached.other':'Target reached after {n} months. From month {m} on, the amounts equal your plan.',
@@ -770,29 +801,39 @@
       'rebal.sched.none':'With a budget of 0 there is nothing to schedule. Add a monthly budget or a one-time amount.',
       'rebal.sched.more':'Show all {n} months','rebal.sched.less':'Show only the first 12 months',
       'rebal.sched.note':'Holdings that are not counted are not listed; they keep their planned amount.',
-      'rebal.sched.csv':'Download schedule (CSV)',
+      'rebal.sched.csv':'Download month-by-month (CSV)','rebal.sched.csv.tip':'Amounts per holding for each month until the target is reached',
       'rebal.t.lump':'Includes your one-time {lump}.','rebal.t.monthly':'Per month for this horizon: {r} (your budget: {budget}).',
       'rebal.assume':'Assumes your holdings\' values stay as entered (no price changes). Re-enter your current values each month to update the calculation.',
       'rebal.sub':'Enter what you hold today. Finplanr calculates how this month\'s budget is distributed so that new money moves your portfolio toward your target.',
       'rebal.intro':'Your plan above is the target. Enter the current value of each holding: what it is worth today, including gains, not what you paid in. Untick holdings or whole categories you do not want to count, for example a savings account. Everything stays in your browser.',
-      'rebal.t.now':'Portfolio now','rebal.t.after':'After this month','rebal.t.budget':'Budget to distribute',
+      'rebal.t.now':'Portfolio now','rebal.t.after':'After month 1','rebal.t.budget':'Budget to distribute',
       'rebal.t.budget.note':'Total budget {total}; {rest} stays as planned for holdings that are not counted.',
       'rebal.table.aria':'Current values and calculated split by holding',
-      'rebal.col.holding':'Holding','rebal.col.current':'Current value today (€)','rebal.col.count':'Count','rebal.col.now':'Share now','rebal.col.target':'Target share','rebal.col.plan':'Plan this month','rebal.col.calc':'Calculated this month',
-      'rebal.count':'Count in rebalancing','rebal.countCat':'Count this category',
+      'rebal.col.holding':'Holding','rebal.col.current':'Current value today (€)','rebal.col.count':'Count','rebal.col.now':'Share now','rebal.col.target':'Target share','rebal.col.diff':'Difference to target (€)','rebal.col.once':'To reach target, one-time (€)',
+      'rebal.tip.diff':'Current value minus the value this holding would have at its target share','rebal.tip.once':'Amount added to this holding at once so that it sits exactly on its target share',
+      'rebal.dir.above':'above','rebal.dir.below':'below',
+      'rebal.count':'Count','rebal.countCat':'Count this category',
       'rebal.aria.current':'Current value of {name} in euros','rebal.aria.count':'Count {name} in rebalancing','rebal.aria.cat':'Count category {name} in rebalancing',
-      'rebal.off':'Not counted','rebal.over':'Above target','rebal.after':'Share after this month: {pct}',
-      'rebal.chip.aria':'Compared with the plan: {delta}','rebal.chip.same':'=',
-      'rebal.copy':'Copy result','rebal.csv':'Download CSV','rebal.clear':'Clear current values',
+      'rebal.off':'Not counted',
+      'rebal.csv':'Download table (CSV)','rebal.csv.tip':'Current values, shares, difference to target and one-time amounts per holding','rebal.clear':'Clear current values',
       'rebal.hint.empty':'Nothing entered yet: the result equals your plan.',
-      'rebal.notice.over':'Some holdings are above their target. They get nothing this month in this calculation; the rest of the budget goes to holdings below target. With new money only, reaching the target can take several months.',
+      'rebal.notice.over':'Holdings above target receive nothing in this calculation until the others have caught up. With new money only, reaching the target can take several months.',
       'rebal.notice.zero':'The budget is 0, so there is nothing to distribute. The table only compares your current shares with the target.',
-      'rebal.empty.items':'No holdings yet. Turn on “Edit” and add some above.',
+      'rebal.empty.items':'No holdings yet. Add some in the category list above.',
       'rebal.empty.none':'No holding is counted. Tick at least one holding or category to get a result.',
       'rebal.confirm.clear':'Clear all entered current values? This cannot be undone.',
-      'rebal.toast.cleared':'Current values cleared.','rebal.toast.copied':'Result copied.',
-      'rebal.csv.head':['Category','Holding','Current value','Share now %','Target share %','Plan','Calculated'],
-      'foot.note':'Planning tool, not investment advice.',
+      'rebal.toast.cleared':'Current values cleared.',
+      'rebal.csv.head':['Category','Holding','Current value','Share now %','Target %','Difference to target','To reach target (one-time)','Month 1','Plan'],
+      'tb.edit.tip':'Rename, recolour, reorder or delete categories and holdings',
+      'chip.example':'Example plan – not a recommendation',
+      'plan.new':'Create my own plan','plan.new.tip':'Start with an empty plan and add your own categories and holdings',
+      'confirm.newPlan':'Start an empty plan? The current plan is replaced. Tip: export a JSON backup first (Export menu).',
+      'toast.newPlan':'Empty plan created.',
+      'empty.title':'Add your first category','empty.help':'Pick a type to start. You can rename, recolour and reorder later.',
+      'pick.etf':'ETF','pick.stock':'Stocks','pick.crypto':'Crypto','pick.etc':'Precious metals (ETC)','pick.cash':'Savings account','pick.other':'Other',
+      'cat.stock':'Stocks','cat.other':'Other',
+      'aria.addItem':'Add holding: {name}',
+      'foot.note':'Planning tool, not investment advice. © 2026 {{COPYRIGHT_HOLDER}}',
       'foot.guide':'User guide'
     },
     de:{
@@ -916,12 +957,12 @@
       'search.note.link':'Datenschutzerklärung',
       'chart.noSymbol':'Kein Chart-Symbol hinterlegt – im Bearbeitungsmodus eintragen, z. B. XETR:VWCE',
       'chart.error':'Der Chart konnte nicht geladen werden (offline oder durch einen Inhaltsblocker blockiert). Du kannst ihn stattdessen auf TradingView öffnen.',
-      'notice.empty':'Noch keine Positionen vorhanden. Aktiviere „Bearbeiten“ und lege Positionen an.',
+      'notice.empty':'Noch keine Positionen vorhanden. Nutze „+ Position hinzufügen“ in einer Kategorie.',
       'notice.zero':'Bitte weise mindestens einer Kategorie einen Anteil über 0 % zu.',
       'sec.perMonth':'pro Monat','sec.count.one':'{n} Position','sec.count.other':'{n} Positionen',
       'sec.share':'Anteil am Gesamtbudget · {step} pro Schritt','item.share':'Anteil innerhalb {cat} · {step} pro Schritt',
       'sec.empty.edit':'Noch keine Positionen. Über den Button unten hinzufügen.',
-      'sec.empty.view':'Noch keine Positionen. Aktiviere „Bearbeiten“, um eine Position hinzuzufügen.',
+      'sec.empty.view':'Noch keine Positionen. Über den Button unten hinzufügen.',
       'aria.catAmount':'Sparbetrag Kategorie {name} in Euro','aria.catPct':'Prozentanteil Kategorie {name}',
       'aria.itemAmount':'Sparbetrag {name} in Euro','aria.itemPct':'Prozentanteil {name}',
       'item.ofTotal':'{pct} gesamt',
@@ -944,7 +985,7 @@
       'toast.itemRemoved':'Position entfernt.','toast.catRemoved':'Kategorie entfernt.',
       'toast.sortedItems':'Positionen sortiert.','toast.sortedAll':'Kategorien und Positionen sortiert.',
       'toast.reordered':'Reihenfolge geändert.','toast.catCreated':'Kategorie erstellt. Jetzt eine Position hinzufügen.',
-      'toast.catNameMissing':'Bitte einen Kategorienamen eintragen.','toast.lastCat':'Mindestens eine Kategorie muss bleiben.',
+      'toast.catNameMissing':'Bitte einen Kategorienamen eintragen.',
       'toast.copied':'Kopiert: {value}','toast.copyFail':'Kopieren nicht möglich – bitte den Wert manuell markieren.',
       'confirm.removeItem':'„{name}“ wirklich entfernen?',
       'confirm.removeCat.one':'Kategorie „{name}“ mit {n} Position löschen?',
@@ -1017,7 +1058,7 @@
       'rebal.plan.title':'Dein Ziel erreichen',
       'rebal.plan.lump':'Einmaliger Zusatzbetrag (€)','rebal.plan.lump.help':'Zum Beispiel ein Bonus. Er wird nur dem ersten Monat hinzugefügt.',
       'rebal.plan.horizon':'Zeitraum',
-      'rebal.h.month':'Nur dieser Monat','rebal.h.asap':'So schnell wie möglich mit meinem Monatsbudget',
+      'rebal.h.month':'Nur diesen Monat','rebal.h.asap':'So bald wie möglich mit meinem Monatsbudget',
       'rebal.h.months.pre':'In','rebal.h.months.post':'Monaten','rebal.h.months.aria':'Anzahl Monate (1 bis 60)',
       'rebal.plan.hint':'Trage oben deine aktuellen Werte ein, um zu sehen, was nötig ist, um dein Ziel zu erreichen.',
       'rebal.plan.pick':'Wähle oben einen Zeitraum, um einen Monatsplan zu sehen.',
@@ -1028,10 +1069,10 @@
       'rebal.sum.need.other':'Betrag, um das Ziel nur mit neuem Geld zu erreichen: {need}. Das Ziel in {n} Monaten zu erreichen, erfordert etwa {r} pro Monat (statt {budget}).',
       'rebal.sum.on':'Deine Positionen entsprechen schon deinem Ziel. Die Beträge für diesen Monat entsprechen deinem Plan.',
       'rebal.sum.lump':' Dein einmaliger Betrag von {lump} ist eingerechnet.',
-      'rebal.need.label':'Insgesamt nötig (einmalig)',
+      'rebal.need.label':'Insgesamt nötig',
       'rebal.need.tip':'Auf die Positionen unter ihrem Ziel verteilt, bringt dieser Betrag jede Position genau auf ihren Zielanteil.',
-      'rebal.once.title':'Als einmaliger Betrag','rebal.col.amount':'Betrag','rebal.total':'Summe',
-      'rebal.sched.title':'Monat für Monat','rebal.sched.month':'Monat','rebal.sched.monthN':'Monat {n}',
+      'rebal.total':'Summe',
+      'rebal.sched.title':'Monat für Monat','rebal.sched.month':'Monat','rebal.sched.monthN':'Monat {n}','rebal.sched.month1':'Monat 1 (dieser Monat)','rebal.sched.plan':'Plan (ohne Ausgleich)',
       'rebal.sched.target':'Zielanteil','rebal.sched.after':'Anteil nach Monat {k}',
       'rebal.sched.reached.one':'Ziel nach {n} Monat erreicht. Ab Monat {m} entsprechen die Beträge deinem Plan.',
       'rebal.sched.reached.other':'Ziel nach {n} Monaten erreicht. Ab Monat {m} entsprechen die Beträge deinem Plan.',
@@ -1039,29 +1080,39 @@
       'rebal.sched.none':'Bei einem Budget von 0 gibt es nichts zu planen. Trage ein Monatsbudget oder einen einmaligen Betrag ein.',
       'rebal.sched.more':'Alle {n} Monate anzeigen','rebal.sched.less':'Nur die ersten 12 Monate anzeigen',
       'rebal.sched.note':'Positionen, die nicht berücksichtigt werden, sind nicht aufgeführt; sie behalten ihren geplanten Betrag.',
-      'rebal.sched.csv':'Zeitplan herunterladen (CSV)',
+      'rebal.sched.csv':'Monatsplan herunterladen (CSV)','rebal.sched.csv.tip':'Beträge pro Position für jeden Monat, bis das Ziel erreicht ist',
       'rebal.t.lump':'Enthält deinen einmaligen Betrag von {lump}.','rebal.t.monthly':'Pro Monat für diesen Zeitraum: {r} (dein Budget: {budget}).',
       'rebal.assume':'Annahme: Die Werte deiner Positionen bleiben wie eingetragen (keine Kursänderungen). Trage deine aktuellen Werte jeden Monat neu ein, um die Berechnung zu aktualisieren.',
       'rebal.sub':'Trage ein, was du heute hältst. Finplanr berechnet, wie sich das Budget dieses Monats verteilt, damit neues Geld dein Portfolio näher an dein Ziel bringt.',
       'rebal.intro':'Dein Plan oben ist das Ziel. Trage den aktuellen Wert jeder Position ein: was sie heute wert ist, inklusive Gewinnen, nicht was du eingezahlt hast. Entferne das Häkchen bei Positionen oder ganzen Kategorien, die nicht mitzählen, zum Beispiel einem Tagesgeldkonto. Alles bleibt in deinem Browser.',
-      'rebal.t.now':'Portfolio jetzt','rebal.t.after':'Nach diesem Monat','rebal.t.budget':'Zu verteilendes Budget',
+      'rebal.t.now':'Portfolio jetzt','rebal.t.after':'Nach Monat 1','rebal.t.budget':'Zu verteilendes Budget',
       'rebal.t.budget.note':'Gesamtbudget {total}; {rest} bleiben wie geplant bei Positionen, die nicht zählen.',
       'rebal.table.aria':'Aktuelle Werte und berechnete Aufteilung je Position',
-      'rebal.col.holding':'Position','rebal.col.current':'Aktueller Wert heute (€)','rebal.col.count':'Zählt','rebal.col.now':'Anteil jetzt','rebal.col.target':'Zielanteil','rebal.col.plan':'Plan diesen Monat','rebal.col.calc':'Berechnet für diesen Monat',
-      'rebal.count':'Beim Ausgleich berücksichtigen','rebal.countCat':'Kategorie berücksichtigen',
+      'rebal.col.holding':'Position','rebal.col.current':'Aktueller Wert heute (€)','rebal.col.count':'Zählt mit','rebal.col.now':'Anteil jetzt','rebal.col.target':'Zielanteil','rebal.col.diff':'Differenz zum Ziel (€)','rebal.col.once':'Bis zum Ziel, einmalig (€)',
+      'rebal.tip.diff':'Aktueller Wert minus der Wert, den diese Position bei ihrem Zielanteil hätte','rebal.tip.once':'Betrag, der dieser Position auf einmal hinzugefügt wird, damit sie genau auf ihrem Zielanteil liegt',
+      'rebal.dir.above':'darüber','rebal.dir.below':'darunter',
+      'rebal.count':'Zählt mit','rebal.countCat':'Kategorie mitzählen',
       'rebal.aria.current':'Aktueller Wert von {name} in Euro','rebal.aria.count':'{name} beim Ausgleich berücksichtigen','rebal.aria.cat':'Kategorie {name} beim Ausgleich berücksichtigen',
-      'rebal.off':'Nicht berücksichtigt','rebal.over':'Über Ziel','rebal.after':'Anteil nach diesem Monat: {pct}',
-      'rebal.chip.aria':'Im Vergleich zum Plan: {delta}','rebal.chip.same':'=',
-      'rebal.copy':'Ergebnis kopieren','rebal.csv':'CSV herunterladen','rebal.clear':'Aktuelle Werte löschen',
+      'rebal.off':'Nicht mitgezählt',
+      'rebal.csv':'Tabelle herunterladen (CSV)','rebal.csv.tip':'Aktuelle Werte, Anteile, Differenz zum Ziel und einmalige Beträge je Position','rebal.clear':'Aktuelle Werte löschen',
       'rebal.hint.empty':'Noch nichts eingetragen: Das Ergebnis entspricht deinem Plan.',
-      'rebal.notice.over':'Einige Positionen liegen über ihrem Ziel. Sie bekommen diesen Monat in dieser Berechnung nichts; der Rest des Budgets geht an Positionen unter ihrem Ziel. Nur mit neuem Geld kann das Erreichen des Ziels mehrere Monate dauern.',
+      'rebal.notice.over':'Positionen über ihrem Ziel erhalten in dieser Berechnung nichts, bis die anderen aufgeholt haben. Nur mit neuem Geld kann das Erreichen des Ziels mehrere Monate dauern.',
       'rebal.notice.zero':'Das Budget ist 0, es gibt also nichts zu verteilen. Die Tabelle vergleicht nur deine aktuellen Anteile mit dem Ziel.',
-      'rebal.empty.items':'Noch keine Positionen vorhanden. Aktiviere oben „Bearbeiten“ und lege Positionen an.',
+      'rebal.empty.items':'Noch keine Positionen vorhanden. Füge oben in der Kategorieliste welche hinzu.',
       'rebal.empty.none':'Keine Position zählt. Setze bei mindestens einer Position oder Kategorie ein Häkchen, um ein Ergebnis zu erhalten.',
       'rebal.confirm.clear':'Alle eingetragenen aktuellen Werte löschen? Das kann nicht rückgängig gemacht werden.',
-      'rebal.toast.cleared':'Aktuelle Werte gelöscht.','rebal.toast.copied':'Ergebnis kopiert.',
-      'rebal.csv.head':['Kategorie','Position','Aktueller Wert','Anteil jetzt %','Zielanteil %','Plan','Berechnet'],
-      'foot.note':'Planungswerkzeug, keine Anlageberatung.',
+      'rebal.toast.cleared':'Aktuelle Werte gelöscht.',
+      'rebal.csv.head':['Kategorie','Position','Aktueller Wert','Anteil jetzt %','Ziel %','Differenz zum Ziel','Bis zum Ziel (einmalig)','Monat 1','Plan'],
+      'tb.edit.tip':'Kategorien und Positionen umbenennen, einfärben, anordnen oder löschen',
+      'chip.example':'Beispielplan – keine Empfehlung',
+      'plan.new':'Eigenen Plan erstellen','plan.new.tip':'Mit einem leeren Plan starten und eigene Kategorien und Positionen hinzufügen',
+      'confirm.newPlan':'Einen leeren Plan beginnen? Der aktuelle Plan wird ersetzt. Tipp: Exportiere vorher eine JSON-Sicherung (Menü Export).',
+      'toast.newPlan':'Leerer Plan erstellt.',
+      'empty.title':'Erste Kategorie hinzufügen','empty.help':'Wähle einen Typ zum Start. Umbenennen, einfärben und anordnen kannst du später.',
+      'pick.etf':'ETF','pick.stock':'Aktien','pick.crypto':'Krypto','pick.etc':'Edelmetalle (ETC)','pick.cash':'Tagesgeld','pick.other':'Sonstiges',
+      'cat.stock':'Aktien','cat.other':'Sonstiges',
+      'aria.addItem':'Position hinzufügen: {name}',
+      'foot.note':'Planungswerkzeug, keine Anlageberatung. © 2026 {{COPYRIGHT_HOLDER}}',
       'foot.guide':'Anleitung'
     }
   };
@@ -1106,7 +1157,7 @@
       {id:'silver',name:'WisdomTree Core Physical Silver',ticker:'WSLV',tv:'XETR:WSLV',isin:'JE00BQRFDY49',wkn:'A4AE1X',weight:25}
     ]}
   ]};
-  const CAT_NAME_KEYS=new Set(['cat.crypto','cat.etf','cat.etc','cat.cash']);
+  const CAT_NAME_KEYS=new Set(['cat.crypto','cat.etf','cat.etc','cat.cash','cat.stock','cat.other']);
   const ITEM_NAME_KEYS=new Set(['item.cash','item.new']);
   // Old saved data stored the German default names as plain text; recognise them by id + exact name.
   const LEGACY_CAT_DEFAULTS={krypto:['cat.crypto','Krypto'],etf:['cat.etf','ETF'],etc:['cat.etc','ETC'],cash:['cat.cash','Tagesgeld'],tagesgeld:['cat.cash','Tagesgeld']};
@@ -1185,13 +1236,13 @@
   const CATALOG_BY_ISIN=new Map(ASSET_CATALOG.filter(a=>a.isin).map(a=>[a.isin,a]));
   // Rebalance card: `current` = value of a holding today (number 0..1e9 with two decimals, null = not entered); anything else becomes null.
   const cleanCurrent=v=>{if(v===null||v===undefined||v===''||typeof v==='boolean')return null;const n=Number(v);return Number.isFinite(n)?Math.round(clamp(n,0,1e9)*100)/100:null;};
-  // Accepts current files and older ones (format 'mein-sparplan-v2'); a stored `language` is ignored. `autoSort` (keep sorted by size) and `offerLogo` (offer a logo search after applying a result) default to true when missing; per holding `current` (null) and `rebal` (true), per category `rebalOff` (false) and the top-level `rebalMode` ('month'), `rebalMonths` (6), `rebalLump` (0) belong to the rebalance card.
+  // An empty categories array is a valid (empty) plan. Accepts current files and older ones (format 'mein-sparplan-v2'); a stored `language` is ignored. `autoSort` (keep sorted by size) and `offerLogo` (offer a logo search after applying a result) default to true when missing; per holding `current` (null) and `rebal` (true), per category `rebalOff` (false) and the top-level `rebalMode` ('month'), `rebalMonths` (6), `rebalLump` (0) belong to the rebalance card.
   function validate(raw){
-    if(!raw||typeof raw!=='object'||!Array.isArray(raw.categories)||raw.categories.length>80||raw.categories.length<1)throw Error(t('err.invalidFile'));
+    if(!raw||typeof raw!=='object'||!Array.isArray(raw.categories)||raw.categories.length>80)throw Error(t('err.invalidFile'));
     const allowCents=raw.allowCents===true;
     const amount=clamp(Number(raw.budget)||0,0,100000000);
     const months=Math.round(Number(raw.rebalMonths));
-    const result={budget:allowCents?Math.round(amount*100)/100:Math.round(amount),allowCents,autoSort:raw.autoSort!==false,offerLogo:raw.offerLogo!==false,rebalMode:['month','asap','months'].includes(raw.rebalMode)?raw.rebalMode:'month',rebalMonths:Number.isFinite(months)&&months>=1?clamp(months,1,60):6,rebalLump:cleanCurrent(raw.rebalLump)||0,categories:[]};
+    const result={budget:allowCents?Math.round(amount*100)/100:Math.round(amount),allowCents,autoSort:raw.autoSort!==false,offerLogo:raw.offerLogo!==false,rebalMode:['month','asap','months'].includes(raw.rebalMode)?raw.rebalMode:'asap',rebalMonths:Number.isFinite(months)&&months>=1?clamp(months,1,60):6,rebalLump:cleanCurrent(raw.rebalLump)||0,categories:[]};
     const ids=new Set();
     for(const c of raw.categories){
       if(!c||typeof c!=='object'||!Array.isArray(c.items)||c.items.length>300)throw Error(t('err.invalidItems'));
@@ -1443,6 +1494,7 @@
     </div>
     <div class="locktools"><label class="lockchip ${c.locked?'locked-ui':''}" title="${esc(t('lock.catTip'))}"><input type="checkbox" data-cat-lock="${esc(c.id)}" ${c.locked?'checked':''} ${!c.items.length?'disabled':''}><span>${esc(c.locked?t('lock.catOn'):t('lock.catOff'))}</span></label><label for="peer-${esc(c.id)}">${esc(t('peer.label'))}</label><select id="peer-${esc(c.id)}" class="peer-select" data-cat-peer="${esc(c.id)}" ${c.locked||!c.items.length?'disabled':''}>${peerOptions}</select><span class="muted">${esc(peerNote)}</span></div>
     <div class="entries">${obj.items.length?obj.items.map(it=>entryHtml(c,it)).join(''):`<p class="muted" style="margin:17px 0">${esc(editMode?t('sec.empty.edit'):t('sec.empty.view'))}</p>`}</div>
+    ${editMode?'':`<div class="addquick-row"><button type="button" class="addquick" data-add-item="${esc(c.id)}" aria-label="${esc(t('aria.addItem',{name}))}">${esc(t('edit.addItem'))}</button></div>`}
     ${editMode?`<div class="edittools"><button type="button" class="btn soft small" data-add-item="${esc(c.id)}">${esc(t('edit.addItem'))}</button>${state.autoSort?'':`<span class="muted">${esc(t('sort.label'))}</span><button class="btn small" type="button" data-sort-items="desc" data-cat="${esc(c.id)}">${esc(t('sort.desc'))}</button><button class="btn small" type="button" data-sort-items="asc" data-cat="${esc(c.id)}">${esc(t('sort.asc'))}</button>`}</div>`:''}</section>`;
   }
   // ---------------------------------------------------------------- price chart (TradingView Advanced Chart widget)
@@ -1607,6 +1659,20 @@
     openChart={catId,itemId};
     mountChart(true);
   }
+  // ---- Onboarding chrome. The example chip is stateless: it shows while the plan consists of exactly the built-in example's categories and holdings (ids, any order).
+  const planShape=p=>p.categories.map(c=>c.id+':'+c.items.map(i=>i.id).sort().join(',')).sort().join('|');
+  const DEFAULT_SHAPE=planShape(DEFAULT);
+  const isExamplePlan=()=>planShape(state)===DEFAULT_SHAPE;
+  function updatePlanChrome(){
+    const none=!state.categories.length;
+    $('#exampleChip').classList.toggle('hidden',!isExamplePlan());
+    $('#emptyState').classList.toggle('hidden',!none);
+    $('#addCatQuick').classList.toggle('hidden',none||editMode);
+    $('#newPlan').classList.toggle('hidden',none);
+    $('#editLabel').classList.toggle('hidden',none);$('#introSub').classList.toggle('hidden',none);
+    $('#stackbar').classList.toggle('hidden',none);
+    $('#rebal').classList.toggle('hidden',none);
+  }
   // "sec.count" resolves to the plural variants via {n}.
   function render(keepChart){
     if(state.autoSort&&applyAutoSort())persist(); // standing behaviour: every full render shows categories/holdings sorted by size
@@ -1616,8 +1682,10 @@
     $('#editToggle').textContent=editMode?t('tb.done'):t('tb.edit');
     $('#editToggle').classList.toggle('primary',!editMode);
     $('#editLabel').textContent=editMode?t('mode.edit'):t('mode.view');
-    $('#addCategory').classList.toggle('hidden',!editMode);
-    $('#globalSortBar').classList.toggle('hidden',!editMode);
+    const noCats=!state.categories.length;
+    $('#addCategory').classList.toggle('hidden',!editMode||noCats);
+    $('#globalSortBar').classList.toggle('hidden',!editMode||noCats);
+    updatePlanChrome();
     $('#autoSort').checked=state.autoSort;$('#offerLogo').checked=state.offerLogo;$('#sortTools').classList.toggle('hidden',state.autoSort);if(!state.autoSort)$('#sortHint').textContent=t('sort.hint');
     $('#allowCents').checked=state.allowCents;
     $('#monthlyBudget').step=state.allowCents?'0.01':'1';
@@ -1683,6 +1751,7 @@
     box.addEventListener('focusout',()=>{allocFocus=null;allocPaint();});
     box.addEventListener('click',e=>{const el=segOf(e);if(el)jumpToCategory(el.dataset.seg);});
   });
+  $('#donut').addEventListener('click',e=>{if(!e.target.closest('[data-seg]')&&!state.categories.length)$('#emptyState').scrollIntoView({block:'center'});});
   $('#donut').addEventListener('keydown',e=>{const el=e.target.closest?.('.seg');if(el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();jumpToCategory(el.dataset.seg);}});
   function updateNumbers(){
     const data=info(),count=state.categories.reduce((s,c)=>s+c.items.length,0),active=state.categories.filter(c=>c.items.length).length;
@@ -1691,7 +1760,8 @@
     $('#sumWeight').textContent=active?percent(100):percent(0);
     updateAlloc(data,active);
     const notice=$('#notice');
-    if(count===0){notice.textContent=t('notice.empty');notice.classList.remove('hidden');}
+    if(!state.categories.length)notice.classList.add('hidden'); // the empty-state card says what to do
+    else if(count===0){notice.textContent=t('notice.empty');notice.classList.remove('hidden');}
     else if(data.every(d=>d.catRatio===0)){notice.textContent=t('notice.zero');notice.classList.remove('hidden');}
     else notice.classList.add('hidden');
     data.forEach(d=>{
@@ -1787,6 +1857,7 @@
     if(b.hasAttribute('data-chart-close')){closeChart(true);return;}
     if(b.hasAttribute('data-chart-consent')){grantConsent('charts');remountChart(true);return;}
     if(b.hasAttribute('data-chart-toggle')){if(!editMode)toggleChart(b);return;}
+    if(b.hasAttribute('data-add-item')){addHolding(b.dataset.addItem);return;}
     if(!editMode)return;
     if(b.hasAttribute('data-find-item')){openSearchModal(b.dataset.cat,b.dataset.findItem,false);return;}
     if(b.hasAttribute('data-asset-logo')){openSearchModal(b.dataset.cat,b.dataset.assetLogo,true);return;}
@@ -1800,13 +1871,6 @@
     if(b.hasAttribute('data-sort-items')){
       sortItems(b.dataset.cat,b.dataset.sortItems);return;
     }
-    if(b.hasAttribute('data-add-item')){
-      const c=state.categories.find(c=>c.id===b.dataset.addItem);if(!c)return;
-      const newId=uid();c.items.push({id:newId,name:t('item.new'),nameKey:'item.new',ticker:'',tv:'',isin:'',wkn:'',icon:'',iconUrl:'',locked:false,weight:0,current:null,rebal:true});
-      if(c.items.length===1)c.items[0].weight=100;
-      if(state.categories.filter(x=>x.items.length).length===1)c.weight=100;
-      persist();render();openSearchModal(c.id,newId,false);toast(t('toast.newItem'));return;
-    }
     if(b.hasAttribute('data-remove-item')){
       const c=state.categories.find(c=>c.id===b.dataset.cat);const item=c?.items.find(x=>x.id===b.dataset.removeItem);if(!item)return;
       if(!confirm(t('confirm.removeItem',{name:itemName(item)})))return;
@@ -1815,10 +1879,34 @@
       persist();render();toast(t('toast.itemRemoved'));return;
     }
     if(b.hasAttribute('data-remove-category')){
-      const c=state.categories.find(c=>c.id===b.dataset.removeCategory);if(!c||state.categories.length===1)return toast(t('toast.lastCat'));
+      const c=state.categories.find(c=>c.id===b.dataset.removeCategory);if(!c)return; // the last category may be removed: an empty plan is valid
       if(!confirm(t('confirm.removeCat',{name:catName(c),n:c.items.length})))return;
       state.categories=state.categories.filter(x=>x.id!==c.id);persist();render();toast(t('toast.catRemoved'));
     }
+  });
+  // Adds an empty holding to a category and opens the search dialog for it (same flow in view and edit mode).
+  // Edit mode is switched on so the new holding can also be filled in by hand if the dialog is closed without a pick.
+  function addHolding(catId){
+    const c=state.categories.find(x=>x.id===catId);if(!c)return;
+    const newId=uid();c.items.push({id:newId,name:t('item.new'),nameKey:'item.new',ticker:'',tv:'',isin:'',wkn:'',icon:'',iconUrl:'',locked:false,weight:0,current:null,rebal:true});
+    if(c.items.length===1)c.items[0].weight=100;
+    if(state.categories.filter(x=>x.items.length).length===1)c.weight=100;
+    editMode=true;persist();render();openSearchModal(c.id,newId,false);toast(t('toast.newItem'));
+  }
+  // One-tap category of a type (empty state and "+ Add category"): localized default name, then straight into the search dialog.
+  function startCategory(type){
+    if(!Object.hasOwn(typeEmoji,type))return;
+    const id=uid(),key='cat.'+type;
+    state.categories.push({id,name:t(key),nameKey:key,type,color:colors[(state.categories.length-4+colors.length)%colors.length],icon:typeEmoji[type],iconUrl:'',locked:false,rebalanceWith:'auto',rebalOff:false,weight:state.categories.length?0:100,items:[]});
+    addHolding(id);
+  }
+  document.addEventListener('click',e=>{const b=e.target.closest?.('[data-new-cat]');if(b)startCategory(b.dataset.newCat);});
+  // "Create my own plan": an empty plan keeps budget, cents setting and the two preferences; everything else (incl. rebalance values) starts fresh.
+  $('#newPlan').addEventListener('click',()=>{
+    if(state.categories.length&&!confirm(t('confirm.newPlan')))return;
+    state=validate({budget:state.budget,allowCents:state.allowCents,autoSort:state.autoSort,offerLogo:state.offerLogo,categories:[]});
+    editMode=false;persist();render();toast(t('toast.newPlan'));
+    $('#emptyState button')?.focus({preventScroll:true});
   });
   function moveInArray(array,id,delta){
     const index=array.findIndex(x=>x.id===id);if(index<0)return false;
@@ -2455,6 +2543,12 @@
     }
     return out;
   }
+  // diffToTarget(v,t,on): signed difference per entry = current value minus the value it would have at its target share, v_i - t_i*V with V = sum of the counted
+  // values (exact, in units). null for entries that are not counted or when V = 0. Over the counted entries the differences add up to 0.
+  function diffToTarget(v,t,on){
+    const V=v.reduce((a,x,i)=>a+(on[i]?x:0),0);
+    return v.map((x,i)=>on[i]&&V>0?x-t[i]*V:null);
+  }
   const curOf=it=>typeof it.current==='number'&&it.current>0?it.current:0;
   const rebalOn=(cat,it)=>!cat.rebalOff&&it.rebal!==false;
   function rebalModel(){
@@ -2462,7 +2556,9 @@
     data.forEach((d,ci)=>{const ir=ratios(d.cat.items);d.items.forEach((x,j)=>flat.push({cat:d.cat,item:x.item,w:cr[ci]*ir[j],p:Math.round(x.cents/unit),v:curOf(x.item)*scale,on:rebalOn(d.cat,x.item)}));});
     const budget=budgetUnits(),lump=Math.round((state.rebalLump||0)*scale),mode=state.rebalMode,N=state.rebalMonths;
     const plan=rebalPlan(flat,budget,lump,mode,N),r=rebalance(flat,budget,plan.extra);
-    const rows=flat.map((x,i)=>({...x,t:r.t[i],s:r.s[i],over:r.over[i]}));
+    const dArr=diffToTarget(flat.map(x=>x.v),r.t,flat.map(x=>x.on)),cArr=flat.map(()=>null);
+    plan.inc.forEach((i,j)=>{cArr[i]=plan.once[j]||0;});
+    const rows=flat.map((x,i)=>({...x,t:r.t[i],s:r.s[i],over:r.over[i],d:dArr[i],c:cArr[i]}));
     const sched=mode==='asap'||(mode==='months'&&!plan.nm)?plan.asap:mode==='months'?plan.nm.sim:null;
     return {rows,cats:data.filter(d=>d.items.length).map(d=>({cat:d.cat,rows:rows.filter(x=>x.cat===d.cat)})),budget,B:r.budget,sumV:r.sumV,scale,unit,eur:u=>u*unit/100,plan,sched,mode,N,lump,
       zero:budget===0&&r.budget===0,anyOn:rows.some(x=>x.on),anyCur:rows.some(x=>x.on&&x.v>0),anyOver:rows.some(x=>x.over),sumW:rows.reduce((a,x)=>a+(x.on?x.w:0),0)};
@@ -2476,22 +2572,26 @@
   const rebalCatPic=c=>c.iconExternal===true&&cleanImg(c.iconUrl)?visualIcon('',c.icon||typeEmoji[c.type]||'◇',false):catPic(c);
   function buildRebal(m){
     const tbl=$('#rebalTable'),act=document.activeElement,rf=act&&tbl.contains(act)?act.dataset.rf:null,step=state.allowCents?'0.01':'1';
-    const th=(k,cls)=>`<th scope="col"${cls?` class="${cls}"`:''}${k==='rebal.col.current'?` title="${esc(t('rebal.help.current'))}"`:''}>${esc(t(k))}</th>`;
-    let h=`<caption class="sr-only">${esc(t('rebal.table.aria'))}</caption><colgroup><col class="c-nm"><col class="c-in"><col class="c-ck"><col class="c-pc"><col class="c-pc"><col class="c-eu"><col class="c-sg"></colgroup><thead><tr>${th('rebal.col.holding')}${th('rebal.col.current')}${th('rebal.col.count','c-ck')}${th('rebal.col.now')}${th('rebal.col.target')}${th('rebal.col.plan')}${th('rebal.col.calc')}</tr></thead>`;
+    const tipKey={'rebal.col.current':'rebal.help.current','rebal.col.diff':'rebal.tip.diff','rebal.col.once':'rebal.tip.once'},tipId={'rebal.col.diff':'rebalTipDiff','rebal.col.once':'rebalTipOnce'};
+    const th=(k,cls)=>`<th scope="col"${cls?` class="${cls}"`:''}${tipKey[k]?` title="${esc(t(tipKey[k]))}"`:''}${tipId[k]?` aria-describedby="${tipId[k]}"`:''}>${esc(t(k))}</th>`;
+    let h=`<caption class="sr-only">${esc(t('rebal.table.aria'))}</caption><colgroup><col class="c-nm"><col class="c-in"><col class="c-ck"><col class="c-pc"><col class="c-pc"><col class="c-df"><col class="c-on"></colgroup><thead><tr>${th('rebal.col.holding')}${th('rebal.col.current')}${th('rebal.col.count','c-ck')}${th('rebal.col.now')}${th('rebal.col.target')}${th('rebal.col.diff')}${th('rebal.col.once')}</tr></thead>`;
     const lab=k=>` data-label="${esc(t(k))}"`;
-    const nums=`<td${lab('rebal.col.now')} data-c="now"></td><td${lab('rebal.col.target')} data-c="tgt"></td><td${lab('rebal.col.plan')} data-c="plan"></td>`;
+    const nums=`<td class="c-pc"${lab('rebal.col.now')} data-c="now"></td><td class="c-pc"${lab('rebal.col.target')} data-c="tgt"></td>`
+      +`<td class="c-df"${lab('rebal.col.diff')} title="${esc(t('rebal.tip.diff'))}"><div class="rebal-df"><strong class="rebal-dv" data-c="diff"></strong><span class="rebal-dir" data-c="dir" hidden></span></div></td>`
+      +`<td class="c-on"${lab('rebal.col.once')} title="${esc(t('rebal.tip.once'))}"><strong class="rebal-once" data-c="once"></strong></td>`;
     m.cats.forEach(g=>{
       const c=g.cat,name=catName(c);
-      h+=`<tbody class="grp" style="--accent:${esc(c.color)}"><tr class="rebal-cat" data-rkind="c" data-cat="${esc(c.id)}"><th scope="rowgroup" class="c-name"><div class="rebal-catname">${rebalCatPic(c)}<strong>${esc(name)}</strong></div><label class="rebal-catchk"><input type="checkbox" data-rebal-cat data-cat="${esc(c.id)}" data-rf="c|${esc(c.id)}" aria-label="${esc(t('rebal.aria.cat',{name}))}"><span>${esc(t('rebal.countCat'))}</span></label></th><td class="c-in"${lab('rebal.col.current')} data-c="cur"></td><td class="c-ck c-gap"></td>${nums}<td class="c-sg"${lab('rebal.col.calc')}><div class="rebal-sg"><strong class="rebal-sug" data-c="sug"></strong></div></td></tr>`;
+      h+=`<tbody class="grp" style="--accent:${esc(c.color)}"><tr class="rebal-cat" data-rkind="c" data-cat="${esc(c.id)}"><th scope="rowgroup" class="c-name"><div class="rebal-catname">${rebalCatPic(c)}<strong>${esc(name)}</strong></div><label class="rebal-catchk"><input type="checkbox" data-rebal-cat data-cat="${esc(c.id)}" data-rf="c|${esc(c.id)}" aria-label="${esc(t('rebal.aria.cat',{name}))}"><span>${esc(t('rebal.countCat'))}</span></label></th><td class="c-in"${lab('rebal.col.current')} data-c="cur"></td><td class="c-ck c-gap"></td>${nums}</tr>`;
       g.rows.forEach(r=>{
         const it=r.item,nm=itemName(it)||t('item.unnamed'),idAttr=`data-cat="${esc(c.id)}" data-item="${esc(it.id)}"`;
         h+=`<tr class="rebal-item" data-rkind="i" ${idAttr}><th scope="row" class="c-name"><div class="rebal-name">${rebalPic(c,it)}<span class="rebal-nm">${esc(nm)}<span class="rebal-tag" data-c="tag" hidden>${esc(t('rebal.off'))}</span></span></div></th>`
           +`<td class="c-in"${lab('rebal.col.current')}><label class="euroinput rebal-in"><span class="sr-only">${esc(t('rebal.aria.current',{name:nm}))}</span><input type="number" min="0" max="1000000000" step="${step}" inputmode="decimal" placeholder="0" data-rebal-cur ${idAttr} data-rf="v|${esc(c.id)}|${esc(it.id)}" value="${typeof it.current==='number'?it.current:''}"><span>€</span></label></td>`
           +`<td class="c-ck"><label class="rebal-chk"><input type="checkbox" data-rebal-on ${idAttr} data-rf="i|${esc(c.id)}|${esc(it.id)}" aria-label="${esc(t('rebal.aria.count',{name:nm}))}"><span class="rebal-chk-t">${esc(t('rebal.count'))}</span></label></td>`
-          +`${nums}<td class="c-sg"${lab('rebal.col.calc')}><div class="rebal-sg"><strong class="rebal-sug" data-c="sug"></strong><span class="rebal-chip" data-c="chip" hidden></span><span class="rebal-over" data-c="over" hidden>▲ ${esc(t('rebal.over'))}</span></div></td></tr>`;
+          +`${nums}</tr>`;
       });
       h+='</tbody>';
     });
+    h+=`<tfoot><tr class="rebal-total" id="rebalTotal" hidden><th scope="row" colspan="6">${esc(t('rebal.need.label'))}</th><td class="c-on"${lab('rebal.col.once')} data-c="total"></td></tr></tfoot>`;
     tbl.innerHTML=h;
     rebalMap=new Map();
     tbl.querySelectorAll('tr[data-rkind]').forEach(tr=>rebalMap.set(tr.dataset.rkind+rKey(tr.dataset.cat,tr.dataset.item),tr));
@@ -2506,13 +2606,10 @@
     let h='';
     h+=`<div class="rp-key" title="${esc(t('rebal.need.tip'))}"><span class="rp-k">${esc(t('rebal.need.label'))}</span><strong class="rp-v" data-need="${P.Dint}">${esc(money(eur(P.Dint)))}</strong></div><p class="rp-tip">${esc(t('rebal.need.tip'))}</p>`;
     if(P.Dint<=0)return h+`<p class="rebal-note">${esc(t('rebal.sum.on'))}</p>`;
-    h+=`<h4 class="rp-h">${esc(t('rebal.once.title'))}</h4><table class="rebal-mini" data-once><thead><tr><th scope="col">${esc(t('rebal.col.holding'))}</th><th scope="col">${esc(t('rebal.col.amount'))}</th></tr></thead><tbody>`;
-    inc.forEach((r,j)=>{if(P.once[j]>0)h+=`<tr><th scope="row">${esc(itemName(r.item)||t('item.unnamed'))}</th><td>${esc(money(eur(P.once[j])))}</td></tr>`;});
-    h+=`</tbody><tfoot><tr><th scope="row">${esc(t('rebal.total'))}</th><td>${esc(money(eur(P.Dint)))}</td></tr></tfoot></table>`;
     if(m.mode==='month')return h+`<p class="rebal-note">${esc(t('rebal.plan.pick'))}</p>`;
     const S=m.sched;
     h+=`<h4 class="rp-h">${esc(t('rebal.sched.title'))}</h4>`;
-    if(m.mode==='months'&&P.nm)h+=`<p class="rebal-note warn" data-r="${P.nm.R}">${esc(t('rebal.sum.need',{need:money(eur(P.Dint)),r:money(eur(P.nm.R)),n:m.N,budget:money(eur(P.B))}))}</p>`;
+    if(m.mode==='months'&&P.nm)h+=`<p class="rebal-note warn" hidden data-r="${P.nm.R}">${esc(t('rebal.sum.need',{need:money(eur(P.Dint)),r:money(eur(P.nm.R)),n:m.N,budget:money(eur(P.B))}))}</p>`;
     if(S.K===0)return h+`<p class="rebal-note">${esc(t('rebal.sum.on'))}</p>`;
     const rowsN=S.rows.length;
     if(!rowsN)return h+`<p class="rebal-note warn">${esc(t('rebal.sched.none'))}</p>`;
@@ -2521,10 +2618,11 @@
     const showAll=rebalAll||rowsN<=12,cols=inc.length+2;
     h+=`<div class="rebal-scroll"><table class="rebal-sched" data-sched><caption class="sr-only">${esc(t('rebal.sched.title'))}</caption><thead><tr><th scope="col">${esc(t('rebal.sched.month'))}</th>${inc.map(r=>`<th scope="col" title="${esc(itemName(r.item))}">${esc(short(r))}</th>`).join('')}<th scope="col">${esc(t('rebal.total'))}</th></tr></thead><tbody>`;
     S.rows.forEach((row,i)=>{
-      h+=`<tr class="sch-row${!showAll&&i>=12?' late':''}" data-m="${row.m}"><th scope="row" data-label="${esc(t('rebal.sched.month'))}">${esc(t('rebal.sched.monthN',{n:row.m}))}</th>${row.amounts.map((a,j)=>`<td data-label="${esc(short(inc[j]))}"${a>0?'':' class="z"'} data-amt>${esc(money(eur(a)))}</td>`).join('')}<td class="tot" data-label="${esc(t('rebal.total'))}" data-tot>${esc(money(eur(row.total)))}</td></tr>`;
+      h+=`<tr class="sch-row${!showAll&&i>=12?' late':''}" data-m="${row.m}"><th scope="row" data-label="${esc(t('rebal.sched.month'))}">${esc(t(row.m===1?'rebal.sched.month1':'rebal.sched.monthN',{n:row.m}))}</th>${row.amounts.map((a,j)=>`<td data-label="${esc(short(inc[j]))}"${a>0?'':' class="z"'} data-amt>${esc(money(eur(a)))}</td>`).join('')}<td class="tot" data-label="${esc(t('rebal.total'))}" data-tot>${esc(money(eur(row.total)))}</td></tr>`;
     });
     if(S.K!==null)h+=`<tr class="sch-mark" data-k="${S.K}"><td colspan="${cols}">✓ ${esc(t('rebal.sched.reached',{n:S.K,m:S.K+1}))}</td></tr>`;
-    const V=inc.reduce((a,r,j)=>a+cum[j],0);
+    const V=inc.reduce((a,r,j)=>a+cum[j],0),planTot=inc.reduce((a,r)=>a+r.p,0);
+    h+=`<tr class="sch-plan" data-plan><th scope="row" data-label="${esc(t('rebal.sched.plan'))}">${esc(t('rebal.sched.plan'))}</th>${inc.map(r=>`<td data-label="${esc(short(r))}"${r.p>0?'':' class="z"'} data-plan-amt>${esc(money(eur(r.p)))}</td>`).join('')}<td class="tot" data-label="${esc(t('rebal.total'))}" data-plan-tot>${esc(money(eur(planTot)))}</td></tr>`;
     h+=`</tbody><tfoot><tr class="sch-foot"><th scope="row" data-label="${esc(t('rebal.sched.target'))}">${esc(t('rebal.sched.target'))}</th>${inc.map((r,j)=>`<td data-label="${esc(short(r))}">${esc(pctF(P.t[j]))}</td>`).join('')}<td class="tot"></td></tr><tr class="sch-foot"><th scope="row" data-label="">${esc(t('rebal.sched.after',{k}))}</th>${inc.map((r,j)=>`<td data-label="${esc(short(r))}" data-reached>${V>0?esc(pctF(cum[j]/V)):'–'}</td>`).join('')}<td class="tot"></td></tr></tfoot></table></div>`;
     if(!showAll||rebalAll)h+=`<button type="button" class="btn small" data-rebal-all data-rf="all">${esc(rebalAll?t('rebal.sched.less'):t('rebal.sched.more',{n:rowsN}))}</button>`;
     return h+`<p class="rebal-fine">${esc(t('rebal.sched.note'))}</p>`;
@@ -2541,9 +2639,17 @@
   // Updates only the computed cells (and the stored values of inputs that are not being edited): focus and caret in the card stay untouched.
   function paintRebal(m){
     const {eur}=m,zero=m.zero,pct=x=>percent(x*100),setT=(root,c,txt)=>{const el=root.querySelector(`[data-c="${c}"]`);if(el&&el.textContent!==txt)el.textContent=txt;};
-    const sugText=u=>zero?'–':money(eur(u)),total=m.sumV>0?m.sumV:0,afterTotal=m.sumV+m.B;
+    const total=m.sumV>0?m.sumV:0,showOnce=m.anyOn&&m.anyCur&&m.sumW>0;
+    // signed difference to the target value (units): '+€773' above, '−€1,234' below, '0' within one unit, '–' when there is nothing to compare; colour and the words above/below
+    const paintDiff=(tr,d)=>{
+      const v=tr.querySelector('[data-c="diff"]'),chip=tr.querySelector('[data-c="dir"]');
+      const u=d===null?null:Math.abs(d)<1?0:Math.sign(d)*Math.round(Math.abs(d)),txt=u===null?'–':u===0?'0':(u>0?'+':'−')+money(eur(Math.abs(u))),dir=u?(u>0?'above':'below'):'';
+      if(v.textContent!==txt)v.textContent=txt;
+      chip.hidden=!dir;chip.classList.toggle('up',dir==='above');chip.classList.toggle('dn',dir==='below');
+      const word=dir?t('rebal.dir.'+dir):'';if(chip.textContent!==word)chip.textContent=word;
+    };
     $('#rebalNow').textContent=moneyV(m.sumV/m.scale);
-    $('#rebalAfter').textContent=moneyV((m.sumV+m.B)/m.scale);
+    $('#rebalAfter').textContent=moneyV((m.sumV+m.B)/m.scale); // portfolio now + month 1 of the chosen horizon
     $('#rebalBudget').textContent=money(eur(m.B));
     const note=$('#rebalBudgetNote'),excl=m.budget-m.plan.B,nt=[];
     if(excl>0&&m.rows.length)nt.push(t('rebal.t.budget.note',{total:money(eur(m.budget)),rest:money(eur(excl))}));
@@ -2557,8 +2663,8 @@
       setT(tr,'cur',on.length?moneyV(sumNow/m.scale):'–');
       setT(tr,'now',on.length&&total>0?pct(sumNow/total):'–');
       setT(tr,'tgt',on.length&&m.sumW>0?pct(sumT):'–');
-      setT(tr,'plan',money(eur(g.rows.reduce((a,r)=>a+r.p,0))));
-      setT(tr,'sug',sugText(g.rows.reduce((a,r)=>a+r.s,0)));
+      paintDiff(tr,on.length&&m.sumW>0&&total>0?on.reduce((a,r)=>a+r.d,0):null);
+      setT(tr,'once',on.length&&showOnce?money(eur(on.reduce((a,r)=>a+r.c,0))):'–');
       g.rows.forEach(r=>{
         const row=rebalMap.get('i'+rKey(c.id,r.item.id));if(!row)return;
         row.classList.toggle('off',!r.on);
@@ -2569,18 +2675,8 @@
         if(inp!==document.activeElement&&inp.value!==val)inp.value=val;
         setT(row,'now',r.on&&total>0?pct(r.v/total):'–');
         setT(row,'tgt',r.on&&m.sumW>0?pct(r.t):'–');
-        setT(row,'plan',money(eur(r.p)));
-        setT(row,'sug',sugText(r.s));
-        const sug=row.querySelector('[data-c="sug"]');
-        if(r.on&&!zero&&afterTotal>0)sug.title=t('rebal.after',{pct:pct((r.v+r.s)/(afterTotal))});else sug.removeAttribute('title');
-        const chip=row.querySelector('[data-c="chip"]'),d=r.s-r.p;
-        chip.hidden=!(r.on&&!zero);
-        if(!chip.hidden){
-          const txt=d>0?'+'+money(eur(d)):d<0?'−'+money(eur(-d)):t('rebal.chip.same');
-          if(chip.textContent!==txt){chip.textContent=txt;chip.setAttribute('aria-label',t('rebal.chip.aria',{delta:txt}));}
-          chip.classList.toggle('pos',d>0);chip.classList.toggle('neg',d<0);
-        }
-        row.querySelector('[data-c="over"]').hidden=!(r.on&&r.over);
+        paintDiff(row,r.on&&m.sumW>0&&total>0?r.d:null);
+        setT(row,'once',r.on&&showOnce?money(eur(r.c)):'–');
       });
     });
     const notes=[];
@@ -2591,6 +2687,7 @@
       if(!m.anyCur&&!(m.plan.extra>0))notes.push(['',t('rebal.hint.empty')]);
       if(m.anyOver&&m.B>0)notes.push(['warn',t('rebal.notice.over')]);
     }
+    const tot=$('#rebalTotal');tot.hidden=!showOnce;setT(tot,'total',showOnce?money(eur(m.plan.Dint)):'–');
     const key=JSON.stringify(notes),box=$('#rebalNotes');
     if(box.dataset.k!==key){box.dataset.k=key;box.innerHTML=notes.map(n=>`<p class="rebal-note ${n[0]}">${esc(n[1])}</p>`).join('');}
     // headline summary + plan part
@@ -2608,7 +2705,7 @@
     if(mon!==document.activeElement&&mon.value!==String(state.rebalMonths))mon.value=state.rebalMonths;
     document.querySelectorAll('[name="rebalHorizon"]').forEach(r=>{r.checked=r.value===state.rebalMode;});
     $('#rebalTable').classList.toggle('hidden',!m.rows.length);
-    ['#rebalCopy','#rebalCsv'].forEach(q=>{$(q).disabled=!m.rows.length;});
+    $('#rebalCsv').disabled=!m.rows.length;
     $('#rebalSchedCsv').classList.toggle('hidden',m.mode==='month');
     $('#rebalSchedCsv').disabled=!(m.sched&&m.sched.rows.length);
     $('#rebalClear').disabled=!state.categories.some(c=>c.items.some(it=>typeof it.current==='number'));
@@ -2649,16 +2746,12 @@
   });
   $('#rebalMonths').addEventListener('focus',()=>{if(state.rebalMode!=='months'){state.rebalMode='months';persist();updateRebal();}});
   $('#rebalPlanOut').addEventListener('click',e=>{if(e.target.closest('[data-rebal-all]')){rebalAll=!rebalAll;updateRebal();}});
-  $('#rebalCopy').addEventListener('click',async()=>{
-    flushSort();
-    const m=rebalModel(),text=m.rows.map(r=>(itemName(r.item)||t('item.unnamed'))+': '+(m.zero?'–':money(m.eur(r.s)))).join('\n');
-    try{await copyText(text);toast(t('rebal.toast.copied'));}catch(err){toast(t('toast.copyFail'));}
-  });
   $('#rebalCsv').addEventListener('click',()=>{
     flushSort();
     const {dec}=csvFormat(),m=rebalModel(),n=(v,d)=>v.toFixed(d).replace('.',dec),fr=state.allowCents?2:0,rows=[t('rebal.csv.head')];
+    const so=m.anyOn&&m.anyCur&&m.sumW>0,dd=r=>{if(!(r.on&&m.sumW>0&&m.sumV>0&&r.d!==null))return '';const u=Math.abs(r.d)<1?0:Math.sign(r.d)*Math.round(Math.abs(r.d));return n(m.eur(u),fr);};
     m.rows.forEach(r=>rows.push([catName(r.cat),itemName(r.item),typeof r.item.current==='number'?n(r.item.current,2):'',
-      r.on&&m.sumV>0?n(r.v/m.sumV*100,4):'',r.on&&m.sumW>0?n(r.t*100,4):'',n(m.eur(r.p),fr),m.zero?'':n(m.eur(r.s),fr)]));
+      r.on&&m.sumV>0?n(r.v/m.sumV*100,4):'',r.on&&m.sumW>0?n(r.t*100,4):'',dd(r),r.on&&so?n(m.eur(r.c),fr):'',m.zero?'':n(m.eur(r.s),fr),n(m.eur(r.p),fr)]));
     downloadCsv('finplanr-rebalance.csv',rows);toast(t('toast.csv'));
   });
   $('#rebalSchedCsv').addEventListener('click',()=>{
@@ -2704,9 +2797,9 @@
     else if(openChart)closeChart(true);
   });
   function download(filename,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
-  // CSV: ';' and decimal comma in German, ',' and decimal point otherwise; every cell is quoted and a leading = + - @ tab or CR is neutralised (formula injection).
+  // CSV: ';' and decimal comma in German, ',' and decimal point otherwise; every cell is quoted and a leading = + - @ tab or CR is neutralised (formula injection); a plain negative number such as -12,5 stays a number.
   const csvFormat=()=>({sep:lang==='de'?';':',',dec:lang==='de'?',':'.'});
-  const csvSafe=v=>{const s=String(v??'');return '"'+(/^[=+@\-\t\r]/.test(s)?"'"+s:s).replaceAll('"','""')+'"';};
+  const csvSafe=v=>{const s=String(v??'');return '"'+(/^[=+@\-\t\r]/.test(s)&&!/^-\d+(?:[.,]\d+)?$/.test(s)?"'"+s:s).replaceAll('"','""')+'"';};
   const downloadCsv=(filename,rows)=>download(filename,'﻿'+rows.map(row=>row.map(csvSafe).join(csvFormat().sep)).join('\r\n'),'text/csv;charset=utf-8');
   // Default names keep their nameKey; the stored name is refreshed so older readers still see readable text.
   function exportPortfolio(portfolio){

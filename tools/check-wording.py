@@ -76,7 +76,8 @@ ALLOWLIST = [
     "keine anlageberatung",                  # DE footer "Planungswerkzeug, keine Anlageberatung."
     "gibt finplanr anlageberatung",          # DE FAQ question
     "no recommendation",                     # negations: "no recommendation(s)"
-    "keine empfehlung",                      # negations: "keine Empfehlung(en)"
+    "keine empfehlung",                      # negations: "keine Empfehlung(en)"; also covers the DE example chip "Beispielplan – keine Empfehlung"
+    "not a recommendation",                  # EN example chip "Example plan – not a recommendation": it NEGATES a recommendation (the preset plan is only an example)
     # --- input validation (UI error messages, not about investments)
     "at least one category must remain",
     "mindestens eine kategorie muss bleiben",

@@ -8,9 +8,10 @@ Live site: https://finplanr.net
 
 ## Features
 - Monthly budget with category and holding weights (whole euros or cents)
+- The plan shown at first start is a marked example; "Create my own plan" starts an empty plan (budget and settings kept) with one-tap type buttons for the first category. Categories and holdings can be freely changed, added or removed; "+ Add holding" and "+ Add category" are always visible, Edit mode is for renaming, colours, symbols, ordering and deleting
 - Locks and "balance only with" partners, automatic sorting by size
 - Interactive allocation donut (hover to enlarge, click to jump to the category)
-- Optional "Rebalance with my current holdings" card: enter what you hold today and see how to split this month's budget toward your plan, what it takes to reach the target and a month-by-month schedule (a calculation from the values you enter, new money only; values stay in your browser)
+- Optional "Rebalance with my current holdings" card: enter the current value of each holding (with a counted/not counted checkbox per holding and category) and see the difference to your plan's target shares, the one-time amount per holding needed to reach the target, and a month-by-month schedule for a chosen horizon with an optional extra one-time amount, each available as a CSV download (a calculation from the values you enter; values stay in your browser and in the JSON backup)
 - JSON backup/import, CSV export, personal reset point
 - Optional online search for stocks, ETFs and crypto, an optional logo search (Wikimedia Commons) offered after adding a holding, and an optional TradingView chart (only after consent); holdings without a logo get a locally drawn letter badge
 - Your data stays in your browser (localStorage); Finplanr itself sets no cookies of its own (technical cookies of the hosting provider's security features may exist, see the privacy policy)
