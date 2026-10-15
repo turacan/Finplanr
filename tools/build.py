@@ -292,6 +292,12 @@ PRIVACY = {
 }
 
 URL_RE = re.compile(r'https?://[^\s<>()"“”„]+')
+EMAIL_RE = re.compile(r'(?<![\w@/.=-])[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}')
+# Cloudflare "Email Address Obfuscation" (Scrape Shield) rewrites e-mail addresses in HTML into JS-decoded links; without JavaScript the
+# visitor sees "[email protected]". Documented exemption (developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/):
+# wrap the address in <!--email_off--> ... <!--/email_off-->. The href of an <a> is obfuscated too, so the WHOLE link is wrapped.
+EMAIL_OFF = ("<!--email_off-->", "<!--/email_off-->")
+EMAIL_OFF_RE = re.compile(re.escape(EMAIL_OFF[0]) + r".*?" + re.escape(EMAIL_OFF[1]), re.S)
 
 
 def inline(text):
@@ -312,6 +318,7 @@ def inline(text):
             url = url[:-1]
         return '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>%s' % (url, url, trail)
     text = URL_RE.sub(link_sub, text)
+    text = EMAIL_RE.sub(lambda m: '%s<a href="mailto:%s">%s</a>%s' % (EMAIL_OFF[0], m.group(0), m.group(0), EMAIL_OFF[1]), text)
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
     # the single owner placeholder
     text = re.sub(r'\[([^\]]*(?:bitte ergänzen|please add)[^\]]*)\]', r'<mark class="todo">[\1]</mark>', text)
@@ -511,6 +518,19 @@ def verify(out, cfg):
         f = out / rel
         if f.is_file() and ('<meta name="author" content="%s">' % html.escape(name, quote=True)) not in f.read_text(encoding="utf-8"):
             errors.append("%s: meta author not set" % rel)
+    # 4) the contact address must be shielded from Cloudflare's e-mail obfuscation in EVERY html page that shows it
+    mail_html = html.escape(mail, quote=False)
+    for p in sorted(out.rglob("*.html")):
+        t = p.read_text(encoding="utf-8")
+        if mail_html in EMAIL_OFF_RE.sub("", t) or mail in EMAIL_OFF_RE.sub("", t):
+            errors.append("%s shows the contact address outside <!--email_off-->...<!--/email_off-->" % p.relative_to(out))
+    for rel in ("datenschutz.html", "en/datenschutz.html"):
+        f = out / rel
+        if f.is_file():
+            t = f.read_text(encoding="utf-8")
+            wrapped = "".join(EMAIL_OFF_RE.findall(t))
+            if mail_html not in re.sub(r"<[^>]+>", "", wrapped):
+                errors.append("%s: no wrapped, visible contact address" % rel)
     return errors
 
 
