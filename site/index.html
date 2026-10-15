@@ -160,6 +160,14 @@
     .locknote{font-size:11px;color:var(--muted);margin-top:5px}
     .icon-picker{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.symbol-field{max-width:70px;width:70px;text-align:center;font-size:19px}
     .mini-icon{position:relative;width:30px;height:30px;border-radius:9px;object-fit:contain;display:inline-grid;place-items:center;flex:none;background:#f4f6fa;font-size:19px;overflow:hidden}
+    .mini-icon.monogram{border:0;font-weight:800;letter-spacing:-.2px;line-height:1;font-family:inherit;user-select:none;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+    .offer-preview{display:flex;align-items:center;gap:10px;margin:12px 0 0;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:#f8fafd;min-width:0}
+    .offer-preview .mini-icon{width:38px;height:38px;border-radius:11px}
+    .offer-preview strong{display:block;overflow-wrap:anywhere}.offer-preview small{display:block;color:var(--muted);margin-top:2px;line-height:1.35}
+    .offer-foot{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;margin:6px 0 12px}
+    .offer-check{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#31475e;cursor:pointer;flex:1 1 220px;min-width:0}.offer-check input{accent-color:#1a5679;width:17px;height:17px;margin:1px 0 0;flex:none}
+    #searchModal .modal.offer #imagePanel>:not(#imageMatches){display:none}
+    #searchModal .modal.offer #imagePanel{margin-top:2px}
     .itemidentity{display:flex;align-items:center;gap:10px}.entry-main .entry-left{min-width:0}
     .itemidentity .itemtext{min-width:0}.itemidentity .itemtext .entry-name{word-break:break-word}
     .settings-info{font-size:12px;color:var(--muted);max-width:890px;line-height:1.6;margin:9px 0 0}
@@ -232,12 +240,14 @@
     .linkbtn{border:0;background:none;padding:0;margin:0;font:inherit;color:#516a89;text-decoration:underline;cursor:pointer}
     .linkbtn:hover{color:#1f5a8c}
     .searchnote{font-size:12px;color:var(--muted);line-height:1.5;margin:8px 0 0}.searchnote a{color:#366a9c;font-weight:700}
-    .privacy-status{font-size:14px;font-weight:700;margin:12px 0}.privacy-status.on{color:#1d6b48}
+    .priv-purpose{border-top:1px solid #e5eaf1;margin-top:16px;padding-top:6px}.priv-purpose h3{font-size:15px;margin:10px 0 0}
+    .priv-purpose .consent-info p,.consent-box .consent-info p{font-size:12.5px;line-height:1.55;margin:7px 0 0}.priv-purpose .consent-info a{color:#366a9c;font-weight:700}
+    .privacy-status{font-size:14px;font-weight:700;margin:8px 0 0}.privacy-status.on{color:#1d6b48}
     .privacy-actions{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:12px 0}
     .privacy-actions a{font-size:13px;font-weight:700;color:#366a9c}
     @media(max-width:620px){.chart-body{height:320px}}
     @media(max-width:620px){.toolbar{position:relative}.menuwrap{display:contents}.menu{left:0;right:0;width:auto;max-width:none;top:calc(100% + 6px)}.langswitch{margin-left:auto}}
-    @media print{.seg,.legendline,.stackbar button{pointer-events:none;transition:none!important;filter:none!important;opacity:1!important}.toolbar,.copychip .copyicon,.add-section,.edittools,input[type=range],.chart-panel,.about,.footer .line{display:none!important}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff}.section{box-shadow:none;break-inside:avoid}}
+    @media print{.mini-icon.monogram{print-color-adjust:exact;-webkit-print-color-adjust:exact}.seg,.legendline,.stackbar button{pointer-events:none;transition:none!important;filter:none!important;opacity:1!important}.toolbar,.copychip .copyicon,.add-section,.edittools,input[type=range],.chart-panel,.about,.footer .line{display:none!important}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff}.section{box-shadow:none;break-inside:avoid}}
   </style>
 </head>
 <body>
@@ -264,11 +274,12 @@
     <h2 data-i18n="set.title">Calculation &amp; rounding</h2>
     <label class="settings-control"><input type="checkbox" id="allowCents"><span><span data-i18n="set.cents">Allow cents</span> <span class="settings-description" data-i18n="set.cents.desc">Off by default. Amounts are set in whole euros; turn this on for €0.01 steps.</span></span></label>
     <label class="settings-control"><input type="checkbox" id="autoSort" checked><span><span data-i18n="set.sort">Keep sorted by size, largest first</span> <span class="settings-description" data-i18n="set.sort.desc">On by default. Categories and holdings are ordered by amount once you finish a change (never while you drag a slider or type). Turn off to arrange them yourself in Edit mode.</span></span></label>
+    <label class="settings-control"><input type="checkbox" id="offerLogo" checked><span><span data-i18n="set.offer">Offer a logo search when I add a holding</span> <span class="settings-description" data-i18n="set.offer.desc">On by default. After you apply a search result that has no logo, Finplanr offers to look for one on Wikimedia Commons. The online search needs your permission first; without a logo the holding shows a letter badge.</span></span></label>
     <p class="settings-info"><strong data-i18n="set.lock.title">Locking:</strong> <span data-i18n="set.lock.text">Locked categories and holdings keep their amounts when you change something else; only unlocked ones balance the change. For each category you choose one rebalancing partner or all flexible categories. With whole euros, rounding can be off by one step.</span></p>
     <div class="reset-setup"><button id="saveResetPoint" type="button" class="btn primary" data-i18n="set.saveReset">★ Save current state as reset point</button><button id="factoryReset" type="button" class="btn danger small" data-i18n="set.factory">Restore factory defaults</button></div>
     <p id="resetStateInfo" class="settings-info" aria-live="polite"></p>
     <p class="settings-info" data-i18n="set.reset.explain">Reset returns to your saved reset point; “Restore factory defaults” returns to the built-in example and deletes the saved reset point.</p>
-    <p class="settings-info"><strong data-i18n="set.search.title">Online search:</strong> <span data-i18n="set.search.text">Crypto search uses CoinGecko, securities search uses Wikidata where available, and image search uses Wikimedia Commons. These services receive your search term. justETF and Finanzfluss cannot be queried directly and are only offered as links.</span></p>
+    <p class="settings-info"><strong data-i18n="set.search.title">Online search:</strong> <span data-i18n="set.search.text">Online search (crypto via CoinGecko, securities via Wikidata, images via Wikimedia Commons) only runs after you allow it; the built-in catalog always works without. You can change this under “Privacy settings” in the footer.</span></p>
   </div>
   <main>
     <section class="hero" data-i18n-attr="aria-label:hero.aria">
@@ -312,18 +323,21 @@
   </section>
   <footer class="footer">
     <div class="line"><a id="guideLink" href="/en/anleitung.html" target="_blank" rel="noopener noreferrer" data-i18n="foot.guide">User guide</a> · <a id="legalLink" href="{{IMPRESSUM_URL}}" target="_blank" rel="noopener noreferrer" data-i18n="foot.legal">Legal notice (Impressum)</a> · <a id="privacyLink" data-privacy-link href="/en/datenschutz.html" target="_blank" rel="noopener noreferrer" data-i18n="foot.privacylink">Privacy policy</a> · <button type="button" id="privacySettingsBtn" class="linkbtn" aria-haspopup="dialog" data-i18n="foot.privacySettings">Privacy settings</button></div>
-    <div class="line" data-i18n="foot.note">Planning tool, not investment advice. Your data stays in this browser.</div>
+    <div class="line" data-i18n="foot.note">Planning tool, not investment advice.</div>
   </footer>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="searchModal" class="modalback hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal">
+  <div class="modal" id="modalBox">
     <div class="modalhead"><h2 id="modalTitle"></h2><button id="modalClose" class="btn" type="button" data-i18n="modal.close" data-i18n-attr="aria-label:modal.close.aria">✕ Close</button></div>
     <div id="modalHelp" class="settings-info"></div>
+    <div id="offerPreview" class="offer-preview hidden" role="group"></div>
     <div><div id="srcSwitch" class="srcswitch hidden" role="radiogroup" data-i18n-attr="aria-label:src.sel.aria"><button type="button" role="radio" aria-checked="true" data-src="stocks" data-i18n="src.sel.stocks">Stocks &amp; ETFs</button><button type="button" role="radio" aria-checked="false" data-src="crypto" data-i18n="src.sel.crypto">Crypto</button></div></div>
     <div class="searchline" style="margin-top:13px"><input id="modalQuery"class="text-input" type="search" autocomplete="off"><button id="modalSearch" class="btn primary" type="button" data-i18n="modal.search">Search</button></div>
     <p id="searchNote" class="searchnote hidden"></p>
+    <div id="searchConsent" class="hidden"></div>
     <div id="modalStatus" class="modalstatus" aria-live="polite"></div>
+    <div id="offerFoot" class="offer-foot hidden"><label class="offer-check"><input type="checkbox" id="offerNever"><span data-i18n="offer.never">Don't offer a logo search when adding holdings</span></label><button id="offerSkip" class="btn" type="button" data-i18n="offer.skip">Skip</button></div>
     <div id="cgCredit" class="credit hidden"><span data-i18n="cg.label">Crypto data:</span> <a href="https://www.coingecko.com/en/api?utm_source=finplanr&amp;utm_medium=referral" target="_blank" rel="noopener noreferrer" data-i18n="cg.link">Powered by CoinGecko API</a></div>
     <div class="matchlist" id="modalResults"></div>
     <div class="modelinks" id="modalLinks"></div>
@@ -338,9 +352,9 @@
 <div id="privacyModal" class="modalback hidden" role="dialog" aria-modal="true" aria-labelledby="privTitle">
   <div class="modal">
     <div class="modalhead"><h2 id="privTitle" data-i18n="priv.title">Privacy settings</h2><button id="privClose" class="btn" type="button" data-i18n="modal.close" data-i18n-attr="aria-label:modal.close.aria">✕ Close</button></div>
-    <p class="settings-info" data-i18n="priv.intro">Finplanr loads nothing from third parties by default. The only thing that needs your consent are TradingView charts.</p>
-    <p id="privStatus" class="privacy-status" aria-live="polite"></p>
-    <div class="privacy-actions"><button id="privToggle" class="btn" type="button"></button><a id="privPolicy" data-privacy-link href="/en/datenschutz.html" target="_blank" rel="noopener noreferrer" data-i18n="priv.policy">Privacy policy</a></div>
+    <p class="settings-info" data-i18n="priv.intro">Finplanr loads nothing from third parties by default. Two features need your explicit consent: price charts and online search.</p>
+    <div id="privPurposes"></div>
+    <div class="privacy-actions"><a id="privPolicy" data-privacy-link href="/en/datenschutz.html" target="_blank" rel="noopener noreferrer" data-i18n="priv.policy">Privacy policy</a></div>
     <p class="settings-info" data-i18n="priv.note">Withdrawing does not delete data TradingView may have stored in your browser; you can clear it in your browser settings (site data for tradingview-widget.com).</p>
   </div>
 </div>
@@ -350,9 +364,11 @@
   'use strict';
   const STORAGE_KEY='mein-sparplan-portfolio-v1';
   const RESET_KEY='mein-sparplan-reset-stand-v1';
-  const LANG_KEY='finplanr-lang';
-  // Consent record for loading TradingView charts (Art. 6(1)(a) GDPR, § 25(1) TDDDG): JSON {v:1,granted:true,ts:ISO}. No record = no request to TradingView.
-  const CONSENT_KEY='finplanr-consent-tv';
+  const LEGACY_LANG_KEY='finplanr-lang'; // never written any more (the language is part of the URL); an old value is deleted at startup
+  // Consent record (Art. 6(1)(a) GDPR, § 25(1) TDDDG, Art. 49(1)(a) GDPR): ONE key, JSON {v:2,charts:{granted:true,ts:ISO},search:{granted:true,ts:ISO}}.
+  // A missing purpose = not granted. 'charts' = TradingView, 'search' = CoinGecko / Wikidata / Wikimedia Commons. No record = no request to those hosts.
+  const CONSENT_KEY='finplanr-consent';
+  const OLD_CONSENT_KEY='finplanr-consent-tv'; // v1 record: NOT migrated (it was given with less information, so it is not valid any more); deleted at startup
   // Legal links: the Impressum is hosted externally (same URL in every language); the privacy policy lives on this site (/datenschutz.html, /en/datenschutz.html).
   const IMPRESSUM_URL='{{IMPRESSUM_URL}}';
   const privacyUrl=()=>lang==='en'?'/en/datenschutz.html':'/datenschutz.html';
@@ -408,7 +424,7 @@
       'set.reset.none':'No personal reset point saved. Reset restores the built-in example portfolio.',
       'tb.reset.tip':'{what}. Reset returns to your saved reset point; “Restore factory defaults” (Settings) returns to the built-in example and deletes the saved reset point.',
       'set.search.title':'Online search:',
-      'set.search.text':'Crypto search uses CoinGecko, securities search uses Wikidata where available, and image search uses Wikimedia Commons. These services receive your search term. justETF and Finanzfluss cannot be queried directly and are only offered as links.',
+      'set.search.text':'Online search (crypto via CoinGecko, securities via Wikidata, images via Wikimedia Commons) only runs after you allow it; the built-in catalog always works without. You can change this under “Privacy settings” in the footer.',
       'toast.cents.on':'Cents enabled.','toast.cents.off':'Switched to whole euros.',
       'toast.resetSaved':'Current state saved as reset point.','toast.resetDone':'Saved reset point restored.',
       'toast.factoryDone':'Factory settings restored.',
@@ -447,16 +463,38 @@
       'chart.toggleTip':'Show or hide the price chart','chart.aria':'Price chart for {name}',
       'chart.title':'{symbol} · Daily chart','chart.open':'Open on TradingView ↗','chart.openHome':'Open TradingView ↗',
       'chart.close':'Close chart','chart.loading':'Loading chart …',
-      'consent.text':'To show this chart, a widget from TradingView (TradingView Inc., USA) is loaded. This transmits your IP address and technical data to TradingView, and TradingView may store data in your browser. Details in our',
-      'consent.policy':'privacy policy.','consent.load':'Load chart','consent.cancel':'Cancel',
-      'priv.title':'Privacy settings','priv.intro':'Finplanr loads nothing from third parties by default. The only thing that needs your consent are TradingView charts.',
-      'priv.status.on':'TradingView charts: allowed since {date}','priv.status.off':'TradingView charts: not allowed',
-      'priv.withdraw':'Withdraw consent','priv.allow':'Allow charts',
+
+      'consent.policy':'privacy policy.',
+      'consent.charts.provider':'Provider: TradingView.com, Inc., USA. When the chart loads, TradingView receives your IP address, the web address (URL) of this page, browser and technical data and the chart symbol. TradingView may also store data in your browser (local storage of tradingview-widget.com).',
+      'consent.charts.risk':'The USA has no EU adequacy decision for this provider, and TradingView states no certification under the EU-US Data Privacy Framework. Your data could be accessed by US authorities without the protection you have in the EU. By allowing charts you explicitly consent to this transfer (Art. 49(1)(a) GDPR).',
+      'consent.more':'You can withdraw at any time via “Privacy settings” in the footer. Details in our',
+      'consent.search.lead.stocks':'This search goes to Wikidata and its query service (Wikimedia Foundation, Inc., USA).',
+      'consent.search.lead.crypto':'This search goes to CoinGecko (Gecko Labs Pte. Ltd., Singapore).',
+      'consent.search.lead.img':'This image search goes to Wikimedia Commons (Wikimedia Foundation, Inc., USA).',
+      'consent.search.providers':'One permission covers all online search: stocks and ETFs (Wikidata, Wikimedia Foundation, Inc., USA), crypto (CoinGecko, Gecko Labs Pte. Ltd., Singapore) and logo or image search (Wikimedia Commons, Wikimedia Foundation, Inc., USA). Each search only contacts the provider it needs.',
+      'consent.search.data':'The provider receives your search term, your IP address and technical data of your browser. Images in the results, and images you pick, are loaded from the provider; a picked image is saved as a local copy where possible.',
+      'consent.search.risk':'Singapore has no EU adequacy decision, and the Wikimedia Foundation (USA) states no certification under the EU-US Data Privacy Framework. Your data could be accessed by authorities there without the protection you have in the EU. By allowing online search you explicitly consent to these transfers (Art. 49(1)(a) GDPR).',
+      'consent.search.allow':'Allow online search',
+      'consent.search.local':'Use local catalog only','consent.load':'Load chart','consent.cancel':'Cancel',
+      'priv.title':'Privacy settings',
+      'priv.charts.title':'Price charts (TradingView)',
+      'priv.search.title':'Online search (Wikidata, CoinGecko, Wikimedia Commons)',
+      'priv.on':'Allowed since {date}',
+      'priv.off':'Not allowed',
+      'priv.allow.charts':'Allow charts',
+      'priv.allow.search':'Allow online search',
+      'priv.withdrawn.charts':'Consent withdrawn. Charts are closed.',
+      'priv.withdrawn.search':'Consent withdrawn. Online search is off.',
+      'priv.allowed.charts':'Charts allowed.',
+      'priv.allowed.search':'Online search allowed.','priv.intro':'Finplanr loads nothing from third parties by default. Two features need your explicit consent: price charts and online search.',
+
+      'priv.withdraw':'Withdraw consent',
       'priv.note':'Withdrawing does not delete data TradingView may have stored in your browser; you can clear it in your browser settings (site data for tradingview-widget.com).',
-      'priv.policy':'Privacy policy','priv.close':'Close','priv.withdrawn':'Consent withdrawn. Charts are closed.','priv.allowed':'Charts allowed.',
-      'search.note.crypto':'Online search (Search button or Enter) sends your search term and your IP address to CoinGecko.',
-      'search.note.sec':'Online search (Search button or Enter) sends your search term and your IP address to Wikidata and its query service (Wikimedia Foundation).',
-      'search.note.img':'Image search (button or Enter) sends your search term and your IP address to Wikimedia Commons; images you pick are loaded from the internet.',
+      'priv.policy':'Privacy policy','priv.close':'Close',
+
+
+      'search.note.img':'Online images (button or Enter) come from Wikimedia Commons and need your permission. You can also pick an icon or upload a file.',
+      'search.note':'Online results (Search button or Enter) need your permission: they come from third-party servers. The built-in catalog works without.',
       'search.note.link':'Privacy policy',
       'chart.noSymbol':'No chart symbol set — add one in Edit mode, e.g. XETR:VWCE',
       'chart.error':'The chart could not be loaded (offline, or blocked by a content blocker). You can open it on TradingView instead.',
@@ -516,10 +554,14 @@
       'modal.status.images':'Search Wikimedia Commons for images or pick an icon.',
       'modal.status.typing':'Searching the catalog; click “Search” for more results.',
       'modal.status.offline':'Offline: searching the built-in catalog only.',
+      'modal.status.localOnly':'Online search not allowed. Showing local catalog results only.',
+      'modal.status.searchOff':'Online search was switched off. Showing local results only.',
+      'modal.status.needConsent':'Online search needs your permission first.',
+      'modal.status.savingCopy':'Saving a local copy of the image …',
       'modal.status.running':'Showing local results. Searching online …',
-      'modal.status.failed':'Online data is currently unavailable (network, CORS or rate limit). The catalog and external links still work.',
+      'modal.status.failed':'Online data is currently unavailable (network, CORS or rate limit). The built-in catalog still works.',
       'modal.status.found':'Results from the catalog and online search ({n} online). Only pick matching entries and check the identifiers.',
-      'modal.status.none':'Online search finished. No additional matches; the catalog and external search are still available.',
+      'modal.status.none':'Online search finished. No additional matches; the built-in catalog is still available.',
       'modal.status.needImageTerm':'Enter a search term for images.','modal.status.needSymbol':'Enter an icon.',
       'modal.status.needUrl':'Enter a valid https:// image URL.','modal.status.badFile':'Choose a PNG/JPG/WebP/GIF of at most 150 KB.',
       'modal.status.fileFail':'The image could not be saved.',
@@ -537,9 +579,22 @@
       'img.searching':'Searching Wikimedia Commons …','img.src':'Wikimedia Commons · only pick if it matches; check licence and attribution on the file page','img.filepage':'File page ↗',
       'img.none':'No matching images found. Use an image URL or an upload.',
       'img.unavailable':'Image search unavailable. Use your own file or an image URL.',
-      'toast.assetApplied':'Details applied – please check the identifiers.','toast.iconApplied':'Icon/logo applied.',
+      'offer.title':'Choose a logo for {name}',
+      'offer.help':'This result came without a logo. Search Wikimedia Commons for one, or skip and keep the letter badge. You can change it later in Edit mode with “◉ Logo”.',
+      'offer.preview.aria':'Current symbol of {name}','offer.preview.note':'Shown like this until you pick a logo.',
+      'offer.status.pick':'Pick a logo only if it really matches this holding. Skip keeps the letter badge.',
+      'search.note.offer':'Online logos come from Wikimedia Commons and need your permission.',
+      'offer.skip':'Skip','offer.never':'Don\'t offer a logo search when adding holdings','offer.results.aria':'Logo suggestions for {name}',
+      'img.none.offer':'No matching logo found. Skip to keep the letter badge, or add your own file later in Edit mode with “◉ Logo”.',
+      'img.unavailable.offer':'Logo search is unavailable right now. Skip to keep the letter badge; you can add a logo later in Edit mode.',
+      'toast.offer.on':'A logo search will be offered when you add a holding.',
+      'toast.offer.off':'Logo search is off when adding holdings. You can turn this on again in Settings.',
+      'set.offer':'Offer a logo search when I add a holding',
+      'set.offer.desc':'On by default. After you apply a search result that has no logo, Finplanr offers to look for one on Wikimedia Commons. The online search needs your permission first; without a logo the holding shows a letter badge.',
+      'toast.assetApplied':'Details applied – please check the identifiers.',
+      'toast.imgExternal':'Couldn\'t save a local copy. This logo will load from its original server each time; upload the image as a file to avoid that.','toast.iconApplied':'Icon/logo applied.',
       'cg.label':'Crypto data:','cg.link':'Powered by CoinGecko API','foot.legal':'Legal notice (Impressum)','foot.privacylink':'Privacy policy','foot.privacySettings':'Privacy settings',
-      'foot.note':'Planning tool, not investment advice. Your data stays in this browser.',
+      'foot.note':'Planning tool, not investment advice.',
       'foot.guide':'User guide'
     },
     de:{
@@ -589,7 +644,7 @@
       'set.reset.none':'Kein eigener Reset-Stand gespeichert. Reset stellt das eingebaute Beispielportfolio wieder her.',
       'tb.reset.tip':'{what}. Reset führt zu deinem gespeicherten Reset-Stand zurück; „Werkseinstellungen wiederherstellen“ (Einstellungen) führt zum eingebauten Beispiel zurück und löscht den gespeicherten Reset-Stand.',
       'set.search.title':'Online-Suche:',
-      'set.search.text':'Die Krypto-Suche nutzt CoinGecko, die Wertpapier-Suche Wikidata (soweit verfügbar) und die Bildersuche Wikimedia Commons. Diese Dienste erhalten deinen Suchbegriff. justETF und Finanzfluss lassen sich nicht direkt abfragen und werden nur als Link angeboten.',
+      'set.search.text':'Die Online-Suche (Krypto über CoinGecko, Wertpapiere über Wikidata, Bilder über Wikimedia Commons) läuft nur, wenn du sie erlaubst; der integrierte Katalog funktioniert immer ohne. Du kannst das unter „Datenschutz-Einstellungen“ im Seitenfuß ändern.',
       'toast.cents.on':'Centbeträge aktiviert.','toast.cents.off':'Auf ganze Euro umgestellt.',
       'toast.resetSaved':'Aktueller Stand als Reset-Stand gespeichert.','toast.resetDone':'Gespeicherten Reset-Stand wiederhergestellt.',
       'toast.factoryDone':'Werkseinstellungen wiederhergestellt.',
@@ -628,16 +683,38 @@
       'chart.toggleTip':'Kurschart ein- oder ausblenden','chart.aria':'Kurschart für {name}',
       'chart.title':'{symbol} · Tageschart','chart.open':'Auf TradingView öffnen ↗','chart.openHome':'TradingView öffnen ↗',
       'chart.close':'Chart schließen','chart.loading':'Chart wird geladen …',
-      'consent.text':'Um diesen Chart anzuzeigen, wird ein Widget von TradingView (TradingView Inc., USA) geladen. Dabei werden deine IP-Adresse und technische Daten an TradingView übermittelt, und TradingView kann Daten in deinem Browser speichern. Details in unserer',
-      'consent.policy':'Datenschutzerklärung.','consent.load':'Chart laden','consent.cancel':'Abbrechen',
-      'priv.title':'Datenschutz-Einstellungen','priv.intro':'Finplanr lädt standardmäßig nichts von Dritten. Einwilligungspflichtig sind nur die TradingView-Charts.',
-      'priv.status.on':'TradingView-Charts: erlaubt seit {date}','priv.status.off':'TradingView-Charts: nicht erlaubt',
-      'priv.withdraw':'Einwilligung widerrufen','priv.allow':'Charts erlauben',
+
+      'consent.policy':'Datenschutzerklärung.',
+      'consent.charts.provider':'Anbieter: TradingView.com, Inc., USA. Beim Laden des Charts erhält TradingView deine IP-Adresse, die Webadresse (URL) dieser Seite, Browser- und technische Daten sowie das Chart-Symbol. TradingView kann außerdem Daten in deinem Browser speichern (Local Storage von tradingview-widget.com).',
+      'consent.charts.risk':'Für die USA besteht für diesen Anbieter kein EU-Angemessenheitsbeschluss, und TradingView nennt keine Zertifizierung nach dem EU-US Data Privacy Framework. Deine Daten könnten von US-Behörden ohne den Schutz abgerufen werden, den du in der EU hast. Mit der Freigabe der Charts willigst du ausdrücklich in diese Übermittlung ein (Art. 49 Abs. 1 lit. a DSGVO).',
+      'consent.more':'Du kannst jederzeit über „Datenschutz-Einstellungen“ im Seitenfuß widerrufen. Details in unserer',
+      'consent.search.lead.stocks':'Diese Suche geht an Wikidata und dessen Abfragedienst (Wikimedia Foundation, Inc., USA).',
+      'consent.search.lead.crypto':'Diese Suche geht an CoinGecko (Gecko Labs Pte. Ltd., Singapur).',
+      'consent.search.lead.img':'Diese Bildersuche geht an Wikimedia Commons (Wikimedia Foundation, Inc., USA).',
+      'consent.search.providers':'Eine Erlaubnis gilt für die gesamte Online-Suche: Aktien und ETFs (Wikidata, Wikimedia Foundation, Inc., USA), Krypto (CoinGecko, Gecko Labs Pte. Ltd., Singapur) sowie Logo- und Bildersuche (Wikimedia Commons, Wikimedia Foundation, Inc., USA). Jede Suche kontaktiert nur den Anbieter, den sie braucht.',
+      'consent.search.data':'Der Anbieter erhält deinen Suchbegriff, deine IP-Adresse und technische Daten deines Browsers. Bilder in den Ergebnissen und von dir gewählte Bilder werden vom Anbieter geladen; ein gewähltes Bild wird nach Möglichkeit als lokale Kopie gespeichert.',
+      'consent.search.risk':'Für Singapur besteht kein EU-Angemessenheitsbeschluss, und die Wikimedia Foundation (USA) nennt keine Zertifizierung nach dem EU-US Data Privacy Framework. Deine Daten könnten dort von Behörden ohne den Schutz abgerufen werden, den du in der EU hast. Mit der Freigabe der Online-Suche willigst du ausdrücklich in diese Übermittlungen ein (Art. 49 Abs. 1 lit. a DSGVO).',
+      'consent.search.allow':'Online-Suche erlauben',
+      'consent.search.local':'Nur lokalen Katalog nutzen','consent.load':'Chart laden','consent.cancel':'Abbrechen',
+      'priv.title':'Datenschutz-Einstellungen',
+      'priv.charts.title':'Kurscharts (TradingView)',
+      'priv.search.title':'Online-Suche (Wikidata, CoinGecko, Wikimedia Commons)',
+      'priv.on':'Erlaubt seit {date}',
+      'priv.off':'Nicht erlaubt',
+      'priv.allow.charts':'Charts erlauben',
+      'priv.allow.search':'Online-Suche erlauben',
+      'priv.withdrawn.charts':'Einwilligung widerrufen. Charts wurden geschlossen.',
+      'priv.withdrawn.search':'Einwilligung widerrufen. Die Online-Suche ist aus.',
+      'priv.allowed.charts':'Charts erlaubt.',
+      'priv.allowed.search':'Online-Suche erlaubt.','priv.intro':'Finplanr lädt standardmäßig nichts von Dritten. Zwei Funktionen brauchen deine ausdrückliche Einwilligung: Kurscharts und Online-Suche.',
+
+      'priv.withdraw':'Einwilligung widerrufen',
       'priv.note':'Der Widerruf löscht keine Daten, die TradingView in deinem Browser gespeichert haben könnte; du kannst sie in den Browser-Einstellungen entfernen (Websitedaten für tradingview-widget.com).',
-      'priv.policy':'Datenschutzerklärung','priv.close':'Schließen','priv.withdrawn':'Einwilligung widerrufen. Charts wurden geschlossen.','priv.allowed':'Charts erlaubt.',
-      'search.note.crypto':'Die Online-Suche (Button „Suchen“ oder Enter) sendet deinen Suchbegriff und deine IP-Adresse an CoinGecko.',
-      'search.note.sec':'Die Online-Suche (Button „Suchen“ oder Enter) sendet deinen Suchbegriff und deine IP-Adresse an Wikidata und dessen Abfragedienst (Wikimedia Foundation).',
-      'search.note.img':'Die Bildersuche (Button oder Enter) sendet deinen Suchbegriff und deine IP-Adresse an Wikimedia Commons; ausgewählte Bilder werden aus dem Internet geladen.',
+      'priv.policy':'Datenschutzerklärung','priv.close':'Schließen',
+
+
+      'search.note.img':'Online-Bilder (Button oder Enter) kommen von Wikimedia Commons und brauchen deine Erlaubnis. Du kannst auch ein Symbol wählen oder eine Datei hochladen.',
+      'search.note':'Online-Ergebnisse (Button „Suchen“ oder Enter) brauchen deine Erlaubnis: Sie kommen von Servern Dritter. Der integrierte Katalog funktioniert ohne.',
       'search.note.link':'Datenschutzerklärung',
       'chart.noSymbol':'Kein Chart-Symbol hinterlegt – im Bearbeitungsmodus eintragen, z. B. XETR:VWCE',
       'chart.error':'Der Chart konnte nicht geladen werden (offline oder durch einen Inhaltsblocker blockiert). Du kannst ihn stattdessen auf TradingView öffnen.',
@@ -697,10 +774,14 @@
       'modal.status.images':'Bilder über Wikimedia Commons suchen oder ein Symbol wählen.',
       'modal.status.typing':'Katalog wird durchsucht; für weitere Treffer auf „Suchen“ klicken.',
       'modal.status.offline':'Offline: Suche nur im integrierten Katalog.',
+      'modal.status.localOnly':'Online-Suche nicht erlaubt. Es werden nur Treffer aus dem lokalen Katalog gezeigt.',
+      'modal.status.searchOff':'Die Online-Suche wurde ausgeschaltet. Es werden nur lokale Treffer gezeigt.',
+      'modal.status.needConsent':'Die Online-Suche braucht zuerst deine Erlaubnis.',
+      'modal.status.savingCopy':'Lokale Kopie des Bildes wird gespeichert …',
       'modal.status.running':'Lokale Treffer angezeigt. Online-Suche läuft …',
-      'modal.status.failed':'Online-Daten sind gerade nicht verfügbar (Netzwerk, CORS oder Limit). Katalog und externe Links funktionieren weiterhin.',
+      'modal.status.failed':'Online-Daten sind gerade nicht verfügbar (Netzwerk, CORS oder Limit). Der integrierte Katalog funktioniert weiterhin.',
       'modal.status.found':'Treffer aus Katalog und Online-Suche ({n} online). Nur passende Einträge wählen und Kennungen prüfen.',
-      'modal.status.none':'Online-Suche abgeschlossen. Keine zusätzlichen Treffer; Katalog und externe Suche bleiben verfügbar.',
+      'modal.status.none':'Online-Suche abgeschlossen. Keine zusätzlichen Treffer; der integrierte Katalog bleibt verfügbar.',
       'modal.status.needImageTerm':'Bitte einen Suchbegriff für Bilder eingeben.','modal.status.needSymbol':'Bitte ein Symbol eingeben.',
       'modal.status.needUrl':'Bitte eine gültige https://-Bildadresse eingeben.','modal.status.badFile':'Bitte PNG/JPG/WebP/GIF mit höchstens 150 KB auswählen.',
       'modal.status.fileFail':'Das Bild konnte nicht gespeichert werden.',
@@ -718,9 +799,22 @@
       'img.searching':'Wikimedia Commons wird durchsucht …','img.src':'Wikimedia Commons · nur bei richtiger Zuordnung wählen; Lizenz und Namensnennung auf der Dateiseite prüfen','img.filepage':'Dateiseite ↗',
       'img.none':'Keine passenden Bilder gefunden. Bildadresse oder Upload verwenden.',
       'img.unavailable':'Bildsuche nicht verfügbar. Eigene Datei oder Bildadresse verwenden.',
-      'toast.assetApplied':'Stammdaten übernommen – bitte Kennungen prüfen.','toast.iconApplied':'Symbol/Logo übernommen.',
+      'offer.title':'Logo für {name} wählen',
+      'offer.help':'Dieser Treffer kam ohne Logo. Suche bei Wikimedia Commons nach einem oder überspringe den Schritt und behalte das Buchstaben-Symbol. Später kannst du es im Bearbeitungsmodus über „◉ Logo“ ändern.',
+      'offer.preview.aria':'Aktuelles Symbol von {name}','offer.preview.note':'So wird die Position angezeigt, bis du ein Logo wählst.',
+      'offer.status.pick':'Wähle ein Logo nur, wenn es wirklich zu dieser Position passt. „Überspringen“ behält das Buchstaben-Symbol.',
+      'search.note.offer':'Online-Logos kommen von Wikimedia Commons und brauchen deine Erlaubnis.',
+      'offer.skip':'Überspringen','offer.never':'Beim Hinzufügen kein Logo vorschlagen','offer.results.aria':'Logo-Vorschläge für {name}',
+      'img.none.offer':'Kein passendes Logo gefunden. Überspringe den Schritt, um das Buchstaben-Symbol zu behalten, oder lade später im Bearbeitungsmodus über „◉ Logo“ eine eigene Datei hoch.',
+      'img.unavailable.offer':'Die Logo-Suche ist gerade nicht verfügbar. Überspringe den Schritt, um das Buchstaben-Symbol zu behalten; ein Logo kannst du später im Bearbeitungsmodus hinzufügen.',
+      'toast.offer.on':'Beim Hinzufügen einer Position wird eine Logo-Suche angeboten.',
+      'toast.offer.off':'Beim Hinzufügen wird kein Logo mehr vorgeschlagen. Du kannst das in den Einstellungen wieder einschalten.',
+      'set.offer':'Beim Hinzufügen einer Position eine Logo-Suche anbieten',
+      'set.offer.desc':'Standardmäßig an. Nach dem Übernehmen eines Treffers ohne Logo bietet Finplanr an, bei Wikimedia Commons nach einem zu suchen. Die Online-Suche braucht zuerst deine Erlaubnis; ohne Logo zeigt die Position ein Buchstaben-Symbol.',
+      'toast.assetApplied':'Stammdaten übernommen – bitte Kennungen prüfen.',
+      'toast.imgExternal':'Lokale Kopie konnte nicht gespeichert werden. Dieses Logo wird bei jedem Besuch vom ursprünglichen Server geladen; lade das Bild als Datei hoch, um das zu vermeiden.','toast.iconApplied':'Symbol/Logo übernommen.',
       'cg.label':'Kryptodaten:','cg.link':'Powered by CoinGecko API','foot.legal':'Impressum','foot.privacylink':'Datenschutz','foot.privacySettings':'Datenschutz-Einstellungen',
-      'foot.note':'Planungswerkzeug, keine Anlageberatung. Deine Daten bleiben in diesem Browser.',
+      'foot.note':'Planungswerkzeug, keine Anlageberatung.',
       'foot.guide':'Anleitung'
     }
   };
@@ -842,12 +936,12 @@
     {type:'stock',name:'BMW AG',isin:'DE0005190003',wkn:'519000',ticker:'BMW',tv:'XETR:BMW'}, {type:'stock',name:'BASF SE',isin:'DE000BASF111',wkn:'BASF11',ticker:'BAS',tv:'XETR:BAS'}
   ];
   const CATALOG_BY_ISIN=new Map(ASSET_CATALOG.filter(a=>a.isin).map(a=>[a.isin,a]));
-  // Accepts current files and older ones (format 'mein-sparplan-v2'); a stored `language` is ignored. `autoSort` (keep sorted by size) defaults to true when missing.
+  // Accepts current files and older ones (format 'mein-sparplan-v2'); a stored `language` is ignored. `autoSort` (keep sorted by size) and `offerLogo` (offer a logo search after applying a result) default to true when missing.
   function validate(raw){
     if(!raw||typeof raw!=='object'||!Array.isArray(raw.categories)||raw.categories.length>80||raw.categories.length<1)throw Error(t('err.invalidFile'));
     const allowCents=raw.allowCents===true;
     const amount=clamp(Number(raw.budget)||0,0,100000000);
-    const result={budget:allowCents?Math.round(amount*100)/100:Math.round(amount),allowCents,autoSort:raw.autoSort!==false,categories:[]};
+    const result={budget:allowCents?Math.round(amount*100)/100:Math.round(amount),allowCents,autoSort:raw.autoSort!==false,offerLogo:raw.offerLogo!==false,categories:[]};
     const ids=new Set();
     for(const c of raw.categories){
       if(!c||typeof c!=='object'||!Array.isArray(c.items)||c.items.length>300)throw Error(t('err.invalidItems'));
@@ -861,6 +955,7 @@
       }
       const category={id,name:String(c.name||t('cat.unnamed')).slice(0,100),type,color,icon:String(c.icon||typeEmoji[type]||'◇').slice(0,8),iconUrl:cleanImg(c.iconUrl),locked:!!c.locked,rebalanceWith:String(c.rebalanceWith||'auto').slice(0,80),weight:clamp(Number(c.weight)||0,0,1e9),items:[]};
       if(nameKey)category.nameKey=nameKey;
+      if(c.iconExternal===true&&/^https:/i.test(category.iconUrl))category.iconExternal=true; // logo still loads from its original server (copy failed)
       const itemIds=new Set();
       for(const it of c.items){
         if(!it||typeof it!=='object')throw Error(t('err.invalidItem'));
@@ -873,6 +968,7 @@
         if(known){if(!item.ticker&&known.ticker)item.ticker=known.ticker;if(!item.tv&&known.tv)item.tv=known.tv;}
         else if(type==='crypto'&&!item.tv&&COINS[item.ticker.trim().toUpperCase()])item.tv='KRAKEN:'+item.ticker.trim().toUpperCase()+'EUR';
         if(itemKey)item.nameKey=itemKey;
+        if(it.iconExternal===true&&/^https:/i.test(item.iconUrl))item.iconExternal=true;
         category.items.push(item);
       }
       result.categories.push(category);
@@ -884,7 +980,7 @@
   try{const saved=localStorage.getItem(STORAGE_KEY);if(saved)state=validate(JSON.parse(saved));}catch(e){console.warn('Local data not loaded',e);}
   try{const saved=localStorage.getItem(RESET_KEY);if(saved){const parsed=JSON.parse(saved);resetPoint=validate(parsed.portfolio||parsed);resetSavedAt=parsed.savedAt||null;resetSource=cleanSource(parsed.source);}}catch(e){console.warn('Reset point not loaded',e);}
   function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){console.warn('Local storage not available',e);}}
-  function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2350);}
+  function toast(message,ms=2350){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),ms);}
   function ratios(items){if(!items.length)return [];const sum=items.reduce((s,c)=>s+Math.max(0,Number(c.weight)||0),0);return sum>0?items.map(c=>Math.max(0,Number(c.weight)||0)/sum):items.map(()=>1/items.length);}
   function categoryRatios(){const active=state.categories.filter(c=>c.items.length);if(!active.length)return state.categories.map(()=>0);const positive=active.some(c=>c.weight>0);return ratios(state.categories.map(c=>({...c,weight:c.items.length?(positive?c.weight:1):0})));}
   function setRelative(group,id,p){
@@ -997,16 +1093,60 @@
   const editFieldsFor=cat=>cat.type==='cash'?fieldsFor(cat):[...fieldsFor(cat),'tv'];
   const fieldLabel=key=>key==='ticker'?t('f.ticker'):key==='tv'?t('f.tv'):key.toUpperCase();
   const fieldTip=key=>key==='wkn'?t('tip.wkn'):key==='tv'?t('tip.tv'):'';
-  function visualIcon(img,emoji){
+  // The ONE place that creates <img> elements for images that may come from another server (search results, hotlinked logos).
+  // crossorigin="anonymous": the browser loads the image in CORS mode without credentials, so it sends no cookies and ignores Set-Cookie from the image host.
+  // referrerpolicy="no-referrer": no Referer.
+  // hotlink (a logo whose local copy failed): tried in CORS mode first; only if the host sends no CORS headers the capture listener below retries once as a plain image (still without Referer).
+  function remoteImg(src,{cls='',style='',hotlink=false,onerror=''}={}){
+    return `<img${cls?` class="${cls}"`:''} alt="" src="${esc(src)}" crossorigin="anonymous" referrerpolicy="no-referrer" loading="lazy"${hotlink?' data-hotlink':''}${onerror&&!hotlink?` onerror="${onerror}"`:''}${style?` style="${style}"`:''}>`;
+  }
+  document.addEventListener('error',e=>{
+    const img=e.target;
+    if(!(img instanceof HTMLImageElement)||!img.hasAttribute('data-hotlink'))return;
+    if(img.hasAttribute('crossorigin')){img.removeAttribute('crossorigin');img.src=img.src;}else img.remove();
+  },true);
+  function visualIcon(img,emoji,hotlink){
     // Image is optional and may fail offline. The symbol below remains visible.
-    return `<span class="mini-icon asseticon" aria-hidden="true"><span>${esc(emoji)}</span>${img?`<img alt="" src="${esc(img)}" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#f4f6fa">`:''}</span>`;
+    return `<span class="mini-icon asseticon" aria-hidden="true"><span>${esc(emoji)}</span>${img?remoteImg(img,{hotlink,onerror:'this.remove()',style:'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#f4f6fa'}):''}</span>`;
   }
-  function assetPic(cat,it){
+  // ---- Letter badge: the local fallback icon of a holding without logo and without own symbol. No image, no request, nothing stored.
+  // Text: ticker (at most 4 letters/digits) or the initials of the name (at most 3). Colour: derived from the name (palette of the categories).
+  const LEGAL_RE=/(?:[\s,]+(?:inc\.?|incorporated|corp\.?|corporation|co\.?|company|ltd\.?|limited|plc|se|ag|nv|n\.v\.|s\.a\.|sa|sas|spa|s\.p\.a\.|gmbh|kgaa|llc|lp|ab|oyj|group|holdings?))+$/i;
+  const logoCore=name=>{let s=String(name||'').replace(/\([^)]*\)/g,' ').replace(/\bUCITS\s+ETF\b|\bUCITS\b|\bETF\b|\bETC\b/gi,' ').replace(/\s+/g,' ').replace(/^[\s,]+|[\s,]+$/g,'');for(let i=0;i<4;i++){const n=s.replace(LEGAL_RE,'').trim();if(!n||n===s)break;s=n;}return s.split(' ').slice(0,5).join(' ').slice(0,60).trim();};
+  const logoQuery=name=>{const core=logoCore(name)||String(name||'').trim().slice(0,60);return core?core+' logo':'';};
+  const monoText=(name,ticker)=>{
+    const tk=String(ticker||'').replace(/[^\p{L}\p{N}]/gu,'');
+    if(tk)return Array.from(tk).slice(0,4).join('').toLocaleUpperCase();
+    const core=logoCore(name),words=core.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+    if(!words.length)return '';
+    if(words.length===1)return /^[\p{Lu}\p{N}]{2,4}$/u.test(words[0])?words[0]:Array.from(words[0]).slice(0,2).join('').toLocaleUpperCase();
+    return words.slice(0,3).map(w=>Array.from(w)[0]).join('').toLocaleUpperCase();
+  };
+  const lumOf=hex=>{const c=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];};
+  const contrastOf=(a,b)=>{const x=lumOf(a),y=lumOf(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
+  const mixHex=(hex,to,k)=>'#'+[1,3,5].map(i=>{const a=parseInt(hex.slice(i,i+2),16),b=parseInt(to.slice(i,i+2),16);return Math.round(a+(b-a)*k).toString(16).padStart(2,'0');}).join('');
+  function badgeColors(name){
+    const s=String(name||'').toLocaleLowerCase('de').trim();let h=2166136261;
+    for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
+    let bg=colors[h%colors.length];const dark='#17263a';
+    let fg=contrastOf(bg,'#ffffff')>=contrastOf(bg,dark)?'#ffffff':dark;
+    for(let i=0;i<8&&contrastOf(bg,fg)<4.5;i++)bg=mixHex(bg,fg==='#ffffff'?'#000000':'#ffffff',.12); // keep text readable (WCAG AA)
+    return {bg,fg};
+  }
+  function monogramHtml(name,ticker,scale=1){
+    const txt=monoText(name,ticker);if(!txt)return '';
+    const {bg,fg}=badgeColors(name||ticker),n=Array.from(txt).length;
+    return `<span class="mini-icon asseticon monogram" aria-hidden="true" data-mono="${esc(txt)}" style="background:${bg};color:${fg};font-size:${Math.round(([0,15,13,11,9][n]||9)*scale)}px">${esc(txt)}</span>`;
+  }
+  // Holdings (not cash, not the empty placeholder) without logo and without own symbol get the letter badge instead of the type glyph.
+  const needsBadge=(cat,it)=>cat.type!=='cash'&&!(it.nameKey==='item.new'&&!it.ticker)&&!it.icon&&!cleanImg(it.iconUrl)&&!autoLogo(cat.type,it);
+  function assetPic(cat,it,scale){
     // A user-picked logo (iconUrl) wins; a custom emoji suppresses the automatic one; otherwise resolve it now (not stored).
-    const img=cleanImg(it.iconUrl)||(it.icon?'':autoLogo(cat.type,it));
-    return visualIcon(img,it.icon||typeEmoji[cat.type]||'◇');
+    const own=cleanImg(it.iconUrl),img=own||(it.icon?'':autoLogo(cat.type,it));
+    if(needsBadge(cat,it)){const m=monogramHtml(itemName(it),it.ticker,scale);if(m)return m;}
+    return visualIcon(img,it.icon||typeEmoji[cat.type]||'◇',!!own&&it.iconExternal===true);
   }
-  function catPic(cat){return visualIcon(cleanImg(cat.iconUrl),cat.icon||typeEmoji[cat.type]||'◇');}
+  function catPic(cat){return visualIcon(cleanImg(cat.iconUrl),cat.icon||typeEmoji[cat.type]||'◇',cat.iconExternal===true);}
   function copyChip(key,value){
     if(!value)return '';
     const field=fieldLabel(key),tip=fieldTip(key);
@@ -1069,23 +1209,98 @@
     if(cat.type==='etf'||cat.type==='etc')return 'XETR:'+tk;
     return '';
   }
-  // Consent for TradingView. Stored as {v:1,granted:true,ts}; if storage is unavailable, consent only lasts for this page view.
-  let memConsent=null;
-  function getConsent(){
-    try{const r=JSON.parse(localStorage.getItem(CONSENT_KEY)||'null');return r&&r.v===1&&r.granted===true?{ts:typeof r.ts==='string'?r.ts:''}:null;}
-    catch(e){return memConsent;}
+  // ---- Consent store (one key, two purposes). The IN-MEMORY state is authoritative for this page view; localStorage is only the
+  // persistence / sync channel between page views and tabs. Without usable storage, consent lasts for the current page view only.
+  const PURPOSES=['charts','search'];
+  const consentMem={charts:null,search:null};      // null | {ts}: what is allowed right now
+  const consentStale={charts:null,search:null};    // ts of a stored record that was withdrawn here but could not be removed: it must never re-grant
+  const consentMemOnly={charts:false,search:false}; // granted here, but could not be stored (lasts for this page view)
+  const consentEntry=r=>r&&typeof r==='object'&&r.granted===true?{ts:typeof r.ts==='string'?r.ts:''}:null;
+  function parseJson(raw){try{return raw?JSON.parse(raw):null;}catch(e){return null;}}
+  // Reads the stored record ({charts,search}, each null or {ts}); null if storage is unavailable. The old v1 key is never read.
+  function readStoredConsent(){
+    try{
+      const out={charts:null,search:null},rec=parseJson(localStorage.getItem(CONSENT_KEY));
+      if(rec&&typeof rec==='object'&&rec.v===2)PURPOSES.forEach(p=>{out[p]=consentEntry(rec[p]);});
+      return out;
+    }catch(e){return null;}
   }
-  function grantConsent(){
-    const rec={v:1,granted:true,ts:new Date().toISOString()};
-    memConsent={ts:rec.ts};
-    try{localStorage.setItem(CONSENT_KEY,JSON.stringify(rec));}catch(e){}
+  // Re-reads storage into memory (e.g. after another tab changed it). Records withdrawn in this page view stay withdrawn.
+  function syncConsent(){
+    const st=readStoredConsent();if(!st)return;
+    PURPOSES.forEach(p=>{
+      const s=st[p];
+      if(s){
+        if(consentStale[p]!==null&&s.ts===consentStale[p])return; // the very record we withdrew but could not delete
+        consentMem[p]=s;consentStale[p]=null;consentMemOnly[p]=false;
+      }else{
+        consentStale[p]=null;
+        if(!consentMemOnly[p])consentMem[p]=null;
+      }
+    });
   }
-  function withdrawConsent(){
-    memConsent=null;
-    try{localStorage.removeItem(CONSENT_KEY);}catch(e){}
-    // Remove any open chart (panel, TradingView script and iframe nodes) immediately.
-    if(openChart){closeChart();}
-    document.querySelectorAll('.chart-panel,.tradingview-widget-container,iframe[src*="tradingview"]').forEach(n=>n.remove());
+  function persistConsent(){
+    try{
+      if(PURPOSES.some(p=>consentMem[p])){
+        const rec={v:2};PURPOSES.forEach(p=>{if(consentMem[p])rec[p]={granted:true,ts:consentMem[p].ts};});
+        localStorage.setItem(CONSENT_KEY,JSON.stringify(rec));
+      }else localStorage.removeItem(CONSENT_KEY);
+      localStorage.removeItem(OLD_CONSENT_KEY);
+      PURPOSES.forEach(p=>{consentStale[p]=null;consentMemOnly[p]=false;});
+      return true;
+    }catch(e){return false;}
+  }
+  // Read-through accessor: always checks storage first, so a withdrawal in another tab is respected even without the storage event.
+  function consentFresh(p){syncConsent();return consentMem[p];}
+  function grantConsent(p){
+    syncConsent();
+    consentMem[p]={ts:new Date().toISOString()};consentStale[p]=null;
+    if(!persistConsent())consentMemOnly[p]=true;
+  }
+  function withdrawConsent(p){
+    const st=readStoredConsent();
+    const oldTs=consentMem[p]?consentMem[p].ts:(st&&st[p]?st[p].ts:null);
+    consentMem[p]=null;consentMemOnly[p]=false; // memory first
+    if(!persistConsent()&&oldTs!==null)consentStale[p]=oldTs;
+    if(p==='charts')dropCharts();else dropSearch();
+  }
+  // Startup: delete the unused language key and the old v1 consent key (visitors are asked again), then load the stored consent.
+  function initConsent(){
+    try{localStorage.removeItem(LEGACY_LANG_KEY);localStorage.removeItem(OLD_CONSENT_KEY);}catch(e){}
+    const st=readStoredConsent();if(!st)return;
+    PURPOSES.forEach(p=>{consentMem[p]=st[p];});
+  }
+  // Another tab changed the consent: re-read and react. Withdrawn charts disappear at once, withdrawn search stops running requests.
+  function onConsentChanged(){
+    const had={charts:!!consentMem.charts,search:!!consentMem.search};
+    syncConsent();
+    if(had.charts&&!consentMem.charts)dropCharts();
+    if(had.search&&!consentMem.search)dropSearch();
+    if(privOpen())renderPrivacy();
+  }
+  window.addEventListener('storage',e=>{if(e.key===null||e.key===CONSENT_KEY)onConsentChanged();});
+  window.addEventListener('focus',onConsentChanged);window.addEventListener('pageshow',e=>{if(e.persisted)onConsentChanged();});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)onConsentChanged();});
+  // Remove the chart panel and every TradingView node (script, iframe) from this tab.
+  function dropCharts(){
+    if(openChart)closeChart();
+    document.querySelectorAll('.chart-panel,.tradingview-widget-container,iframe[src*="tradingview"],script[src*="tradingview"]').forEach(n=>n.remove());
+  }
+  // Stop running online requests, forget online results (local results stay), and ask again on the next online search.
+  function dropSearch(){
+    ++requestSeq;abortSearchRequests();hideSearchConsent();
+    if(!modalCtx)return;
+    imageView=null;$('#imageMatches').innerHTML='';
+    const q=$('#modalQuery').value.trim();
+    if(modalCtx.itemId&&!modalCtx.logoOnly&&q)renderMatches(localMatches(q));else{modalMatches=[];$('#modalResults').innerHTML='';$('#cgCredit').classList.add('hidden');}
+    statusModal('modal.status.searchOff');
+    if(modalCtx.offer)showSearchConsent('images'); // step 2: results are gone, ask again (Allow / Skip)
+  }
+  const consentPolicyUrl=()=>privacyUrl()+(lang==='en'?'#consent':'#einwilligung');
+  // The information shown BEFORE a consent is given. One source for both places (consent box and Privacy settings), so they never differ.
+  function consentInfoHtml(p){
+    const parts=p==='charts'?['consent.charts.provider','consent.charts.risk']:['consent.search.providers','consent.search.data','consent.search.risk'];
+    return `<div class="consent-info" data-consent-info="${p}">${parts.map(k=>`<p>${esc(t(k))}</p>`).join('')}<p>${esc(t('consent.more'))} <a href="${esc(consentPolicyUrl())}" target="_blank" rel="noopener noreferrer">${esc(t('consent.policy'))}</a></p></div>`;
   }
   const chartEntry=(catId,itemId)=>[...document.querySelectorAll('[data-entry]')].find(e=>e.dataset.entry===itemId&&e.dataset.cat===catId)||null;
   function closeChart(focus){
@@ -1104,6 +1319,7 @@
     const panel=$('#chartPanel');if(focus&&panel){panel.tabIndex=-1;panel.focus({preventScroll:true});}
   }
   function loadChartWidget(body,sym){
+    if(!consentFresh('charts'))return; // last check right before anything from TradingView is requested
     const wrap=document.createElement('div');wrap.className='tradingview-widget-container';
     const inner=document.createElement('div');inner.className='tradingview-widget-container__widget';
     const s=document.createElement('script');
@@ -1123,9 +1339,9 @@
     const link=sym?'https://www.tradingview.com/chart/?symbol='+encodeURIComponent(sym):'https://www.tradingview.com/';
     const panel=document.createElement('div');
     panel.className='chart-panel';panel.id='chartPanel';panel.setAttribute('role','region');panel.setAttribute('aria-label',t('chart.aria',{name}));
-    const consent=sym?getConsent():null;
+    const consent=sym?consentFresh('charts'):null;
     const head=`<div class="chart-head"><strong class="chart-title">${esc(sym?t('chart.title',{symbol:sym}):name)}</strong>${!sym||consent?`<a class="chart-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${esc(t(sym?'chart.open':'chart.openHome'))}</a>`:''}<button type="button" class="btn small icononly" data-chart-close aria-label="${esc(t('chart.close'))}" title="${esc(t('chart.close'))}">✕</button></div>`;
-    const consentBox=`<div class="consent-box" data-consent-box><p>${esc(t('consent.text'))} <a href="${esc(privacyUrl())}" target="_blank" rel="noopener noreferrer">${esc(t('consent.policy'))}</a></p><div class="consent-actions"><button type="button" class="btn primary small" data-chart-consent>${esc(t('consent.load'))}</button><a class="chart-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${esc(t('chart.open'))}</a><button type="button" class="btn small" data-chart-close>${esc(t('consent.cancel'))}</button></div></div>`;
+    const consentBox=`<div class="consent-box" data-consent-box>${consentInfoHtml('charts')}<div class="consent-actions"><button type="button" class="btn primary small" data-chart-consent>${esc(t('consent.load'))}</button><a class="chart-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${esc(t('chart.open'))}</a><button type="button" class="btn small" data-chart-close>${esc(t('consent.cancel'))}</button></div></div>`;
     panel.innerHTML=head+(sym?(consent?`<div class="chart-body"><div class="chart-loading">${esc(t('chart.loading'))}</div></div>`:consentBox):`<p class="chart-hint">${esc(t('chart.noSymbol'))}</p>`);
     entry.appendChild(panel);
     const btn=entry.querySelector('[data-chart-toggle]');
@@ -1152,7 +1368,7 @@
     $('#editLabel').textContent=editMode?t('mode.edit'):t('mode.view');
     $('#addCategory').classList.toggle('hidden',!editMode);
     $('#globalSortBar').classList.toggle('hidden',!editMode);
-    $('#autoSort').checked=state.autoSort;$('#sortTools').classList.toggle('hidden',state.autoSort);if(!state.autoSort)$('#sortHint').textContent=t('sort.hint');
+    $('#autoSort').checked=state.autoSort;$('#offerLogo').checked=state.offerLogo;$('#sortTools').classList.toggle('hidden',state.autoSort);if(!state.autoSort)$('#sortHint').textContent=t('sort.hint');
     $('#allowCents').checked=state.allowCents;
     $('#monthlyBudget').step=state.allowCents?'0.01':'1';
     $('#monthlyBudget').inputMode=state.allowCents?'decimal':'numeric';
@@ -1278,7 +1494,7 @@
     }else if(editMode&&el.hasAttribute('data-cat-color')){
       const c=state.categories.find(c=>c.id===el.dataset.catColor);if(c&&/^#[0-9a-f]{6}$/i.test(el.value)){c.color=el.value;persist();const sec=el.closest('.section');if(sec)sec.style.setProperty('--accent',c.color);updateNumbers();}
     }else if(editMode&&el.hasAttribute('data-cat-icon')){
-      const c=state.categories.find(c=>c.id===el.dataset.catIcon);if(c){c.icon=el.value.slice(0,8);c.iconUrl='';persist();const symbol=el.closest('.section')?.querySelector('.catsymbol');if(symbol)symbol.innerHTML=catPic(c);}
+      const c=state.categories.find(c=>c.id===el.dataset.catIcon);if(c){c.icon=el.value.slice(0,8);c.iconUrl='';delete c.iconExternal;persist();const symbol=el.closest('.section')?.querySelector('.catsymbol');if(symbol)symbol.innerHTML=catPic(c);}
     }else if(editMode&&el.hasAttribute('data-rename-cat')){
       const c=state.categories.find(c=>c.id===el.dataset.renameCat);if(c){c.name=el.value;delete c.nameKey;persist();}
     }
@@ -1314,7 +1530,7 @@
       return;
     }
     if(b.hasAttribute('data-chart-close')){closeChart(true);return;}
-    if(b.hasAttribute('data-chart-consent')){grantConsent();remountChart(true);return;}
+    if(b.hasAttribute('data-chart-consent')){grantConsent('charts');remountChart(true);return;}
     if(b.hasAttribute('data-chart-toggle')){if(!editMode)toggleChart(b);return;}
     if(!editMode)return;
     if(b.hasAttribute('data-find-item')){openSearchModal(b.dataset.cat,b.dataset.findItem,false);return;}
@@ -1430,6 +1646,7 @@
   $('#monthlyBudget').addEventListener('input',cancelSort);
   $('#monthlyBudget').addEventListener('change',()=>scheduleSort(450));
   ['#exportJson','#exportCsv'].forEach(q=>$(q).addEventListener('click',flushSort));
+  $('#offerLogo').addEventListener('change',e=>{state.offerLogo=e.target.checked;persist();toast(t(state.offerLogo?'toast.offer.on':'toast.offer.off'));});
   $('#autoSort').addEventListener('change',e=>{state.autoSort=e.target.checked;cancelSort();persist();render();toast(t(state.autoSort?'toast.sort.on':'toast.sort.off'));});
   $('#sortAllAsc').addEventListener('click',()=>sortAll('asc'));
   $('#sortAllDesc').addEventListener('click',()=>sortAll('desc'));
@@ -1500,21 +1717,22 @@
   }
   function makeLinks(query,src){
     const q=encodeURIComponent(query);
-    const links=src==='crypto'?
-      [['CoinGecko','https://www.coingecko.com/en/search?query='+q]]:
-      [['justETF','https://www.justetf.com/'+(lang==='de'?'de':'en')+'/search.html?search=ETFS&query='+q],['Finanzfluss','https://www.finanzfluss.de/informer/etf/suche/?q='+q]];
+    // Plain links the user may open in a new tab (no request from this page). Only crypto has one; the stocks row stays empty and hidden.
+    const links=src==='crypto'?[['CoinGecko','https://www.coingecko.com/en/search?query='+q]]:[];
     $('#modalLinks').innerHTML=links.map(([name,url])=>`<a target="_blank" rel="noopener noreferrer" href="${esc(url)}">${esc(t('modal.searchOn',{name}))}</a>`).join('');
+    $('#modalLinks').classList.toggle('hidden',!links.length);
   }
   function setModalTexts(){
     const c=modalCategory();if(!c||!modalCtx)return;
-    const {itemId,logoOnly}=modalCtx;
-    $('#modalTitle').textContent=t(itemId?(logoOnly?'modal.title.logo':'modal.title.find'):'modal.title.cat');
-    $('#modalHelp').textContent=t(!itemId?'modal.help.cat':logoOnly?'modal.help.logo':'modal.help.find');
-    $('#modalQuery').placeholder=t(logoOnly?'modal.ph.image':'modal.ph.find');
+    const {itemId,logoOnly,offer}=modalCtx,offerName=offer&&modalItem()?itemName(modalItem()):'';
+    $('#modalTitle').textContent=offer?t('offer.title',{name:offerName}):t(itemId?(logoOnly?'modal.title.logo':'modal.title.find'):'modal.title.cat');
+    $('#modalHelp').textContent=offer?t('offer.help'):t(!itemId?'modal.help.cat':logoOnly?'modal.help.logo':'modal.help.find');
+    $('#modalQuery').placeholder=t(logoOnly?'modal.ph.image':'modal.ph.find');$('#modalQuery').setAttribute('aria-label',$('#modalQuery').placeholder);
     document.querySelectorAll('#emojiOptions [data-emoji]').forEach(b=>{b.title=t('modal.iconTip',{icon:b.dataset.emoji});});
     makeLinks($('#modalQuery').value||catName(c),modalSource());syncSrcSwitch();
+    if(pendingOnline)showSearchConsent(pendingOnline,true);
     // Persistent notice: which third party an online search contacts (shown before any request can happen); it follows the selected source.
-    const key=logoOnly?'search.note.img':!itemId?null:modalSource()==='crypto'?'search.note.crypto':'search.note.sec';
+    const key=logoOnly?(offer?'search.note.offer':'search.note.img'):!itemId?null:'search.note';
     const note=$('#searchNote');note.classList.toggle('hidden',!key);
     note.innerHTML=key?`${esc(t(key))} <a href="${esc(privacyUrl())}" data-privacy-link target="_blank" rel="noopener noreferrer">${esc(t('search.note.link'))}</a>`:'';
   }
@@ -1523,10 +1741,11 @@
     modalCtx={catId,itemId,logoOnly,seq:++requestSeq,src:defaultSource(c.type)};
     const it=itemId?c.items.find(x=>x.id===itemId):null;
     $('#modalQuery').value=it&&it.nameKey!=='item.new'?itemName(it):'';
-    $('#modalResults').innerHTML='';$('#imageMatches').innerHTML='';modalMatches=[];imageView=null;
+    $('#modalResults').innerHTML='';$('#imageMatches').innerHTML='';modalMatches=[];imageView=null;hideSearchConsent();
     $('#imageUrl').value=it?.iconUrl||c.iconUrl||'';$('#customSymbol').value=it?.icon||c.icon||'';
     $('#imagePanel').classList.toggle('hidden',!logoOnly);
     $('#modalSearch').classList.toggle('hidden',!itemId||logoOnly);
+    $('#modalBox').classList.remove('offer');$('#offerFoot').classList.add('hidden');renderOfferPreview();
     $('#emojiOptions').innerHTML=logoOnly?iconPicks.map(i=>`<button type="button" class="iconoption" data-emoji="${esc(i)}">${esc(i)}</button>`).join(''):'';
     setModalTexts();
     statusModal(itemId&&!logoOnly?'modal.status.catalog':'modal.status.images');
@@ -1538,10 +1757,43 @@
       renderMatches(localMatches(q));makeLinks(q,modalSource());statusModal('modal.status.typing');
     }
   }
-  function closeSearchModal(){
-    ++requestSeq;modalCtx=null;modalMatches=[];imageView=null;modalStatusState=null;$modal.classList.add('hidden');document.body.style.overflow='';
+  // Step 2 ("offer a logo") is left by Skip, a pick, Esc, the backdrop or Close: a ticked "don't offer again" box then switches the setting off.
+  function leaveOffer(){
+    if(!modalCtx?.offer||!$('#offerNever').checked)return false;
+    state.offerLogo=false;persist();$('#offerLogo').checked=false;return true;
+  }
+  function closeSearchModal(opts){
+    const switchedOff=leaveOffer();
+    ++requestSeq;abortSearchRequests();hideSearchConsent();modalCtx=null;modalMatches=[];imageView=null;modalStatusState=null;$modal.classList.add('hidden');document.body.style.overflow='';
     ['#modalResults','#imageMatches','#modalLinks','#modalStatus','#emojiOptions'].forEach(sel=>{$(sel).innerHTML='';});
     $('#modalTitle').textContent='';$('#modalHelp').textContent='';$('#modalQuery').placeholder='';$('#searchNote').innerHTML='';
+    $('#modalBox').classList.remove('offer');$('#offerFoot').classList.add('hidden');renderOfferPreview();$('#imageMatches').removeAttribute('aria-label');
+    if(switchedOff&&!(opts&&opts.quiet))toast(t('toast.offer.off'),5000);
+    return switchedOff;
+  }
+  // Step 2 of adding a holding: the same dialog offers a logo search (Wikimedia Commons). Nothing is requested before the 'search' consent.
+  function renderOfferPreview(){
+    const box=$('#offerPreview'),c=modalCategory(),it=modalItem();
+    if(!modalCtx?.offer||!c||!it){box.innerHTML='';box.classList.add('hidden');box.removeAttribute('aria-label');return;}
+    const name=itemName(it);
+    box.setAttribute('aria-label',t('offer.preview.aria',{name}));
+    box.innerHTML=`${assetPic(c,it,1.25)}<span class="matchtext"><strong>${esc(name)}</strong><small>${esc([it.ticker,it.isin].filter(Boolean).join(' · '))}${it.ticker||it.isin?' · ':''}${esc(t('offer.preview.note'))}</small></span>`;
+    box.classList.remove('hidden');
+  }
+  const offerWanted=(c,it)=>state.offerLogo&&c.type!=='cash'&&!it.iconUrl&&!it.icon&&!autoLogo(c.type,it);
+  function enterOfferStep(){
+    const it=modalItem();if(!modalCtx||!it)return;
+    ++requestSeq;abortSearchRequests();hideSearchConsent();
+    modalCtx.logoOnly=true;modalCtx.offer=true;modalMatches=[];imageView=null;
+    ['#modalResults','#imageMatches','#modalLinks'].forEach(sel=>{$(sel).innerHTML='';});$('#cgCredit').classList.add('hidden');
+    $('#modalBox').classList.add('offer');
+    $('#modalQuery').value=logoQuery(itemName(it));
+    $('#offerNever').checked=false;$('#offerFoot').classList.remove('hidden');
+    $('#imagePanel').classList.remove('hidden');$('#modalSearch').classList.remove('hidden');
+    setModalTexts();syncSrcSwitch();$('#modalLinks').classList.add('hidden');renderOfferPreview();
+    $('#imageMatches').setAttribute('aria-label',t('offer.results.aria',{name:itemName(it)}));
+    statusModal(null);$('#offerSkip').focus();
+    searchImages(); // without consent this shows the consent box and requests nothing
   }
   // Local catalog search: the 'stocks' source covers every catalog type except crypto (stocks, ETFs, ETCs), 'crypto' only the coins.
   function assetMatches(term,src){
@@ -1559,26 +1811,89 @@
     $('#cgCredit').classList.toggle('hidden',!modalMatches.some(a=>a.source==='CoinGecko'));
     $('#modalResults').innerHTML=items.length?modalMatches.map((a,i)=>{
       const logo=a.iconUrl||autoLogo(a.type,a);
-      const pic=logo?`<img class="mini-icon" alt="" loading="lazy" src="${esc(logo)}" onerror="this.style.display='none'">`:`<span class="mini-icon">◇</span>`;
+      const pic=logo?remoteImg(logo,{cls:'mini-icon',onerror:"this.style.display='none'"}):(monogramHtml(a.name,a.ticker)||`<span class="mini-icon" aria-hidden="true">◇</span>`);
       return `<button type="button" class="match" data-pick-result="${i}">${pic}<span class="matchtext"><strong>${esc(a.name||t('modal.unknown'))}</strong><small>${esc([a.ticker,a.isin,a.wkn].filter(Boolean).join(' · '))} · ${esc(sourceLabel(a.source))}${a.noteKey||a.note?`<br>${esc(a.noteKey?t(a.noteKey):a.note)}`:''}</small></span><strong style="font-size:12px;color:#4475a3">${esc(t('modal.use'))}</strong></button>`;
     }).join(''):`<p class="muted">${esc(t(modalSource()==='crypto'?'modal.none.crypto':'modal.none'))}</p>`;
   }
-  function applyAsset(data){const it=modalItem(),c=modalCategory();if(!it||!c)return;
+  // Applying a result copies a logo delivered by the search into this browser (data URL) so later visits make no third-party request.
+  let imageBusy=false;
+  async function applyAsset(data){
+    const ctx=modalCtx;if(!ctx||!modalItem()||!modalCategory()||imageBusy)return;
+    let icon=cleanImg(data.iconUrl),external=false;
+    if(/^https:/i.test(icon)){
+      if(!consentFresh('search'))icon='';
+      else{
+        imageBusy=true;statusModal('modal.status.savingCopy');
+        try{icon=await localizeImage(icon,true);}catch(e){external=true;}
+        imageBusy=false;
+        if(modalCtx!==ctx)return;
+        if(external&&!consentFresh('search')){icon='';external=false;} // withdrawn meanwhile: do not keep a third-party URL
+      }
+    }
+    const it=modalItem();if(!it)return;
     it.name=String(data.name||itemName(it)).slice(0,150);delete it.nameKey;
     // A newly picked asset replaces ticker/identifiers/chart symbol of the previous one; blanks are never invented.
     it.ticker=data.ticker?String(data.ticker).toUpperCase().slice(0,30):'';
     it.isin=data.isin?String(data.isin).toUpperCase().slice(0,32):'';
     it.wkn=data.wkn?String(data.wkn).toUpperCase().slice(0,24):'';
     it.tv=cleanTv(data.tv);
-    // Logos of known assets are resolved automatically at render time; only a logo URL delivered by the search result is stored.
-    it.iconUrl=cleanImg(data.iconUrl);it.icon='';
-    persist();render();closeSearchModal();toast(t('toast.assetApplied'));
+    // Logos of known assets are resolved automatically at render time; only a logo delivered by the search result is stored (as a local copy).
+    it.iconUrl=icon;it.icon='';if(external&&icon)it.iconExternal=true;else delete it.iconExternal;
+    persist();render();
+    if(offerWanted(modalCategory(),it))enterOfferStep();else closeSearchModal();
+    toast(t('toast.assetApplied'));
+    if(external&&icon)toast(t('toast.imgExternal'),6500);
   }
+  // Every request to CoinGecko, Wikidata or Wikimedia Commons goes through here (or localizeImage), and none starts without the 'search' consent.
+  const activeAborts=new Set();
+  function abortSearchRequests(){activeAborts.forEach(c=>c.abort());activeAborts.clear();}
   async function fetchJson(url,timeout=6500){
-    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);
-    try{const r=await fetch(url,{signal:controller.signal,headers:{'Accept':'application/json'}});if(!r.ok)throw Error('HTTP '+r.status);return await r.json();}
-    finally{clearTimeout(timer);}
+    if(!consentFresh('search'))throw Error('no consent');
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);activeAborts.add(controller);
+    try{const r=await fetch(url,{credentials:'omit',referrerPolicy:'no-referrer',signal:controller.signal,headers:{'Accept':'application/json'}});if(!r.ok)throw Error('HTTP '+r.status);return await r.json();}
+    finally{clearTimeout(timer);activeAborts.delete(controller);}
   }
+  const IMG_TYPES=['image/png','image/jpeg','image/webp','image/gif'];
+  // Copy an external image into this browser: CORS fetch -> blob (png/jpeg/webp/gif, at most 150000 bytes) -> data URL. Throws if that is not possible.
+  async function localizeImage(url,abortable){
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);if(abortable)activeAborts.add(controller);
+    try{
+      const r=await fetch(url,{mode:'cors',credentials:'omit',referrerPolicy:'no-referrer',signal:controller.signal});
+      if(!r.ok)throw Error('HTTP '+r.status);
+      const type=(r.headers.get('content-type')||'').split(';')[0].trim().toLowerCase();
+      if(!IMG_TYPES.includes(type))throw Error('type');
+      if(Number(r.headers.get('content-length')||0)>150000)throw Error('size');
+      const blob=await r.blob();
+      if(!blob.size||blob.size>150000)throw Error('size');
+      const dataUrl=await new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(String(fr.result));fr.onerror=()=>rej(fr.error);fr.readAsDataURL(new Blob([blob],{type}));});
+      const clean=cleanImg(dataUrl);if(!clean.startsWith('data:'))throw Error('invalid');
+      return clean;
+    }finally{clearTimeout(timer);activeAborts.delete(controller);}
+  }
+  // ---- Consent box of the online search (replaces the pending request; shown on Search / Enter / image search without consent).
+  let pendingOnline=null; // 'assets' | 'images': the request that runs once the user allows
+  function showSearchConsent(kind,keepStatus){
+    pendingOnline=kind;
+    const lead=kind==='images'?'img':modalSource();
+    const box=$('#searchConsent');
+    box.innerHTML=`<div class="consent-box" data-search-consent role="group" aria-label="${esc(t('priv.search.title'))}"><p><strong>${esc(t('consent.search.lead.'+lead))}</strong></p>${consentInfoHtml('search')}<div class="consent-actions"><button type="button" class="btn primary small" data-search-allow>${esc(t('consent.search.allow'))}</button>${modalCtx?.offer?`<button type="button" class="btn small" data-offer-skip>${esc(t('offer.skip'))}</button>`:`<button type="button" class="btn small" data-search-local>${esc(t('consent.search.local'))}</button>`}</div></div>`;
+    box.classList.remove('hidden');
+    if(!keepStatus){statusModal('modal.status.needConsent');box.querySelector('[data-search-allow]').focus();}
+  }
+  function hideSearchConsent(){pendingOnline=null;const box=$('#searchConsent');box.innerHTML='';box.classList.add('hidden');}
+  $('#searchConsent').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    if(b.hasAttribute('data-search-allow')){
+      const kind=pendingOnline;hideSearchConsent();grantConsent('search');
+      if(!modalCtx)return;
+      if(modalCtx.offer)$('#offerSkip').focus();else $('#modalQuery').focus();
+      if(kind==='images')searchImages();else if(kind==='assets')searchAssets();
+    }else if(b.hasAttribute('data-offer-skip')){
+      closeSearchModal();
+    }else if(b.hasAttribute('data-search-local')){
+      hideSearchConsent();statusModal('modal.status.localOnly');$('#modalQuery').focus();
+    }
+  });
   const localMatches=q=>assetMatches(q,modalSource()).map(a=>({...a,source:'catalog'}));
   // ---- Securities search via Wikidata (CC0, no API key, CORS-enabled). OpenFIGI was tested but sends no CORS headers, so browsers cannot use it.
   // Stage 1 finds candidate items (prefix search by name + full-text search limited to items that carry an ISIN, P946).
@@ -1655,6 +1970,7 @@
     const local=localMatches(q);
     renderMatches(local);makeLinks(q,src);
     if(!navigator.onLine){statusModal('modal.status.offline');return;}
+    if(!consentFresh('search')){showSearchConsent('assets');return;} // local results stay; the online request waits for the user's decision
     statusModal('modal.status.running');
     let online=[];let ok=false;
     try{
@@ -1666,40 +1982,83 @@
         online=await wdSearchStocks(q);
       }
       ok=true;
-    }catch(err){if(seq!==requestSeq)return;statusModal('modal.status.failed');}
+    }catch(err){if(seq!==requestSeq)return;if(!consentFresh('search')){dropSearch();return;}statusModal('modal.status.failed');}
     if(seq!==requestSeq)return;
     const seen=new Set();const combined=[...local,...online].filter(a=>{const key=(a.isin||a.coinId||a.name).toLowerCase();if(seen.has(key))return false;seen.add(key);return true;});
     renderMatches(combined);
     if(ok)online.length?statusModal('modal.status.found',{n:online.length}):statusModal('modal.status.none');
   }
-  function setAssetImage(url,emoji){
+  function setAssetImage(url,emoji,external){
     const c=modalCategory(),it=modalItem();if(!c)return;
-    if(it){it.icon=emoji||'';it.iconUrl=url||'';}else{c.icon=emoji||typeEmoji[c.type]||'◇';c.iconUrl=url||'';}
-    persist();render();closeSearchModal();toast(t('toast.iconApplied'));
+    const target=it||c;
+    if(it)it.icon=emoji||'';else c.icon=emoji||typeEmoji[c.type]||'◇';
+    target.iconUrl=url||'';
+    if(external&&url)target.iconExternal=true;else delete target.iconExternal;
+    persist();render();
+    const off=closeSearchModal({quiet:true});
+    toast(t('toast.iconApplied')+(off?' '+t('toast.offer.off'):''),off?5000:undefined);
+  }
+  // An https image (typed by the user or chosen from the search results) is copied into this browser; if that fails, the URL is kept and flagged.
+  async function pickImage(url,fromSearch){
+    if(imageBusy)return;
+    if(!/^https:\/\//i.test(url))return setAssetImage(url,'');
+    if(fromSearch&&!consentFresh('search')){dropSearch();return;}
+    const ctx=modalCtx;if(!ctx)return;
+    imageBusy=true;statusModal('modal.status.savingCopy');
+    let local='',failed=false;
+    try{local=await localizeImage(url,fromSearch);}catch(e){failed=true;}
+    imageBusy=false;
+    if(modalCtx!==ctx)return;
+    if(!failed)return setAssetImage(local,'');
+    if(fromSearch&&!consentFresh('search')){dropSearch();return;}
+    setAssetImage(url,'',true);toast(t('toast.imgExternal'),6500);
   }
   // imageView: null | {msg:key} | {images:[...]}
   function renderImageView(){
     const el=$('#imageMatches');
     if(!imageView){el.innerHTML='';return;}
     if(imageView.msg){el.innerHTML=`<p class="muted">${esc(t(imageView.msg))}</p>`;return;}
-    el.innerHTML=imageView.images.length?imageView.images.map((im,i)=>`<div class="matchrow"><button class="match" type="button" data-image-pick="${i}"><img class="mini-icon" src="${esc(im.image)}" alt=""><span class="matchtext"><strong>${esc(im.name)}</strong><small>${esc(t('img.src'))}</small></span>${esc(t('modal.use'))}</button><a class="filelink" href="https://commons.wikimedia.org/wiki/${esc(encodeURIComponent(String(im.name).replace(/ /g,'_')).replace(/%3A/g,':').replace(/%2F/g,'/'))}" target="_blank" rel="noopener noreferrer">${esc(t('img.filepage'))}</a></div>`).join(''):`<p class="muted">${esc(t('img.none'))}</p>`;
+    const offer=!!modalCtx?.offer;
+    el.innerHTML=imageView.images.length?imageView.images.map((im,i)=>`<div class="matchrow"><button class="match" type="button" data-image-pick="${i}">${remoteImg(im.image,{cls:'mini-icon',onerror:"this.style.display='none'"})}<span class="matchtext"><strong>${esc(im.name)}</strong><small>${esc(t('img.src'))}</small></span>${esc(t('modal.use'))}</button><a class="filelink" href="https://commons.wikimedia.org/wiki/${esc(encodeURIComponent(String(im.name).replace(/ /g,'_')).replace(/%3A/g,':').replace(/%2F/g,'/'))}" target="_blank" rel="noopener noreferrer">${esc(t('img.filepage'))}</a></div>`).join(''):`<p class="muted">${esc(t(offer?'img.none.offer':'img.none'))}</p>`;
+    // Step 2: keyboard focus moves to the first result as soon as it is there (unless the user already went somewhere else in the dialog).
+    const first=offer&&el.querySelector('[data-image-pick]'),a=document.activeElement;
+    if(first&&(a===$('#offerSkip')||a===document.body||!$modal.contains(a)))first.focus();
+  }
+  // Step 2 only: prefer files named like a logo, drop other media types and obvious non-logos (flags, maps, parties ...).
+  const LOGO_BAD=/\b(flag|map|party|election|stamp|coat of arms|building|headquarters|campus|store|shop|screenshot|portrait|photo)\b/i;
+  function rankLogoFiles(files,query){
+    const q=String(query).toLowerCase(),word=(q.replace(/\blogo\b/g,'').trim().split(/\s+/)[0]||'').replace(/[^\p{L}\p{N}]/gu,'');
+    const scored=files.filter(f=>/\.(png|jpe?g|svg|webp|gif)$/i.test(f.name)).map((f,i)=>{
+      const n=f.name.toLowerCase().replace(/^file:/,'');let sc=0;
+      if(/\blogos?\b|logo/.test(n))sc+=4;
+      if(word&&n.includes(word))sc+=2;
+      const bad=n.match(LOGO_BAD);if(bad&&!q.includes(bad[1].toLowerCase()))sc-=4;
+      if(/\.svg$/.test(n))sc+=1;
+      return {f,sc,i:Number.isFinite(f.index)?f.index:i};
+    });
+    const keep=scored.some(x=>x.sc>=0)?scored.filter(x=>x.sc>=0):scored;
+    return keep.sort((a,b)=>b.sc-a.sc||a.i-b.i).map(x=>x.f);
   }
   async function searchImages(){
     if(!modalCtx)return;
     const q=$('#modalQuery').value.trim()||(modalItem()?itemName(modalItem()):'')||(modalCategory()?catName(modalCategory()):'');
     if(!q)return statusModal('modal.status.needImageTerm');
+    if(!consentFresh('search')){imageView=null;renderImageView();showSearchConsent('images');return;}
     imageView={msg:'img.searching'};renderImageView();
     const seq=++requestSeq;
     try{
-      const url='https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch='+encodeURIComponent(q+' logo')+'&gsrnamespace=6&gsrlimit=12&prop=imageinfo&iiprop=url&iiurlwidth=96&format=json&origin=*';
+      const offer=!!modalCtx?.offer;
+      const url='https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch='+encodeURIComponent(offer?q:q+' logo')+'&gsrnamespace=6&gsrlimit='+(offer?30:12)+'&prop=imageinfo&iiprop=url&iiurlwidth=96&format=json&origin=*';
       const result=await fetchJson(url);if(seq!==requestSeq)return;
-      const images=Object.values(result.query?.pages||{}).flatMap(p=>p.imageinfo?.[0]?.thumburl||p.imageinfo?.[0]?.url?[{name:p.title,image:p.imageinfo[0].thumburl||p.imageinfo[0].url}]:[]).filter(v=>/^https:\/\//.test(v.image)).slice(0,12);
-      imageView={images};renderImageView();
-    }catch(e){if(seq===requestSeq){imageView={msg:'img.unavailable'};renderImageView();}}
+      const images=Object.values(result.query?.pages||{}).flatMap(p=>p.imageinfo?.[0]?.thumburl||p.imageinfo?.[0]?.url?[{name:p.title,image:p.imageinfo[0].thumburl||p.imageinfo[0].url,index:p.index}]:[]).filter(v=>/^https:\/\//.test(v.image));
+      imageView={images:(offer?rankLogoFiles(images,q):images).slice(0,12)};renderImageView();
+      if(offer)statusModal(imageView.images.length?'offer.status.pick':null,{name:modalItem()?itemName(modalItem()):''});
+    }catch(e){if(seq===requestSeq){if(!consentFresh('search')){dropSearch();return;}imageView={msg:modalCtx?.offer?'img.unavailable.offer':'img.unavailable'};renderImageView();}}
   }
   $('#modalClose').addEventListener('click',closeSearchModal);
   $modal.addEventListener('click',e=>{if(e.target===$modal)closeSearchModal();});
-  $('#modalSearch').addEventListener('click',searchAssets);
+  $('#modalSearch').addEventListener('click',()=>{modalCtx?.offer?searchImages():searchAssets();});
+  $('#offerSkip').addEventListener('click',()=>closeSearchModal());
   $('#modalQuery').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();modalCtx?.logoOnly?searchImages():searchAssets();}});
   $('#modalQuery').addEventListener('input',()=>{if(modalCtx?.itemId&&!modalCtx.logoOnly){const q=$('#modalQuery').value.trim();++requestSeq;renderMatches(localMatches(q));makeLinks(q,modalSource());statusModal('modal.status.typing');}});
   // Source selector (radio group): switching drops online results of the other source and never starts a request by itself.
@@ -1717,10 +2076,10 @@
   $('#modalResults').addEventListener('click',e=>{const el=e.target.closest('[data-pick-result]');if(el)applyAsset(modalMatches[Number(el.dataset.pickResult)]);});
   $('#emojiOptions').addEventListener('click',e=>{const btn=e.target.closest('[data-emoji]');if(btn)setAssetImage('',btn.dataset.emoji);});
   $('#applyCustomSymbol').addEventListener('click',()=>{const e=$('#customSymbol').value.trim().slice(0,8);if(e)setAssetImage('',e);else statusModal('modal.status.needSymbol');});
-  $('#applyImageUrl').addEventListener('click',()=>{const url=cleanImg($('#imageUrl').value.trim());if(!url)return statusModal('modal.status.needUrl');setAssetImage(url,'');});
+  $('#applyImageUrl').addEventListener('click',()=>{const url=cleanImg($('#imageUrl').value.trim());if(!url)return statusModal('modal.status.needUrl');pickImage(url,false);});
   $('#clearImage').addEventListener('click',()=>setAssetImage('',''));
   $('#searchCommons').addEventListener('click',searchImages);
-  $('#imageMatches').addEventListener('click',e=>{const el=e.target.closest('[data-image-pick]');if(el&&imageView?.images)setAssetImage(imageView.images[Number(el.dataset.imagePick)].image,'');});
+  $('#imageMatches').addEventListener('click',e=>{const el=e.target.closest('[data-image-pick]');if(el&&imageView?.images)pickImage(imageView.images[Number(el.dataset.imagePick)].image,true);});
   $('#imageFile').addEventListener('change',e=>{
     const f=e.target.files?.[0];if(!f||!modalCtx)return;
     if(f.size>150000||!['image/png','image/jpeg','image/webp','image/gif'].includes(f.type)){statusModal('modal.status.badFile');e.target.value='';return;}
@@ -1729,18 +2088,20 @@
 
   // ---------------------------------------------------------------- privacy settings dialog
   const $priv=$('#privacyModal');let privOpener=null;
-  function renderPrivacy(){
-    const c=getConsent(),st=$('#privStatus');
-    let date='';try{const d=new Date(c?.ts);if(!isNaN(d))date=d.toLocaleDateString(locale(),{dateStyle:'medium'});}catch(e){}
-    st.textContent=c?t('priv.status.on',{date:date||'–'}):t('priv.status.off');
-    st.classList.toggle('on',!!c);
-    const tg=$('#privToggle');tg.textContent=t(c?'priv.withdraw':'priv.allow');
-    tg.classList.toggle('danger',!!c);tg.classList.toggle('primary',!c);
+  // One block per purpose: status, the full information (same text as the consent box) and a toggle button.
+  function renderPrivacy(focusPurpose){
+    syncConsent();
+    $('#privPurposes').innerHTML=PURPOSES.map(p=>{
+      const c=consentMem[p];
+      let date='';try{const d=new Date(c?.ts);if(!isNaN(d))date=d.toLocaleDateString(locale(),{dateStyle:'medium'});}catch(e){}
+      return `<section class="priv-purpose" data-purpose="${p}" aria-labelledby="privT-${p}"><h3 id="privT-${p}">${esc(t('priv.'+p+'.title'))}</h3><p class="privacy-status${c?' on':''}" aria-live="polite">${esc(c?t('priv.on',{date:date||'–'}):t('priv.off'))}</p>${consentInfoHtml(p)}<div class="privacy-actions"><button type="button" class="btn ${c?'danger':'primary'}" data-priv-toggle="${p}">${esc(t(c?'priv.withdraw':'priv.allow.'+p))}</button></div></section>`;
+    }).join('');
+    if(focusPurpose)$('#privPurposes').querySelector('[data-priv-toggle="'+focusPurpose+'"]')?.focus();
   }
   const privOpen=()=>!$priv.classList.contains('hidden');
   function openPrivacy(){
     privOpener=document.activeElement;
-    renderPrivacy();$priv.classList.remove('hidden');document.body.style.overflow='hidden';$('#privToggle').focus();
+    renderPrivacy();$priv.classList.remove('hidden');document.body.style.overflow='hidden';$('#privPurposes [data-priv-toggle]').focus();
   }
   function closePrivacy(){
     $priv.classList.add('hidden');document.body.style.overflow='';
@@ -1749,10 +2110,12 @@
   $('#privacySettingsBtn').addEventListener('click',openPrivacy);
   $('#privClose').addEventListener('click',closePrivacy);
   $priv.addEventListener('click',e=>{if(e.target===$priv)closePrivacy();});
-  $('#privToggle').addEventListener('click',()=>{
-    if(getConsent()){withdrawConsent();toast(t('priv.withdrawn'));}
-    else{grantConsent();remountChart(false);toast(t('priv.allowed'));}
-    renderPrivacy();
+  $('#privPurposes').addEventListener('click',e=>{
+    const b=e.target.closest('[data-priv-toggle]');if(!b)return;
+    const p=b.dataset.privToggle;
+    if(consentFresh(p)){withdrawConsent(p);toast(t('priv.withdrawn.'+p));}
+    else{grantConsent(p);if(p==='charts')remountChart(false);toast(t('priv.allowed.'+p));}
+    renderPrivacy(p);
   });
   // Keep Tab inside the dialog.
   $priv.addEventListener('keydown',e=>{
@@ -1844,10 +2207,9 @@
 
   // ---------------------------------------------------------------- language switch
   // The switch navigates between / (English) and /de/ (German). The plan lives in localStorage (same origin), so it carries over.
-  // LANG_KEY only remembers the last explicit choice (not used for any redirect).
+  // The language is part of the URL; nothing about it is stored.
   function setLang(next){
     if((next!=='en'&&next!=='de')||next===lang)return;
-    try{localStorage.setItem(LANG_KEY,next);}catch(e){}
     location.assign((next==='de'?'/de/':'/')+location.search+location.hash);
   }
   document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
@@ -1874,6 +2236,7 @@
     const fit=()=>{document.body.style.paddingTop=el.offsetHeight+'px';};fit();window.addEventListener('resize',fit);
   }
   try{if(!isAllowedHost(location.hostname))showCopyBanner();}catch(e){console.warn('Domain check skipped',e);}
+  initConsent();
   render();
 })();
 </script>
