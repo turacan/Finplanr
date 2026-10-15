@@ -10,6 +10,7 @@ Live site: https://finplanr.net
 - Monthly budget with category and holding weights (whole euros or cents)
 - Locks and "balance only with" partners, automatic sorting by size
 - Interactive allocation donut (hover to enlarge, click to jump to the category)
+- Optional "Rebalance with my current holdings" card: enter what you hold today and see how to split this month's budget toward your plan, what it takes to reach the target and a month-by-month schedule (a calculation from the values you enter, new money only; values stay in your browser)
 - JSON backup/import, CSV export, personal reset point
 - Optional online search for stocks, ETFs and crypto, an optional logo search (Wikimedia Commons) offered after adding a holding, and an optional TradingView chart (only after consent); holdings without a logo get a locally drawn letter badge
 - Your data stays in your browser (localStorage); Finplanr itself sets no cookies of its own (technical cookies of the hosting provider's security features may exist, see the privacy policy)
@@ -25,6 +26,8 @@ python3 -m http.server 8000 --directory dist             # preview at http://loc
 
 Sources contain `{{PLACEHOLDERS}}` instead of personal data; `tools/build.py` replaces them and verifies the result. Run `python3 -I tools/check-repo.py` before every commit: it fails if any operator value, infrastructure detail or token-like string is about to be committed (`git config core.hooksPath .githooks` runs it automatically).
 
+Wording guard: `python3 -I tools/check-wording.py` fails the build (and the pre-commit hook) if advice-like words appear in the built pages; `--src` also scans the sources. Finplanr only calculates from the values you enter. The banned words (EN + DE) and the small allowlist of disclaimer phrases are constants at the top of the script.
+
 ## Deployment
 `dist/` is a static site: serve it with any web server. `docker-compose.example.yaml` shows a generic nginx setup (optionally behind a Cloudflare Tunnel, see `tunnel.env.example`); copy it to `docker-compose.yaml`, which is git-ignored together with `tunnel.env`. `config/default.conf` is the nginx configuration (security headers, caching, compression).
 
@@ -37,6 +40,7 @@ Sources contain `{{PLACEHOLDERS}}` instead of personal data; `tools/build.py` re
 | `config/default.conf` | nginx configuration |
 | `tools/build.py` | Build: `site/` + configuration to `dist/` |
 | `tools/check-repo.py`, `.githooks/` | Pre-commit safety check |
+| `tools/check-wording.py` | Wording guard: banned-word check of the built pages (see Build) |
 | `tools/og-image.html` | Source of the social preview image |
 | `docker-compose.example.yaml`, `tunnel.env.example` | Generic deployment examples |
 

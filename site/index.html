@@ -247,7 +247,123 @@
     .privacy-actions a{font-size:13px;font-weight:700;color:#366a9c}
     @media(max-width:620px){.chart-body{height:320px}}
     @media(max-width:620px){.toolbar{position:relative}.menuwrap{display:contents}.menu{left:0;right:0;width:auto;max-width:none;top:calc(100% + 6px)}.langswitch{margin-left:auto}}
-    @media print{.mini-icon.monogram{print-color-adjust:exact;-webkit-print-color-adjust:exact}.seg,.legendline,.stackbar button{pointer-events:none;transition:none!important;filter:none!important;opacity:1!important}.toolbar,.copychip .copyicon,.add-section,.edittools,input[type=range],.chart-panel,.about,.footer .line{display:none!important}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff}.section{box-shadow:none;break-inside:avoid}}
+    /* Rebalance card (contribution-based rebalancing; read-only calculator) */
+    .rebal{margin-top:17px;background:var(--paper);border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);overflow:hidden}
+    .rebal [hidden]{display:none!important}
+    .rebal-h{margin:0;font-size:inherit;letter-spacing:0}
+    .rebal-toggle{display:flex;align-items:center;gap:14px;width:100%;border:0;background:none;color:inherit;text-align:left;padding:20px 24px}
+    .rebal-toggle:hover{background:#f8fafd}.rebal-toggle:focus-visible{outline-offset:-3px}
+    .rebal-ico{width:38px;height:38px;flex:none;border-radius:12px;display:grid;place-items:center;background:#eef3fa;color:#2f5b8a;font-size:20px}
+    .rebal-titles{flex:1;min-width:0;display:block}.rebal-title{display:block;font-size:19px;letter-spacing:-.3px;font-weight:770;line-height:1.3}
+    .rebal-sub{display:block;font-size:13px;color:var(--muted);margin-top:3px;font-weight:400;letter-spacing:0;line-height:1.45}
+    .rebal-chev{flex:none;font-size:18px;color:#60738d;transition:transform .15s ease}.rebal-toggle[aria-expanded="true"] .rebal-chev{transform:rotate(180deg)}
+    .rebal-body{padding:2px 24px 22px;border-top:1px solid var(--line)}
+    .rebal-intro{font-size:13px;color:#4a5a6e;margin:16px 0 14px;max-width:880px;line-height:1.55}
+    .rebal-totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+    .rt{border:1px solid var(--line);background:#fbfcfe;border-radius:13px;padding:11px 14px;min-width:0}
+    .rt-k{font-size:11px;font-weight:730;color:var(--muted)}.rt-v{font-size:22px;font-weight:790;letter-spacing:-.4px;font-variant-numeric:tabular-nums;margin-top:2px}.rt-n{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+    .rebal-notes:empty{display:none}.rebal-notes{display:grid;gap:8px;margin-bottom:14px}
+    .rebal-note{margin:0;padding:10px 13px;border-radius:11px;font-size:12.5px;line-height:1.5;border:1px solid #d5e1ee;background:#f4f8fd;color:#2f4863}
+    .rebal-note.warn{background:#fff7e8;color:#825b1d;border-color:#f0dfbd}
+    .rebal-scroll{min-width:0}
+    .rebal-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;table-layout:fixed}
+    .rebal-table th,.rebal-table td{padding:8px 8px;text-align:right;vertical-align:middle;font-weight:400}
+    .rebal-table thead th{font-size:11px;font-weight:730;color:var(--muted);border-bottom:1px solid var(--line);vertical-align:bottom;padding-bottom:7px;line-height:1.3}
+    .rebal-table th:first-child,.rebal-table td:first-child{text-align:left}
+    .rebal-table col.c-nm{width:auto}.rebal-table col.c-in{width:138px}.rebal-table col.c-ck{width:58px}.rebal-table col.c-pc{width:84px}.rebal-table col.c-eu{width:98px}.rebal-table col.c-sg{width:156px}
+    .rebal-table .c-ck{text-align:center}
+    .rebal-table tbody.grp tr.rebal-cat th,.rebal-table tbody.grp tr.rebal-cat td{background:color-mix(in srgb,var(--accent) 8%,white);border-top:1px solid var(--line);font-weight:730;padding-top:10px;padding-bottom:10px}
+    .rebal-table tbody.grp:first-of-type tr.rebal-cat th,.rebal-table tbody.grp:first-of-type tr.rebal-cat td{border-top:0}
+    .rebal-table tr.rebal-item th,.rebal-table tr.rebal-item td{border-top:1px solid #edf0f5}
+    .rebal-table tr.rebal-item th{font-weight:400}
+    .rebal-catname{display:flex;align-items:center;gap:9px;min-width:0}.rebal-catname .mini-icon{width:26px;height:26px;border-radius:8px;font-size:15px;background:color-mix(in srgb,var(--accent) 14%,white)}
+    .rebal-catname strong{font-size:14px;letter-spacing:-.2px;overflow-wrap:anywhere}
+    .rebal-catchk{display:inline-flex;align-items:center;gap:6px;margin:6px 0 0 35px;font-size:12px;font-weight:650;color:#31475e;cursor:pointer}
+    .rebal-catchk input,.rebal-chk input{accent-color:#1a5679;width:16px;height:16px;margin:0}
+    .rebal-name{display:flex;align-items:center;gap:9px;min-width:0}.rebal-name .mini-icon{width:26px;height:26px;border-radius:8px;font-size:15px}
+    .rebal-nm{font-size:13.5px;font-weight:650;line-height:1.35;overflow-wrap:anywhere;min-width:0}
+    .rebal-tag{display:inline-block;font-size:10.5px;font-weight:700;color:#6b7686;border:1px solid #d9e0e8;background:#f4f6f9;border-radius:6px;padding:1px 6px;margin-left:6px;white-space:nowrap;vertical-align:1px}
+    .rebal-in{max-width:132px;margin-left:auto;height:34px}
+    .rebal-in input{font-size:14px}.rebal-in:focus-within{border-color:#8db9db;box-shadow:0 0 0 3px #b2c7ef66}
+    .rebal-chk{display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;min-height:28px;min-width:28px}
+    .rebal-chk-t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+    .rebal-sg{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:3px 6px}.rebal-sg .rebal-sug{flex:0 0 100%;text-align:right}
+    .rebal-sug{font-size:15.5px;font-weight:800;letter-spacing:-.2px}
+    .rebal-chip{display:inline-block;font-size:11px;font-weight:700;border-radius:99px;padding:1px 8px;border:1px solid #d9e0e8;background:#f4f6f9;color:#516173}
+    .rebal-chip.pos{background:#e9f6ef;border-color:#bfe2cd;color:#1d6b48}.rebal-chip.neg{background:#fdf0ef;border-color:#f0cdc9;color:#9a3d43}
+    .rebal-over{display:inline-block;font-size:10.5px;font-weight:750;border-radius:6px;padding:1px 7px;border:1px solid #efdcb7;background:#fff6e7;color:#845d17;white-space:nowrap}
+    .rebal-table tr.off .rebal-nm,.rebal-table tr.off td:not(.c-ck):not(.c-in),.rebal-table tr.off .rebal-name .mini-icon{opacity:.5}
+    .rebal-table tr.off .rebal-in{background:#f3f5f8}
+    .rebal-actions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 10px}
+    .rebal-actions .btn:disabled{opacity:.45;cursor:not-allowed}
+    .rebal-disc{font-size:12px;color:var(--muted);margin:6px 0 0}
+    .rebal-summary{margin:0 0 14px;padding:12px 15px;border-radius:12px;background:#eef6f3;border:1px solid #cfe6de;color:#1d4d41;font-size:14px;font-weight:650;line-height:1.5}
+    .rebal-note.ok{background:#eef6f3;border-color:#cfe6de;color:#1d4d41;font-weight:650}
+    .rebal-plan{margin-top:22px;border-top:1px solid var(--line);padding-top:6px}
+    .rp-title{font-size:17px;letter-spacing:-.2px;margin:14px 0 12px}
+    .rp-inputs{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-start;margin-bottom:12px}
+    .rp-f{margin:0;padding:0;border:0;min-width:0}.rp-f>label:first-child,.rp-f>legend{display:block;font-size:12px;font-weight:730;color:#31475e;margin:0 0 5px;padding:0}
+    .rp-f small{display:block;font-size:11.5px;color:var(--muted);margin-top:4px;max-width:260px;line-height:1.4}
+    .rp-f .rebal-in{max-width:150px;margin-left:0}
+    .rp-hz{display:grid;gap:7px}
+    .rp-radio{display:flex;align-items:center;gap:8px;font-size:13px;color:#31475e;cursor:pointer;flex-wrap:wrap}.rp-radio input[type=radio]{accent-color:#1a5679;width:16px;height:16px;margin:0}
+    .rp-n{width:64px;height:30px;border:1px solid #dbe3ed;border-radius:8px;background:#fbfcfe;text-align:center;font-weight:700;color:var(--ink)}
+    .rp-out{display:grid;gap:10px;min-width:0}
+    .rp-key{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}.rp-k{font-size:13px;font-weight:730;color:#31475e}.rp-v{font-size:24px;letter-spacing:-.4px;font-variant-numeric:tabular-nums}
+    .rp-tip{margin:-4px 0 0;font-size:12px;color:var(--muted);max-width:760px;line-height:1.5}
+    .rp-h{font-size:14px;margin:10px 0 0}
+    .rebal-fine{margin:0;font-size:12px;color:var(--muted)}
+    .rebal-mini{border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:min(100%,360px);font-size:13px}
+    .rebal-mini th,.rebal-mini td{padding:6px 12px 6px 0;text-align:left;font-weight:400;border-bottom:1px solid #edf0f5}.rebal-mini td{text-align:right;padding-right:0;font-weight:700}
+    .rebal-mini thead th{font-size:11px;font-weight:730;color:var(--muted)}.rebal-mini thead th:last-child{text-align:right}.rebal-mini tfoot th,.rebal-mini tfoot td{font-weight:800;border-bottom:0}
+    .rebal-mini th[scope=row]{padding-right:28px}
+    .rebal-sched{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:12.5px}
+    .rebal-sched th,.rebal-sched td{padding:6px 8px;text-align:right;border-bottom:1px solid #edf0f5;font-weight:400;vertical-align:bottom}
+    .rebal-sched thead th{font-size:11px;font-weight:730;color:var(--muted);line-height:1.25;word-break:break-word}
+    .rebal-sched th:first-child,.rebal-sched td:first-child{text-align:left;white-space:nowrap}
+    .rebal-sched td.z{color:#a3aebb}.rebal-sched td.tot{font-weight:750}
+    .rebal-sched tr.late{display:none}
+    .rebal-sched tr.sch-mark td{text-align:left;background:#eef6f3;color:#1d4d41;font-weight:700;padding:8px 10px;white-space:normal}
+    .rebal-sched tfoot th,.rebal-sched tfoot td{font-weight:700;background:#fafbfd;border-bottom:0}
+    .rebal-sched tfoot tr.sch-foot+tr.sch-foot th,.rebal-sched tfoot tr.sch-foot+tr.sch-foot td{border-top:1px solid #edf0f5}
+    @media(max-width:900px){
+      .rebal-sched,.rebal-sched tbody,.rebal-sched tfoot,.rebal-sched tr,.rebal-sched th,.rebal-sched td{display:block}
+      .rebal-sched thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+      .rebal-sched tr{border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin-bottom:8px}
+      .rebal-sched tr.late{display:none}
+      .rebal-sched th,.rebal-sched td{border:0!important;padding:2px 0;text-align:left!important;background:none!important}
+      .rebal-sched th:first-child{font-weight:800;font-size:13.5px;padding-bottom:4px}
+      .rebal-sched td[data-label]{display:flex;justify-content:space-between;gap:12px}.rebal-sched td[data-label]::before{content:attr(data-label);color:var(--muted);font-size:12px;min-width:0;overflow-wrap:anywhere}
+      .rebal-sched td.z,.rebal-sched td.tot:empty{display:none}
+      .rebal-sched td.tot{border-top:1px solid #edf0f5!important;margin-top:3px;padding-top:5px;font-weight:800}
+      .rebal-sched tr.sch-foot{background:#fafbfd}.rebal-sched tr.sch-foot td.tot{display:none}.rebal-sched tr.sch-foot td.z{display:flex}
+      .rebal-sched tr.sch-mark{background:#eef6f3}
+      .rebal-mini{width:100%}
+    }
+    @media(max-width:700px){.rebal-totals{grid-template-columns:1fr}}
+    @media(max-width:1060px){.rebal-table col.c-in{width:120px}.rebal-table col.c-sg{width:132px}.rebal-table col.c-pc{width:74px}.rebal-table col.c-eu{width:84px}}
+    @media(max-width:900px){
+      .rebal-table,.rebal-table tbody,.rebal-table tr,.rebal-table th,.rebal-table td{display:block}
+      .rebal-table colgroup{display:none}
+      .rebal-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+      .rebal-table tbody.grp{margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+      .rebal-table tr{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px 12px;padding:11px 13px;text-align:left}
+      .rebal-table th.c-name{grid-column:span 6}.rebal-table td.c-in,.rebal-table td.c-ck{grid-column:span 3}.rebal-table td[data-c=now],.rebal-table td[data-c=tgt],.rebal-table td[data-c=plan]{grid-column:span 2}.rebal-table td.c-sg{grid-column:span 6}
+      .rebal-cat td.c-in{grid-column:span 2}.rebal-cat td[data-c=plan],.rebal-cat td.c-sg{grid-column:span 3}
+      .rebal-table tr.rebal-item{border-top:1px solid #edf0f5}
+      .rebal-table tbody.grp tr.rebal-cat th,.rebal-table tbody.grp tr.rebal-cat td,.rebal-table tr.rebal-item th,.rebal-table tr.rebal-item td{border:0!important;background:none;padding:0;text-align:left}
+      .rebal-table tr.rebal-cat{background:color-mix(in srgb,var(--accent) 9%,white)}
+      .rebal-table th:first-child,.rebal-table td{min-width:0}
+      .rebal-table td[data-label]::before{content:attr(data-label);display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:2px}
+      .rebal-table td.c-ck::before{display:none}
+      .rebal-table td.c-ck{text-align:left}
+      .rebal-table td.c-gap{display:none}
+      .rebal-sg{justify-content:flex-start}.rebal-sg .rebal-sug{flex:0 0 auto;text-align:left;font-size:17px}
+      .rebal-in{max-width:none;margin-left:0}
+      .rebal-chk{justify-content:flex-start}.rebal-chk-t{position:static;width:auto;height:auto;clip:auto;white-space:normal;font-size:12.5px;font-weight:650;color:#31475e}
+    }
+    @media(max-width:620px){.rebal-toggle{padding:16px 15px;gap:11px}.rebal-body{padding:2px 15px 18px}.rebal-title{font-size:17px}.rebal-ico{width:34px;height:34px}.rebal-actions .btn{flex:1 1 100%}}
+    @media print{.mini-icon.monogram{print-color-adjust:exact;-webkit-print-color-adjust:exact}.seg,.legendline,.stackbar button{pointer-events:none;transition:none!important;filter:none!important;opacity:1!important}.toolbar,.copychip .copyicon,.add-section,.edittools,input[type=range],.chart-panel,.rebal,.about,.footer .line{display:none!important}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff}.section{box-shadow:none;break-inside:avoid}}
   </style>
 </head>
 <body>
@@ -303,11 +419,44 @@
       <div class="field"><label for="catType" data-i18n="add.type">Category type</label><select id="catType" class="text-input"><option value="stock" data-i18n="type.stock">Stocks / ticker, ISIN &amp; WKN</option><option value="etf" selected data-i18n="type.etf">ETF / ticker, ISIN &amp; WKN</option><option value="etc" data-i18n="type.etc">ETC / ticker, ISIN &amp; WKN</option><option value="crypto" data-i18n="type.crypto">Crypto / ticker</option><option value="cash" data-i18n="type.cash">Savings account / name</option><option value="other" data-i18n="type.other">Other / all fields</option></select></div>
       <button id="createCategory" class="btn primary" type="button" data-i18n="add.btn">+ Add category</button>
     </div>
+    <section class="rebal" id="rebal">
+      <h2 class="rebal-h"><button type="button" id="rebalToggle" class="rebal-toggle" aria-expanded="false" aria-controls="rebalBody" aria-labelledby="rebalTitleTxt" aria-describedby="rebalSubTxt"><span class="rebal-ico" aria-hidden="true">⚖</span><span class="rebal-titles"><span class="rebal-title" id="rebalTitleTxt" data-i18n="rebal.title">Rebalance with my current holdings</span><span class="rebal-sub" id="rebalSubTxt" data-i18n="rebal.sub">Enter what you hold today. Finplanr calculates how this month's budget is distributed so that new money moves your portfolio toward your target.</span></span><span class="rebal-chev" aria-hidden="true">▾</span></button></h2>
+      <div class="rebal-body hidden" id="rebalBody">
+        <p class="rebal-intro" data-i18n="rebal.intro">Your plan above is the target. Enter the current value of each holding: what it is worth today, including gains, not what you paid in. Untick holdings or whole categories you do not want to count, for example a savings account. Everything stays in your browser.</p>
+        <div class="rebal-totals">
+          <div class="rt"><div class="rt-k" data-i18n="rebal.t.now">Portfolio now</div><div class="rt-v" id="rebalNow">–</div></div>
+          <div class="rt"><div class="rt-k" data-i18n="rebal.t.after">After this month</div><div class="rt-v" id="rebalAfter">–</div></div>
+          <div class="rt"><div class="rt-k" data-i18n="rebal.t.budget">Budget to distribute</div><div class="rt-v" id="rebalBudget">–</div><div class="rt-n hidden" id="rebalBudgetNote"></div></div>
+        </div>
+        <p class="rebal-summary hidden" id="rebalSummary" role="status"></p>
+        <div class="rebal-notes" id="rebalNotes" role="status" aria-live="polite"></div>
+        <div class="rebal-scroll"><table class="rebal-table" id="rebalTable"></table></div>
+        <div class="rebal-plan" id="rebalPlan">
+          <h3 class="rp-title" data-i18n="rebal.plan.title">Reaching your target</h3>
+          <div class="rp-inputs">
+            <div class="rp-f"><label for="rebalLump" data-i18n="rebal.plan.lump">Extra one-time amount (€)</label><label class="euroinput rebal-in"><input type="number" id="rebalLump" min="0" max="1000000000" step="1" inputmode="decimal" placeholder="0" aria-describedby="rebalLumpHelp"><span>€</span></label><small id="rebalLumpHelp" data-i18n="rebal.plan.lump.help">For example a bonus. It is added to the first month only.</small></div>
+            <fieldset class="rp-f rp-hz"><legend data-i18n="rebal.plan.horizon">Horizon</legend>
+              <label class="rp-radio"><input type="radio" name="rebalHorizon" value="month" checked><span data-i18n="rebal.h.month">This month only</span></label>
+              <label class="rp-radio"><input type="radio" name="rebalHorizon" value="asap"><span data-i18n="rebal.h.asap">As soon as possible with my monthly budget</span></label>
+              <label class="rp-radio"><input type="radio" name="rebalHorizon" value="months"><span data-i18n="rebal.h.months.pre">In</span><input type="number" id="rebalMonths" class="rp-n" min="1" max="60" step="1" value="6" inputmode="numeric" data-i18n-attr="aria-label:rebal.h.months.aria"><span data-i18n="rebal.h.months.post">months</span></label>
+            </fieldset>
+          </div>
+          <div class="rp-out" id="rebalPlanOut"></div>
+        </div>
+        <div class="rebal-actions">
+          <button type="button" class="btn primary" id="rebalCopy" data-i18n="rebal.copy">Copy result</button>
+          <button type="button" class="btn" id="rebalCsv" data-i18n="rebal.csv">Download CSV</button>
+          <button type="button" class="btn hidden" id="rebalSchedCsv" data-i18n="rebal.sched.csv">Download schedule (CSV)</button>
+          <button type="button" class="btn danger" id="rebalClear" data-i18n="rebal.clear">Clear current values</button>
+        </div>
+        <p class="rebal-disc" data-i18n="rebal.assume">Assumes your holdings' values stay as entered (no price changes). Re-enter your current values each month to update the calculation.</p>
+      </div>
+    </section>
   </main>
   <section class="about" id="about" aria-labelledby="aboutTitle">
     <h2 id="aboutTitle" data-i18n="about.title">Finplanr: a free savings plan calculator</h2>
     <p data-i18n="about.p1">Finplanr turns one monthly savings budget into a clear savings plan. Split your budget across ETFs, precious metals (ETCs), crypto and a savings account, and see at once how many euros go into each holding.</p>
-    <p data-i18n="about.p2">Every category and every holding has a weight. Move a slider and the rest is rebalanced automatically; lock the entries that should stay fixed. Inside each category the holdings add up to 100%, and all amounts update when you change the budget.</p>
+    <p data-i18n="about.p2">Every category and every holding has a weight. Move a slider and the rest is rebalanced automatically; lock entries to keep them fixed. Inside each category the holdings add up to 100%, and all amounts update when you change the budget.</p>
     <p data-i18n="about.p3">It is made for savers who already know what they want to buy and need a tidy allocation for the savings plans at their broker or bank. Finplanr is a planning tool: no price feeds, no bank connection, no account. Your plan stays in this browser.</p>
     <h3 data-i18n="about.faq">Frequently asked questions</h3>
     <h4 data-i18n="about.q1">Is Finplanr free?</h4>
@@ -383,7 +532,7 @@
       'brand.tagline':'Your personal portfolio planner',
       'about.title':'Finplanr: a free savings plan calculator',
       'about.p1':'Finplanr turns one monthly savings budget into a clear savings plan. Split your budget across ETFs, precious metals (ETCs), crypto and a savings account, and see at once how many euros go into each holding.',
-      'about.p2':'Every category and every holding has a weight. Move a slider and the rest is rebalanced automatically; lock the entries that should stay fixed. Inside each category the holdings add up to 100%, and all amounts update when you change the budget.',
+      'about.p2':'Every category and every holding has a weight. Move a slider and the rest is rebalanced automatically; lock entries to keep them fixed. Inside each category the holdings add up to 100%, and all amounts update when you change the budget.',
       'about.p3':'It is made for savers who already know what they want to buy and need a tidy allocation for the savings plans at their broker or bank. Finplanr is a planning tool: no price feeds, no bank connection, no account. Your plan stays in this browser.',
       'about.faq':'Frequently asked questions',
       'about.q1':'Is Finplanr free?',
@@ -584,7 +733,7 @@
       'offer.preview.aria':'Current symbol of {name}','offer.preview.note':'Shown like this until you pick a logo.',
       'offer.status.pick':'Pick a logo only if it really matches this holding. Skip keeps the letter badge.',
       'search.note.offer':'Online logos come from Wikimedia Commons and need your permission.',
-      'offer.skip':'Skip','offer.never':'Don\'t offer a logo search when adding holdings','offer.results.aria':'Logo suggestions for {name}',
+      'offer.skip':'Skip','offer.never':'Don\'t offer a logo search when adding holdings','offer.results.aria':'Logo search results for {name}',
       'img.none.offer':'No matching logo found. Skip to keep the letter badge, or add your own file later in Edit mode with “◉ Logo”.',
       'img.unavailable.offer':'Logo search is unavailable right now. Skip to keep the letter badge; you can add a logo later in Edit mode.',
       'toast.offer.on':'A logo search will be offered when you add a holding.',
@@ -594,6 +743,55 @@
       'toast.assetApplied':'Details applied – please check the identifiers.',
       'toast.imgExternal':'Couldn\'t save a local copy. This logo will load from its original server each time; upload the image as a file to avoid that.','toast.iconApplied':'Icon/logo applied.',
       'cg.label':'Crypto data:','cg.link':'Powered by CoinGecko API','foot.legal':'Legal notice (Impressum)','foot.privacylink':'Privacy policy','foot.privacySettings':'Privacy settings',
+      'rebal.title':'Rebalance with my current holdings',
+      'rebal.help.current':'What the holding is worth now, not what you paid in.',
+      'rebal.plan.title':'Reaching your target',
+      'rebal.plan.lump':'Extra one-time amount (€)','rebal.plan.lump.help':'For example a bonus. It is added to the first month only.',
+      'rebal.plan.horizon':'Horizon',
+      'rebal.h.month':'This month only','rebal.h.asap':'As soon as possible with my monthly budget',
+      'rebal.h.months.pre':'In','rebal.h.months.post':'months','rebal.h.months.aria':'Number of months (1 to 60)',
+      'rebal.plan.hint':'Enter your current values above to see what it takes to reach your target.',
+      'rebal.plan.pick':'Choose a horizon above to see a month-by-month schedule.',
+      'rebal.sum.reach.one':'Amount needed to reach the target with new money only: {need}. At your budget of {budget} per month that takes about {n} month.',
+      'rebal.sum.reach.other':'Amount needed to reach the target with new money only: {need}. At your budget of {budget} per month that takes about {n} months.',
+      'rebal.sum.never':'Amount needed to reach the target with new money only: {need}. At your budget of {budget} per month that is not possible within 5 years.',
+      'rebal.sum.need.one':'Amount needed to reach the target with new money only: {need}. Reaching the target in {n} month takes about {r} per month (instead of {budget}).',
+      'rebal.sum.need.other':'Amount needed to reach the target with new money only: {need}. Reaching the target in {n} months takes about {r} per month (instead of {budget}).',
+      'rebal.sum.on':'Your holdings already match your target. This month\'s amounts equal your plan.',
+      'rebal.sum.lump':' Your one-time amount of {lump} is included.',
+      'rebal.need.label':'Needed in total (one-time)',
+      'rebal.need.tip':'Distributed across the holdings below target, this amount puts every holding exactly on its target share.',
+      'rebal.once.title':'As a one-time amount','rebal.col.amount':'Amount','rebal.total':'Total',
+      'rebal.sched.title':'Month by month','rebal.sched.month':'Month','rebal.sched.monthN':'Month {n}',
+      'rebal.sched.target':'Target share','rebal.sched.after':'Share after month {k}',
+      'rebal.sched.reached.one':'Target reached after {n} month. From month {m} on, the amounts equal your plan.',
+      'rebal.sched.reached.other':'Target reached after {n} months. From month {m} on, the amounts equal your plan.',
+      'rebal.sched.capped':'Target not reached within 5 years at this budget. The table shows the first {n} months.',
+      'rebal.sched.none':'With a budget of 0 there is nothing to schedule. Add a monthly budget or a one-time amount.',
+      'rebal.sched.more':'Show all {n} months','rebal.sched.less':'Show only the first 12 months',
+      'rebal.sched.note':'Holdings that are not counted are not listed; they keep their planned amount.',
+      'rebal.sched.csv':'Download schedule (CSV)',
+      'rebal.t.lump':'Includes your one-time {lump}.','rebal.t.monthly':'Per month for this horizon: {r} (your budget: {budget}).',
+      'rebal.assume':'Assumes your holdings\' values stay as entered (no price changes). Re-enter your current values each month to update the calculation.',
+      'rebal.sub':'Enter what you hold today. Finplanr calculates how this month\'s budget is distributed so that new money moves your portfolio toward your target.',
+      'rebal.intro':'Your plan above is the target. Enter the current value of each holding: what it is worth today, including gains, not what you paid in. Untick holdings or whole categories you do not want to count, for example a savings account. Everything stays in your browser.',
+      'rebal.t.now':'Portfolio now','rebal.t.after':'After this month','rebal.t.budget':'Budget to distribute',
+      'rebal.t.budget.note':'Total budget {total}; {rest} stays as planned for holdings that are not counted.',
+      'rebal.table.aria':'Current values and calculated split by holding',
+      'rebal.col.holding':'Holding','rebal.col.current':'Current value today (€)','rebal.col.count':'Count','rebal.col.now':'Share now','rebal.col.target':'Target share','rebal.col.plan':'Plan this month','rebal.col.calc':'Calculated this month',
+      'rebal.count':'Count in rebalancing','rebal.countCat':'Count this category',
+      'rebal.aria.current':'Current value of {name} in euros','rebal.aria.count':'Count {name} in rebalancing','rebal.aria.cat':'Count category {name} in rebalancing',
+      'rebal.off':'Not counted','rebal.over':'Above target','rebal.after':'Share after this month: {pct}',
+      'rebal.chip.aria':'Compared with the plan: {delta}','rebal.chip.same':'=',
+      'rebal.copy':'Copy result','rebal.csv':'Download CSV','rebal.clear':'Clear current values',
+      'rebal.hint.empty':'Nothing entered yet: the result equals your plan.',
+      'rebal.notice.over':'Some holdings are above their target. They get nothing this month in this calculation; the rest of the budget goes to holdings below target. With new money only, reaching the target can take several months.',
+      'rebal.notice.zero':'The budget is 0, so there is nothing to distribute. The table only compares your current shares with the target.',
+      'rebal.empty.items':'No holdings yet. Turn on “Edit” and add some above.',
+      'rebal.empty.none':'No holding is counted. Tick at least one holding or category to get a result.',
+      'rebal.confirm.clear':'Clear all entered current values? This cannot be undone.',
+      'rebal.toast.cleared':'Current values cleared.','rebal.toast.copied':'Result copied.',
+      'rebal.csv.head':['Category','Holding','Current value','Share now %','Target share %','Plan','Calculated'],
       'foot.note':'Planning tool, not investment advice.',
       'foot.guide':'User guide'
     },
@@ -603,11 +801,11 @@
       'brand.tagline':'Dein persönlicher Portfolio-Planer',
       'about.title':'Finplanr: ein kostenloser Sparplan-Rechner',
       'about.p1':'Finplanr macht aus einem monatlichen Sparbudget einen übersichtlichen Sparplan. Verteile dein Budget auf ETFs, Edelmetalle (ETCs), Krypto und Tagesgeld und sieh sofort, wie viele Euro in jede Position fließen.',
-      'about.p2':'Jede Kategorie und jede Position hat ein Gewicht. Bewegst du einen Regler, gleicht sich der Rest automatisch an; Einträge, die fest bleiben sollen, sperrst du. Innerhalb einer Kategorie ergeben die Positionen 100 %, und alle Beträge passen sich an, wenn du das Budget änderst.',
+      'about.p2':'Jede Kategorie und jede Position hat ein Gewicht. Bewegst du einen Regler, gleicht sich der Rest automatisch an; Einträge, die fest bleiben, sperrst du. Innerhalb einer Kategorie ergeben die Positionen 100 %, und alle Beträge passen sich an, wenn du das Budget änderst.',
       'about.p3':'Gedacht ist Finplanr für Sparer, die schon wissen, was sie kaufen wollen, und eine saubere Aufteilung für die Sparpläne bei Broker oder Bank brauchen. Es ist ein Planungswerkzeug: keine Kursdaten, keine Bankanbindung, kein Konto. Dein Plan bleibt in diesem Browser.',
       'about.faq':'Häufige Fragen',
       'about.q1':'Ist Finplanr kostenlos?',
-      'about.a1':'Ja. Du musst dich nirgends anmelden und zahlst nichts.',
+      'about.a1':'Ja. Es ist keine Anmeldung nötig, und es fallen keine Kosten an.',
       'about.q2':'Wo werden meine Daten gespeichert?',
       'about.a2':'Nur im lokalen Speicher deines Browsers. Auf einem Server wird nichts gespeichert. Mit einer JSON-Sicherung überträgst du deinen Plan auf ein anderes Gerät.',
       'about.q3':'Gibt Finplanr Anlageberatung?',
@@ -804,16 +1002,65 @@
       'offer.preview.aria':'Aktuelles Symbol von {name}','offer.preview.note':'So wird die Position angezeigt, bis du ein Logo wählst.',
       'offer.status.pick':'Wähle ein Logo nur, wenn es wirklich zu dieser Position passt. „Überspringen“ behält das Buchstaben-Symbol.',
       'search.note.offer':'Online-Logos kommen von Wikimedia Commons und brauchen deine Erlaubnis.',
-      'offer.skip':'Überspringen','offer.never':'Beim Hinzufügen kein Logo vorschlagen','offer.results.aria':'Logo-Vorschläge für {name}',
+      'offer.skip':'Überspringen','offer.never':'Beim Hinzufügen keine Logo-Suche anbieten','offer.results.aria':'Logo-Suchergebnisse für {name}',
       'img.none.offer':'Kein passendes Logo gefunden. Überspringe den Schritt, um das Buchstaben-Symbol zu behalten, oder lade später im Bearbeitungsmodus über „◉ Logo“ eine eigene Datei hoch.',
       'img.unavailable.offer':'Die Logo-Suche ist gerade nicht verfügbar. Überspringe den Schritt, um das Buchstaben-Symbol zu behalten; ein Logo kannst du später im Bearbeitungsmodus hinzufügen.',
       'toast.offer.on':'Beim Hinzufügen einer Position wird eine Logo-Suche angeboten.',
-      'toast.offer.off':'Beim Hinzufügen wird kein Logo mehr vorgeschlagen. Du kannst das in den Einstellungen wieder einschalten.',
+      'toast.offer.off':'Beim Hinzufügen wird keine Logo-Suche mehr angeboten. Du kannst das in den Einstellungen wieder einschalten.',
       'set.offer':'Beim Hinzufügen einer Position eine Logo-Suche anbieten',
       'set.offer.desc':'Standardmäßig an. Nach dem Übernehmen eines Treffers ohne Logo bietet Finplanr an, bei Wikimedia Commons nach einem zu suchen. Die Online-Suche braucht zuerst deine Erlaubnis; ohne Logo zeigt die Position ein Buchstaben-Symbol.',
       'toast.assetApplied':'Stammdaten übernommen – bitte Kennungen prüfen.',
       'toast.imgExternal':'Lokale Kopie konnte nicht gespeichert werden. Dieses Logo wird bei jedem Besuch vom ursprünglichen Server geladen; lade das Bild als Datei hoch, um das zu vermeiden.','toast.iconApplied':'Symbol/Logo übernommen.',
       'cg.label':'Kryptodaten:','cg.link':'Powered by CoinGecko API','foot.legal':'Impressum','foot.privacylink':'Datenschutz','foot.privacySettings':'Datenschutz-Einstellungen',
+      'rebal.title':'Mit meinem Bestand ausgleichen',
+      'rebal.help.current':'Was die Position jetzt wert ist, nicht was du eingezahlt hast.',
+      'rebal.plan.title':'Dein Ziel erreichen',
+      'rebal.plan.lump':'Einmaliger Zusatzbetrag (€)','rebal.plan.lump.help':'Zum Beispiel ein Bonus. Er wird nur dem ersten Monat hinzugefügt.',
+      'rebal.plan.horizon':'Zeitraum',
+      'rebal.h.month':'Nur dieser Monat','rebal.h.asap':'So schnell wie möglich mit meinem Monatsbudget',
+      'rebal.h.months.pre':'In','rebal.h.months.post':'Monaten','rebal.h.months.aria':'Anzahl Monate (1 bis 60)',
+      'rebal.plan.hint':'Trage oben deine aktuellen Werte ein, um zu sehen, was nötig ist, um dein Ziel zu erreichen.',
+      'rebal.plan.pick':'Wähle oben einen Zeitraum, um einen Monatsplan zu sehen.',
+      'rebal.sum.reach.one':'Betrag, um das Ziel nur mit neuem Geld zu erreichen: {need}. Mit deinem Budget von {budget} pro Monat dauert das etwa {n} Monat.',
+      'rebal.sum.reach.other':'Betrag, um das Ziel nur mit neuem Geld zu erreichen: {need}. Mit deinem Budget von {budget} pro Monat dauert das etwa {n} Monate.',
+      'rebal.sum.never':'Betrag, um das Ziel nur mit neuem Geld zu erreichen: {need}. Mit deinem Budget von {budget} pro Monat ist das in 5 Jahren nicht möglich.',
+      'rebal.sum.need.one':'Betrag, um das Ziel nur mit neuem Geld zu erreichen: {need}. Das Ziel in {n} Monat zu erreichen, erfordert etwa {r} pro Monat (statt {budget}).',
+      'rebal.sum.need.other':'Betrag, um das Ziel nur mit neuem Geld zu erreichen: {need}. Das Ziel in {n} Monaten zu erreichen, erfordert etwa {r} pro Monat (statt {budget}).',
+      'rebal.sum.on':'Deine Positionen entsprechen schon deinem Ziel. Die Beträge für diesen Monat entsprechen deinem Plan.',
+      'rebal.sum.lump':' Dein einmaliger Betrag von {lump} ist eingerechnet.',
+      'rebal.need.label':'Insgesamt nötig (einmalig)',
+      'rebal.need.tip':'Auf die Positionen unter ihrem Ziel verteilt, bringt dieser Betrag jede Position genau auf ihren Zielanteil.',
+      'rebal.once.title':'Als einmaliger Betrag','rebal.col.amount':'Betrag','rebal.total':'Summe',
+      'rebal.sched.title':'Monat für Monat','rebal.sched.month':'Monat','rebal.sched.monthN':'Monat {n}',
+      'rebal.sched.target':'Zielanteil','rebal.sched.after':'Anteil nach Monat {k}',
+      'rebal.sched.reached.one':'Ziel nach {n} Monat erreicht. Ab Monat {m} entsprechen die Beträge deinem Plan.',
+      'rebal.sched.reached.other':'Ziel nach {n} Monaten erreicht. Ab Monat {m} entsprechen die Beträge deinem Plan.',
+      'rebal.sched.capped':'Ziel mit diesem Budget in 5 Jahren nicht erreicht. Die Tabelle zeigt die ersten {n} Monate.',
+      'rebal.sched.none':'Bei einem Budget von 0 gibt es nichts zu planen. Trage ein Monatsbudget oder einen einmaligen Betrag ein.',
+      'rebal.sched.more':'Alle {n} Monate anzeigen','rebal.sched.less':'Nur die ersten 12 Monate anzeigen',
+      'rebal.sched.note':'Positionen, die nicht berücksichtigt werden, sind nicht aufgeführt; sie behalten ihren geplanten Betrag.',
+      'rebal.sched.csv':'Zeitplan herunterladen (CSV)',
+      'rebal.t.lump':'Enthält deinen einmaligen Betrag von {lump}.','rebal.t.monthly':'Pro Monat für diesen Zeitraum: {r} (dein Budget: {budget}).',
+      'rebal.assume':'Annahme: Die Werte deiner Positionen bleiben wie eingetragen (keine Kursänderungen). Trage deine aktuellen Werte jeden Monat neu ein, um die Berechnung zu aktualisieren.',
+      'rebal.sub':'Trage ein, was du heute hältst. Finplanr berechnet, wie sich das Budget dieses Monats verteilt, damit neues Geld dein Portfolio näher an dein Ziel bringt.',
+      'rebal.intro':'Dein Plan oben ist das Ziel. Trage den aktuellen Wert jeder Position ein: was sie heute wert ist, inklusive Gewinnen, nicht was du eingezahlt hast. Entferne das Häkchen bei Positionen oder ganzen Kategorien, die nicht mitzählen, zum Beispiel einem Tagesgeldkonto. Alles bleibt in deinem Browser.',
+      'rebal.t.now':'Portfolio jetzt','rebal.t.after':'Nach diesem Monat','rebal.t.budget':'Zu verteilendes Budget',
+      'rebal.t.budget.note':'Gesamtbudget {total}; {rest} bleiben wie geplant bei Positionen, die nicht zählen.',
+      'rebal.table.aria':'Aktuelle Werte und berechnete Aufteilung je Position',
+      'rebal.col.holding':'Position','rebal.col.current':'Aktueller Wert heute (€)','rebal.col.count':'Zählt','rebal.col.now':'Anteil jetzt','rebal.col.target':'Zielanteil','rebal.col.plan':'Plan diesen Monat','rebal.col.calc':'Berechnet für diesen Monat',
+      'rebal.count':'Beim Ausgleich berücksichtigen','rebal.countCat':'Kategorie berücksichtigen',
+      'rebal.aria.current':'Aktueller Wert von {name} in Euro','rebal.aria.count':'{name} beim Ausgleich berücksichtigen','rebal.aria.cat':'Kategorie {name} beim Ausgleich berücksichtigen',
+      'rebal.off':'Nicht berücksichtigt','rebal.over':'Über Ziel','rebal.after':'Anteil nach diesem Monat: {pct}',
+      'rebal.chip.aria':'Im Vergleich zum Plan: {delta}','rebal.chip.same':'=',
+      'rebal.copy':'Ergebnis kopieren','rebal.csv':'CSV herunterladen','rebal.clear':'Aktuelle Werte löschen',
+      'rebal.hint.empty':'Noch nichts eingetragen: Das Ergebnis entspricht deinem Plan.',
+      'rebal.notice.over':'Einige Positionen liegen über ihrem Ziel. Sie bekommen diesen Monat in dieser Berechnung nichts; der Rest des Budgets geht an Positionen unter ihrem Ziel. Nur mit neuem Geld kann das Erreichen des Ziels mehrere Monate dauern.',
+      'rebal.notice.zero':'Das Budget ist 0, es gibt also nichts zu verteilen. Die Tabelle vergleicht nur deine aktuellen Anteile mit dem Ziel.',
+      'rebal.empty.items':'Noch keine Positionen vorhanden. Aktiviere oben „Bearbeiten“ und lege Positionen an.',
+      'rebal.empty.none':'Keine Position zählt. Setze bei mindestens einer Position oder Kategorie ein Häkchen, um ein Ergebnis zu erhalten.',
+      'rebal.confirm.clear':'Alle eingetragenen aktuellen Werte löschen? Das kann nicht rückgängig gemacht werden.',
+      'rebal.toast.cleared':'Aktuelle Werte gelöscht.','rebal.toast.copied':'Ergebnis kopiert.',
+      'rebal.csv.head':['Kategorie','Position','Aktueller Wert','Anteil jetzt %','Zielanteil %','Plan','Berechnet'],
       'foot.note':'Planungswerkzeug, keine Anlageberatung.',
       'foot.guide':'Anleitung'
     }
@@ -936,12 +1183,15 @@
     {type:'stock',name:'BMW AG',isin:'DE0005190003',wkn:'519000',ticker:'BMW',tv:'XETR:BMW'}, {type:'stock',name:'BASF SE',isin:'DE000BASF111',wkn:'BASF11',ticker:'BAS',tv:'XETR:BAS'}
   ];
   const CATALOG_BY_ISIN=new Map(ASSET_CATALOG.filter(a=>a.isin).map(a=>[a.isin,a]));
-  // Accepts current files and older ones (format 'mein-sparplan-v2'); a stored `language` is ignored. `autoSort` (keep sorted by size) and `offerLogo` (offer a logo search after applying a result) default to true when missing.
+  // Rebalance card: `current` = value of a holding today (number 0..1e9 with two decimals, null = not entered); anything else becomes null.
+  const cleanCurrent=v=>{if(v===null||v===undefined||v===''||typeof v==='boolean')return null;const n=Number(v);return Number.isFinite(n)?Math.round(clamp(n,0,1e9)*100)/100:null;};
+  // Accepts current files and older ones (format 'mein-sparplan-v2'); a stored `language` is ignored. `autoSort` (keep sorted by size) and `offerLogo` (offer a logo search after applying a result) default to true when missing; per holding `current` (null) and `rebal` (true), per category `rebalOff` (false) and the top-level `rebalMode` ('month'), `rebalMonths` (6), `rebalLump` (0) belong to the rebalance card.
   function validate(raw){
     if(!raw||typeof raw!=='object'||!Array.isArray(raw.categories)||raw.categories.length>80||raw.categories.length<1)throw Error(t('err.invalidFile'));
     const allowCents=raw.allowCents===true;
     const amount=clamp(Number(raw.budget)||0,0,100000000);
-    const result={budget:allowCents?Math.round(amount*100)/100:Math.round(amount),allowCents,autoSort:raw.autoSort!==false,offerLogo:raw.offerLogo!==false,categories:[]};
+    const months=Math.round(Number(raw.rebalMonths));
+    const result={budget:allowCents?Math.round(amount*100)/100:Math.round(amount),allowCents,autoSort:raw.autoSort!==false,offerLogo:raw.offerLogo!==false,rebalMode:['month','asap','months'].includes(raw.rebalMode)?raw.rebalMode:'month',rebalMonths:Number.isFinite(months)&&months>=1?clamp(months,1,60):6,rebalLump:cleanCurrent(raw.rebalLump)||0,categories:[]};
     const ids=new Set();
     for(const c of raw.categories){
       if(!c||typeof c!=='object'||!Array.isArray(c.items)||c.items.length>300)throw Error(t('err.invalidItems'));
@@ -953,7 +1203,7 @@
         const legacy=LEGACY_CAT_DEFAULTS[id];
         if(legacy&&c.name===legacy[1]&&(id!=='etc'||c.items.every(it=>it&&['gold','silver'].includes(it.id))))nameKey=legacy[0];
       }
-      const category={id,name:String(c.name||t('cat.unnamed')).slice(0,100),type,color,icon:String(c.icon||typeEmoji[type]||'◇').slice(0,8),iconUrl:cleanImg(c.iconUrl),locked:!!c.locked,rebalanceWith:String(c.rebalanceWith||'auto').slice(0,80),weight:clamp(Number(c.weight)||0,0,1e9),items:[]};
+      const category={id,name:String(c.name||t('cat.unnamed')).slice(0,100),type,color,icon:String(c.icon||typeEmoji[type]||'◇').slice(0,8),iconUrl:cleanImg(c.iconUrl),locked:!!c.locked,rebalanceWith:String(c.rebalanceWith||'auto').slice(0,80),rebalOff:c.rebalOff===true,weight:clamp(Number(c.weight)||0,0,1e9),items:[]};
       if(nameKey)category.nameKey=nameKey;
       if(c.iconExternal===true&&/^https:/i.test(category.iconUrl))category.iconExternal=true; // logo still loads from its original server (copy failed)
       const itemIds=new Set();
@@ -962,7 +1212,7 @@
         const itemId=String(it.id||uid()).slice(0,80);if(itemIds.has(itemId))throw Error(t('err.dupItem'));itemIds.add(itemId);
         let itemKey=ITEM_NAME_KEYS.has(it.nameKey)?it.nameKey:'';
         if(!itemKey){const legacy=LEGACY_ITEM_DEFAULTS[itemId];if(legacy&&it.name===legacy[1])itemKey=legacy[0];else if(!it.name||Object.values(STR).some(l=>l['item.new']===it.name))itemKey='item.new';}
-        const item={id:itemId,name:String(it.name||t('item.new')).slice(0,150),ticker:String(it.ticker||'').slice(0,30),isin:String(it.isin||'').slice(0,32),wkn:String(it.wkn||'').slice(0,24),tv:cleanTv(it.tv),icon:String(it.icon||'').slice(0,8),iconUrl:cleanImg(it.iconUrl),locked:!!it.locked,weight:clamp(Number(it.weight)||0,0,1e9)};
+        const item={id:itemId,name:String(it.name||t('item.new')).slice(0,150),ticker:String(it.ticker||'').slice(0,30),isin:String(it.isin||'').slice(0,32),wkn:String(it.wkn||'').slice(0,24),tv:cleanTv(it.tv),icon:String(it.icon||'').slice(0,8),iconUrl:cleanImg(it.iconUrl),locked:!!it.locked,weight:clamp(Number(it.weight)||0,0,1e9),current:cleanCurrent(it.current),rebal:it.rebal!==false};
         // Older saved data has no ticker/chart symbol: fill empty values from the catalog (by ISIN) or the crypto ticker; never overwrite user values.
         const known=CATALOG_BY_ISIN.get(item.isin.trim().toUpperCase());
         if(known){if(!item.ticker&&known.ticker)item.ticker=known.ticker;if(!item.tv&&known.tv)item.tv=known.tv;}
@@ -1374,7 +1624,7 @@
     $('#monthlyBudget').inputMode=state.allowCents?'decimal':'numeric';
     $('#monthlyBudget').value=state.budget;
     $('#sections').innerHTML=info().map(sectionHtml).join('');
-    updateNumbers();updateResetLabel();
+    rebalSig='';updateNumbers();updateResetLabel();
     if(openChart)mountChart(false);
   }
   /* Allocation visuals: SVG donut + legend + stack bar share one [data-seg=categoryId] element per category.
@@ -1459,6 +1709,7 @@
         el=query('data-item-euro-input');if(el){el.max=ic.max;el.disabled=ic.disabled;if(document.activeElement!==el)el.value=amount;}
       });
     });
+    updateRebal();
   }
   function adjustValue(el){
     const val=Number(String(el.value).replace(',','.'));if(!Number.isFinite(val))return;
@@ -1516,11 +1767,15 @@
     }
     if(['data-rename-cat','data-field','data-cat-icon','data-cat-color'].some(x=>el.hasAttribute(x))){setTimeout(render,0);}
   });
+  async function copyText(value){
+    if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(value);
+    else{const ta=document.createElement('textarea');ta.value=value;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.focus();ta.select();const ok=document.execCommand('copy');ta.remove();if(!ok)throw Error('copy failed');}
+  }
   $('#sections').addEventListener('click',async e=>{
     const b=e.target.closest('button');if(!b)return;
     if(b.hasAttribute('data-copy')){
       const value=b.getAttribute('data-copy');
-      try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(value);else{const ta=document.createElement('textarea');ta.value=value;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.focus();ta.select();if(!document.execCommand('copy'))throw Error('copy failed');ta.remove();}toast(t('toast.copied',{value}));}catch(err){toast(t('toast.copyFail'));}
+      try{await copyText(value);toast(t('toast.copied',{value}));}catch(err){toast(t('toast.copyFail'));}
       return;
     }
     if(b.hasAttribute('data-item-lock')){
@@ -1547,7 +1802,7 @@
     }
     if(b.hasAttribute('data-add-item')){
       const c=state.categories.find(c=>c.id===b.dataset.addItem);if(!c)return;
-      const newId=uid();c.items.push({id:newId,name:t('item.new'),nameKey:'item.new',ticker:'',tv:'',isin:'',wkn:'',icon:'',iconUrl:'',locked:false,weight:0});
+      const newId=uid();c.items.push({id:newId,name:t('item.new'),nameKey:'item.new',ticker:'',tv:'',isin:'',wkn:'',icon:'',iconUrl:'',locked:false,weight:0,current:null,rebal:true});
       if(c.items.length===1)c.items[0].weight=100;
       if(state.categories.filter(x=>x.items.length).length===1)c.weight=100;
       persist();render();openSearchModal(c.id,newId,false);toast(t('toast.newItem'));return;
@@ -1693,7 +1948,7 @@
   $('#sections').addEventListener('pointercancel',e=>{if(drag&&drag.pointer===e.pointerId){clearDrop();drag.source.classList.remove('dragging');document.body.style.userSelect='';drag=null;}});
   $('#createCategory').addEventListener('click',()=>{
     const name=$('#catName').value.trim();if(!name){$('#catName').focus();return toast(t('toast.catNameMissing'));}
-    const type=$('#catType').value;const id=uid();state.categories.push({id,name:name.slice(0,100),type,color:colors[(state.categories.length-4+colors.length)%colors.length],icon:typeEmoji[type],iconUrl:'',locked:false,rebalanceWith:'auto',weight:0,items:[]});
+    const type=$('#catType').value;const id=uid();state.categories.push({id,name:name.slice(0,100),type,color:colors[(state.categories.length-4+colors.length)%colors.length],icon:typeEmoji[type],iconUrl:'',locked:false,rebalanceWith:'auto',rebalOff:false,weight:0,items:[]});
     $('#catName').value='';persist();render();toast(t('toast.catCreated'));
     document.querySelector(`[data-section="${CSS.escape(id)}"]`)?.scrollIntoView({behavior:'smooth',block:'center'});
   });
@@ -2126,6 +2381,302 @@
     else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
   });
 
+  // ---------------------------------------------------------------- rebalance card (contribution-based rebalancing)
+  // The plan (category weights x holding weights, locks included) is the TARGET allocation. The card only READS the plan and the current
+  // values the user enters (saved in the plan as `current`, `rebal`, `rebalOff`, plus `rebalMode`, `rebalMonths`, `rebalLump`); it never changes weights,
+  // sliders, locks, sorting or the CSV plan export.
+  // waterFill(v,t,B): v = current values (units), t = target shares (sum 1 over the entries with t>0), B = amount to distribute (integer units).
+  // Finds the level X with sum_i max(0, t_i*X - v_i) = B (piecewise linear and increasing, solved exactly over the sorted breakpoints v_i/t_i);
+  // contribution c_i = max(0, t_i*X - v_i); entries above target (v_i > t_i*X) get 0, nothing is ever sold. c is turned into whole units with
+  // largest remainders (allocate(), ties by order), so the amounts add up to B exactly.
+  function waterFill(v,t,B){
+    const c=v.map(()=>0),idx=[];let level=0;
+    v.forEach((x,i)=>{if(t[i]>0)idx.push(i);});
+    if(!idx.length||!(B>0))return {c,level};
+    idx.sort((a,b)=>v[a]/t[a]-v[b]/t[b]||a-b);
+    let T=0,V=0;
+    for(let k=0;k<idx.length;k++){
+      const i=idx[k];T+=t[i];V+=v[i];level=(B+V)/T;
+      if(k===idx.length-1||level<=v[idx[k+1]]/t[idx[k+1]])break;
+    }
+    return {c:allocate(B,v.map((x,i)=>t[i]>0?Math.max(0,t[i]*level-x):0)),level};
+  }
+  // rebalance(items,budget,extra): pure function for ONE month. items (plan order): {p: plan amount in units (cents or whole euros, as info()),
+  // w: global target weight, v: current value in units, on: counted}. Counted holdings get target shares t_i = w_i / sum(w of counted). Uncounted holdings
+  // keep their plan amount and are ignored everywhere else. B = (budget - sum(plan of uncounted)) + extra (extra = one-time amount / top-up, >= 0).
+  // Without any current value and without extra the result is the plan itself.
+  function rebalance(items,budget,extra=0){
+    const s=items.map(x=>x.p),t=items.map(()=>0),over=items.map(()=>false),inc=[];
+    let sumW=0,sumV=0,excl=0;
+    items.forEach((x,i)=>{if(x.on){inc.push(i);sumW+=x.w;sumV+=x.v;}else excl+=x.p;});
+    const B=Math.max(0,budget-excl)+extra,out={s,t,over,budget:B,sumV,level:0};
+    if(!inc.length||!(sumW>0))return out;
+    inc.forEach(i=>{t[i]=items[i].w/sumW;});
+    let level=sumV;
+    if(B<=0)inc.forEach(i=>{s[i]=0;});
+    else if(!(sumV>0)&&!(extra>0))level=B; // nothing entered: the plan itself (s keeps the plan amounts)
+    else{const wf=waterFill(inc.map(i=>items[i].v),inc.map(i=>t[i]),B);inc.forEach((i,j)=>{s[i]=wf.c[j];});level=wf.level;}
+    out.level=level;
+    const tol=1e-9*Math.max(1,level);
+    inc.forEach(i=>{over[i]=items[i].v>t[i]*level+tol;});
+    return out;
+  }
+  // rebalPlan(items,budget,lump,mode,N): the long view for the counted holdings (static values, no price changes).
+  //  D = max(0, max_i(v_i/t_i) - sum(v)) over counted holdings with t_i > 0 = what must be invested at once so that every one of them sits exactly on its
+  //  target share (holdings with target 0 are left out of D). once = the distribution of D (c_i = t_i*(V+D) - v_i, largest remainders, sums to ceil(D)).
+  //  Schedule: month by month the monthly amount (plus `lump` in month 1) goes through waterFill, is added to the values, repeat, until every holding is within
+  //  one unit of its target value or after REBAL_MAX months. mode 'months': if ceil((D-lump)/N) exceeds the budget, the schedule uses that amount R instead.
+  const REBAL_MAX=60;
+  function rebalPlan(items,budget,lump,mode,N){
+    const inc=[],t=[],v0=[];let sumW=0,excl=0;
+    items.forEach((x,i)=>{if(x.on){inc.push(i);sumW+=x.w;}else excl+=x.p;});
+    const B=Math.max(0,budget-excl),out={inc,t,v0,B,D:0,Dint:0,once:[],asap:null,nm:null,extra:lump};
+    if(!inc.length||!(sumW>0))return out;
+    inc.forEach(i=>{t.push(items[i].w/sumW);v0.push(items[i].v);});
+    const pos=t.map((x,j)=>j).filter(j=>t[j]>0),Vt=pos.reduce((a,j)=>a+v0[j],0);
+    out.pos=pos;
+    out.D=Math.max(0,Math.max(...pos.map(j=>v0[j]/t[j]))-Vt);
+    out.Dint=Math.max(0,Math.ceil(out.D-1e-9));
+    out.once=out.Dint>0?allocate(out.Dint,t.map((x,j)=>x>0?Math.max(0,x*(Vt+out.D)-v0[j]):0)):t.map(()=>0);
+    const reached=v=>{const V=pos.reduce((a,j)=>a+v[j],0);return pos.every(j=>Math.abs(v[j]-t[j]*V)<=1+1e-9);};
+    const sim=monthly=>{
+      const v=v0.slice(),rows=[];let K=reached(v)?0:null;
+      for(let m=1;K===null&&m<=REBAL_MAX;m++){
+        const amt=monthly+(m===1?lump:0);if(amt<=0)break;
+        const wf=waterFill(v,t,amt);wf.c.forEach((x,j)=>{v[j]+=x;});rows.push({m,amounts:wf.c,total:amt});
+        if(reached(v))K=m;
+      }
+      return {rows,K,v,monthly};
+    };
+    out.asap=sim(B);
+    if(mode==='months'){
+      const R=Math.ceil(Math.max(0,out.D-lump)/N-1e-9);
+      if(R>B){let r=R,s=sim(r);for(let k=0;k<3&&(s.K===null||s.K>N);k++){r++;s=sim(r);}out.nm={R:r,sim:s};out.extra=lump+(r-B);}
+    }
+    return out;
+  }
+  const curOf=it=>typeof it.current==='number'&&it.current>0?it.current:0;
+  const rebalOn=(cat,it)=>!cat.rebalOff&&it.rebal!==false;
+  function rebalModel(){
+    const data=info(),unit=unitCents(),scale=state.allowCents?100:1,cr=categoryRatios(),flat=[];
+    data.forEach((d,ci)=>{const ir=ratios(d.cat.items);d.items.forEach((x,j)=>flat.push({cat:d.cat,item:x.item,w:cr[ci]*ir[j],p:Math.round(x.cents/unit),v:curOf(x.item)*scale,on:rebalOn(d.cat,x.item)}));});
+    const budget=budgetUnits(),lump=Math.round((state.rebalLump||0)*scale),mode=state.rebalMode,N=state.rebalMonths;
+    const plan=rebalPlan(flat,budget,lump,mode,N),r=rebalance(flat,budget,plan.extra);
+    const rows=flat.map((x,i)=>({...x,t:r.t[i],s:r.s[i],over:r.over[i]}));
+    const sched=mode==='asap'||(mode==='months'&&!plan.nm)?plan.asap:mode==='months'?plan.nm.sim:null;
+    return {rows,cats:data.filter(d=>d.items.length).map(d=>({cat:d.cat,rows:rows.filter(x=>x.cat===d.cat)})),budget,B:r.budget,sumV:r.sumV,scale,unit,eur:u=>u*unit/100,plan,sched,mode,N,lump,
+      zero:budget===0&&r.budget===0,anyOn:rows.some(x=>x.on),anyCur:rows.some(x=>x.on&&x.v>0),anyOver:rows.some(x=>x.over),sumW:rows.reduce((a,x)=>a+(x.on?x.w:0),0)};
+  }
+  // Entered values may have cents even in whole-euro mode, so sums show cents whenever they are not whole euros.
+  function moneyV(n){const c=Math.round(n*100),f=state.allowCents||c%100!==0;return numFmt({style:'currency',currency:'EUR',minimumFractionDigits:f?2:0,maximumFractionDigits:f?2:0}).format(c/100);}
+  let rebalOpen=false,rebalSig='',rebalMap=new Map(),rebalAll=false;
+  const rKey=(cat,item)=>JSON.stringify([cat,item]);
+  const rebalItem=el=>state.categories.find(c=>c.id===el.dataset.cat)?.items.find(x=>x.id===el.dataset.item);
+  const rebalPic=(cat,it)=>it.iconExternal===true&&cleanImg(it.iconUrl)?visualIcon('',it.icon||typeEmoji[cat.type]||'◇',false):assetPic(cat,it,.8);
+  const rebalCatPic=c=>c.iconExternal===true&&cleanImg(c.iconUrl)?visualIcon('',c.icon||typeEmoji[c.type]||'◇',false):catPic(c);
+  function buildRebal(m){
+    const tbl=$('#rebalTable'),act=document.activeElement,rf=act&&tbl.contains(act)?act.dataset.rf:null,step=state.allowCents?'0.01':'1';
+    const th=(k,cls)=>`<th scope="col"${cls?` class="${cls}"`:''}${k==='rebal.col.current'?` title="${esc(t('rebal.help.current'))}"`:''}>${esc(t(k))}</th>`;
+    let h=`<caption class="sr-only">${esc(t('rebal.table.aria'))}</caption><colgroup><col class="c-nm"><col class="c-in"><col class="c-ck"><col class="c-pc"><col class="c-pc"><col class="c-eu"><col class="c-sg"></colgroup><thead><tr>${th('rebal.col.holding')}${th('rebal.col.current')}${th('rebal.col.count','c-ck')}${th('rebal.col.now')}${th('rebal.col.target')}${th('rebal.col.plan')}${th('rebal.col.calc')}</tr></thead>`;
+    const lab=k=>` data-label="${esc(t(k))}"`;
+    const nums=`<td${lab('rebal.col.now')} data-c="now"></td><td${lab('rebal.col.target')} data-c="tgt"></td><td${lab('rebal.col.plan')} data-c="plan"></td>`;
+    m.cats.forEach(g=>{
+      const c=g.cat,name=catName(c);
+      h+=`<tbody class="grp" style="--accent:${esc(c.color)}"><tr class="rebal-cat" data-rkind="c" data-cat="${esc(c.id)}"><th scope="rowgroup" class="c-name"><div class="rebal-catname">${rebalCatPic(c)}<strong>${esc(name)}</strong></div><label class="rebal-catchk"><input type="checkbox" data-rebal-cat data-cat="${esc(c.id)}" data-rf="c|${esc(c.id)}" aria-label="${esc(t('rebal.aria.cat',{name}))}"><span>${esc(t('rebal.countCat'))}</span></label></th><td class="c-in"${lab('rebal.col.current')} data-c="cur"></td><td class="c-ck c-gap"></td>${nums}<td class="c-sg"${lab('rebal.col.calc')}><div class="rebal-sg"><strong class="rebal-sug" data-c="sug"></strong></div></td></tr>`;
+      g.rows.forEach(r=>{
+        const it=r.item,nm=itemName(it)||t('item.unnamed'),idAttr=`data-cat="${esc(c.id)}" data-item="${esc(it.id)}"`;
+        h+=`<tr class="rebal-item" data-rkind="i" ${idAttr}><th scope="row" class="c-name"><div class="rebal-name">${rebalPic(c,it)}<span class="rebal-nm">${esc(nm)}<span class="rebal-tag" data-c="tag" hidden>${esc(t('rebal.off'))}</span></span></div></th>`
+          +`<td class="c-in"${lab('rebal.col.current')}><label class="euroinput rebal-in"><span class="sr-only">${esc(t('rebal.aria.current',{name:nm}))}</span><input type="number" min="0" max="1000000000" step="${step}" inputmode="decimal" placeholder="0" data-rebal-cur ${idAttr} data-rf="v|${esc(c.id)}|${esc(it.id)}" value="${typeof it.current==='number'?it.current:''}"><span>€</span></label></td>`
+          +`<td class="c-ck"><label class="rebal-chk"><input type="checkbox" data-rebal-on ${idAttr} data-rf="i|${esc(c.id)}|${esc(it.id)}" aria-label="${esc(t('rebal.aria.count',{name:nm}))}"><span class="rebal-chk-t">${esc(t('rebal.count'))}</span></label></td>`
+          +`${nums}<td class="c-sg"${lab('rebal.col.calc')}><div class="rebal-sg"><strong class="rebal-sug" data-c="sug"></strong><span class="rebal-chip" data-c="chip" hidden></span><span class="rebal-over" data-c="over" hidden>▲ ${esc(t('rebal.over'))}</span></div></td></tr>`;
+      });
+      h+='</tbody>';
+    });
+    tbl.innerHTML=h;
+    rebalMap=new Map();
+    tbl.querySelectorAll('tr[data-rkind]').forEach(tr=>rebalMap.set(tr.dataset.rkind+rKey(tr.dataset.cat,tr.dataset.item),tr));
+    if(rf){const el=[...tbl.querySelectorAll('[data-rf]')].find(x=>x.dataset.rf===rf);if(el){el.focus({preventScroll:true});if(el.type==='number'){const v=el.value;el.value='';el.value=v;}}} // caret to the end
+  }
+  // ---- plan part: one-time amount D and the month-by-month schedule (HTML string; rebuilt only when it changes)
+  function planHtml(m){
+    const P=m.plan,eur=m.eur,pctF=x=>percent(x*100);
+    if(!m.anyOn||!P.inc.length||!(m.sumW>0))return '';
+    if(!m.anyCur)return `<p class="rebal-note">${esc(t('rebal.plan.hint'))}</p>`;
+    const inc=P.inc.map(i=>m.rows[i]),short=r=>r.item.ticker||itemName(r.item)||t('item.unnamed');
+    let h='';
+    h+=`<div class="rp-key" title="${esc(t('rebal.need.tip'))}"><span class="rp-k">${esc(t('rebal.need.label'))}</span><strong class="rp-v" data-need="${P.Dint}">${esc(money(eur(P.Dint)))}</strong></div><p class="rp-tip">${esc(t('rebal.need.tip'))}</p>`;
+    if(P.Dint<=0)return h+`<p class="rebal-note">${esc(t('rebal.sum.on'))}</p>`;
+    h+=`<h4 class="rp-h">${esc(t('rebal.once.title'))}</h4><table class="rebal-mini" data-once><thead><tr><th scope="col">${esc(t('rebal.col.holding'))}</th><th scope="col">${esc(t('rebal.col.amount'))}</th></tr></thead><tbody>`;
+    inc.forEach((r,j)=>{if(P.once[j]>0)h+=`<tr><th scope="row">${esc(itemName(r.item)||t('item.unnamed'))}</th><td>${esc(money(eur(P.once[j])))}</td></tr>`;});
+    h+=`</tbody><tfoot><tr><th scope="row">${esc(t('rebal.total'))}</th><td>${esc(money(eur(P.Dint)))}</td></tr></tfoot></table>`;
+    if(m.mode==='month')return h+`<p class="rebal-note">${esc(t('rebal.plan.pick'))}</p>`;
+    const S=m.sched;
+    h+=`<h4 class="rp-h">${esc(t('rebal.sched.title'))}</h4>`;
+    if(m.mode==='months'&&P.nm)h+=`<p class="rebal-note warn" data-r="${P.nm.R}">${esc(t('rebal.sum.need',{need:money(eur(P.Dint)),r:money(eur(P.nm.R)),n:m.N,budget:money(eur(P.B))}))}</p>`;
+    if(S.K===0)return h+`<p class="rebal-note">${esc(t('rebal.sum.on'))}</p>`;
+    const rowsN=S.rows.length;
+    if(!rowsN)return h+`<p class="rebal-note warn">${esc(t('rebal.sched.none'))}</p>`;
+    const k=S.K===null?rowsN:S.K,cum=S.v;
+    if(S.K===null)h+=`<p class="rebal-note warn" data-k="">${esc(t('rebal.sched.capped',{n:rowsN}))}</p>`;
+    const showAll=rebalAll||rowsN<=12,cols=inc.length+2;
+    h+=`<div class="rebal-scroll"><table class="rebal-sched" data-sched><caption class="sr-only">${esc(t('rebal.sched.title'))}</caption><thead><tr><th scope="col">${esc(t('rebal.sched.month'))}</th>${inc.map(r=>`<th scope="col" title="${esc(itemName(r.item))}">${esc(short(r))}</th>`).join('')}<th scope="col">${esc(t('rebal.total'))}</th></tr></thead><tbody>`;
+    S.rows.forEach((row,i)=>{
+      h+=`<tr class="sch-row${!showAll&&i>=12?' late':''}" data-m="${row.m}"><th scope="row" data-label="${esc(t('rebal.sched.month'))}">${esc(t('rebal.sched.monthN',{n:row.m}))}</th>${row.amounts.map((a,j)=>`<td data-label="${esc(short(inc[j]))}"${a>0?'':' class="z"'} data-amt>${esc(money(eur(a)))}</td>`).join('')}<td class="tot" data-label="${esc(t('rebal.total'))}" data-tot>${esc(money(eur(row.total)))}</td></tr>`;
+    });
+    if(S.K!==null)h+=`<tr class="sch-mark" data-k="${S.K}"><td colspan="${cols}">✓ ${esc(t('rebal.sched.reached',{n:S.K,m:S.K+1}))}</td></tr>`;
+    const V=inc.reduce((a,r,j)=>a+cum[j],0);
+    h+=`</tbody><tfoot><tr class="sch-foot"><th scope="row" data-label="${esc(t('rebal.sched.target'))}">${esc(t('rebal.sched.target'))}</th>${inc.map((r,j)=>`<td data-label="${esc(short(r))}">${esc(pctF(P.t[j]))}</td>`).join('')}<td class="tot"></td></tr><tr class="sch-foot"><th scope="row" data-label="">${esc(t('rebal.sched.after',{k}))}</th>${inc.map((r,j)=>`<td data-label="${esc(short(r))}" data-reached>${V>0?esc(pctF(cum[j]/V)):'–'}</td>`).join('')}<td class="tot"></td></tr></tfoot></table></div>`;
+    if(!showAll||rebalAll)h+=`<button type="button" class="btn small" data-rebal-all data-rf="all">${esc(rebalAll?t('rebal.sched.less'):t('rebal.sched.more',{n:rowsN}))}</button>`;
+    return h+`<p class="rebal-fine">${esc(t('rebal.sched.note'))}</p>`;
+  }
+  function summaryText(m){
+    const P=m.plan;
+    if(!m.anyOn||!P.inc.length||!(m.sumW>0)||!m.anyCur)return '';
+    if(P.Dint<=0)return t('rebal.sum.on');
+    const need=money(m.eur(P.Dint)),budget=money(m.eur(P.B)),lump=m.lump>0?t('rebal.sum.lump',{lump:money(m.eur(m.lump))}):'';
+    if(m.mode==='months'&&P.nm)return t('rebal.sum.need',{need,r:money(m.eur(P.nm.R)),n:m.N,budget})+lump;
+    const K=P.asap.K;
+    return K===null?t('rebal.sum.never',{need,budget})+lump:t('rebal.sum.reach',{need,budget,n:K})+lump;
+  }
+  // Updates only the computed cells (and the stored values of inputs that are not being edited): focus and caret in the card stay untouched.
+  function paintRebal(m){
+    const {eur}=m,zero=m.zero,pct=x=>percent(x*100),setT=(root,c,txt)=>{const el=root.querySelector(`[data-c="${c}"]`);if(el&&el.textContent!==txt)el.textContent=txt;};
+    const sugText=u=>zero?'–':money(eur(u)),total=m.sumV>0?m.sumV:0,afterTotal=m.sumV+m.B;
+    $('#rebalNow').textContent=moneyV(m.sumV/m.scale);
+    $('#rebalAfter').textContent=moneyV((m.sumV+m.B)/m.scale);
+    $('#rebalBudget').textContent=money(eur(m.B));
+    const note=$('#rebalBudgetNote'),excl=m.budget-m.plan.B,nt=[];
+    if(excl>0&&m.rows.length)nt.push(t('rebal.t.budget.note',{total:money(eur(m.budget)),rest:money(eur(excl))}));
+    if(m.lump>0)nt.push(t('rebal.t.lump',{lump:money(eur(m.lump))}));
+    if(m.mode==='months'&&m.plan.nm)nt.push(t('rebal.t.monthly',{r:money(eur(m.plan.nm.R)),budget:money(eur(m.plan.B))}));
+    note.classList.toggle('hidden',!nt.length);note.textContent=nt.join(' ');
+    m.cats.forEach(g=>{
+      const c=g.cat,tr=rebalMap.get('c'+rKey(c.id,undefined));if(!tr)return;
+      const on=g.rows.filter(r=>r.on),sumNow=on.reduce((a,r)=>a+r.v,0),sumT=on.reduce((a,r)=>a+r.t,0);
+      const chk=tr.querySelector('[data-rebal-cat]');if(chk.checked!==!c.rebalOff)chk.checked=!c.rebalOff;
+      setT(tr,'cur',on.length?moneyV(sumNow/m.scale):'–');
+      setT(tr,'now',on.length&&total>0?pct(sumNow/total):'–');
+      setT(tr,'tgt',on.length&&m.sumW>0?pct(sumT):'–');
+      setT(tr,'plan',money(eur(g.rows.reduce((a,r)=>a+r.p,0))));
+      setT(tr,'sug',sugText(g.rows.reduce((a,r)=>a+r.s,0)));
+      g.rows.forEach(r=>{
+        const row=rebalMap.get('i'+rKey(c.id,r.item.id));if(!row)return;
+        row.classList.toggle('off',!r.on);
+        row.querySelector('[data-c="tag"]').hidden=r.on;
+        const cb=row.querySelector('[data-rebal-on]'),want=r.item.rebal!==false&&!c.rebalOff;
+        if(cb.checked!==want)cb.checked=want;if(cb.disabled!==!!c.rebalOff)cb.disabled=!!c.rebalOff;
+        const inp=row.querySelector('[data-rebal-cur]'),val=typeof r.item.current==='number'?String(r.item.current):'';
+        if(inp!==document.activeElement&&inp.value!==val)inp.value=val;
+        setT(row,'now',r.on&&total>0?pct(r.v/total):'–');
+        setT(row,'tgt',r.on&&m.sumW>0?pct(r.t):'–');
+        setT(row,'plan',money(eur(r.p)));
+        setT(row,'sug',sugText(r.s));
+        const sug=row.querySelector('[data-c="sug"]');
+        if(r.on&&!zero&&afterTotal>0)sug.title=t('rebal.after',{pct:pct((r.v+r.s)/(afterTotal))});else sug.removeAttribute('title');
+        const chip=row.querySelector('[data-c="chip"]'),d=r.s-r.p;
+        chip.hidden=!(r.on&&!zero);
+        if(!chip.hidden){
+          const txt=d>0?'+'+money(eur(d)):d<0?'−'+money(eur(-d)):t('rebal.chip.same');
+          if(chip.textContent!==txt){chip.textContent=txt;chip.setAttribute('aria-label',t('rebal.chip.aria',{delta:txt}));}
+          chip.classList.toggle('pos',d>0);chip.classList.toggle('neg',d<0);
+        }
+        row.querySelector('[data-c="over"]').hidden=!(r.on&&r.over);
+      });
+    });
+    const notes=[];
+    if(!m.rows.length)notes.push(['',t('rebal.empty.items')]);
+    else if(!m.anyOn)notes.push(['warn',t('rebal.empty.none')]);
+    else{
+      if(zero)notes.push(['',t('rebal.notice.zero')]);
+      if(!m.anyCur&&!(m.plan.extra>0))notes.push(['',t('rebal.hint.empty')]);
+      if(m.anyOver&&m.B>0)notes.push(['warn',t('rebal.notice.over')]);
+    }
+    const key=JSON.stringify(notes),box=$('#rebalNotes');
+    if(box.dataset.k!==key){box.dataset.k=key;box.innerHTML=notes.map(n=>`<p class="rebal-note ${n[0]}">${esc(n[1])}</p>`).join('');}
+    // headline summary + plan part
+    const sum=summaryText(m),sb=$('#rebalSummary');
+    if(sb.textContent!==sum)sb.textContent=sum;sb.classList.toggle('hidden',!sum);
+    sb.dataset.k=m.plan.asap&&m.plan.asap.K!==null?m.plan.asap.K:'';sb.dataset.need=m.plan.Dint;
+    const ph=planHtml(m),po=$('#rebalPlanOut');
+    if(po.dataset.h!==ph){
+      const af=document.activeElement,rf=af&&po.contains(af)?af.dataset.rf:null;
+      po.dataset.h=ph;po.innerHTML=ph;
+      if(rf)po.querySelector('[data-rf="'+rf+'"]')?.focus({preventScroll:true});
+    }
+    const lump=$('#rebalLump'),mon=$('#rebalMonths');
+    if(lump!==document.activeElement){const lv=state.rebalLump>0?String(state.rebalLump):'';if(lump.value!==lv)lump.value=lv;}
+    if(mon!==document.activeElement&&mon.value!==String(state.rebalMonths))mon.value=state.rebalMonths;
+    document.querySelectorAll('[name="rebalHorizon"]').forEach(r=>{r.checked=r.value===state.rebalMode;});
+    $('#rebalTable').classList.toggle('hidden',!m.rows.length);
+    ['#rebalCopy','#rebalCsv'].forEach(q=>{$(q).disabled=!m.rows.length;});
+    $('#rebalSchedCsv').classList.toggle('hidden',m.mode==='month');
+    $('#rebalSchedCsv').disabled=!(m.sched&&m.sched.rows.length);
+    $('#rebalClear').disabled=!state.categories.some(c=>c.items.some(it=>typeof it.current==='number'));
+  }
+  function updateRebal(){
+    if(!rebalOpen)return; // closed: nothing is built or computed; opening builds everything from the current state
+    const m=rebalModel(),sig=lang+'|'+state.allowCents+'|'+m.cats.map(g=>g.cat.id+':'+g.cat.color+':'+g.rows.map(r=>r.item.id).join(',')).join('|');
+    if(sig!==rebalSig){buildRebal(m);rebalSig=sig;}
+    paintRebal(m);
+  }
+  function setRebalOpen(open){
+    rebalOpen=open;$('#rebalToggle').setAttribute('aria-expanded',String(open));$('#rebalBody').classList.toggle('hidden',!open);
+    if(open){rebalSig='';updateRebal();}
+  }
+  $('#rebalToggle').addEventListener('click',()=>setRebalOpen(!rebalOpen));
+  $('#rebalBody').addEventListener('input',e=>{
+    const el=e.target;if(!el.hasAttribute)return;
+    if(el.hasAttribute('data-rebal-cur')){
+      const it=rebalItem(el);if(!it)return;
+      if(el.value===''){if(el.validity&&el.validity.badInput)return;it.current=null;}else it.current=cleanCurrent(el.value);
+      persist();updateRebal();
+    }else if(el.id==='rebalLump'){
+      if(el.value===''){if(el.validity&&el.validity.badInput)return;state.rebalLump=0;}else state.rebalLump=cleanCurrent(el.value)||0;
+      persist();updateRebal();
+    }else if(el.id==='rebalMonths'){
+      const n=Math.round(Number(el.value));if(el.value===''||!Number.isFinite(n)||n<1)return;
+      state.rebalMonths=clamp(n,1,REBAL_MAX);state.rebalMode='months';persist();updateRebal();
+    }
+  });
+  $('#rebalBody').addEventListener('change',e=>{
+    const el=e.target;if(!el.hasAttribute)return;
+    if(el.hasAttribute('data-rebal-cur')){const it=rebalItem(el);if(it)el.value=typeof it.current==='number'?String(it.current):'';return;}
+    if(el.hasAttribute('data-rebal-on')){const it=rebalItem(el);if(it){it.rebal=el.checked;persist();updateRebal();}return;}
+    if(el.hasAttribute('data-rebal-cat')){const c=state.categories.find(x=>x.id===el.dataset.cat);if(c){c.rebalOff=!el.checked;persist();updateRebal();}return;}
+    if(el.name==='rebalHorizon'){state.rebalMode=el.value;persist();updateRebal();return;}
+    if(el.id==='rebalLump'){el.value=state.rebalLump>0?String(state.rebalLump):'';return;}
+    if(el.id==='rebalMonths'){el.value=state.rebalMonths;}
+  });
+  $('#rebalMonths').addEventListener('focus',()=>{if(state.rebalMode!=='months'){state.rebalMode='months';persist();updateRebal();}});
+  $('#rebalPlanOut').addEventListener('click',e=>{if(e.target.closest('[data-rebal-all]')){rebalAll=!rebalAll;updateRebal();}});
+  $('#rebalCopy').addEventListener('click',async()=>{
+    flushSort();
+    const m=rebalModel(),text=m.rows.map(r=>(itemName(r.item)||t('item.unnamed'))+': '+(m.zero?'–':money(m.eur(r.s)))).join('\n');
+    try{await copyText(text);toast(t('rebal.toast.copied'));}catch(err){toast(t('toast.copyFail'));}
+  });
+  $('#rebalCsv').addEventListener('click',()=>{
+    flushSort();
+    const {dec}=csvFormat(),m=rebalModel(),n=(v,d)=>v.toFixed(d).replace('.',dec),fr=state.allowCents?2:0,rows=[t('rebal.csv.head')];
+    m.rows.forEach(r=>rows.push([catName(r.cat),itemName(r.item),typeof r.item.current==='number'?n(r.item.current,2):'',
+      r.on&&m.sumV>0?n(r.v/m.sumV*100,4):'',r.on&&m.sumW>0?n(r.t*100,4):'',n(m.eur(r.p),fr),m.zero?'':n(m.eur(r.s),fr)]));
+    downloadCsv('finplanr-rebalance.csv',rows);toast(t('toast.csv'));
+  });
+  $('#rebalSchedCsv').addEventListener('click',()=>{
+    flushSort();
+    const {dec}=csvFormat(),m=rebalModel(),S=m.sched;if(!S||!S.rows.length)return;
+    const n=(v,d)=>v.toFixed(d).replace('.',dec),fr=state.allowCents?2:0,inc=m.plan.inc.map(i=>m.rows[i]),k=S.K===null?S.rows.length:S.K;
+    const rows=[[t('rebal.sched.month'),...inc.map(r=>itemName(r.item)||t('item.unnamed')),t('rebal.total')]];
+    S.rows.forEach(row=>rows.push([row.m,...row.amounts.map(a=>n(m.eur(a),fr)),n(m.eur(row.total),fr)]));
+    const V=S.v.reduce((a,x,j)=>a+x,0);
+    rows.push([t('rebal.sched.target')+' %',...m.plan.t.map(x=>n(x*100,4)),'']);
+    rows.push([t('rebal.sched.after',{k})+' %',...S.v.map(x=>V>0?n(x/V*100,4):''),'']);
+    downloadCsv('finplanr-schedule.csv',rows);toast(t('toast.csv'));
+  });
+  $('#rebalClear').addEventListener('click',()=>{
+    if(!confirm(t('rebal.confirm.clear')))return;
+    state.categories.forEach(c=>c.items.forEach(it=>{it.current=null;}));persist();updateRebal();toast(t('rebal.toast.cleared'));
+  });
+
   // ---------------------------------------------------------------- export / import
   const exportWrap=$('#exportWrap'),exportToggle=$('#exportToggle'),exportMenu=$('#exportMenu');
   const exportItems=()=>[...exportMenu.querySelectorAll('[role="menuitem"]')];
@@ -2153,6 +2704,10 @@
     else if(openChart)closeChart(true);
   });
   function download(filename,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+  // CSV: ';' and decimal comma in German, ',' and decimal point otherwise; every cell is quoted and a leading = + - @ tab or CR is neutralised (formula injection).
+  const csvFormat=()=>({sep:lang==='de'?';':',',dec:lang==='de'?',':'.'});
+  const csvSafe=v=>{const s=String(v??'');return '"'+(/^[=+@\-\t\r]/.test(s)?"'"+s:s).replaceAll('"','""')+'"';};
+  const downloadCsv=(filename,rows)=>download(filename,'﻿'+rows.map(row=>row.map(csvSafe).join(csvFormat().sep)).join('\r\n'),'text/csv;charset=utf-8');
   // Default names keep their nameKey; the stored name is refreshed so older readers still see readable text.
   function exportPortfolio(portfolio){
     const copy=clone(portfolio);
@@ -2166,11 +2721,9 @@
   });
   $('#exportCsv').addEventListener('click',()=>{
     setExportMenu(false);
-    const sep=lang==='de'?';':',',dec=lang==='de'?',':'.';
-    const safe=v=>{const s=String(v??'');return '"'+(/^[=+@\-\t\r]/.test(s)?"'"+s:s).replaceAll('"','""')+'"';};
-    const rows=[t('csv.head')];
+    const {dec}=csvFormat(),rows=[t('csv.head')];
     info().forEach(d=>d.items.forEach(x=>rows.push([catName(d.cat),itemName(x.item),x.item.ticker,x.item.isin,x.item.wkn,(x.ratio*100).toFixed(4).replace('.',dec),(x.globalRatio*100).toFixed(4).replace('.',dec),(x.cents/100).toFixed(state.allowCents?2:0).replace('.',dec)])));
-    download('finplanr-plan.csv','﻿'+rows.map(row=>row.map(safe).join(sep)).join('\r\n'),'text/csv;charset=utf-8');toast(t('toast.csv'));
+    downloadCsv('finplanr-plan.csv',rows);toast(t('toast.csv'));
   });
   $('#importJson').addEventListener('click',()=>$('#importFile').click());
   $('#importFile').addEventListener('change',async e=>{

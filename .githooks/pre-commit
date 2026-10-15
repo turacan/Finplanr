@@ -1,5 +1,7 @@
 #!/bin/sh
-# Blocks a commit when personal/operator/infrastructure data or secrets are about to be committed.
+# Blocks a commit when personal/operator/infrastructure data or secrets are about to be committed,
+# or when advice-like wording appears in the sources (Finplanr only calculates; see tools/check-wording.py).
 # Enable once per clone:  git config core.hooksPath .githooks
 root="$(git rev-parse --show-toplevel)" || exit 1
-exec python3 -I "$root/tools/check-repo.py" --repo "$root"
+python3 -I "$root/tools/check-repo.py" --repo "$root" || exit 1
+exec python3 -I "$root/tools/check-wording.py" --src --no-dist

@@ -15,7 +15,8 @@ Result (dist/ is deleted and rebuilt on every run, so the output is reproducible
     parked-for-later/datenschutz-text.de.md / .en.md,
   * private/datenschutz-text.de.md and .en.md: the same texts with your values filled in (for pasting into an
     Impressum service; git-ignored folder).
-The build then verifies the result (no placeholder left, every sitemap URL exists, real values present).
+The build then verifies the result (no placeholder left, every sitemap URL exists, real values present, and the wording guard
+tools/check-wording.py finds no advice-like wording in the built pages).
 
 Options:
   --config PATH        operator config (default: config/operator.json)
@@ -28,6 +29,7 @@ Stdlib only.
 """
 import argparse
 import html
+import importlib.util
 import json
 import re
 import shutil
@@ -531,6 +533,13 @@ def verify(out, cfg):
             wrapped = "".join(EMAIL_OFF_RE.findall(t))
             if mail_html not in re.sub(r"<[^>]+>", "", wrapped):
                 errors.append("%s: no wrapped, visible contact address" % rel)
+    # 5) wording guard: Finplanr only calculates, it must never read like investment advice (banned terms: tools/check-wording.py)
+    spec = importlib.util.spec_from_file_location("check_wording", ROOT / "tools" / "check-wording.py")
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)
+    for f, line, kind, term, ex in guard.check(out, False):
+        fp = Path(f)
+        errors.append("wording guard: %s:%d [%s] '%s' ... %s" % (fp.relative_to(out) if fp.is_absolute() and out in fp.parents else f, line, kind, term, ex))
     return errors
 
 

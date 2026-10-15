@@ -72,7 +72,7 @@ Finplanr saves your settings in your browser's local storage so that they are th
 
 The following entries are created:
 
-- `mein-sparplan-portfolio-v1`: your portfolio, i.e. monthly savings budget, categories and positions, weights and amounts, names, tickers, ISIN, WKN, colours, symbols, logos (including images you upload yourself or that were copied into your browser, see section 8), locked weights, sort order and display settings
+- `mein-sparplan-portfolio-v1`: your portfolio, i.e. monthly savings budget, categories and positions, weights and amounts, names, tickers, ISIN, WKN, colours, symbols, logos (including images you upload yourself or that were copied into your browser, see section 8), locked weights, sort order and display settings and, if you enter them in the optional "Rebalance with my current holdings" feature, the current values of your holdings, the choice of which holdings count there, and an optional one-time amount and the chosen horizon (the same entry, stored locally only and never transmitted)
 - `mein-sparplan-reset-stand-v1`: a personal reset point that you saved
 - `finplanr-consent`: a single entry recording your privacy choices (one decision per function, "charts" and "online search", each with the time of the decision), see section 5
 
@@ -84,7 +84,7 @@ Finplanr itself sets no cookies of its own (for cookies from Cloudflare see sect
 
 **Retention and deletion:** The data stays in your browser until you delete it. You can remove it at any time: "Restore factory defaults" (in the app's settings) replaces your portfolio with the built-in example and deletes the reset point; you withdraw your privacy choices in the "Privacy settings" dialog. You remove all entries together by deleting the site data for finplanr.net in your browser settings. Switching browser or device does not transfer the data automatically.
 
-**Export and import:** Finplanr can export your portfolio as a JSON file and the current plan as a CSV table, and can import a JSON backup. These files are created and read entirely in your browser. They are saved to or read from your device and are not transmitted to us or anyone else. You are responsible for keeping these files safe. The copy buttons (for example for ISIN or WKN) only place the value on your device's clipboard; nothing is transmitted.
+**Export and import:** Finplanr can export your portfolio as a JSON file and the current plan as a CSV table, and can import a JSON backup. These files are created and read entirely in your browser. They are saved to or read from your device and are not transmitted to us or anyone else. You are responsible for how these files are stored. The copy buttons (for example for ISIN or WKN) only place the value on your device's clipboard; nothing is transmitted.
 
 ## 5. Privacy settings and consent {#consent}
 
@@ -241,7 +241,7 @@ You can view a copy of the safeguards mentioned (for example the Standard Contra
 
 Finplanr can be used without providing personal data. There is no statutory or contractual obligation to provide it.
 
-On every page view, connection data such as your IP address must be transmitted for technical reasons, otherwise the page cannot be delivered. For the chart, the online search and external logos: if you do not use the function or do not give your consent, no connections to the third-party providers arise. The only consequence is that the chart or the online search results are not shown. If you write to us, we need your email address in order to reply.
+On every page view, connection data such as your IP address is transmitted for technical reasons, because otherwise the page cannot be delivered. For the chart, the online search and external logos: if you do not use the function or do not give your consent, no connections to the third-party providers arise. The only consequence is that the chart or the online search results are not shown. If you write to us, we need your email address in order to reply.
 
 ## 14. External links
 
