@@ -11,8 +11,8 @@ Live site: https://finplanr.net
 - Locks and "balance only with" partners, automatic sorting by size
 - Interactive allocation donut (hover to enlarge, click to jump to the category)
 - JSON backup/import, CSV export, personal reset point
-- Optional online search for stocks, ETFs and crypto, and an optional TradingView chart (only after consent)
-- Your data stays in your browser (localStorage); the site sets no cookies
+- Optional online search for stocks, ETFs and crypto, an optional logo search (Wikimedia Commons) offered after adding a holding, and an optional TradingView chart (only after consent); holdings without a logo get a locally drawn letter badge
+- Your data stays in your browser (localStorage); Finplanr itself sets no cookies of its own (technical cookies of the hosting provider's security features may exist, see the privacy policy)
 
 ## Build
 The app itself is plain HTML, CSS and JavaScript without dependencies. A small Python 3 script (standard library only) assembles the deployable site in `dist/`: it generates the German page and the privacy-policy pages and injects the operator details (name, address, e-mail, Impressum link) from a local configuration file that is **not** part of this repository.
