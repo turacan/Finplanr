@@ -14,7 +14,10 @@ Result (dist/ is deleted and rebuilt on every run, so the output is reproducible
   * dist/datenschutz.html and dist/en/datenschutz.html: the privacy policy pages rendered from
     parked-for-later/datenschutz-text.de.md / .en.md,
   * private/datenschutz-text.de.md and .en.md: the same texts with your values filled in (for pasting into an
-    Impressum service; git-ignored folder).
+    Impressum service; git-ignored folder),
+  * dist/data/instruments.v1.json: the instrument index for the app search, copied byte for byte from
+    build-cache/instruments.v1.json after it was validated (made by tools/fetch-instruments.py). Without that file the build
+    still succeeds with a WARNING and the app falls back to its small built-in list plus the optional online search.
 The build then verifies the result (no placeholder left, every sitemap URL exists, real values present, and the wording guard
 tools/check-wording.py finds no advice-like wording in the built pages).
 
@@ -33,6 +36,7 @@ import importlib.util
 import json
 import re
 import shutil
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -43,6 +47,9 @@ INDEX_SRC = SRC_DIR / "index.html"
 DEFAULT_CONFIG = ROOT / "config" / "operator.json"
 DEFAULT_OUT = ROOT / "dist"
 DEFAULT_PRIVATE = ROOT / "private"
+INSTRUMENTS_SRC = ROOT / "build-cache" / "instruments.v1.json"
+INSTRUMENTS_VALIDATOR = ROOT / "tools" / "validate-instruments.py"
+INSTRUMENTS_OUT = Path("data") / "instruments.v1.json"
 MD_SRC = {"de": ROOT / "parked-for-later" / "datenschutz-text.de.md", "en": ROOT / "parked-for-later" / "datenschutz-text.en.md"}
 
 BASE = "https://finplanr.net"
@@ -478,11 +485,109 @@ def copy_site(out, cfg):
     return n
 
 
+ISIN_RE = re.compile(r"[A-Z]{2}[A-Z0-9]{9}[0-9]")
+INSTRUMENT_COLS = ["isin", "name", "wkn", "ticker", "type", "ccy", "venues"]
+INSTRUMENT_TYPES = {"E", "C", "S", "F", "O"}
+
+
+def isin_ok(v):
+    if not ISIN_RE.fullmatch(v):
+        return False
+    digits = "".join(str(int(ch, 36)) for ch in v)
+    total = 0
+    for i, ch in enumerate(reversed(digits)):
+        d = int(ch)
+        if i % 2 == 1:
+            d = d * 2 - 9 if d > 4 else d * 2
+        total += d
+    return total % 10 == 0
+
+
+def check_instruments(path):
+    """Schema check of the instrument index as the app reads it (contract v1). Returns (errors, info)."""
+    errors = []
+    try:
+        d = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        return ["cannot read %s: %s" % (path.name, e)], None
+    if not isinstance(d, dict) or d.get("v") != 1:
+        return ["%s: top level must be an object with \"v\": 1" % path.name], None
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(d.get("built", ""))):
+        errors.append("'built' must be YYYY-MM-DD")
+    src = d.get("sources")
+    if not isinstance(src, list) or not src or not all(isinstance(x, dict) and all(isinstance(x.get(k), str) and x[k].strip() for k in ("id", "name", "date", "attr", "attr_de")) for x in src):
+        errors.append("'sources' must be a non-empty list of {id, name, date, attr, attr_de} (non-empty strings)")
+    ven = d.get("venues")
+    if not isinstance(ven, dict) or not ven or not all(isinstance(k, str) and isinstance(v, str) and v for k, v in ven.items()):
+        errors.append("'venues' must be an object MIC -> name")
+        ven = {}
+    if d.get("cols") != INSTRUMENT_COLS:
+        errors.append("'cols' must be exactly %s" % INSTRUMENT_COLS)
+    rows = d.get("rows")
+    if not isinstance(rows, list) or not rows:
+        errors.append("'rows' must be a non-empty list")
+        return errors, None
+    seen, bad, counts = set(), 0, {}
+    for n, r in enumerate(rows):
+        why = None
+        if not isinstance(r, list) or len(r) != len(INSTRUMENT_COLS) or not all(isinstance(x, str) for x in r):
+            why = "row is not a list of %d strings" % len(INSTRUMENT_COLS)
+        elif not isin_ok(r[0]):
+            why = "invalid ISIN %r" % r[0]
+        elif r[0] in seen:
+            why = "duplicate ISIN %s" % r[0]
+        elif not r[1].strip():
+            why = "empty name (%s)" % r[0]
+        elif r[4] not in INSTRUMENT_TYPES:
+            why = "unknown type %r (%s)" % (r[4], r[0])
+        elif r[5] and not re.fullmatch(r"[A-Z]{3}", r[5]):
+            why = "bad currency %r (%s)" % (r[5], r[0])
+        elif any(m not in ven for m in r[6].split()):
+            why = "venue without a name in 'venues' (%s)" % r[0]
+        if why:
+            bad += 1
+            if bad <= 8:
+                errors.append("row %d: %s" % (n, why))
+            continue
+        seen.add(r[0])
+        counts[r[4]] = counts.get(r[4], 0) + 1
+    if bad > 8:
+        errors.append("... and %d more bad rows" % (bad - 8))
+    return errors, {"built": d.get("built"), "rows": len(rows), "counts": counts, "sources": [x.get("id") for x in src] if isinstance(src, list) else []}
+
+
+def copy_instruments(out):
+    """Validate build-cache/instruments.v1.json and copy it unchanged to dist/data/. Returns a summary string, or None when absent."""
+    if not INSTRUMENTS_SRC.is_file():
+        print("WARNING: build-cache/instruments.v1.json not found: the build has no instrument index, so the app search falls back to its small\n"
+              "         built-in list plus the optional online search. Create it with: python3 -I tools/fetch-instruments.py --refresh", file=sys.stderr)
+        return None
+    errors, info = check_instruments(INSTRUMENTS_SRC)
+    if INSTRUMENTS_VALIDATOR.is_file():
+        r = subprocess.run([sys.executable, "-I", str(INSTRUMENTS_VALIDATOR), str(INSTRUMENTS_SRC)], capture_output=True, text=True)
+        if r.returncode != 0:
+            errors.append("tools/validate-instruments.py failed:\n" + "\n".join("    " + l for l in (r.stdout + r.stderr).strip().splitlines()[-15:]))
+    if errors:
+        raise RuntimeError("instrument index invalid (build-cache/instruments.v1.json):\n  - " + "\n  - ".join(errors))
+    if "xetra" in info["sources"]:
+        print("WARNING: the instrument index contains Deutsche Boerse data (built with --with-xetra: WKN, Xetra ticker). That data has no reuse\n"
+              "         licence: use this dist/ for private tests only and do NOT publish it. Public builds: python3 -I tools/fetch-instruments.py --refresh\n"
+              "         (see private/DATA-LICENCE-FOR-OWNER.md).", file=sys.stderr)
+    dest = out / INSTRUMENTS_OUT
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(INSTRUMENTS_SRC, dest)
+    dest.chmod(0o644)
+    c = info["counts"]
+    return "instrument index: built %s, %d instruments (ETF %d, ETC/ETN %d, stocks %d, other funds %d, other %d), %.1f MB, sources: %s" % (
+        info["built"], info["rows"], c.get("E", 0), c.get("C", 0), c.get("S", 0), c.get("F", 0), c.get("O", 0),
+        dest.stat().st_size / 1048576, ", ".join(info["sources"]))
+
+
 def verify(out, cfg):
     errors = []
-    # 1) no placeholder left
+    # 1) no placeholder left (the generated data files are not scanned)
     for p in sorted(out.rglob("*")):
-        if p.is_file() and is_text(p) and "{{" in p.read_text(encoding="utf-8"):
+        if p.is_file() and is_text(p) and "data" not in p.relative_to(out).parts[:1] and "{{" in p.read_text(encoding="utf-8"):
             errors.append("unreplaced '{{' in %s" % p.relative_to(out))
     # 2) every sitemap URL exists
     sm = out / "sitemap.xml"
@@ -596,6 +701,7 @@ def main(argv=None):
 
         out = prepare_out(out_arg)
         n_files = copy_site(out, cfg)
+        instruments = copy_instruments(out)
 
         # app pages: the generated English head replaces the source block, the German page is new
         base_values = placeholder_values(cfg)
@@ -627,6 +733,7 @@ def main(argv=None):
     print("localized %d texts and %d attributes in /de/; copied %d source files; %d files in %s; verification ok"
           % (stats["text"], stats["attr"], n_files, n_all, out))
     print("filled privacy texts: %s" % private)
+    print(instruments or "instrument index: none (WARNING above)")
     return 0
 
 
