@@ -200,8 +200,23 @@
     .srcswitch button{border:0;background:transparent;color:#5a6b80;font-size:13px;font-weight:700;padding:7px 14px;border-radius:9px;min-width:0}
     .srcswitch button:hover{background:#f1f5fa}.srcswitch button[aria-checked="true"]{background:var(--navy);color:#fff}
     .srcswitch button:focus-visible{outline:2px solid #366a9c;outline-offset:1px}
+    .typefilter{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .typefilter button{border:1px solid var(--line);background:#fff;color:#42586f;font-size:12.5px;font-weight:700;line-height:1.2;padding:5px 11px;border-radius:999px;min-width:0}
+    .typefilter button:hover{background:#f1f5fa;border-color:#c9d6e4}.typefilter button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+    .typefilter button:focus-visible{outline:2px solid #366a9c;outline-offset:1px}.typefilter .n{font-weight:600;opacity:.75;margin-left:4px;font-variant-numeric:tabular-nums}
     .matchlist{display:grid;gap:7px;margin-top:13px}.match{width:100%;display:flex;gap:12px;align-items:center;text-align:left;border:1px solid #dce5ee;border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
     .match:hover{border-color:#8db9db;background:#f4f9fe}.match small{display:block;color:var(--muted);margin-top:3px;line-height:1.35;font-weight:400}.matchtext{flex:1;min-width:0}
+    .mlist{display:grid;gap:7px}.match mark{background:#ffe9a6;color:inherit;border-radius:3px;padding:0 1px}.match .ids{overflow-wrap:anywhere}
+    .badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+    .badge{display:inline-block;font-size:11px;font-weight:700;line-height:1.35;padding:1px 7px;border-radius:999px;background:#f1f5fa;color:#42586f;border:1px solid #dbe5ef}
+    .badge.type{background:#e4eef9;color:#1d4a73;border-color:#c9dcf0}.badge.venue{font-weight:600;background:#fafbfd}
+    .match .usebtn{flex:none;font-size:12px;color:#4475a3;align-self:flex-start;margin-top:2px}
+    .dbnote{font-size:13px;line-height:1.5;color:var(--ink);background:#f4f8fd;border:1px solid #d5e1ee;border-radius:10px;padding:10px 12px;margin:0}
+    .dbnote p{margin:0}.dbnote .consent-actions{margin-top:8px}
+    .listhead{font-size:12px;font-weight:700;color:var(--muted);margin:10px 0 -2px}
+    .dbmore,.onlinerow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .dbcredit{font-size:11px;color:var(--muted);line-height:1.5;margin:14px 0 0;overflow-wrap:anywhere}.dbcredit a{color:#366a9c;font-weight:700}
+    #dbRetry{margin-top:10px}
     .modelinks{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0 0}.modelinks a{color:#366a9c;font-size:12px;font-weight:700}
     .modalstatus{font-size:12px;color:var(--muted);margin:10px 0}
     .credit{font-size:12px;color:var(--muted);margin:-4px 0 10px}.credit a{color:#366a9c;font-weight:700}
@@ -416,7 +431,7 @@
     <div class="reset-setup"><button id="saveResetPoint" type="button" class="btn primary" data-i18n="set.saveReset">★ Save current state as reset point</button><button id="factoryReset" type="button" class="btn danger small" data-i18n="set.factory">Restore factory defaults</button></div>
     <p id="resetStateInfo" class="settings-info" aria-live="polite"></p>
     <p class="settings-info" data-i18n="set.reset.explain">Reset returns to your saved reset point; “Restore factory defaults” returns to the built-in example and deletes the saved reset point.</p>
-    <p class="settings-info"><strong data-i18n="set.search.title">Online search:</strong> <span data-i18n="set.search.text">Online search (crypto via CoinGecko, securities via Wikidata, images via Wikimedia Commons) only runs after you allow it; the built-in catalog always works without. You can change this under “Privacy settings” in the footer.</span></p>
+    <p class="settings-info"><strong data-i18n="set.search.title">Online search:</strong> <span data-i18n="set.search.text">Online search (crypto via CoinGecko, securities via Wikidata, images via Wikimedia Commons) only runs after you allow it; searching the instrument database runs in your browser and sends nothing anywhere. You can change this under “Privacy settings” in the footer.</span></p>
   </div>
   <main>
     <section class="hero" data-i18n-attr="aria-label:hero.aria">
@@ -512,15 +527,19 @@
     <div class="modalhead"><h2 id="modalTitle"></h2><button id="modalClose" class="btn" type="button" data-i18n="modal.close" data-i18n-attr="aria-label:modal.close.aria">✕ Close</button></div>
     <div id="modalHelp" class="settings-info"></div>
     <div id="offerPreview" class="offer-preview hidden" role="group"></div>
-    <div><div id="srcSwitch" class="srcswitch hidden" role="radiogroup" data-i18n-attr="aria-label:src.sel.aria"><button type="button" role="radio" aria-checked="true" data-src="stocks" data-i18n="src.sel.stocks">Stocks &amp; ETFs</button><button type="button" role="radio" aria-checked="false" data-src="crypto" data-i18n="src.sel.crypto">Crypto</button></div></div>
+    <div><div id="srcSwitch" class="srcswitch hidden" role="radiogroup" data-i18n-attr="aria-label:src.sel.aria"><button type="button" role="radio" aria-checked="true" data-src="stocks" data-i18n="src.sel.stocks">Securities</button><button type="button" role="radio" aria-checked="false" data-src="crypto" data-i18n="src.sel.crypto">Crypto</button></div></div>
     <div class="searchline" style="margin-top:13px"><input id="modalQuery"class="text-input" type="search" autocomplete="off"><button id="modalSearch" class="btn primary" type="button" data-i18n="modal.search">Search</button></div>
+    <div id="typeFilter" class="typefilter hidden" role="group" data-i18n-attr="aria-label:tf.aria"><button type="button" data-tf="all" aria-pressed="true"></button><button type="button" data-tf="E" aria-pressed="false"></button><button type="button" data-tf="C" aria-pressed="false"></button><button type="button" data-tf="S" aria-pressed="false"></button><button type="button" data-tf="F" aria-pressed="false"></button></div>
     <p id="searchNote" class="searchnote hidden"></p>
     <div id="searchConsent" class="hidden"></div>
     <div id="modalStatus" class="modalstatus" aria-live="polite"></div>
+    <div id="dbRetry" class="dbnote hidden"><p data-i18n="db.failed">The instrument database could not be loaded. Only the built-in list (a few well-known ETFs and stocks) is searched.</p><div class="consent-actions"><button id="dbRetryBtn" class="btn small" type="button" data-i18n="db.retry">Try again</button></div></div>
     <div id="offerFoot" class="offer-foot hidden"><label class="offer-check"><input type="checkbox" id="offerNever"><span data-i18n="offer.never">Don't offer a logo search when adding holdings</span></label><button id="offerSkip" class="btn" type="button" data-i18n="offer.skip">Skip</button></div>
     <div id="cgCredit" class="credit hidden"><span data-i18n="cg.label">Crypto data:</span> <a href="https://www.coingecko.com/en/api?utm_source=finplanr&amp;utm_medium=referral" target="_blank" rel="noopener noreferrer" data-i18n="cg.link">Powered by CoinGecko API</a></div>
     <div class="matchlist" id="modalResults"></div>
+    <div id="onlineRow" class="onlinerow hidden"><button id="onlineBtn" class="btn small" type="button" data-i18n="db.online">Also search online (Wikidata)</button></div>
     <div class="modelinks" id="modalLinks"></div>
+    <p id="dbCredit" class="dbcredit hidden"></p>
     <div id="imagePanel" class="hidden"><div class="divider" style="margin:20px 0;border-top:1px solid #e5eaf1"></div><strong data-i18n="img.title">Choose your own logo or image</strong><p class="settings-info" data-i18n="img.help">Use an icon, an image URL or a local picture. Images from Wikimedia Commons can be picked via the search; check the match yourself.</p>
     <div class="iconoptions" id="emojiOptions" style="margin:13px 0"></div>
     <div class="searchline" style="margin:0 0 10px"><input id="customSymbol" class="text-input" maxlength="8" data-i18n-attr="placeholder:img.customSymbol"><button id="applyCustomSymbol" class="btn small" type="button" data-i18n="img.useSymbol">Use icon</button></div>
@@ -604,7 +623,7 @@
       'set.reset.none':'No personal reset point saved. Reset restores the built-in example portfolio.',
       'tb.reset.tip':'{what}. Reset returns to your saved reset point; “Restore factory defaults” (Settings) returns to the built-in example and deletes the saved reset point.',
       'set.search.title':'Online search:',
-      'set.search.text':'Online search (crypto via CoinGecko, securities via Wikidata, images via Wikimedia Commons) only runs after you allow it; the built-in catalog always works without. You can change this under “Privacy settings” in the footer.',
+      'set.search.text':'Online search (crypto via CoinGecko, securities via Wikidata, images via Wikimedia Commons) only runs after you allow it; searching the instrument database runs in your browser and sends nothing anywhere. You can change this under “Privacy settings” in the footer.',
       'toast.cents.on':'Cents enabled.','toast.cents.off':'Switched to whole euros.',
       'toast.resetSaved':'Current state saved as reset point.','toast.resetDone':'Saved reset point restored.',
       'toast.factoryDone':'Factory settings restored.',
@@ -651,11 +670,11 @@
       'consent.search.lead.stocks':'This search goes to Wikidata and its query service (Wikimedia Foundation, Inc., USA).',
       'consent.search.lead.crypto':'This search goes to CoinGecko (Gecko Labs Pte. Ltd., Singapore).',
       'consent.search.lead.img':'This image search goes to Wikimedia Commons (Wikimedia Foundation, Inc., USA).',
-      'consent.search.providers':'One permission covers all online search: stocks and ETFs (Wikidata, Wikimedia Foundation, Inc., USA), crypto (CoinGecko, Gecko Labs Pte. Ltd., Singapore) and logo or image search (Wikimedia Commons, Wikimedia Foundation, Inc., USA). Each search only contacts the provider it needs.',
+      'consent.search.providers':'One permission covers all online search: securities (Wikidata, Wikimedia Foundation, Inc., USA), crypto (CoinGecko, Gecko Labs Pte. Ltd., Singapore) and logo or image search (Wikimedia Commons, Wikimedia Foundation, Inc., USA). Each search only contacts the provider it needs.',
       'consent.search.data':'The provider receives your search term, your IP address and technical data of your browser. Images in the results, and images you pick, are loaded from the provider; a picked image is saved as a local copy where possible.',
       'consent.search.risk':'Singapore has no EU adequacy decision, and the Wikimedia Foundation (USA) states no certification under the EU-US Data Privacy Framework. Your data could be accessed by authorities there without the protection you have in the EU. By allowing online search you explicitly consent to these transfers (Art. 49(1)(a) GDPR).',
       'consent.search.allow':'Allow online search',
-      'consent.search.local':'Use local catalog only','consent.load':'Load chart','consent.cancel':'Cancel',
+      'consent.search.local':'Search locally only','consent.load':'Load chart','consent.cancel':'Cancel',
       'priv.title':'Privacy settings',
       'priv.charts.title':'Price charts (TradingView)',
       'priv.search.title':'Online search (Wikidata, CoinGecko, Wikimedia Commons)',
@@ -730,27 +749,42 @@
       'modal.close':'✕ Close','modal.close.aria':'Close','modal.search':'Search',
       'modal.ph.find':'Name, ISIN, WKN or ticker','modal.ph.image':'Search term for images',
       'modal.iconTip':'Icon {icon}',
-      'modal.status.catalog':'Search the built-in catalog or start an online search.',
+      'modal.status.catalog':'Search the built-in coin list or start an online search.',
       'modal.status.images':'Search Wikimedia Commons for images or pick an icon.',
       'modal.status.typing':'Searching the catalog; click “Search” for more results.',
-      'modal.status.offline':'Offline: searching the built-in catalog only.',
-      'modal.status.localOnly':'Online search not allowed. Showing local catalog results only.',
+      'modal.status.offline':'Offline: online search is not available.',
+      'modal.status.localOnly':'Online search not allowed. Showing local results only.',
       'modal.status.searchOff':'Online search was switched off. Showing local results only.',
       'modal.status.needConsent':'Online search needs your permission first.',
       'modal.status.savingCopy':'Saving a local copy of the image …',
       'modal.status.running':'Showing local results. Searching online …',
-      'modal.status.failed':'Online data is currently unavailable (network, CORS or rate limit). The built-in catalog still works.',
-      'modal.status.found':'Results from the catalog and online search ({n} online). Only pick matching entries and check the identifiers.',
-      'modal.status.none':'Online search finished. No additional matches; the built-in catalog is still available.',
+      'modal.status.failed':'Online data is currently unavailable (network, CORS or rate limit). Your local results are still shown.',
+      'modal.status.found':'Results include online matches ({n} online). Only pick matching entries and check the identifiers.',
+      'modal.status.none':'Online search finished. No additional matches.',
       'modal.status.needImageTerm':'Enter a search term for images.','modal.status.needSymbol':'Enter an icon.',
       'modal.status.needUrl':'Enter a valid https:// image URL.','modal.status.badFile':'Choose a PNG/JPG/WebP/GIF of at most 150 KB.',
       'modal.status.fileFail':'The image could not be saved.',
       'modal.none':'No match: try the exact company name, ticker or ISIN, or enter the details manually.',
       'modal.none.crypto':'No match: try the coin name or ticker, or enter the details manually.',
-      'src.sel.aria':'Search source','src.sel.stocks':'Stocks & ETFs','src.sel.crypto':'Crypto',
-      'modal.status.src.stocks':'Source: Stocks & ETFs (built-in catalog, then Wikidata on Search).','modal.status.src.crypto':'Source: Crypto (built-in catalog, then CoinGecko on Search).',
+      'src.sel.aria':'Search source','src.sel.stocks':'Securities','src.sel.crypto':'Crypto',
+      'tf.aria':'Filter results by type','tf.all':'All','tf.E':'ETF','tf.C':'ETC/ETN','tf.S':'Stocks','tf.F':'Funds',
+      'tf.none':'No match of this type. {n} matches of other types: choose “All”.',
+      'modal.status.src.stocks':'Source: Securities (instrument database; online search is optional).','modal.status.src.crypto':'Source: Crypto (built-in catalog, then CoinGecko on Search).',
       'modal.use':'Use →','modal.unknown':'Unknown','modal.searchOn':'↗ Search on {name}',
-      'src.catalog':'Built-in catalog','src.wikidata':'Wikidata · verify ISIN',
+      'src.catalog':'Built-in list','src.wikidata':'Wikidata · verify ISIN',
+      'search.note.db':'Searching the instrument database happens in your browser: your search terms are not sent anywhere. “Also search online” needs your permission first.',
+      'db.loading':'Loading instrument database …','db.loadingSize':'Loading instrument database ({size}) …','db.preparing':'Preparing the instrument database …',
+      'db.failed':'The instrument database could not be loaded. Only the built-in list (a few well-known ETFs and stocks) is searched.','db.retry':'Try again',
+      'db.hint':'Type a name, ISIN, WKN or ticker, e.g. “VWCE”, “IE00B4L5Y983” or “SAP”.',
+      'db.count.one':'1 result','db.count.other':'{n} results','db.countOf':'Showing {shown} of {n} results.','db.more':'Show more','db.listAria':'Search results',
+      'db.none':'No match in the instrument database. Check the spelling, or enter the details manually.',
+      'db.noneList':'No match in the built-in list. Try the exact name, ticker or ISIN, or enter the details manually.',
+      'db.isinMissing':'ISIN not in the instrument database. You can add it manually with this ISIN.',
+      'db.isinOnly':'You can add this ISIN manually. The name is left for you to fill in.','db.isinUse':'Use ISIN only',
+      'db.isinBad':'This ISIN has an invalid check digit. Please check it for typos.',
+      'db.online':'Also search online (Wikidata)','db.onlineHead':'Online results (Wikidata)',
+      'db.type.E':'ETF','db.type.C':'ETC / ETN','db.type.S':'Stock','db.type.F':'Fund',
+      'db.updated':'Updated {date}',
       'img.title':'Choose your own logo or image',
       'img.help':'Use an icon, an image URL or a local picture. Images from Wikimedia Commons can be picked via the search; check the match yourself and the licence and attribution on the file page (logos are often trademarks).',
       'img.customSymbol':'Your own icon or emoji','img.useSymbol':'Use icon',
@@ -883,7 +917,7 @@
       'set.reset.none':'Kein eigener Reset-Stand gespeichert. Reset stellt das eingebaute Beispielportfolio wieder her.',
       'tb.reset.tip':'{what}. Reset führt zu deinem gespeicherten Reset-Stand zurück; „Werkseinstellungen wiederherstellen“ (Einstellungen) führt zum eingebauten Beispiel zurück und löscht den gespeicherten Reset-Stand.',
       'set.search.title':'Online-Suche:',
-      'set.search.text':'Die Online-Suche (Krypto über CoinGecko, Wertpapiere über Wikidata, Bilder über Wikimedia Commons) läuft nur, wenn du sie erlaubst; der integrierte Katalog funktioniert immer ohne. Du kannst das unter „Datenschutz-Einstellungen“ im Seitenfuß ändern.',
+      'set.search.text':'Die Online-Suche (Krypto über CoinGecko, Wertpapiere über Wikidata, Bilder über Wikimedia Commons) läuft nur, wenn du sie erlaubst; die Suche in der Instrumentendatenbank läuft in deinem Browser und sendet nichts irgendwohin. Du kannst das unter „Datenschutz-Einstellungen“ im Seitenfuß ändern.',
       'toast.cents.on':'Centbeträge aktiviert.','toast.cents.off':'Auf ganze Euro umgestellt.',
       'toast.resetSaved':'Aktueller Stand als Reset-Stand gespeichert.','toast.resetDone':'Gespeicherten Reset-Stand wiederhergestellt.',
       'toast.factoryDone':'Werkseinstellungen wiederhergestellt.',
@@ -930,11 +964,11 @@
       'consent.search.lead.stocks':'Diese Suche geht an Wikidata und dessen Abfragedienst (Wikimedia Foundation, Inc., USA).',
       'consent.search.lead.crypto':'Diese Suche geht an CoinGecko (Gecko Labs Pte. Ltd., Singapur).',
       'consent.search.lead.img':'Diese Bildersuche geht an Wikimedia Commons (Wikimedia Foundation, Inc., USA).',
-      'consent.search.providers':'Eine Erlaubnis gilt für die gesamte Online-Suche: Aktien und ETFs (Wikidata, Wikimedia Foundation, Inc., USA), Krypto (CoinGecko, Gecko Labs Pte. Ltd., Singapur) sowie Logo- und Bildersuche (Wikimedia Commons, Wikimedia Foundation, Inc., USA). Jede Suche kontaktiert nur den Anbieter, den sie braucht.',
+      'consent.search.providers':'Eine Erlaubnis gilt für die gesamte Online-Suche: Wertpapiere (Wikidata, Wikimedia Foundation, Inc., USA), Krypto (CoinGecko, Gecko Labs Pte. Ltd., Singapur) sowie Logo- und Bildersuche (Wikimedia Commons, Wikimedia Foundation, Inc., USA). Jede Suche kontaktiert nur den Anbieter, den sie braucht.',
       'consent.search.data':'Der Anbieter erhält deinen Suchbegriff, deine IP-Adresse und technische Daten deines Browsers. Bilder in den Ergebnissen und von dir gewählte Bilder werden vom Anbieter geladen; ein gewähltes Bild wird nach Möglichkeit als lokale Kopie gespeichert.',
       'consent.search.risk':'Für Singapur besteht kein EU-Angemessenheitsbeschluss, und die Wikimedia Foundation (USA) nennt keine Zertifizierung nach dem EU-US Data Privacy Framework. Deine Daten könnten dort von Behörden ohne den Schutz abgerufen werden, den du in der EU hast. Mit der Freigabe der Online-Suche willigst du ausdrücklich in diese Übermittlungen ein (Art. 49 Abs. 1 lit. a DSGVO).',
       'consent.search.allow':'Online-Suche erlauben',
-      'consent.search.local':'Nur lokalen Katalog nutzen','consent.load':'Chart laden','consent.cancel':'Abbrechen',
+      'consent.search.local':'Nur lokal suchen','consent.load':'Chart laden','consent.cancel':'Abbrechen',
       'priv.title':'Datenschutz-Einstellungen',
       'priv.charts.title':'Kurscharts (TradingView)',
       'priv.search.title':'Online-Suche (Wikidata, CoinGecko, Wikimedia Commons)',
@@ -1009,27 +1043,42 @@
       'modal.close':'✕ Schließen','modal.close.aria':'Schließen','modal.search':'Suchen',
       'modal.ph.find':'Name, ISIN, WKN oder Kürzel','modal.ph.image':'Suchbegriff für Bilder',
       'modal.iconTip':'Symbol {icon}',
-      'modal.status.catalog':'Integrierten Katalog durchsuchen oder eine Online-Suche starten.',
+      'modal.status.catalog':'Integrierte Coin-Liste durchsuchen oder eine Online-Suche starten.',
       'modal.status.images':'Bilder über Wikimedia Commons suchen oder ein Symbol wählen.',
       'modal.status.typing':'Katalog wird durchsucht; für weitere Treffer auf „Suchen“ klicken.',
-      'modal.status.offline':'Offline: Suche nur im integrierten Katalog.',
-      'modal.status.localOnly':'Online-Suche nicht erlaubt. Es werden nur Treffer aus dem lokalen Katalog gezeigt.',
+      'modal.status.offline':'Offline: Die Online-Suche ist nicht verfügbar.',
+      'modal.status.localOnly':'Online-Suche nicht erlaubt. Es werden nur lokale Treffer gezeigt.',
       'modal.status.searchOff':'Die Online-Suche wurde ausgeschaltet. Es werden nur lokale Treffer gezeigt.',
       'modal.status.needConsent':'Die Online-Suche braucht zuerst deine Erlaubnis.',
       'modal.status.savingCopy':'Lokale Kopie des Bildes wird gespeichert …',
       'modal.status.running':'Lokale Treffer angezeigt. Online-Suche läuft …',
-      'modal.status.failed':'Online-Daten sind gerade nicht verfügbar (Netzwerk, CORS oder Limit). Der integrierte Katalog funktioniert weiterhin.',
-      'modal.status.found':'Treffer aus Katalog und Online-Suche ({n} online). Nur passende Einträge wählen und Kennungen prüfen.',
-      'modal.status.none':'Online-Suche abgeschlossen. Keine zusätzlichen Treffer; der integrierte Katalog bleibt verfügbar.',
+      'modal.status.failed':'Online-Daten sind gerade nicht verfügbar (Netzwerk, CORS oder Limit). Deine lokalen Treffer bleiben sichtbar.',
+      'modal.status.found':'Die Treffer enthalten Online-Ergebnisse ({n} online). Nur passende Einträge wählen und Kennungen prüfen.',
+      'modal.status.none':'Online-Suche abgeschlossen. Keine zusätzlichen Treffer.',
       'modal.status.needImageTerm':'Bitte einen Suchbegriff für Bilder eingeben.','modal.status.needSymbol':'Bitte ein Symbol eingeben.',
       'modal.status.needUrl':'Bitte eine gültige https://-Bildadresse eingeben.','modal.status.badFile':'Bitte PNG/JPG/WebP/GIF mit höchstens 150 KB auswählen.',
       'modal.status.fileFail':'Das Bild konnte nicht gespeichert werden.',
       'modal.none':'Kein Treffer: Versuche den genauen Firmennamen, das Kürzel oder die ISIN, oder trage die Angaben manuell ein.',
       'modal.none.crypto':'Kein Treffer: Versuche den Coin-Namen oder das Kürzel, oder trage die Angaben manuell ein.',
-      'src.sel.aria':'Suchquelle','src.sel.stocks':'Aktien & ETFs','src.sel.crypto':'Krypto',
-      'modal.status.src.stocks':'Quelle: Aktien & ETFs (integrierter Katalog, bei „Suchen“ zusätzlich Wikidata).','modal.status.src.crypto':'Quelle: Krypto (integrierter Katalog, bei „Suchen“ zusätzlich CoinGecko).',
+      'src.sel.aria':'Suchquelle','src.sel.stocks':'Wertpapiere','src.sel.crypto':'Krypto',
+      'tf.aria':'Treffer nach Art filtern','tf.all':'Alle','tf.E':'ETF','tf.C':'ETC/ETN','tf.S':'Aktien','tf.F':'Fonds',
+      'tf.none':'Kein Treffer dieser Art. {n} Treffer anderer Arten: „Alle“ wählen.',
+      'modal.status.src.stocks':'Quelle: Wertpapiere (Instrumentendatenbank; Online-Suche optional).','modal.status.src.crypto':'Quelle: Krypto (integrierter Katalog, bei „Suchen“ zusätzlich CoinGecko).',
       'modal.use':'Übernehmen →','modal.unknown':'Unbekannt','modal.searchOn':'↗ Bei {name} recherchieren',
-      'src.catalog':'Integrierter Katalog','src.wikidata':'Wikidata · ISIN prüfen',
+      'src.catalog':'Integrierte Liste','src.wikidata':'Wikidata · ISIN prüfen',
+      'search.note.db':'Die Suche in der Instrumentendatenbank läuft in deinem Browser: Deine Suchbegriffe werden nirgendwohin gesendet. „Auch online suchen“ braucht zuerst deine Erlaubnis.',
+      'db.loading':'Instrumentendatenbank wird geladen …','db.loadingSize':'Instrumentendatenbank wird geladen ({size}) …','db.preparing':'Instrumentendatenbank wird vorbereitet …',
+      'db.failed':'Die Instrumentendatenbank konnte nicht geladen werden. Es wird nur die integrierte Liste (einige bekannte ETFs und Aktien) durchsucht.','db.retry':'Erneut versuchen',
+      'db.hint':'Name, ISIN, WKN oder Kürzel eingeben, z. B. „VWCE“, „IE00B4L5Y983“ oder „SAP“.',
+      'db.count.one':'1 Treffer','db.count.other':'{n} Treffer','db.countOf':'{shown} von {n} Treffern angezeigt.','db.more':'Mehr anzeigen','db.listAria':'Suchergebnisse',
+      'db.none':'Kein Treffer in der Instrumentendatenbank. Schreibweise prüfen oder die Angaben manuell eintragen.',
+      'db.noneList':'Kein Treffer in der integrierten Liste. Versuche den genauen Namen, das Kürzel oder die ISIN, oder trage die Angaben manuell ein.',
+      'db.isinMissing':'ISIN nicht in der Instrumentendatenbank. Du kannst sie mit dieser ISIN manuell hinzufügen.',
+      'db.isinOnly':'Du kannst diese ISIN manuell hinzufügen. Den Namen trägst du selbst ein.','db.isinUse':'Nur ISIN übernehmen',
+      'db.isinBad':'Diese ISIN hat eine ungültige Prüfziffer. Bitte auf Tippfehler prüfen.',
+      'db.online':'Auch online suchen (Wikidata)','db.onlineHead':'Online-Ergebnisse (Wikidata)',
+      'db.type.E':'ETF','db.type.C':'ETC / ETN','db.type.S':'Aktie','db.type.F':'Fonds',
+      'db.updated':'Stand {date}',
       'img.title':'Eigenes Logo oder Bild auswählen',
       'img.help':'Ein Symbol, eine Bildadresse oder ein lokales Bild verwenden. Bilder aus Wikimedia Commons lassen sich über die Suche auswählen; prüfe die Zuordnung sowie Lizenz und Namensnennung auf der Dateiseite selbst (Logos sind oft Marken).',
       'img.customSymbol':'Eigenes Symbol oder Emoji','img.useSymbol':'Symbol übernehmen',
@@ -1594,9 +1643,10 @@
     if(!modalCtx)return;
     imageView=null;$('#imageMatches').innerHTML='';
     const q=$('#modalQuery').value.trim();
-    if(modalCtx.itemId&&!modalCtx.logoOnly&&q)renderMatches(localMatches(q));else{modalMatches=[];$('#modalResults').innerHTML='';$('#cgCredit').classList.add('hidden');}
+    if(stocksMode()){modalCtx.online=null;stocksRefresh();}
+    else if(modalCtx.itemId&&!modalCtx.logoOnly&&q)renderMatches(localMatches(q));else{modalMatches=[];$('#modalResults').innerHTML='';$('#cgCredit').classList.add('hidden');}
     statusModal('modal.status.searchOff');
-    if(modalCtx.offer)showSearchConsent('images'); // step 2: results are gone, ask again (Allow / Skip)
+    if(modalCtx.offer)showSearchConsent('images',true); // step 2: results are gone, ask again (Allow / Skip); the focus stays where the user is typing
   }
   const consentPolicyUrl=()=>privacyUrl()+(lang==='en'?'#consent':'#einwilligung');
   // The information shown BEFORE a consent is given. One source for both places (consent box and Privacy settings), so they never differ.
@@ -2045,6 +2095,8 @@
   // ---------------------------------------------------------------- search & image picker
   // No scraped ETF portals: they generally disallow cross-origin browser access.
   let modalCtx=null,requestSeq=0,modalMatches=[],modalStatusState=null,imageView=null;
+  let modalOpener=null; // {el,catId,itemId,logoOnly}: where focus returns when the dialog closes
+  let typeFilter='all'; // type chip of the securities source (all | E | C | S | F); kept for the page view, not stored
   const $modal=$('#searchModal');
   const iconPicks=['₿','◎','€','▥','◈','◆','◇','💰','🏦','📈','🌍','🥇','🥈','🪙','💎','📊','🌱','🚀','💵','🏅'];
   function modalCategory(){return state.categories.find(c=>c.id===modalCtx?.catId);}
@@ -2072,45 +2124,68 @@
     $('#modalHelp').textContent=offer?t('offer.help'):t(!itemId?'modal.help.cat':logoOnly?'modal.help.logo':'modal.help.find');
     $('#modalQuery').placeholder=t(logoOnly?'modal.ph.image':'modal.ph.find');$('#modalQuery').setAttribute('aria-label',$('#modalQuery').placeholder);
     document.querySelectorAll('#emojiOptions [data-emoji]').forEach(b=>{b.title=t('modal.iconTip',{icon:b.dataset.emoji});});
-    makeLinks($('#modalQuery').value||catName(c),modalSource());syncSrcSwitch();
+    makeLinks($('#modalQuery').value||catName(c),modalSource());syncSrcSwitch();syncTypeFilter();
     if(pendingOnline)showSearchConsent(pendingOnline,true);
     // Persistent notice: which third party an online search contacts (shown before any request can happen); it follows the selected source.
-    const key=logoOnly?(offer?'search.note.offer':'search.note.img'):!itemId?null:'search.note';
+    const key=logoOnly?(offer?'search.note.offer':'search.note.img'):!itemId?null:modalSource()==='stocks'?'search.note.db':'search.note';
     const note=$('#searchNote');note.classList.toggle('hidden',!key);
     note.innerHTML=key?`${esc(t(key))} <a href="${esc(privacyUrl())}" data-privacy-link target="_blank" rel="noopener noreferrer">${esc(t('search.note.link'))}</a>`:'';
   }
   function openSearchModal(catId,itemId,logoOnly){
     const c=state.categories.find(x=>x.id===catId);if(!c)return;
-    modalCtx={catId,itemId,logoOnly,seq:++requestSeq,src:defaultSource(c.type)};
+    if($modal.classList.contains('hidden')){const a=document.activeElement;modalOpener={el:a&&a!==document.body?a:null,catId,itemId,logoOnly:!!logoOnly};}
+    clearTimeout(dbTimer);modalCtx={catId,itemId,logoOnly,seq:++requestSeq,src:defaultSource(c.type),st:null,online:null};
     const it=itemId?c.items.find(x=>x.id===itemId):null;
     $('#modalQuery').value=it&&it.nameKey!=='item.new'?itemName(it):'';
     $('#modalResults').innerHTML='';$('#imageMatches').innerHTML='';modalMatches=[];imageView=null;hideSearchConsent();
     $('#imageUrl').value=it?.iconUrl||c.iconUrl||'';$('#customSymbol').value=it?.icon||c.icon||'';
     $('#imagePanel').classList.toggle('hidden',!logoOnly);
-    $('#modalSearch').classList.toggle('hidden',!itemId||logoOnly);
+    syncSearchUi();
     $('#modalBox').classList.remove('offer');$('#offerFoot').classList.add('hidden');renderOfferPreview();
     $('#emojiOptions').innerHTML=logoOnly?iconPicks.map(i=>`<button type="button" class="iconoption" data-emoji="${esc(i)}">${esc(i)}</button>`).join(''):'';
     setModalTexts();
     statusModal(itemId&&!logoOnly?'modal.status.catalog':'modal.status.images');
     $modal.classList.remove('hidden');
     document.body.style.overflow='hidden';$('#modalQuery').focus();
-    // Only the local catalog is searched on open; the online request starts on the Search button or Enter.
-    if(itemId&&!logoOnly&&$('#modalQuery').value.trim()){
-      const q=$('#modalQuery').value.trim();
-      renderMatches(localMatches(q));makeLinks(q,modalSource());statusModal('modal.status.typing');
+    if(itemId&&!logoOnly){
+      // Securities: the instrument database (own server, searched in this browser) opens the dialog; nothing online starts by itself.
+      // Crypto: only the local coin list is searched on open; the online request starts on the Search button or Enter.
+      if(modalSource()==='stocks'){if(db.status==='error')db.status='idle';stocksRefresh();}
+      else if($('#modalQuery').value.trim()){
+        const q=$('#modalQuery').value.trim();
+        renderMatches(localMatches(q));makeLinks(q,modalSource());statusModal('modal.status.typing');
+      }
     }
+  }
+  // The Search button is only for the online searches (crypto source, logo step); stocks are searched live while typing.
+  function syncSearchUi(){
+    if(!modalCtx)return;
+    $('#modalSearch').classList.toggle('hidden',!(modalCtx.offer||(modalCtx.itemId&&!modalCtx.logoOnly&&modalSource()==='crypto')));
   }
   // Step 2 ("offer a logo") is left by Skip, a pick, Esc, the backdrop or Close: a ticked "don't offer again" box then switches the setting off.
   function leaveOffer(){
     if(!modalCtx?.offer||!$('#offerNever').checked)return false;
     state.offerLogo=false;persist();$('#offerLogo').checked=false;return true;
   }
+  // Focus goes back to the control that opened the dialog (or its replacement after a re-render), unless the user already moved it elsewhere.
+  function restoreModalFocus(wasInside){
+    const o=modalOpener;modalOpener=null;if(!o)return;
+    const a=document.activeElement;if(!wasInside&&a&&a!==document.body)return;
+    let el=o.el&&o.el.isConnected?o.el:null;
+    if(!el){
+      const q=s=>document.querySelector(s);
+      el=(o.itemId&&(o.logoOnly&&q(`[data-asset-logo="${CSS.escape(o.itemId)}"]`)||q(`[data-find-item="${CSS.escape(o.itemId)}"]`)))||(!o.itemId&&q(`[data-category-icons="${CSS.escape(o.catId)}"]`))||null;
+    }
+    if(el)el.focus({preventScroll:true});
+  }
   function closeSearchModal(opts){
-    const switchedOff=leaveOffer();
-    ++requestSeq;abortSearchRequests();hideSearchConsent();modalCtx=null;modalMatches=[];imageView=null;modalStatusState=null;$modal.classList.add('hidden');document.body.style.overflow='';
+    const switchedOff=leaveOffer(),wasInside=$modal.contains(document.activeElement);
+    ++requestSeq;abortSearchRequests();hideSearchConsent();clearTimeout(dbTimer);modalCtx=null;modalMatches=[];imageView=null;modalStatusState=null;$modal.classList.add('hidden');document.body.style.overflow='';$('#typeFilter').classList.add('hidden');
     ['#modalResults','#imageMatches','#modalLinks','#modalStatus','#emojiOptions'].forEach(sel=>{$(sel).innerHTML='';});
+    ['#onlineRow','#dbRetry','#dbCredit'].forEach(sel=>$(sel).classList.add('hidden'));$('#dbCredit').innerHTML='';
     $('#modalTitle').textContent='';$('#modalHelp').textContent='';$('#modalQuery').placeholder='';$('#searchNote').innerHTML='';
     $('#modalBox').classList.remove('offer');$('#offerFoot').classList.add('hidden');renderOfferPreview();$('#imageMatches').removeAttribute('aria-label');
+    restoreModalFocus(wasInside);
     if(switchedOff&&!(opts&&opts.quiet))toast(t('toast.offer.off'),5000);
     return switchedOff;
   }
@@ -2132,7 +2207,8 @@
     $('#modalBox').classList.add('offer');
     $('#modalQuery').value=logoQuery(itemName(it));
     $('#offerNever').checked=false;$('#offerFoot').classList.remove('hidden');
-    $('#imagePanel').classList.remove('hidden');$('#modalSearch').classList.remove('hidden');
+    $('#imagePanel').classList.remove('hidden');syncSearchUi();
+    ['#onlineRow','#dbRetry','#dbCredit'].forEach(sel=>$(sel).classList.add('hidden'));
     setModalTexts();syncSrcSwitch();$('#modalLinks').classList.add('hidden');renderOfferPreview();
     $('#imageMatches').setAttribute('aria-label',t('offer.results.aria',{name:itemName(it)}));
     statusModal(null);$('#offerSkip').focus();
@@ -2152,15 +2228,15 @@
     modalMatches=items.slice(0,16);
     // CoinGecko's terms require visible attribution wherever their data is shown.
     $('#cgCredit').classList.toggle('hidden',!modalMatches.some(a=>a.source==='CoinGecko'));
-    $('#modalResults').innerHTML=items.length?modalMatches.map((a,i)=>{
+    $('#modalResults').innerHTML=items.length?`<div class="mlist" role="list" aria-label="${esc(t('db.listAria'))}">`+modalMatches.map((a,i)=>{
       const logo=a.iconUrl||autoLogo(a.type,a);
       const pic=logo?remoteImg(logo,{cls:'mini-icon',onerror:"this.style.display='none'"}):(monogramHtml(a.name,a.ticker)||`<span class="mini-icon" aria-hidden="true">◇</span>`);
-      return `<button type="button" class="match" data-pick-result="${i}">${pic}<span class="matchtext"><strong>${esc(a.name||t('modal.unknown'))}</strong><small>${esc([a.ticker,a.isin,a.wkn].filter(Boolean).join(' · '))} · ${esc(sourceLabel(a.source))}${a.noteKey||a.note?`<br>${esc(a.noteKey?t(a.noteKey):a.note)}`:''}</small></span><strong style="font-size:12px;color:#4475a3">${esc(t('modal.use'))}</strong></button>`;
-    }).join(''):`<p class="muted">${esc(t(modalSource()==='crypto'?'modal.none.crypto':'modal.none'))}</p>`;
+      return `<div role="listitem"><button type="button" class="match" data-pick-result="${i}">${pic}<span class="matchtext"><strong>${esc(a.name||t('modal.unknown'))}</strong><small>${esc([a.ticker,a.isin,a.wkn].filter(Boolean).join(' · '))} · ${esc(sourceLabel(a.source))}${a.noteKey||a.note?`<br>${esc(a.noteKey?t(a.noteKey):a.note)}`:''}</small></span><strong class="usebtn">${esc(t('modal.use'))}</strong></button></div>`;
+    }).join('')+'</div>':`<p class="muted">${esc(t(modalSource()==='crypto'?'modal.none.crypto':'modal.none'))}</p>`;
   }
   // Applying a result copies a logo delivered by the search into this browser (data URL) so later visits make no third-party request.
   let imageBusy=false;
-  async function applyAsset(data){
+  async function applyAsset(data,opts){
     const ctx=modalCtx;if(!ctx||!modalItem()||!modalCategory()||imageBusy)return;
     let icon=cleanImg(data.iconUrl),external=false;
     if(/^https:/i.test(icon)){
@@ -2174,7 +2250,7 @@
       }
     }
     const it=modalItem();if(!it)return;
-    it.name=String(data.name||itemName(it)).slice(0,150);delete it.nameKey;
+    if(!(opts&&opts.keepName)){it.name=String(data.name||itemName(it)).slice(0,150);delete it.nameKey;}
     // A newly picked asset replaces ticker/identifiers/chart symbol of the previous one; blanks are never invented.
     it.ticker=data.ticker?String(data.ticker).toUpperCase().slice(0,30):'';
     it.isin=data.isin?String(data.isin).toUpperCase().slice(0,32):'';
@@ -2183,7 +2259,7 @@
     // Logos of known assets are resolved automatically at render time; only a logo delivered by the search result is stored (as a local copy).
     it.iconUrl=icon;it.icon='';if(external&&icon)it.iconExternal=true;else delete it.iconExternal;
     persist();render();
-    if(offerWanted(modalCategory(),it))enterOfferStep();else closeSearchModal();
+    if(offerWanted(modalCategory(),it)&&!it.nameKey)enterOfferStep();else closeSearchModal();
     toast(t('toast.assetApplied'));
     if(external&&icon)toast(t('toast.imgExternal'),6500);
   }
@@ -2230,7 +2306,7 @@
       const kind=pendingOnline;hideSearchConsent();grantConsent('search');
       if(!modalCtx)return;
       if(modalCtx.offer)$('#offerSkip').focus();else $('#modalQuery').focus();
-      if(kind==='images')searchImages();else if(kind==='assets')searchAssets();
+      if(kind==='images')searchImages();else if(kind==='assets')searchAssets(); // searchAssets() hands stocks over to searchOnlineStocks()
     }else if(b.hasAttribute('data-offer-skip')){
       closeSearchModal();
     }else if(b.hasAttribute('data-search-local')){
@@ -2238,6 +2314,291 @@
     }
   });
   const localMatches=q=>assetMatches(q,modalSource()).map(a=>({...a,source:'catalog'}));
+  // ---------------------------------------------------------------- instrument database (first-party static file, searched locally)
+  // /data/instruments.v1.json is built at build time from official reference data (see README) and served from our own origin. It is
+  // fetched without cookies the first time the search dialog needs it (once per page view) and searched entirely in this browser:
+  // the search terms never leave the device. No third party is contacted by this part.
+  // File: {v:1,built,sources:[{id,name,date,attr,attr_de}],venues:{MIC:name},cols:[isin,name,wkn,ticker,type,ccy,venues],rows:[[...]]};
+  // type: E = ETF/ETP fund, C = ETC/ETN, S = stock, F = other fund, O = other.
+  const DB_URL='/data/instruments.v1.json',DB_COLS=['isin','name','wkn','ticker','type','ccy','venues'];
+  const DB_PREF={etf:1,etc:2,stock:3},DB_CODE={E:1,C:2,S:3,F:4,O:5};
+  const db={status:'idle',phase:'',promise:null,size:0,data:null,col:null,nn:null,wk:null,tk:null,tc:null,base:null,retry:false};
+  let dbTimer=0;
+  const dbYield=()=>new Promise(r=>setTimeout(r,0));
+  const DB_FOLD={'ß':'ss','æ':'ae','œ':'oe','ø':'o','đ':'d','ð':'d','þ':'th','ł':'l','ı':'i'};
+  // lowercase, without diacritics (ä -> a, ß -> ss), punctuation replaced by single spaces
+  function dbFold(v){
+    let x=String(v).toLowerCase();
+    if(/[^\u0000-\u007f]/.test(x))x=x.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[ßæœøđðþłı]/g,c=>DB_FOLD[c]);
+    return x.replace(/[^a-z0-9]+/g,' ').trim();
+  }
+  const dbMeasure=(name,start)=>{try{performance.clearMeasures(name);performance.measure(name,{start,end:performance.now()});}catch(e){}};
+  function dbNotify(){if(stocksMode())stocksRefresh();}
+  function loadDb(){
+    if(db.status==='loading'||db.status==='ready')return db.promise;
+    db.status='loading';db.phase='download';db.size=0;
+    const retry=db.retry;db.retry=false;
+    db.promise=(async()=>{
+      try{
+        const t0=performance.now();
+        const r=await fetch(DB_URL,{credentials:'omit',referrerPolicy:'no-referrer',cache:retry?'reload':'default',headers:{'Accept':'application/json'}});
+        if(!r.ok)throw Error('HTTP '+r.status);
+        db.size=Number(r.headers.get('content-length')||0);dbNotify();
+        const d=await r.json();dbMeasure('finplanr-db-download',t0);
+        if(!d||d.v!==1||!Array.isArray(d.cols)||!Array.isArray(d.rows)||!d.rows.length)throw Error('format');
+        db.phase='prepare';dbNotify();
+        await dbPrepare(d);
+        db.status='ready';
+      }catch(err){db.status='error';db.data=null;db.promise=null;}
+      dbNotify();
+    })();
+    return db.promise;
+  }
+  // Builds the lookup arrays in slices of at most ~12 ms so the page stays responsive (about 100k rows).
+  async function dbPrepare(d){
+    const t0=performance.now(),col={};
+    d.cols.forEach((c,i)=>{col[c]=i;});
+    if(!DB_COLS.every(c=>c in col))throw Error('cols');
+    const rows=d.rows,N=rows.length,cn=col.name,cw=col.wkn,ct=col.ticker,cy=col.type,cv=col.venues;
+    const nn=new Array(N),wk=new Array(N),tk=new Array(N),tc=new Uint8Array(N),base=new Uint16Array(N);
+    let slice=performance.now();
+    for(let i=0;i<N;i++){
+      const r=rows[i],name=String(r[cn]||''),venues=String(r[cv]||''),wkn=String(r[cw]||''),tick=String(r[ct]||'');
+      nn[i]=' '+dbFold(name);wk[i]=wkn.toUpperCase();tk[i]=tick.toUpperCase().replace(/[^A-Z0-9]/g,'');tc[i]=DB_CODE[r[cy]]||0;
+      let vc=venues?1:0;for(let j=venues.indexOf(' ');j>=0;j=venues.indexOf(' ',j+1))vc++;
+      // lower is better: has WKN or ticker, traded on Xetra, number of venues, shorter name
+      base[i]=(((!wkn&&!tick?2:0)+(venues.indexOf('XETR')<0?1:0))*8+(7-Math.min(vc,7)))*256+Math.min(name.length,255);
+      if((i&255)===255&&performance.now()-slice>12){await dbYield();slice=performance.now();}
+    }
+    db.data=d;db.col=col;db.nn=nn;db.wk=wk;db.tk=tk;db.tc=tc;db.base=base;
+    dbMeasure('finplanr-db-prepare',t0);
+  }
+  // Query variants: umlauts both as a/o/u and ae/oe/ue, so "Münchener", "Munchener" and "Muenchener" all find the same names.
+  function dbVariants(raw){
+    const low=raw.toLowerCase(),out=[],add=v=>{const f=dbFold(v);if(f&&!out.includes(f))out.push(f);};
+    add(low);
+    if(/[äöü]/.test(low))add(low.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue'));
+    if(out[0]&&/[aou]e/.test(out[0]))add(out[0].replace(/([aou])e/g,'$1'));
+    return out;
+  }
+  // Ranking (lower tier first): 0 exact ISIN, 1 exact WKN/ticker, 2 name starts with the query, 3 every word is the start of a word of the name,
+  // 4 ISIN/WKN/ticker prefix, 5 words found inside words. Ties: type of the category, has WKN/ticker, traded on Xetra, more venues, shorter name.
+  function dbSearch(raw,catType){
+    const t0=performance.now(),c=db.col,rows=db.data.rows,N=rows.length,nn=db.nn,wk=db.wk,tk=db.tk,tc=db.tc,base=db.base;
+    const pref=DB_PREF[catType]||0,keyQ=raw.toUpperCase().replace(/[^A-Z0-9]/g,'');
+    const isinShape=/^[A-Z]{2}[A-Z0-9]{9}[0-9]$/.test(keyQ),variants=dbVariants(raw);
+    const keys=new Float64Array(N),mark=new Uint8Array(N),allToks=new Set();let n=0;
+    for(let pass=0;pass<Math.max(1,variants.length);pass++){
+      if(pass>0&&n>=5)break;
+      const toks=(variants[pass]||'').split(' ').filter(Boolean),qs=' '+toks.join(' ');
+      toks.forEach(x=>allToks.add(x));
+      for(let i=0;i<N;i++){
+        if(mark[i])continue;
+        let tier=99;
+        if(pass===0&&keyQ){
+          if(isinShape&&rows[i][c.isin]===keyQ)tier=0;
+          else if(wk[i]===keyQ||tk[i]===keyQ)tier=1;
+        }
+        if(tier===99&&toks.length){
+          const s=nn[i];
+          if(s.startsWith(qs))tier=2;
+          else{
+            let all=true,inner=false;
+            for(let k=0;k<toks.length;k++){
+              const x=toks[k];
+              if(s.indexOf(' '+x)>=0)continue;
+              if(x.length>=3&&s.indexOf(x)>=0){inner=true;continue;}
+              all=false;break;
+            }
+            if(all)tier=inner?5:3;
+          }
+        }
+        if(tier===99&&pass===0&&keyQ&&((keyQ.length>=2&&tk[i].startsWith(keyQ))||(keyQ.length>=3&&wk[i].startsWith(keyQ))||(keyQ.length>=4&&rows[i][c.isin].startsWith(keyQ))))tier=4;
+        if(tier<99){mark[i]=1;keys[n++]=((tier*2+(pref&&tc[i]!==pref?1:0))*8192+base[i])*1048576+i;}
+      }
+    }
+    const sorted=keys.subarray(0,n).sort(),idx=new Uint32Array(n);
+    for(let j=0;j<n;j++)idx[j]=sorted[j]%1048576;
+    dbMeasure('finplanr-db-search',t0);
+    return {idx,total:n,toks:[...allToks],keyQ,isinShape,isinOk:isinShape&&isinValid(keyQ),exact:isinShape&&n>0&&rows[idx[0]][c.isin]===keyQ};
+  }
+  const dbFindIsin=isin=>{const c=db.col.isin,rows=db.data.rows;for(let i=0;i<rows.length;i++)if(rows[i][c]===isin)return i;return -1;};
+  // Row i of the file as a result object (the shape applyAsset() takes). The chart symbol is only set for Xetra mnemonics on Xetra; nothing is invented.
+  function dbAsset(i){
+    const r=db.data.rows[i],c=db.col,isin=String(r[c.isin]),ticker=String(r[c.ticker]||''),venues=String(r[c.venues]||'').split(' ').filter(Boolean);
+    return {tc:r[c.type],name:String(r[c.name]||''),isin,wkn:String(r[c.wkn]||'')||wknFromIsin(isin),ticker,ccy:String(r[c.ccy]||''),venues,
+      tv:ticker&&venues.includes('XETR')?cleanTv('XETR:'+ticker):'',source:'db'};
+  }
+  // ---- results of the stocks source
+  const stocksMode=()=>!!modalCtx&&!!modalCtx.itemId&&!modalCtx.logoOnly&&modalSource()==='stocks';
+  const fmtBytes=n=>n>=1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB';
+  const fmtDay=v=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(v||''));if(!m)return String(v||'');try{return new Date(Date.UTC(+m[1],+m[2]-1,+m[3])).toLocaleDateString(locale(),{dateStyle:'medium',timeZone:'UTC'});}catch(e){return String(v);}};
+  function hlName(name,toks){
+    const marks=[],re=/[\p{L}\p{N}]+/gu;let m;
+    while((m=re.exec(name))){
+      const fw=dbFold(m[0]);if(!fw)continue;
+      let len=0,at=0;
+      for(const x of toks){
+        if(fw.startsWith(x)){if(x.length>len){len=x.length;at=0;}}
+        else if(x.length>=3&&!len){const j=fw.indexOf(x);if(j>0){len=x.length;at=j;}}
+      }
+      if(len)marks.push([m.index+at,m.index+Math.min(at+len,m[0].length)]);
+    }
+    let out='',last=0;
+    for(const [a,b] of marks){out+=esc(name.slice(last,a))+'<mark>'+esc(name.slice(a,b))+'</mark>';last=b;}
+    return out+esc(name.slice(last));
+  }
+  const hlId=(v,keyQ)=>{const u=String(v).toUpperCase();return keyQ.length>=2&&u.startsWith(keyQ)?`<mark>${esc(String(v).slice(0,keyQ.length))}</mark>${esc(String(v).slice(keyQ.length))}`:esc(v);};
+  function venueBadges(a){
+    if(!a.venues?.length)return '';
+    const names=db.data?.venues||{},vs=a.venues.includes('XETR')?['XETR',...a.venues.filter(v=>v!=='XETR')]:a.venues;
+    return vs.slice(0,3).map(v=>`<span class="badge venue">${esc(names[v]||v)}</span>`).join('')+(vs.length>3?`<span class="badge venue" title="${esc(vs.slice(3).map(v=>names[v]||v).join(', '))}">+${vs.length-3}</span>`:'');
+  }
+  function resultRow(a,i,toks,keyQ){
+    const logo=a.iconUrl||autoLogo('stock',a);
+    const pic=logo?remoteImg(logo,{cls:'mini-icon',onerror:"this.style.display='none'"}):(monogramHtml(a.name,a.ticker)||`<span class="mini-icon" aria-hidden="true">◇</span>`);
+    const ids=[a.isin&&hlId(a.isin,keyQ),a.wkn&&hlId(a.wkn,keyQ),a.ticker&&hlId(a.ticker,keyQ)].filter(Boolean).join(' · ');
+    const tc=a.tc||{etf:'E',etc:'C',stock:'S'}[a.type]||'';
+    const badges=[tc&&DB_CODE[tc]&&tc!=='O'?`<span class="badge type">${esc(t('db.type.'+tc))}</span>`:'',a.ccy?`<span class="badge">${esc(a.ccy)}</span>`:'',venueBadges(a),
+      a.source==='wikidata'||a.source==='catalog'?`<span class="badge">${esc(sourceLabel(a.source))}</span>`:''].join('');
+    return `<div role="listitem"><button type="button" class="match" data-pick-result="${i}">${pic}<span class="matchtext"><strong>${toks?hlName(a.name||t('modal.unknown'),toks):esc(a.name||t('modal.unknown'))}</strong><small class="ids">${ids}</small>${badges?`<span class="badges">${badges}</span>`:''}${a.noteKey||a.note?`<small>${esc(a.noteKey?t(a.noteKey):a.note)}</small>`:''}</span><strong class="usebtn">${esc(t('modal.use'))}</strong></button></div>`;
+  }
+  function syncCredit(){
+    const el=$('#dbCredit'),d=db.status==='ready'&&stocksMode()?db.data:null;
+    el.classList.toggle('hidden',!d);if(!d){el.innerHTML='';return;}
+    // http(s) addresses and bare host names such as registers.esma.europa.eu become links (https); text without an address stays plain text.
+    const link=txt=>String(txt).split(/(https?:\/\/[^\s<>]+|\b(?:[a-z0-9-]+\.)+(?:eu|com|de|org|net|info)\b(?:\/[^\s<>]*)?)/i).map((x,k)=>{
+      if(!(k%2))return esc(x);
+      const tail=/[.,;:)]+$/.exec(x),u=tail?x.slice(0,tail.index):x;
+      return `<a href="${esc(/^https?:/i.test(u)?u:'https://'+u)}" target="_blank" rel="noopener noreferrer">${esc(u.replace(/^https?:\/\//i,''))}</a>${tail?esc(tail[0]):''}`;
+    }).join('');
+    const src=(d.sources||[]).map(s=>String((lang==='de'&&s.attr_de)||s.attr||s.name||'')).filter(Boolean).map(link);
+    el.innerHTML=`${src.join(' · ')}${src.length?' · ':''}${esc(t('db.updated',{date:fmtDay(d.built)}))}`;
+  }
+  // The stocks source: live search in the database; falls back to the built-in list while the file is missing.
+  function stocksRefresh(){
+    if(!stocksMode())return;
+    const q=$('#modalQuery').value.trim(),st=modalCtx;
+    $('#cgCredit').classList.add('hidden');$('#modalLinks').classList.add('hidden');
+    $('#onlineRow').classList.toggle('hidden',!q);
+    $('#dbRetry').classList.toggle('hidden',db.status!=='error');
+    if(db.status==='idle')loadDb();
+    if(db.status==='loading'){
+      statusModal(db.phase==='prepare'?'db.preparing':db.size?'db.loadingSize':'db.loading',{size:fmtBytes(db.size)});
+      modalMatches=[];$('#modalResults').innerHTML='';syncCredit();st.st=null;syncTypeFilter();return;
+    }
+    syncCredit();
+    if(!q){modalMatches=[];$('#modalResults').innerHTML='';statusModal('db.hint');st.st=null;syncTypeFilter();return;}
+    const cat=modalCategory(),prev=st.st&&st.st.q===q?st.st:null;
+    if(db.status==='ready'){
+      const res=dbSearch(q,cat?cat.type:'');
+      st.st={q,mode:'db',res,shown:prev?prev.shown:30};
+    }else{
+      const items=assetMatches(q,'stocks').map(a=>({...a,tc:{etf:'E',etc:'C',stock:'S'}[a.type]||'',source:'catalog'}));
+      const keyQ=q.toUpperCase().replace(/[^A-Z0-9]/g,''),shape=/^[A-Z]{2}[A-Z0-9]{9}[0-9]$/.test(keyQ);
+      st.st={q,mode:'list',res:{items,total:items.length,toks:dbVariants(q).join(' ').split(' ').filter(Boolean),keyQ,isinShape:shape,isinOk:shape&&isinValid(keyQ),exact:items.some(a=>a.isin===keyQ)},shown:prev?prev.shown:30};
+    }
+    if(!(st.online&&st.online.q===q))st.online=null;
+    stocksFilterView(st.st);syncTypeFilter();
+    stocksRender(-1);
+  }
+  // ---- type chips (All | ETF | ETC/ETN | Stocks | Funds): they only filter the database results of the current query
+  const TF_KEYS=['all','E','C','S','F'],TF_CODES={E:[1],C:[2],S:[3],F:[0,4,5]};
+  const tfCode=s=>s.mode==='db'?i=>db.tc[i]:a=>DB_CODE[a.tc]||0;
+  // s.view: the entries to show (typed array of row numbers in db mode, array of items in list mode); s.counts: number of matches per chip
+  function stocksFilterView(s){
+    const all=s.mode==='db'?s.res.idx:s.res.items,code=tfCode(s),counts={all:all.length,E:0,C:0,S:0,F:0};
+    for(let k=0;k<all.length;k++){const c=code(all[k]);counts[c===1?'E':c===2?'C':c===3?'S':'F']++;}
+    s.counts=counts;
+    if(typeFilter==='all'){s.view=all;return;}
+    const want=TF_CODES[typeFilter],out=[];
+    for(let k=0;k<all.length;k++)if(want.includes(code(all[k])))out.push(all[k]);
+    s.view=s.mode==='db'?Uint32Array.from(out):out;
+  }
+  // Labels, counts (only while a query has results) and the pressed state; the buttons stay in place, so keyboard focus is never lost.
+  function syncTypeFilter(){
+    const box=$('#typeFilter'),show=stocksMode();
+    box.classList.toggle('hidden',!show);if(!show)return;
+    const counts=modalCtx.st&&modalCtx.st.counts;
+    box.querySelectorAll('[data-tf]').forEach(b=>{
+      const k=b.dataset.tf,on=k===typeFilter;
+      b.setAttribute('aria-pressed',String(on));
+      b.textContent=t('tf.'+k);
+      if(counts){const n=document.createElement('span');n.className='n';n.textContent=counts[k].toLocaleString(locale());b.appendChild(n);}
+    });
+  }
+  function setTypeFilter(k){
+    if(!TF_KEYS.includes(k)||k===typeFilter)return;
+    typeFilter=k;
+    const st=modalCtx&&modalCtx.st;
+    if(stocksMode()&&st){st.shown=30;stocksFilterView(st);}
+    syncTypeFilter();
+    if(stocksMode()&&st)stocksRender(-1);
+  }
+  $('#typeFilter').addEventListener('click',e=>{const b=e.target.closest('[data-tf]');if(b)setTypeFilter(b.dataset.tf);});
+  // from: index of the first newly added entry (it gets the focus after "Show more"), -1 for none.
+  function stocksRender(from){
+    const st=modalCtx.st,res=st.res,q=st.q,parts=[],view=st.view,total=view.length;
+    const rows=st.mode==='db'?[...view.subarray(0,st.shown)].map(dbAsset):view.slice(0,st.shown);
+    const countStatus=()=>statusModal(total>rows.length?'db.countOf':'db.count',{n:total>rows.length?total.toLocaleString(locale()):total,shown:rows.length.toLocaleString(locale())});
+    const list=from>0&&!modalCtx.online?.items.length?$('#modalResults [data-db-list]'):null;
+    if(list){ // "Show more": only the new entries are added, the rest of the list stays untouched
+      list.insertAdjacentHTML('beforeend',rows.slice(from).map((a,i)=>resultRow(a,from+i,res.toks,res.keyQ)).join(''));
+      modalMatches=rows.slice();
+      if(total<=rows.length)$('#modalResults .dbmore')?.remove();
+      countStatus();$('#modalResults').querySelector(`[data-pick-result="${from}"]`)?.focus();return;
+    }
+    modalMatches=rows.slice();
+    if(res.isinShape&&!res.exact){
+      parts.push(res.isinOk
+        ?`<div class="dbnote" data-db-notfound><p>${esc(t(st.mode==='db'?'db.isinMissing':'db.isinOnly'))}</p><div class="consent-actions"><button type="button" class="btn small primary" data-isin-only="${esc(res.keyQ)}">${esc(t('db.isinUse'))}</button></div></div>`
+        :`<p class="dbnote" data-db-badisin>${esc(t('db.isinBad'))}</p>`);
+    }
+    if(rows.length){
+      parts.push(`<div class="mlist" role="list" data-db-list aria-label="${esc(t('db.listAria'))}">${rows.map((a,i)=>resultRow(a,i,res.toks,res.keyQ)).join('')}</div>`);
+      if(total>rows.length)parts.push(`<div class="dbmore"><button type="button" class="btn small" data-db-more>${esc(t('db.more'))}</button></div>`);
+    }else if(typeFilter!=='all'&&st.counts.all>0){
+      parts.push(`<p class="muted" data-tf-none>${esc(t('tf.none',{n:st.counts.all.toLocaleString(locale())}))}</p>`);
+    }else if(!(res.isinShape&&!res.exact)){
+      parts.push(`<p class="muted">${esc(t(st.mode==='db'?'db.none':'db.noneList'))}</p>`);
+    }
+    const on=modalCtx.online;
+    if(on&&on.items.length){
+      const base=modalMatches.length;
+      parts.push(`<p class="listhead">${esc(t('db.onlineHead'))}</p><div class="mlist" role="list" aria-label="${esc(t('db.onlineHead'))}">${on.items.map((a,i)=>resultRow(a,base+i,null,res.keyQ)).join('')}</div>`);
+      modalMatches=modalMatches.concat(on.items);
+    }
+    $('#modalResults').innerHTML=parts.join('');
+    countStatus();
+    if(from>=0)$('#modalResults').querySelector(`[data-pick-result="${from}"]`)?.focus();
+  }
+  // Optional online lookup (Wikidata) for the stocks source: only after the 'search' consent; results are merged below the database rows.
+  async function searchOnlineStocks(){
+    if(!stocksMode())return;
+    const q=$('#modalQuery').value.trim();if(!q)return;
+    if(!modalCtx.st||modalCtx.st.q!==q){clearTimeout(dbTimer);stocksRefresh();}
+    if(db.status==='loading'){await db.promise;if(!stocksMode()||$('#modalQuery').value.trim()!==q)return;}
+    if(!navigator.onLine){statusModal('modal.status.offline');return;}
+    if(!consentFresh('search')){showSearchConsent('assets');return;}
+    const seq=++requestSeq;
+    statusModal('modal.status.running');
+    let online=[],ok=false;
+    try{online=await wdSearchStocks(q);ok=true;}
+    catch(err){if(seq!==requestSeq)return;if(!consentFresh('search')){dropSearch();return;}statusModal('modal.status.failed');return;} // the database results stay as they are
+    if(seq!==requestSeq||!stocksMode()||!modalCtx.st)return;
+    // dedupe by ISIN: database rows win; an online ISIN that exists in the database is shown from the database (once)
+    const shown=new Set(modalMatches.map(a=>a.isin)),items=[];
+    const inHits=modalCtx.st.mode==='db'?new Set(modalCtx.st.res.idx):null;
+    for(const a of online){
+      if(!a.isin||shown.has(a.isin))continue;
+      if(db.status==='ready'){const i=dbFindIsin(a.isin);if(i>=0){if(!inHits.has(i)){items.push({...dbAsset(i),onlineDb:true});shown.add(a.isin);}continue;}}
+      shown.add(a.isin);items.push(a);
+    }
+    modalCtx.online={q,items};
+    stocksRender(-1);
+    online.length?statusModal('modal.status.found',{n:online.length}):statusModal('modal.status.none');
+  }
+
   // ---- Securities search via Wikidata (CC0, no API key, CORS-enabled). OpenFIGI was tested but sends no CORS headers, so browsers cannot use it.
   // Stage 1 finds candidate items (prefix search by name + full-text search limited to items that carry an ISIN, P946).
   // Stage 2 is ONE compact SPARQL request for ISIN (P946), stock exchange (P414) and ticker (qualifier P249); fallback: wbgetentities claims.
@@ -2307,6 +2668,7 @@
   }
   async function searchAssets(){
     if(!modalCtx?.itemId)return;
+    if(modalSource()==='stocks'&&!modalCtx.logoOnly)return searchOnlineStocks();
     const q=$('#modalQuery').value.trim();if(!q){renderMatches([]);return;}
     const c=modalCategory();if(!c)return;
     const seq=++requestSeq,src=modalSource();
@@ -2399,24 +2761,74 @@
     }catch(e){if(seq===requestSeq){if(!consentFresh('search')){dropSearch();return;}imageView={msg:modalCtx?.offer?'img.unavailable.offer':'img.unavailable'};renderImageView();}}
   }
   $('#modalClose').addEventListener('click',closeSearchModal);
-  $modal.addEventListener('click',e=>{if(e.target===$modal)closeSearchModal();});
+  // The backdrop closes the dialog only on a real click on it: press AND release on the backdrop. A click event is dispatched on the common ancestor of
+  // both targets, so selecting text in the search field with a drag that ends outside the box (or a scrollbar drag, or a press on the backdrop that is
+  // released inside) would otherwise look like a backdrop click and close the dialog.
+  let backdropDown=null,backdropUp=null; // null = no pointer event seen (keyboard/script click)
+  $modal.addEventListener('pointerdown',e=>{backdropDown=e.target===$modal;backdropUp=null;},true);
+  $modal.addEventListener('pointerup',e=>{backdropUp=e.target===$modal;},true);
+  $modal.addEventListener('click',e=>{
+    const real=e.target===$modal&&backdropDown!==false&&backdropUp!==false;
+    backdropDown=backdropUp=null;
+    if(real)closeSearchModal();
+  });
+  // Keep Tab inside the dialog (also when focus is outside of it, e.g. on the page behind).
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Tab'||$modal.classList.contains('hidden'))return;
+    const f=[...$modal.querySelectorAll('button,a[href],input,select,textarea')].filter(x=>!x.disabled&&x.tabIndex>=0&&x.offsetParent!==null&&x.type!=='file');if(!f.length)return;
+    const first=f[0],last=f[f.length-1],a=document.activeElement;
+    if(!$modal.contains(a)){e.preventDefault();(e.shiftKey?last:first).focus();}
+    else if(e.shiftKey&&a===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&a===last){e.preventDefault();first.focus();}
+  });
   $('#modalSearch').addEventListener('click',()=>{modalCtx?.offer?searchImages():searchAssets();});
   $('#offerSkip').addEventListener('click',()=>closeSearchModal());
-  $('#modalQuery').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();modalCtx?.logoOnly?searchImages():searchAssets();}});
-  $('#modalQuery').addEventListener('input',()=>{if(modalCtx?.itemId&&!modalCtx.logoOnly){const q=$('#modalQuery').value.trim();++requestSeq;renderMatches(localMatches(q));makeLinks(q,modalSource());statusModal('modal.status.typing');}});
+  $('#modalQuery').addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      e.preventDefault();
+      if(stocksMode()){clearTimeout(dbTimer);stocksRefresh();} // live search: Enter only skips the short typing delay
+      else modalCtx?.logoOnly?searchImages():searchAssets();
+    }else if(e.key==='ArrowDown'&&stocksMode()){
+      const first=$('#modalResults').querySelector('button.match');if(first){e.preventDefault();first.focus();}
+    }
+  });
+  $('#modalQuery').addEventListener('input',()=>{
+    if(!modalCtx?.itemId||modalCtx.logoOnly)return;
+    if(stocksMode()){++requestSeq;abortSearchRequests();clearTimeout(dbTimer);if(db.status==='idle')loadDb();dbTimer=setTimeout(stocksRefresh,120);return;}
+    const q=$('#modalQuery').value.trim();++requestSeq;renderMatches(localMatches(q));makeLinks(q,modalSource());statusModal('modal.status.typing');
+  });
   // Source selector (radio group): switching drops online results of the other source and never starts a request by itself.
   function setSource(src){
     if(!modalCtx?.itemId||modalCtx.logoOnly||modalSource()===src)return;
-    modalCtx.src=src;++requestSeq;
+    modalCtx.src=src;++requestSeq;abortSearchRequests();clearTimeout(dbTimer);modalCtx.st=null;modalCtx.online=null;
     const q=$('#modalQuery').value.trim();
-    setModalTexts();if(q)renderMatches(localMatches(q));else{modalMatches=[];$('#modalResults').innerHTML='';$('#cgCredit').classList.add('hidden');}makeLinks(q||catName(modalCategory()),src);statusModal('modal.status.src.'+src);
+    setModalTexts();syncSearchUi();
+    ['#onlineRow','#dbRetry','#dbCredit'].forEach(sel=>$(sel).classList.add('hidden'));
+    if(src==='stocks'){modalMatches=[];$('#modalResults').innerHTML='';makeLinks(q,src);stocksRefresh();return;}
+    if(q)renderMatches(localMatches(q));else{modalMatches=[];$('#modalResults').innerHTML='';$('#cgCredit').classList.add('hidden');}makeLinks(q||catName(modalCategory()),src);statusModal('modal.status.src.'+src);
   }
   $('#srcSwitch').addEventListener('click',e=>{const b=e.target.closest('[data-src]');if(b){setSource(b.dataset.src);b.focus();}});
   $('#srcSwitch').addEventListener('keydown',e=>{
     if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;
     e.preventDefault();const next=modalSource()==='crypto'?'stocks':'crypto';setSource(next);$('#srcSwitch').querySelector('[data-src="'+next+'"]').focus();
   });
-  $('#modalResults').addEventListener('click',e=>{const el=e.target.closest('[data-pick-result]');if(el)applyAsset(modalMatches[Number(el.dataset.pickResult)]);});
+  $('#modalResults').addEventListener('click',e=>{
+    const el=e.target.closest('[data-pick-result]');
+    if(el){applyAsset(modalMatches[Number(el.dataset.pickResult)]);return;}
+    const isin=e.target.closest('[data-isin-only]');
+    if(isin){applyAsset({name:'',isin:isin.dataset.isinOnly,wkn:wknFromIsin(isin.dataset.isinOnly),ticker:'',tv:''},{keepName:true});return;}
+    if(e.target.closest('[data-db-more]')&&modalCtx?.st){const st=modalCtx.st,from=Math.min(st.shown,st.view.length);st.shown+=30;stocksRender(from);}
+  });
+  // Keyboard in the results: arrow keys move between the entries, ArrowUp on the first one returns to the search field.
+  $('#modalResults').addEventListener('keydown',e=>{
+    if(!['ArrowDown','ArrowUp','Home','End'].includes(e.key))return;
+    const list=[...$('#modalResults').querySelectorAll('button.match')],at=list.indexOf(document.activeElement);if(at<0)return;
+    e.preventDefault();
+    if(e.key==='ArrowUp'&&at===0){$('#modalQuery').focus();return;}
+    list[e.key==='Home'?0:e.key==='End'?list.length-1:Math.max(0,Math.min(list.length-1,at+(e.key==='ArrowDown'?1:-1)))].focus();
+  });
+  $('#onlineBtn').addEventListener('click',searchOnlineStocks);
+  $('#dbRetryBtn').addEventListener('click',()=>{db.retry=true;loadDb();stocksRefresh();});
   $('#emojiOptions').addEventListener('click',e=>{const btn=e.target.closest('[data-emoji]');if(btn)setAssetImage('',btn.dataset.emoji);});
   $('#applyCustomSymbol').addEventListener('click',()=>{const e=$('#customSymbol').value.trim().slice(0,8);if(e)setAssetImage('',e);else statusModal('modal.status.needSymbol');});
   $('#applyImageUrl').addEventListener('click',()=>{const url=cleanImg($('#imageUrl').value.trim());if(!url)return statusModal('modal.status.needUrl');pickImage(url,false);});
@@ -2790,7 +3202,7 @@
   });
   document.addEventListener('click',e=>{if(exportOpen()&&!exportWrap.contains(e.target))setExportMenu(false);});
   document.addEventListener('keydown',e=>{
-    if(e.key!=='Escape')return;
+    if(e.key!=='Escape'||e.isComposing||e.keyCode===229)return; // Esc that ends an IME composition is not a request to close
     if(privOpen()){closePrivacy();}
     else if(exportOpen()){setExportMenu(false);exportToggle.focus();}
     else if(!$modal.classList.contains('hidden'))closeSearchModal();
