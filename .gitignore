@@ -9,6 +9,8 @@ docker-compose.yaml
 private/
 dist/
 site/logos
+# Instrument index build cache (raw ESMA / Deutsche Boerse downloads, generated index)
+build-cache/
 
 # OS / editor / Windows download markers
 .DS_Store
@@ -32,3 +34,10 @@ parked-for-later/COPYRIGHT-AND-COPIES.md
 parked-for-later/datenschutz-ads-module.*
 parked-for-later/legacy/
 parked-for-later/site/
+
+# Instrument updater (Docker): live index written by the updater service and its download cache
+instruments-data/
+instruments-cache/
+
+# Local deploy settings (mounted server path)
+config/deploy.env
