@@ -39,19 +39,28 @@
 <li><strong>Whole euros or cents:</strong> In Settings, choose whether amounts are rounded to whole euros or include cents.</li>
 </ul>
 
+<h2>Plan and Rebalance tabs</h2>
+<p>Below the overview at the top, the main section has two tabs: <em>Plan</em> and <em>Rebalance</em>.</p>
+<ul>
+<li><strong>Plan:</strong> Shows your categories and holdings, where you edit them and add new ones. At first start it also shows the example banner (see below).</li>
+<li><strong>Rebalance:</strong> Shows the calculation described under &ldquo;Rebalance with my current holdings&rdquo; below: current values, difference to target, one-time amounts, the month-by-month table and the downloads.</li>
+<li><strong>Donut chart:</strong> Click a segment of the donut chart or an entry of its legend to switch back to the <em>Plan</em> tab and jump to that category.</li>
+<li><strong>Direct link:</strong> The address ending <code>#rebalance</code> opens the <em>Rebalance</em> tab directly.</li>
+</ul>
+
 <h2>Example plan and your own plan</h2>
 <ul>
-<li><strong>Example plan:</strong> The plan you see at first start is only an example, marked with an &ldquo;Example plan&rdquo; chip. It shows how the app works and is not tailored to you.</li>
-<li><strong>Create my own plan:</strong> The button <em>Create my own plan</em> starts an empty plan. Your budget and settings are kept. You can bring the previous plan back with <em>Reset</em>, your reset point or a JSON backup.</li>
+<li><strong>Example plan:</strong> The plan you see at first start is only an example. While it is shown, on the <em>Plan</em> tab a banner above the list says &ldquo;Example plan &ndash; not a recommendation&rdquo;, with the button <em>Create my own plan</em> on the same row. It shows how the app works and is not tailored to you.</li>
+<li><strong>Create my own plan:</strong> The button <em>Create my own plan</em> in the banner starts an empty plan. Your budget and settings are kept. You can bring the previous plan back with <em>Reset</em>, your reset point or a JSON backup. Once the plan is your own, the banner is gone and a smaller button <em>New empty plan</em> sits in the header of the list.</li>
 <li><strong>First category:</strong> An empty plan shows a row of type buttons: ETF, Stocks, Crypto, Precious metals (ETC), Savings account and Other. One tap creates the first category and opens the holding search.</li>
 <li><strong>Add and remove freely:</strong> Categories and holdings can be changed, added or removed at any time. The plan is your own.</li>
 </ul>
 
 <h2>Adding and editing</h2>
-<p>Adding works without Edit mode: <em>+ Add holding</em> inside each category and <em>+ Add category</em> below the list are always visible.</p>
+<p>The always-visible buttons <em>+ Add holding</em> inside each category and <em>+ Add category</em> below the list start editing automatically and show the same bar at the bottom of the window as Edit mode (see below). <em>Undo all changes</em> then also removes what you just added.</p>
 
 <h2>Edit mode</h2>
-<p>Edit mode is for renaming, colours, symbols, ordering and deleting. In Edit mode you can:</p>
+<p>Edit mode is for renaming, colours, symbols, ordering and deleting. Switch it on with <em>&#9998; Edit</em> in the header row of &ldquo;Your categories&rdquo;. While you edit, a bar stays pinned at the bottom of the window: &ldquo;Editing &middot; changes are saved as you type&rdquo;. <em>Done</em> leaves Edit mode; <em>Undo all changes</em> restores the plan as it was when editing started. In Edit mode you can:</p>
 <ul>
 <li>change names and identifiers: ticker, ISIN and WKN (German securities number),</li>
 <li>change logos,</li>
@@ -74,13 +83,13 @@
 <p><strong>Logo offer when adding a holding:</strong> If you apply a search result that has no logo (not for savings accounts), the dialog switches to a second step, &ldquo;Choose a logo for &hellip;&rdquo;. If you have allowed online search, it looks for matching images on Wikimedia Commons (for example &ldquo;Apple logo&rdquo;) and shows up to 12; pick one only if it matches, or choose <em>Skip</em> (or press Esc) to keep the letter badge. If you have not allowed online search yet, nothing is requested: the step shows the permission box with <em>Allow online search</em> and <em>Skip</em>. Tick &ldquo;Don&rsquo;t offer a logo search when adding holdings&rdquo; to stop the offer; you can turn it on again in Settings (&ldquo;Offer a logo search when I add a holding&rdquo;). The &ldquo;&#9673; Logo&rdquo; button in Edit mode works as before.</p>
 
 <h2>Rebalance with my current holdings</h2>
-<p>The optional card below your categories (closed by default; open it with its heading) compares what your holdings are worth today with the target shares of your plan above and calculates what it takes to reach them. Your plan stays the target; the card only reads it and changes nothing in it.</p>
+<p>The <em>Rebalance</em> tab compares what your holdings are worth today with the target shares of your plan and calculates what it takes to reach them. Your plan stays the target; the tab only reads it and changes nothing in it.</p>
 <ul>
-<li><strong>Current values:</strong> Enter what each holding is worth <em>today</em> in euros, including gains, not what you paid in. Leave a field empty or enter 0 for a holding you have not invested in yet. Your plan above defines the target shares.</li>
+<li><strong>Current values:</strong> Enter what each holding is worth <em>today</em> in euros, including gains, not what you paid in. Leave a field empty or enter 0 for a holding you have not invested in yet. Your plan defines the target shares.</li>
 <li><strong>Counted or not:</strong> Each holding and each category has a checkbox. Untick it to leave something out of the comparison, for example a savings account or an emergency fund. Holdings that are not counted are ignored in the calculation and keep their planned amount.</li>
 <li><strong>The table:</strong> For each holding it shows the <em>current value</em>, the <em>share now</em> and the <em>target share</em>. <em>Difference to target</em> is the current value minus the value at the target share, in euros and marked &ldquo;above&rdquo; or &ldquo;below&rdquo; the target. <em>To reach target, one-time (&euro;)</em> is the amount that one-time payment would add to that holding; holdings above their target get 0. The sum of this column is shown as <em>Needed in total</em>: the one-time amount that, distributed this way, puts every counted holding exactly on its target share.</li>
 <li><strong>Reaching your target:</strong> Optionally add an <em>extra one-time amount</em> (for example a bonus) and choose a horizon: <em>This month only</em>, <em>As soon as possible with my monthly budget</em> (the default) or <em>In N months</em>. For the last two, a month-by-month table shows the calculated amounts per holding; month 1 is this month. A comparison row, <em>Plan (no rebalancing)</em>, shows your plan for the same months. Once the target is reached, the amounts equal your plan. If the budget is too small for the chosen N months, Finplanr shows the monthly amount that N months would take.</li>
-<li><strong>Assumption:</strong> The calculation assumes that the values stay as entered (no price changes). It is shown as a highlighted notice on the card. To update it, enter your current values again each month.</li>
+<li><strong>Assumption:</strong> The calculation assumes that the values stay as entered (no price changes). It is shown as a highlighted notice on the <em>Rebalance</em> tab. To update it, enter your current values again each month.</li>
 <li><strong>Downloads:</strong> <em>Download table (CSV)</em> saves the current values, shares, difference to target and one-time amounts per holding; <em>Download month-by-month (CSV)</em> saves the amounts per holding for each month until the target is reached; <em>Clear current values</em> deletes your entries after a confirmation.</li>
 <li><strong>Local only:</strong> Everything stays in your browser. The entries are stored together with your plan and are included in the JSON backup. Nothing is sent anywhere. The result is a calculation from your entries, not investment advice.</li>
 </ul>
