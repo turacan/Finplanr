@@ -92,8 +92,8 @@
     .donut-inner{position:relative;text-align:center;z-index:1;pointer-events:none;max-width:104px}.donut-inner strong{display:block;font-size:27px;letter-spacing:-.8px}.donut-inner span{display:block;color:#bbd0e0;font-size:11px}
     .donut-inner .donut-name{color:#fff;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.donut-name:empty{display:none!important}
     .legend{width:100%;display:flex;flex-direction:column;gap:12px;min-width:0}.legendline{display:flex;align-items:center;gap:9px;font-size:12px;width:calc(100% + 12px);margin:-3px -6px;padding:3px 6px;border:0;border-radius:8px;background:none;color:inherit;text-align:left;transition:background .15s ease}.legendline.on{background:#ffffff1c}.dot{width:9px;height:9px;border-radius:4px;flex:none}.legendname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e2eaf3}.legendline strong{font-variant-numeric:tabular-nums;font-weight:730}
-    .intro{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin:33px 0 17px}
-    h2{font-size:23px;letter-spacing:-.6px;margin:0;font-weight:780}.intro .sub{font-size:13px;color:var(--muted);margin-top:4px}
+    .intro{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;margin:33px 0 17px}.intro h2{flex:1 1 auto;min-width:0}
+    h2{font-size:23px;letter-spacing:-.6px;margin:0;font-weight:780}.intro .sub{font-size:13px;color:var(--muted);margin:0;flex:0 0 100%;text-align:left}
     .stackbar{display:flex;overflow:hidden;height:11px;border-radius:99px;background:#e4eaf2;margin-bottom:22px}.stackbar button{height:100%;min-width:0;padding:0;margin:0;border:0;border-radius:0;transition:width .15s ease,filter .15s ease,opacity .15s ease}.stackbar button:focus-visible{outline-offset:-3px}.stackbar.hasact button:not(.on){opacity:.55}
     .sections{display:grid;gap:17px}
     .section{scroll-margin-top:18px;transition:box-shadow .5s ease;background:var(--paper);border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);padding:22px 24px 13px;--accent:var(--teal);overflow:hidden}
@@ -112,14 +112,24 @@
     .copychip:hover{background:#eaf1fb;color:#243a55;border-color:#b9cbe1}.copychip .copyicon{font-size:11px;opacity:.7}.entry-left{min-width:0}.item-slider .caption{font-size:11px;color:var(--muted);margin-bottom:5px;display:block}.item-slider-grid{display:grid;grid-template-columns:minmax(85px,1fr) 76px;align-items:center;gap:12px}.entry-end{text-align:right}.entry-end .value{font-size:19px;white-space:nowrap;font-weight:800;letter-spacing:-.4px;font-variant-numeric:tabular-nums}.entry-end .globalpct{font-size:11px;color:var(--muted);margin-top:2px}
     .edit-fields{display:flex;gap:9px;flex-wrap:wrap;align-items:flex-end}.editfield{flex:1 1 130px;min-width:115px}.editfield.namefield{flex:2 1 210px}.editfield label{font-size:10px;color:var(--muted);font-weight:730;display:block;margin:0 0 4px}.text-input{height:36px;border:1px solid #dbe4ef;background:#fff;border-radius:9px;padding:8px 10px;color:var(--ink);width:100%;font-size:12px}.editfield .text-input{font-size:12px}
     .rowedit{display:flex;gap:7px;align-items:flex-end}
-    .edit-head{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.edit-head input{width:190px}
+    .edit-head{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.edit-head input{width:190px}.typesel{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--muted)}.typesel select{width:auto;max-width:200px;padding:0 8px}
     .edittools{display:flex;gap:9px;align-items:center;margin:12px 0 4px}.muted{font-size:12px;color:var(--muted)}
-    .add-section{border:1px dashed #b8c8d9;border-radius:16px;padding:18px 20px;background:#fbfcff;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}.add-section .field{min-width:170px;flex:1}.add-section label{display:block;font-size:11px;font-weight:700;color:#65768b;margin-bottom:5px}.add-section select{height:36px}
     /* Onboarding: example chip, "create my own plan", empty state, always-visible add controls */
-    .introtitle{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap}
-    .chip{display:inline-flex;align-items:center;font-size:12px;font-weight:700;line-height:1.3;color:#2f5b8a;background:#eef4fb;border:1px solid #cfe0f1;border-radius:99px;padding:3px 11px}
-    .intro>div:first-child{flex:1 1 440px;min-width:0}.introactions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:300px;text-align:right}
-    .introactions .plus{font-size:15px;line-height:1}
+    .introactions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-left:auto}
+    .introactions .btn.small{padding:8px 11px}
+    .examplebanner{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;margin:0 0 12px;padding:9px 12px 9px 14px;background:#eef4fb;border:1px solid #cfe0f1;border-radius:14px;color:#2f5b8a}
+    .examplebanner .extext{flex:1 1 220px;min-width:0;font-size:13px;font-weight:700;line-height:1.35}
+    .examplebanner .exinfo{flex:0 0 auto;position:relative;width:18px;height:18px;border-radius:50%;background:#2f5b8a}
+    .examplebanner .exinfo::before{content:"";position:absolute;left:8px;top:8px;width:2px;height:6px;border-radius:1px;background:#fff}
+    .examplebanner .exinfo::after{content:"";position:absolute;left:8px;top:4px;width:2px;height:2px;border-radius:50%;background:#fff}
+    .examplebanner .btn{flex:0 0 auto}.examplebanner .plus{font-size:14px;line-height:1}
+    .editbar{position:fixed;left:0;right:0;bottom:0;z-index:10;padding:0 13px calc(10px + env(safe-area-inset-bottom,0px));pointer-events:none}
+    .editbar-in{pointer-events:auto;max-width:1134px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;background:#fff;border:1px solid #bfcddf;border-radius:16px;box-shadow:0 10px 36px #182e4440;padding:10px 12px 10px 18px}
+    .editbar-text{font-size:13px;font-weight:650;color:#31475e;min-width:0}
+    .editbar-actions{display:flex;gap:8px;margin-left:auto}
+    .editbar .btn:disabled{opacity:.5;cursor:default;pointer-events:none}
+    body.editing .wrap{padding-bottom:calc(70px + var(--editbar-h,0px))}
+    body.editing #toast{bottom:calc(var(--editbar-h,0px) + 16px);z-index:11}
     .typerow{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px}
     .typebtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:86px;padding:12px 8px;border:1px solid #cfdbeb;border-radius:14px;background:#fff;color:var(--ink);font-weight:700;font-size:14px;line-height:1.25;text-align:center;transition:.15s ease}
     .typebtn .ticon{font-size:26px;line-height:1;color:var(--navy)}
@@ -132,7 +142,7 @@
     .addcat .typebtn{flex-direction:row;gap:9px;min-height:46px;padding:8px 10px;font-size:13px;border-style:dashed;background:#fff}
     .addcat .typebtn .ticon{font-size:18px}
     .addquick-row{padding:2px 0 12px}
-    @media(max-width:620px){.introactions{align-items:flex-start;text-align:left;max-width:none}}
+    @media(max-width:620px){.examplebanner .btn{flex:1 1 100%}.editbar{padding:0 0 env(safe-area-inset-bottom,0px)}.editbar-in{border-radius:16px 16px 0 0;border-width:1px 0 0;padding:9px 12px;gap:8px}.editbar-text{flex:1 1 100%;font-size:12px}.editbar-actions{flex:1 1 100%;margin-left:0}.editbar-actions .btn{flex:1}}
     .addquick{display:inline-flex;align-items:center;gap:7px;border:1px dashed #b0c2d6;background:#fbfcff;color:#31475e;border-radius:10px;padding:8px 13px;font-size:13px;font-weight:700}
     .addquick:hover{background:#eef4fb;border-color:#6f8fb3}
     .about{margin:42px auto 0;max-width:900px;padding:26px 28px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);color:#4a5a6e;font-size:14px;line-height:1.6}
@@ -284,16 +294,21 @@
     @media(max-width:620px){.chart-body{height:320px}}
     @media(max-width:620px){.toolbar{position:relative}.menuwrap{display:contents}.menu{left:0;right:0;width:auto;max-width:none;top:calc(100% + 6px)}.langswitch{margin-left:auto}}
     /* Rebalance card (contribution-based rebalancing; read-only calculator) */
-    .rebal{margin-top:17px;background:var(--paper);border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);overflow:hidden}
+    .rebal{margin-top:20px;background:var(--paper);border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);overflow:hidden;padding:22px 24px}
     .rebal [hidden]{display:none!important}
-    .rebal-h{margin:0;font-size:inherit;letter-spacing:0}
-    .rebal-toggle{display:flex;align-items:center;gap:14px;width:100%;border:0;background:none;color:inherit;text-align:left;padding:20px 24px}
-    .rebal-toggle:hover{background:#f8fafd}.rebal-toggle:focus-visible{outline-offset:-3px}
-    .rebal-ico{width:38px;height:38px;flex:none;border-radius:12px;display:grid;place-items:center;background:#eef3fa;color:#2f5b8a;font-size:20px}
-    .rebal-titles{flex:1;min-width:0;display:block}.rebal-title{display:block;font-size:19px;letter-spacing:-.3px;font-weight:770;line-height:1.3}
-    .rebal-sub{display:block;font-size:13px;color:var(--muted);margin-top:3px;font-weight:400;letter-spacing:0;line-height:1.45}
-    .rebal-chev{flex:none;font-size:18px;color:#60738d;transition:transform .15s ease}.rebal-toggle[aria-expanded="true"] .rebal-chev{transform:rotate(180deg)}
-    .rebal-body{padding:2px 24px 22px;border-top:1px solid var(--line)}
+    .rebal-head{margin:0}
+    .rebal-title{margin:0;font-size:21px;letter-spacing:-.4px;font-weight:780;line-height:1.3}
+    .rebal-sub{font-size:13px;color:var(--muted);margin:5px 0 0;font-weight:400;letter-spacing:0;line-height:1.45;max-width:880px}
+    .rebal.is-empty .rebal-intro,.rebal.is-empty .rebal-totals,.rebal.is-empty .rebal-summary,.rebal.is-empty .rebal-plan,.rebal.is-empty .rebal-actions,.rebal.is-empty .rebal-disc{display:none!important}
+    .rebal.is-empty .rebal-notes{margin-top:14px;margin-bottom:0}
+    /* Plan | Rebalance tabs */
+    .tabs{display:flex;gap:4px;width:max-content;max-width:100%;margin:26px 0 0;padding:4px;background:#e8edf4;border-radius:14px}
+    .tab{flex:0 0 auto;border:0;background:none;color:#4a5a6e;font-size:14.5px;font-weight:720;letter-spacing:-.1px;min-height:40px;padding:8px 24px;border-radius:10px;transition:background .15s ease,color .15s ease}
+    .tab:hover{color:var(--ink);background:#f3f6fa}
+    .tab[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 3px #182a4326,0 0 0 1px #d5deea}
+    .tab:focus-visible{outline:3px solid #7ea0d8;outline-offset:2px;position:relative;z-index:1}
+    .tabpanel[hidden]{display:none!important}
+    .tabpanel>.intro{margin-top:22px}
     .rebal-intro{font-size:13px;color:#4a5a6e;margin:16px 0 14px;max-width:880px;line-height:1.55}
     .rebal-totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
     .rt{border:1px solid var(--line);background:#fbfcfe;border-radius:13px;padding:11px 14px;min-width:0}
@@ -398,8 +413,8 @@
       .rebal-in{max-width:none;margin-left:0}
       .rebal-chk{justify-content:flex-start}.rebal-chk-t{position:static;width:auto;height:auto;clip:auto;white-space:normal;font-size:12.5px;font-weight:650;color:#31475e}
     }
-    @media(max-width:620px){.rebal-toggle{padding:16px 15px;gap:11px}.rebal-body{padding:2px 15px 18px}.rebal-title{font-size:17px}.rebal-ico{width:34px;height:34px}.rebal-actions .btn{flex:1 1 100%}.rebal-actions #rebalClear{margin-top:8px}.rebal-disc{font-size:13px}.addcat{padding:12px 12px 14px}.emptystate{padding:20px 15px 22px}}
-    @media print{.mini-icon.monogram{print-color-adjust:exact;-webkit-print-color-adjust:exact}.seg,.legendline,.stackbar button{pointer-events:none;transition:none!important;filter:none!important;opacity:1!important}.toolbar,.copychip .copyicon,.add-section,.addcat,.addquick-row,.emptystate,#newPlan,.edittools,input[type=range],.chart-panel,.rebal,.about,.footer .line{display:none!important}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff}.section{box-shadow:none;break-inside:avoid}}
+    @media(max-width:620px){.tabs{display:grid;grid-template-columns:1fr 1fr;width:auto;margin-top:20px}.tab{padding:8px 10px}.rebal{padding:16px 15px 18px}.rebal-title{font-size:18px}.rebal-actions .btn{flex:1 1 100%}.rebal-actions #rebalClear{margin-top:8px}.rebal-disc{font-size:13px}.addcat{padding:12px 12px 14px}.emptystate{padding:20px 15px 22px}}
+    @media print{.mini-icon.monogram{print-color-adjust:exact;-webkit-print-color-adjust:exact}.seg,.legendline,.stackbar button{pointer-events:none;transition:none!important;filter:none!important;opacity:1!important}.toolbar,.editbar,.examplebanner .btn,.introactions,.copychip .copyicon,.addcat,.addquick-row,.emptystate,#newPlan,.edittools,input[type=range],.chart-panel,.tabs,.rebal-actions,.about,.footer .line{display:none!important}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:#fff}.section{box-shadow:none;break-inside:avoid}}
   </style>
 </head>
 <body>
@@ -407,7 +422,6 @@
   <header class="top">
     <div class="brand"><span class="brandmark"><span>F<span style="font-weight:300;color:#9ed9ce">/</span></span></span><div class="brandtext"><strong>Finplanr</strong><span data-i18n="brand.tagline">Your personal portfolio planner</span></div></div>
     <div class="toolbar">
-      <button id="editToggle" class="btn primary" type="button" data-i18n-attr="title:tb.edit.tip">✎ Edit</button>
       <button id="settingsToggle" class="btn" type="button" aria-controls="settingsPanel" aria-expanded="false" data-i18n="tb.settings">⚙ Settings</button>
       <div class="menuwrap" id="exportWrap">
         <button id="exportToggle" class="btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="exportMenu" data-i18n="tb.export">↓ Export ▾</button>
@@ -445,10 +459,20 @@
       </div>
       <div class="visual"><div class="donut" id="donut"><svg class="donutsvg" viewBox="0 0 176 176" role="group" data-i18n-attr="aria-label:donut.aria"><circle class="track" cx="88" cy="88" r="75.25"/><g id="donutSegs" transform="rotate(-90 88 88)"></g></svg><div class="donut-inner"><span class="donut-name" id="donutName"></span><strong id="donutSum">100%</strong><span id="donutSub" data-i18n="hero.allocated">allocated</span></div></div><div class="legend" id="legend"></div></div>
     </section>
-    <div class="intro"><div><div class="introtitle"><h2 data-i18n="intro.title">Your categories</h2><span class="chip hidden" id="exampleChip" data-i18n="chip.example">Example plan – not a recommendation</span></div><p class="sub" id="introSub" data-i18n="intro.sub">Lock categories and single holdings with 🔒. Only unlocked amounts balance changes. Within each category, the holdings add up to 100%.</p></div><div class="introactions"><button id="newPlan" class="btn primary-outline" type="button" data-i18n-attr="title:plan.new.tip"><span class="plus" aria-hidden="true">✚</span><span data-i18n="plan.new">Create my own plan</span></button><span class="muted" id="editLabel"></span></div></div>
+    <div class="tabs" id="tabs" role="tablist" data-i18n-attr="aria-label:tab.aria">
+      <button type="button" role="tab" class="tab" id="tabPlan" data-tab="plan" aria-selected="true" aria-controls="panelPlan" tabindex="0" data-i18n="tab.plan" data-i18n-attr="title:tab.plan.tip">Plan</button>
+      <button type="button" role="tab" class="tab" id="tabRebal" data-tab="rebalance" aria-selected="false" aria-controls="panelRebal" tabindex="-1" data-i18n="tab.rebal" data-i18n-attr="title:tab.rebal.tip">Rebalance</button>
+    </div>
+    <div class="tabpanel" id="panelPlan" role="tabpanel" aria-labelledby="tabPlan">
+    <div class="intro">
+      <h2 data-i18n="intro.title">Your categories</h2>
+      <div class="introactions"><button id="editToggle" class="btn primary" type="button" data-i18n-attr="title:tb.edit.tip">✎ Edit</button><button id="newPlan" class="btn soft small hidden" type="button" data-i18n="plan.newEmpty" data-i18n-attr="title:plan.new.tip">New empty plan</button></div>
+      <p class="sub" id="introSub" data-i18n="intro.sub">Lock categories and single holdings with 🔒. Only unlocked amounts balance changes. Within each category, the holdings add up to 100%. Click a name to open its chart, an identifier to copy it.</p>
+    </div>
     <div class="sortbar hidden" id="globalSortBar"><span class="muted" id="sortHint" data-i18n="sort.auto">Sorted automatically by size — turn this off in Settings to arrange manually</span><div class="sorttools hidden" id="sortTools"><span class="muted" data-i18n="sort.all">All categories &amp; holdings:</span><button id="sortAllDesc" type="button" class="btn soft small" data-i18n="sort.desc">↓ Largest first</button><button id="sortAllAsc" type="button" class="btn soft small" data-i18n="sort.asc">↑ Smallest first</button></div></div>
     <div class="stackbar" id="stackbar" role="group" data-i18n-attr="aria-label:stack.aria"></div>
     <div id="notice" class="notice hidden" role="status"></div>
+    <div class="examplebanner hidden" id="exampleBanner" role="note"><span class="exinfo" aria-hidden="true"></span><span class="extext" data-i18n="banner.example">Example plan – not a recommendation</span><button id="newPlanBanner" class="btn primary-outline small" type="button" data-i18n-attr="title:plan.new.tip"><span class="plus" aria-hidden="true">✚</span><span data-i18n="plan.new">Create my own plan</span></button></div>
     <div class="sections" id="sections"></div>
     <section class="emptystate hidden" id="emptyState" aria-labelledby="emptyTitle">
       <h3 id="emptyTitle" data-i18n="empty.title">Add your first category</h3>
@@ -459,14 +483,11 @@
       <div class="addcat-h" id="addCatTitle" data-i18n="add.btn">+ Add category</div>
       <div class="typerow"><button type="button" class="typebtn" data-new-cat="etf"><span class="ticon" aria-hidden="true">▥</span><span data-i18n="pick.etf">ETF</span></button><button type="button" class="typebtn" data-new-cat="stock"><span class="ticon" aria-hidden="true">▲</span><span data-i18n="pick.stock">Stocks</span></button><button type="button" class="typebtn" data-new-cat="crypto"><span class="ticon" aria-hidden="true">₿</span><span data-i18n="pick.crypto">Crypto</span></button><button type="button" class="typebtn" data-new-cat="etc"><span class="ticon" aria-hidden="true">◈</span><span data-i18n="pick.etc">Precious metals (ETC)</span></button><button type="button" class="typebtn" data-new-cat="cash"><span class="ticon" aria-hidden="true">€</span><span data-i18n="pick.cash">Savings account</span></button><button type="button" class="typebtn" data-new-cat="other"><span class="ticon" aria-hidden="true">◇</span><span data-i18n="pick.other">Other</span></button></div>
     </div>
-    <div id="addCategory" class="add-section hidden">
-      <div class="field"><label for="catName" data-i18n="add.name">New category</label><input id="catName" class="text-input" data-i18n-attr="placeholder:add.placeholder" placeholder="e.g. Stocks"></div>
-      <div class="field"><label for="catType" data-i18n="add.type">Category type</label><select id="catType" class="text-input"><option value="stock" data-i18n="type.stock">Stocks / ticker, ISIN &amp; WKN</option><option value="etf" selected data-i18n="type.etf">ETF / ticker, ISIN &amp; WKN</option><option value="etc" data-i18n="type.etc">ETC / ticker, ISIN &amp; WKN</option><option value="crypto" data-i18n="type.crypto">Crypto / ticker</option><option value="cash" data-i18n="type.cash">Savings account / name</option><option value="other" data-i18n="type.other">Other / all fields</option></select></div>
-      <button id="createCategory" class="btn primary" type="button" data-i18n="add.btn">+ Add category</button>
     </div>
-    <section class="rebal" id="rebal">
-      <h2 class="rebal-h"><button type="button" id="rebalToggle" class="rebal-toggle" aria-expanded="false" aria-controls="rebalBody" aria-labelledby="rebalTitleTxt" aria-describedby="rebalSubTxt"><span class="rebal-ico" aria-hidden="true">⚖</span><span class="rebal-titles"><span class="rebal-title" id="rebalTitleTxt" data-i18n="rebal.title">Rebalance with my current holdings</span><span class="rebal-sub" id="rebalSubTxt" data-i18n="rebal.sub">Enter what you hold today. Finplanr calculates how this month's budget is distributed so that new money moves your portfolio toward your target.</span></span><span class="rebal-chev" aria-hidden="true">▾</span></button></h2>
-      <div class="rebal-body hidden" id="rebalBody">
+    <div class="tabpanel" id="panelRebal" role="tabpanel" aria-labelledby="tabRebal" hidden>
+    <section class="rebal" id="rebal" aria-labelledby="rebalTitleTxt">
+      <div class="rebal-head"><h2 class="rebal-title" id="rebalTitleTxt" data-i18n="rebal.title">Rebalance with my current holdings</h2><p class="rebal-sub" data-i18n="rebal.sub">Enter what you hold today and see how this month's budget is distributed toward your plan.</p></div>
+      <div class="rebal-body" id="rebalBody">
         <p class="rebal-intro" data-i18n="rebal.intro">Your plan above is the target. Enter the current value of each holding: what it is worth today, including gains, not what you paid in. Untick holdings or whole categories you do not want to count, for example a savings account. Everything stays in your browser.</p>
         <div class="rebal-totals">
           <div class="rt"><div class="rt-k" data-i18n="rebal.t.now">Portfolio now</div><div class="rt-v" id="rebalNow">–</div></div>
@@ -498,6 +519,7 @@
         <p class="rebal-disc" role="note"><span class="rebal-disc-ico" aria-hidden="true">i</span><span data-i18n="rebal.assume">Assumes your holdings' values stay as entered (no price changes). Re-enter your current values each month to update the calculation.</span></p>
       </div>
     </section>
+    </div>
   </main>
   <section class="about" id="about" aria-labelledby="aboutTitle">
     <h2 id="aboutTitle" data-i18n="about.title">Finplanr: a free savings plan calculator</h2>
@@ -521,6 +543,7 @@
     <div class="line" data-i18n="foot.note">Planning tool, not investment advice. © 2026 {{COPYRIGHT_HOLDER}}</div>
   </footer>
 </div>
+<div id="editBar" class="editbar hidden" role="region" data-i18n-attr="aria-label:editbar.aria"><div class="editbar-in"><span class="editbar-text" data-i18n="editbar.text">Editing · changes are saved as you type</span><div class="editbar-actions"><button id="editUndo" class="btn" type="button" disabled data-i18n="editbar.undo">Undo all changes</button><button id="editDone" class="btn primary" type="button" data-i18n="editbar.done">Done</button></div></div></div>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="searchModal" class="modalback hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal" id="modalBox">
@@ -641,17 +664,14 @@
       'hero.hint':'All euro amounts update automatically with your monthly budget and the weights.',
       'hero.yearly':'Savings per year','hero.count':'Holdings','hero.alloc':'Budget allocated','hero.allocated':'allocated',
       'intro.title':'Your categories',
-      'intro.sub':'Lock categories and single holdings with 🔒. Only unlocked amounts balance changes. Within each category, the holdings add up to 100%.',
-      'mode.view':'View mode · click a name for its chart, identifiers to copy',
+      'intro.sub':'Lock categories and single holdings with 🔒. Only unlocked amounts balance changes. Within each category, the holdings add up to 100%. Click a name to open its chart, an identifier to copy it.',
       'mode.edit':'Edit mode · change names, identifiers and categories',
       'sort.auto':'Sorted automatically by size — turn this off in Settings to arrange manually',
       'banner.copy':'Unofficial copy of Finplanr. The original is at',
       'sort.hint':'Reorder: drag ⠿ or use the arrows','sort.all':'All categories & holdings:',
       'sort.desc':'↓ Largest first','sort.asc':'↑ Smallest first','sort.label':'Sort:',
       'stack.aria':'Share of each category','stack.btn':'{name}: {pct}. Jump to category','donut.aria':'Allocation by category','donut.seg':'{name}, {pct}, {amount} per month. Jump to category',
-      'add.name':'New category','add.placeholder':'e.g. Stocks','add.type':'Category type','add.btn':'+ Add category',
-      'type.stock':'Stocks / ticker, ISIN & WKN','type.etf':'ETF / ticker, ISIN & WKN','type.etc':'ETC / ticker, ISIN & WKN','type.crypto':'Crypto / ticker',
-      'type.cash':'Savings account / name','type.other':'Other / all fields',
+      'add.btn':'+ Add category','edit.type':'Type','edit.type.tip':'Controls which identifier fields a holding shows and which search it uses',
       'cat.crypto':'Crypto','cat.etf':'ETF','cat.etc':'Precious metals (ETC)','cat.cash':'Savings','item.cash':'Savings account',
       'cat.unnamed':'Category','item.new':'New holding','item.unnamed':'Unnamed',
       'f.name':'Name','f.ticker':'Ticker','tip.wkn':'WKN – German securities code',
@@ -724,8 +744,7 @@
       'toast.newItem':'New holding: search for it or enter the details manually.',
       'toast.itemRemoved':'Holding removed.','toast.catRemoved':'Category removed.',
       'toast.sortedItems':'Holdings sorted.','toast.sortedAll':'Categories and holdings sorted.',
-      'toast.reordered':'Order changed.','toast.catCreated':'Category created. Now add a holding.',
-      'toast.catNameMissing':'Enter a category name.',
+      'toast.reordered':'Order changed.',
       'toast.copied':'Copied: {value}','toast.copyFail':'Could not copy – please select the value manually.',
       'confirm.removeItem':'Really remove “{name}”?',
       'confirm.removeCat.one':'Delete category “{name}” and its {n} holding?',
@@ -838,8 +857,8 @@
       'rebal.sched.csv':'Download month-by-month (CSV)','rebal.sched.csv.tip':'Amounts per holding for each month until the target is reached',
       'rebal.t.lump':'Includes your one-time {lump}.','rebal.t.monthly':'Per month for this horizon: {r} (your budget: {budget}).',
       'rebal.assume':'Assumes your holdings\' values stay as entered (no price changes). Re-enter your current values each month to update the calculation.',
-      'rebal.sub':'Enter what you hold today. Finplanr calculates how this month\'s budget is distributed so that new money moves your portfolio toward your target.',
-      'rebal.intro':'Your plan above is the target. Enter the current value of each holding: what it is worth today, including gains, not what you paid in. Untick holdings or whole categories you do not want to count, for example a savings account. Everything stays in your browser.',
+      'rebal.sub':'Enter what you hold today and see how this month\'s budget is distributed toward your plan.',
+      'rebal.intro':'Your plan is the target. Enter the current value of each holding: what it is worth today, including gains, not what you paid in. Untick holdings or whole categories you do not want to count, for example a savings account. Everything stays in your browser.',
       'rebal.t.now':'Portfolio now','rebal.t.after':'After month 1','rebal.t.budget':'Budget to distribute',
       'rebal.t.budget.note':'Total budget {total}; {rest} stays as planned for holdings that are not counted.',
       'rebal.table.aria':'Current values and calculated split by holding',
@@ -853,13 +872,18 @@
       'rebal.hint.empty':'Nothing entered yet: the result equals your plan.',
       'rebal.notice.over':'Holdings above target receive nothing in this calculation until the others have caught up. With new money only, reaching the target can take several months.',
       'rebal.notice.zero':'The budget is 0, so there is nothing to distribute. The table only compares your current shares with the target.',
-      'rebal.empty.items':'No holdings yet. Add some in the category list above.',
+      'rebal.empty.items':'No holdings yet. Add some on the Plan tab.',
+      'tab.aria':'Plan or rebalance','tab.plan':'Plan','tab.plan.tip':'Your categories and holdings','tab.rebal':'Rebalance','tab.rebal.tip':'Enter what you hold today and see the split',
+      'edit.namePh':'Name your category',
       'rebal.empty.none':'No holding is counted. Tick at least one holding or category to get a result.',
       'rebal.confirm.clear':'Clear all entered current values? This cannot be undone.',
       'rebal.toast.cleared':'Current values cleared.',
       'rebal.csv.head':['Category','Holding','Current value','Share now %','Target %','Difference to target','To reach target (one-time)','Month 1','Plan'],
       'tb.edit.tip':'Rename, recolour, reorder or delete categories and holdings',
-      'chip.example':'Example plan – not a recommendation',
+      'banner.example':'Example plan – not a recommendation',
+      'plan.newEmpty':'New empty plan',
+      'editbar.aria':'Editing','editbar.text':'Editing · changes are saved as you type','editbar.undo':'Undo all changes','editbar.done':'Done',
+      'editbar.undo.confirm':'Undo all changes made since you started editing? The plan returns to how it was.','toast.undone':'Changes undone.',
       'plan.new':'Create my own plan','plan.new.tip':'Start with an empty plan and add your own categories and holdings',
       'confirm.newPlan':'Start an empty plan? The current plan is replaced. Tip: export a JSON backup first (Export menu).',
       'toast.newPlan':'Empty plan created.',
@@ -935,17 +959,14 @@
       'hero.hint':'Alle Euro-Beträge passen sich automatisch deinem Monatsbudget und den Gewichtungen an.',
       'hero.yearly':'Sparsumme pro Jahr','hero.count':'Positionen','hero.alloc':'Budget verteilt','hero.allocated':'verteilt',
       'intro.title':'Deine Kategorien',
-      'intro.sub':'Fixiere Kategorien und einzelne Positionen mit 🔒. Nur nicht fixierte Beträge gleichen Änderungen aus. Innerhalb jeder Kategorie ergeben die Positionen 100 %.',
-      'mode.view':'Ansichtsmodus · Namen für den Chart, Kennungen zum Kopieren anklicken',
+      'intro.sub':'Fixiere Kategorien und einzelne Positionen mit 🔒. Nur nicht fixierte Beträge gleichen Änderungen aus. Innerhalb jeder Kategorie ergeben die Positionen 100 %. Klicke auf einen Namen, um seinen Chart zu öffnen, oder auf eine Kennung, um sie zu kopieren.',
       'mode.edit':'Bearbeitungsmodus · Namen, Kennungen und Kategorien anpassen',
       'sort.auto':'Automatisch nach Größe sortiert – zum manuellen Anordnen in den Einstellungen ausschalten',
       'banner.copy':'Inoffizielle Kopie von Finplanr. Das Original ist unter',
       'sort.hint':'Reihenfolge ändern: ⠿ ziehen oder Pfeile nutzen','sort.all':'Alle Kategorien & Positionen:',
       'sort.desc':'↓ Größte zuerst','sort.asc':'↑ Kleinste zuerst','sort.label':'Sortieren:',
       'stack.aria':'Anteil jeder Kategorie','stack.btn':'{name}: {pct}. Zur Kategorie springen','donut.aria':'Aufteilung nach Kategorie','donut.seg':'{name}, {pct}, {amount} pro Monat. Zur Kategorie springen',
-      'add.name':'Neue Kategorie','add.placeholder':'z. B. Aktien','add.type':'Feldtyp','add.btn':'+ Kategorie hinzufügen',
-      'type.stock':'Aktien / Kürzel, ISIN & WKN','type.etf':'ETF / Kürzel, ISIN & WKN','type.etc':'ETC / Kürzel, ISIN & WKN','type.crypto':'Krypto / Kürzel',
-      'type.cash':'Tagesgeld / Name','type.other':'Sonstige / alle Felder',
+      'add.btn':'+ Kategorie hinzufügen','edit.type':'Typ','edit.type.tip':'Bestimmt, welche Kennungsfelder eine Position zeigt und welche Suche sie nutzt',
       'cat.crypto':'Krypto','cat.etf':'ETF','cat.etc':'Edelmetalle (ETC)','cat.cash':'Tagesgeld','item.cash':'Tagesgeld',
       'cat.unnamed':'Kategorie','item.new':'Neue Position','item.unnamed':'Unbenannt',
       'f.name':'Name','f.ticker':'Kürzel','tip.wkn':'WKN – Wertpapierkennnummer',
@@ -1018,8 +1039,7 @@
       'toast.newItem':'Neue Position: Anlage suchen oder manuell eintragen.',
       'toast.itemRemoved':'Position entfernt.','toast.catRemoved':'Kategorie entfernt.',
       'toast.sortedItems':'Positionen sortiert.','toast.sortedAll':'Kategorien und Positionen sortiert.',
-      'toast.reordered':'Reihenfolge geändert.','toast.catCreated':'Kategorie erstellt. Jetzt eine Position hinzufügen.',
-      'toast.catNameMissing':'Bitte einen Kategorienamen eintragen.',
+      'toast.reordered':'Reihenfolge geändert.',
       'toast.copied':'Kopiert: {value}','toast.copyFail':'Kopieren nicht möglich – bitte den Wert manuell markieren.',
       'confirm.removeItem':'„{name}“ wirklich entfernen?',
       'confirm.removeCat.one':'Kategorie „{name}“ mit {n} Position löschen?',
@@ -1132,8 +1152,8 @@
       'rebal.sched.csv':'Monatsplan herunterladen (CSV)','rebal.sched.csv.tip':'Beträge pro Position für jeden Monat, bis das Ziel erreicht ist',
       'rebal.t.lump':'Enthält deinen einmaligen Betrag von {lump}.','rebal.t.monthly':'Pro Monat für diesen Zeitraum: {r} (dein Budget: {budget}).',
       'rebal.assume':'Annahme: Die Werte deiner Positionen bleiben wie eingetragen (keine Kursänderungen). Trage deine aktuellen Werte jeden Monat neu ein, um die Berechnung zu aktualisieren.',
-      'rebal.sub':'Trage ein, was du heute hältst. Finplanr berechnet, wie sich das Budget dieses Monats verteilt, damit neues Geld dein Portfolio näher an dein Ziel bringt.',
-      'rebal.intro':'Dein Plan oben ist das Ziel. Trage den aktuellen Wert jeder Position ein: was sie heute wert ist, inklusive Gewinnen, nicht was du eingezahlt hast. Entferne das Häkchen bei Positionen oder ganzen Kategorien, die nicht mitzählen, zum Beispiel einem Tagesgeldkonto. Alles bleibt in deinem Browser.',
+      'rebal.sub':'Trage ein, was du heute hältst, und sieh, wie sich das Budget dieses Monats auf deinen Plan hin verteilt.',
+      'rebal.intro':'Dein Plan ist das Ziel. Trage den aktuellen Wert jeder Position ein: was sie heute wert ist, inklusive Gewinnen, nicht was du eingezahlt hast. Entferne das Häkchen bei Positionen oder ganzen Kategorien, die nicht mitzählen, zum Beispiel einem Tagesgeldkonto. Alles bleibt in deinem Browser.',
       'rebal.t.now':'Portfolio jetzt','rebal.t.after':'Nach Monat 1','rebal.t.budget':'Zu verteilendes Budget',
       'rebal.t.budget.note':'Gesamtbudget {total}; {rest} bleiben wie geplant bei Positionen, die nicht zählen.',
       'rebal.table.aria':'Aktuelle Werte und berechnete Aufteilung je Position',
@@ -1147,13 +1167,18 @@
       'rebal.hint.empty':'Noch nichts eingetragen: Das Ergebnis entspricht deinem Plan.',
       'rebal.notice.over':'Positionen über ihrem Ziel erhalten in dieser Berechnung nichts, bis die anderen aufgeholt haben. Nur mit neuem Geld kann das Erreichen des Ziels mehrere Monate dauern.',
       'rebal.notice.zero':'Das Budget ist 0, es gibt also nichts zu verteilen. Die Tabelle vergleicht nur deine aktuellen Anteile mit dem Ziel.',
-      'rebal.empty.items':'Noch keine Positionen vorhanden. Füge oben in der Kategorieliste welche hinzu.',
+      'rebal.empty.items':'Noch keine Positionen vorhanden. Füge im Reiter „Plan“ welche hinzu.',
+      'tab.aria':'Plan oder Ausgleich','tab.plan':'Plan','tab.plan.tip':'Deine Kategorien und Positionen','tab.rebal':'Ausgleich','tab.rebal.tip':'Gib ein, was du heute hältst, und sieh die Aufteilung',
+      'edit.namePh':'Name der Kategorie',
       'rebal.empty.none':'Keine Position zählt. Setze bei mindestens einer Position oder Kategorie ein Häkchen, um ein Ergebnis zu erhalten.',
       'rebal.confirm.clear':'Alle eingetragenen aktuellen Werte löschen? Das kann nicht rückgängig gemacht werden.',
       'rebal.toast.cleared':'Aktuelle Werte gelöscht.',
       'rebal.csv.head':['Kategorie','Position','Aktueller Wert','Anteil jetzt %','Ziel %','Differenz zum Ziel','Bis zum Ziel (einmalig)','Monat 1','Plan'],
       'tb.edit.tip':'Kategorien und Positionen umbenennen, einfärben, anordnen oder löschen',
-      'chip.example':'Beispielplan – keine Empfehlung',
+      'banner.example':'Beispielplan – keine Empfehlung',
+      'plan.newEmpty':'Neuer leerer Plan',
+      'editbar.aria':'Bearbeiten','editbar.text':'Bearbeiten · Änderungen werden direkt gespeichert','editbar.undo':'Alle Änderungen verwerfen','editbar.done':'Fertig',
+      'editbar.undo.confirm':'Alle Änderungen seit Beginn der Bearbeitung verwerfen? Der Plan kehrt zum früheren Stand zurück.','toast.undone':'Änderungen verworfen.',
       'plan.new':'Eigenen Plan erstellen','plan.new.tip':'Mit einem leeren Plan starten und eigene Kategorien und Positionen hinzufügen',
       'confirm.newPlan':'Einen leeren Plan beginnen? Der aktuelle Plan wird ersetzt. Tipp: Exportiere vorher eine JSON-Sicherung (Menü Export).',
       'toast.newPlan':'Leerer Plan erstellt.',
@@ -1329,7 +1354,19 @@
   const cleanSource=v=>v==='manual'||v==='import'?v:null;
   try{const saved=localStorage.getItem(STORAGE_KEY);if(saved)state=validate(JSON.parse(saved));}catch(e){console.warn('Local data not loaded',e);}
   try{const saved=localStorage.getItem(RESET_KEY);if(saved){const parsed=JSON.parse(saved);resetPoint=validate(parsed.portfolio||parsed);resetSavedAt=parsed.savedAt||null;resetSource=cleanSource(parsed.source);}}catch(e){console.warn('Reset point not loaded',e);}
-  function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){console.warn('Local storage not available',e);}}
+  function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){console.warn('Local storage not available',e);}updateEditBar();}
+  // Edit session. Changes are saved live (persist), so the floating bar offers "Done" and "Undo all changes": editSnap is the plan exactly as it was when
+  // editing started (JSON of the persisted state), taken once per session BEFORE the first change, also by the implicit paths (+ Add holding / category).
+  let editSnap=null,tab='plan'; // tab: 'plan' | 'rebalance' (the visible main panel; memory only)
+  function beginEditSession(){if(!editMode&&editSnap===null)editSnap=JSON.stringify(state);}
+  function endEditSession(){editMode=false;editSnap=null;}
+  function updateEditBar(){
+    const bar=document.getElementById('editBar');if(!bar)return;
+    const on=editMode&&tab==='plan'; // the edit bar exists only on the Plan tab
+    bar.classList.toggle('hidden',!on);document.body.classList.toggle('editing',on);
+    const undo=document.getElementById('editUndo');if(undo)undo.disabled=!on||editSnap===null||JSON.stringify(state)===editSnap;
+    document.documentElement.style.setProperty('--editbar-h',on?bar.offsetHeight+'px':'0px');
+  }
   function toast(message,ms=2350){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),ms);}
   function ratios(items){if(!items.length)return [];const sum=items.reduce((s,c)=>s+Math.max(0,Number(c.weight)||0),0);return sum>0?items.map(c=>Math.max(0,Number(c.weight)||0)/sum):items.map(()=>1/items.length);}
   function categoryRatios(){const active=state.categories.filter(c=>c.items.length);if(!active.length)return state.categories.map(()=>0);const positive=active.some(c=>c.weight>0);return ratios(state.categories.map(c=>({...c,weight:c.items.length?(positive?c.weight:1):0})));}
@@ -1538,7 +1575,7 @@
     const peerNote=c.locked?t('peer.noteLocked'):(otherCategories(c.id).length?t('peer.noteOk'):t('peer.noteNone'));
     const step$=money(state.allowCents?0.01:1);
     return `<section class="section" data-section="${esc(c.id)}" style="--accent:${esc(c.color)}"><div class="sectionhead">
-      <div><div class="section-title">${editMode&&!state.autoSort?`<button type="button" class="draghandle" data-drag-cat="${esc(c.id)}" title="${esc(t('drag.cat'))}" aria-label="${esc(t('drag.catAria',{name}))}">⠿</button>`:''}<div class="section-icon"><span class="catsymbol">${catPic(c)}</span></div><div><h3 class="sectionname" tabindex="-1">${esc(name)}</h3></div>${move}</div><div class="categoryline"><span data-cat-total="${esc(c.id)}" class="categorymoney">${money(amount)}</span> <span>${esc(t('sec.perMonth'))} · <span data-cat-items="${esc(c.id)}">${esc(t('sec.count',{n:c.items.length}))}</span></span></div>${editMode?`<div class="edit-head"><label class="sr-only" for="catname-${esc(c.id)}">${esc(t('edit.renameCat'))}</label><input class="text-input" data-rename-cat="${esc(c.id)}" id="catname-${esc(c.id)}" value="${esc(name)}" maxlength="100"><button class="btn danger small" type="button" data-remove-category="${esc(c.id)}">${esc(t('edit.deleteCat'))}</button></div><div class="branding-controls"><label>${esc(t('edit.colour'))} <input aria-label="${esc(t('edit.colourOf',{name}))}" type="color" value="${esc(c.color)}" data-cat-color="${esc(c.id)}"></label><label>${esc(t('edit.icon'))} <input class="text-input symbol-field" maxlength="8" aria-label="${esc(t('edit.iconOf',{name}))}" value="${esc(c.icon||typeEmoji[c.type]||'◇')}" data-cat-icon="${esc(c.id)}"></label><button type="button" class="btn small" data-category-icons="${esc(c.id)}">${esc(t('edit.pickIcon'))}</button></div>`:''}</div>
+      <div><div class="section-title">${editMode&&!state.autoSort?`<button type="button" class="draghandle" data-drag-cat="${esc(c.id)}" title="${esc(t('drag.cat'))}" aria-label="${esc(t('drag.catAria',{name}))}">⠿</button>`:''}<div class="section-icon"><span class="catsymbol">${catPic(c)}</span></div><div><h3 class="sectionname" tabindex="-1">${esc(name)}</h3></div>${move}</div><div class="categoryline"><span data-cat-total="${esc(c.id)}" class="categorymoney">${money(amount)}</span> <span>${esc(t('sec.perMonth'))} · <span data-cat-items="${esc(c.id)}">${esc(t('sec.count',{n:c.items.length}))}</span></span></div>${editMode?`<div class="edit-head"><label class="sr-only" for="catname-${esc(c.id)}">${esc(t('edit.renameCat'))}</label><input class="text-input" data-rename-cat="${esc(c.id)}" id="catname-${esc(c.id)}" value="${esc(name)}" maxlength="100" placeholder="${esc(t('edit.namePh'))}"><label class="typesel" title="${esc(t('edit.type.tip'))}">${esc(t('edit.type'))} <select class="text-input" data-cat-type="${esc(c.id)}" title="${esc(t('edit.type.tip'))}">${['etf','stock','crypto','etc','cash','other'].map(k=>`<option value="${k}" ${c.type===k?'selected':''}>${esc(t('pick.'+k))}</option>`).join('')}</select></label><button class="btn danger small" type="button" data-remove-category="${esc(c.id)}">${esc(t('edit.deleteCat'))}</button></div><div class="branding-controls"><label>${esc(t('edit.colour'))} <input aria-label="${esc(t('edit.colourOf',{name}))}" type="color" value="${esc(c.color)}" data-cat-color="${esc(c.id)}"></label><label>${esc(t('edit.icon'))} <input class="text-input symbol-field" maxlength="8" aria-label="${esc(t('edit.iconOf',{name}))}" value="${esc(c.icon||typeEmoji[c.type]||'◇')}" data-cat-icon="${esc(c.id)}"></label><button type="button" class="btn small" data-category-icons="${esc(c.id)}">${esc(t('edit.pickIcon'))}</button></div>`:''}</div>
       <div class="catcontrols"><div><span class="caption">${esc(t('sec.share',{step:step$}))}</span><input type="range" min="0" max="${max}" step="${step}" data-cat-range="${esc(c.id)}" value="${amount}" style="--fill:${obj.catRatio*100}%" aria-label="${esc(t('aria.catAmount',{name}))}" ${cap.disabled?'disabled':''}></div><label class="pctinput"><span class="sr-only">${esc(t('aria.catPct',{name}))}</span><input type="number" min="0" max="100" step="0.01" inputmode="decimal" data-cat-number="${esc(c.id)}" value="${formatPctInput(obj.catRatio*100)}" ${cap.disabled?'disabled':''}><span>%</span></label><label class="euroinput"><span class="sr-only">${esc(t('aria.catAmount',{name}))}</span><input type="number" min="0" max="${max}" step="${step}" inputmode="${state.allowCents?'decimal':'numeric'}" data-cat-euro-input="${esc(c.id)}" value="${amount}" ${cap.disabled?'disabled':''}><span>€</span></label></div>
     </div>
     <div class="locktools"><label class="lockchip ${c.locked?'locked-ui':''}" title="${esc(t('lock.catTip'))}"><input type="checkbox" data-cat-lock="${esc(c.id)}" ${c.locked?'checked':''} ${!c.items.length?'disabled':''}><span>${esc(c.locked?t('lock.catOn'):t('lock.catOff'))}</span></label><label for="peer-${esc(c.id)}">${esc(t('peer.label'))}</label><select id="peer-${esc(c.id)}" class="peer-select" data-cat-peer="${esc(c.id)}" ${c.locked||!c.items.length?'disabled':''}>${peerOptions}</select><span class="muted">${esc(peerNote)}</span></div>
@@ -1709,19 +1746,21 @@
     openChart={catId,itemId};
     mountChart(true);
   }
-  // ---- Onboarding chrome. The example chip is stateless: it shows while the plan consists of exactly the built-in example's categories and holdings (ids, any order).
+  // ---- Onboarding chrome. The example banner is stateless: it shows while the plan consists of exactly the built-in example's categories and holdings (ids, any order).
   const planShape=p=>p.categories.map(c=>c.id+':'+c.items.map(i=>i.id).sort().join(',')).sort().join('|');
   const DEFAULT_SHAPE=planShape(DEFAULT);
   const isExamplePlan=()=>planShape(state)===DEFAULT_SHAPE;
   function updatePlanChrome(){
     const none=!state.categories.length;
-    $('#exampleChip').classList.toggle('hidden',!isExamplePlan());
+    const example=isExamplePlan();
+    $('#exampleBanner').classList.toggle('hidden',!example);
     $('#emptyState').classList.toggle('hidden',!none);
-    $('#addCatQuick').classList.toggle('hidden',none||editMode);
-    $('#newPlan').classList.toggle('hidden',none);
-    $('#editLabel').classList.toggle('hidden',none);$('#introSub').classList.toggle('hidden',none);
+    $('#addCatQuick').classList.toggle('hidden',none);
+    $('#newPlan').classList.toggle('hidden',none||example);
+    $('#editToggle').classList.toggle('hidden',none||editMode);
+    $('#introSub').classList.toggle('hidden',none);
     $('#stackbar').classList.toggle('hidden',none);
-    $('#rebal').classList.toggle('hidden',none);
+    $('#rebal').classList.toggle('is-empty',none); // zero categories: the Rebalance tab shows only its empty hint
   }
   // "sec.count" resolves to the plural variants via {n}.
   function render(keepChart){
@@ -1731,11 +1770,10 @@
     applyStatic();
     $('#editToggle').textContent=editMode?t('tb.done'):t('tb.edit');
     $('#editToggle').classList.toggle('primary',!editMode);
-    $('#editLabel').textContent=editMode?t('mode.edit'):t('mode.view');
+    $('#introSub').textContent=t(editMode?'mode.edit':'intro.sub');
     const noCats=!state.categories.length;
-    $('#addCategory').classList.toggle('hidden',!editMode||noCats);
     $('#globalSortBar').classList.toggle('hidden',!editMode||noCats);
-    updatePlanChrome();
+    updatePlanChrome();updateEditBar();
     $('#autoSort').checked=state.autoSort;$('#offerLogo').checked=state.offerLogo;$('#sortTools').classList.toggle('hidden',state.autoSort);if(!state.autoSort)$('#sortHint').textContent=t('sort.hint');
     $('#allowCents').checked=state.allowCents;
     $('#monthlyBudget').step=state.allowCents?'0.01':'1';
@@ -1788,6 +1826,7 @@
   }
   function jumpToCategory(id){
     const sec=document.querySelector(`[data-section="${CSS.escape(id)}"]`);if(!sec)return;
+    if(tab!=='plan')setTab('plan',{scroll:false});
     allocHover=allocFocus=null;allocPaint();
     sec.scrollIntoView({block:'start'}); // smooth unless prefers-reduced-motion (see CSS); scroll-margin-top keeps it off the edge
     sec.querySelector('.sectionname')?.focus({preventScroll:true});
@@ -1801,7 +1840,7 @@
     box.addEventListener('focusout',()=>{allocFocus=null;allocPaint();});
     box.addEventListener('click',e=>{const el=segOf(e);if(el)jumpToCategory(el.dataset.seg);});
   });
-  $('#donut').addEventListener('click',e=>{if(!e.target.closest('[data-seg]')&&!state.categories.length)$('#emptyState').scrollIntoView({block:'center'});});
+  $('#donut').addEventListener('click',e=>{if(!e.target.closest('[data-seg]')&&!state.categories.length){if(tab!=='plan')setTab('plan',{scroll:false});$('#emptyState').scrollIntoView({block:'center'});}});
   $('#donut').addEventListener('keydown',e=>{const el=e.target.closest?.('.seg');if(el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();jumpToCategory(el.dataset.seg);}});
   function updateNumbers(){
     const data=info(),count=state.categories.reduce((s,c)=>s+c.items.length,0),active=state.categories.filter(c=>c.items.length).length;
@@ -1841,7 +1880,18 @@
     const target=isPercent?Math.round(clamp(val,0,100)*units/100):Math.round(clamp(val,0,100000000)*(state.allowCents?100:1));
     setAmount(kind,catId,itemId,target);
   }
-  $('#editToggle').addEventListener('click',()=>{editMode=!editMode;render();});
+  $('#editToggle').addEventListener('click',()=>{if(editMode)endEditSession();else{beginEditSession();editMode=true;}render();});
+  $('#editDone').addEventListener('click',()=>{endEditSession();render();$('#editToggle').focus({preventScroll:true});});
+  $('#editUndo').addEventListener('click',()=>{
+    if(!editMode||editSnap===null||JSON.stringify(state)===editSnap)return;
+    if(!confirm(t('editbar.undo.confirm')))return;
+    if(!$modal.classList.contains('hidden'))closeSearchModal({quiet:true});
+    if(privOpen())closePrivacy();
+    closeChart();
+    state=validate(JSON.parse(editSnap));endEditSession();persist();render();toast(t('toast.undone'));
+    $('#editToggle').focus({preventScroll:true});
+  });
+  window.addEventListener('resize',updateEditBar);
   $('#settingsToggle').addEventListener('click',()=>{
     const panel=$('#settingsPanel');const show=panel.classList.contains('hidden');
     panel.classList.toggle('hidden',!show);$('#settingsToggle').setAttribute('aria-expanded',String(show));
@@ -1876,6 +1926,14 @@
       const c=state.categories.find(x=>x.id===el.dataset.catLock);if(!c)return;
       c.locked=el.checked;
       persist();render();toast(t(c.locked?'toast.catLockOn':'toast.catLockOff',{name:catName(c)}));return;
+    }
+    if(el.hasAttribute('data-cat-type')){
+      const c=state.categories.find(x=>x.id===el.dataset.catType),nt=el.value;if(!c||!Object.hasOwn(typeEmoji,nt)||nt===c.type)return;
+      const old=c.type;
+      if(c.nameKey==='cat.'+old){c.nameKey='cat.'+nt;c.name=t(c.nameKey);} // a default name keeps following its type; a customised name stays
+      if((!c.icon||c.icon===typeEmoji[old])&&!c.iconUrl)c.icon=typeEmoji[nt]; // default symbol follows the type; a custom icon stays
+      c.type=nt; // every holding's data stays; fields the new type does not show are only hidden
+      persist();render();return;
     }
     if(el.hasAttribute('data-cat-peer')){
       const c=state.categories.find(x=>x.id===el.dataset.catPeer);if(c){c.rebalanceWith=el.value;persist();render();}return;
@@ -1938,6 +1996,7 @@
   // Edit mode is switched on so the new holding can also be filled in by hand if the dialog is closed without a pick.
   function addHolding(catId){
     const c=state.categories.find(x=>x.id===catId);if(!c)return;
+    beginEditSession();
     const newId=uid();c.items.push({id:newId,name:t('item.new'),nameKey:'item.new',ticker:'',tv:'',isin:'',wkn:'',icon:'',iconUrl:'',locked:false,weight:0,current:null,rebal:true});
     if(c.items.length===1)c.items[0].weight=100;
     if(state.categories.filter(x=>x.items.length).length===1)c.weight=100;
@@ -1946,18 +2005,44 @@
   // One-tap category of a type (empty state and "+ Add category"): localized default name, then straight into the search dialog.
   function startCategory(type){
     if(!Object.hasOwn(typeEmoji,type))return;
+    beginEditSession();
     const id=uid(),key='cat.'+type;
     state.categories.push({id,name:t(key),nameKey:key,type,color:colors[(state.categories.length-4+colors.length)%colors.length],icon:typeEmoji[type],iconUrl:'',locked:false,rebalanceWith:'auto',rebalOff:false,weight:state.categories.length?0:100,items:[]});
+    if(type==='other'){ // the default name "Other" is rarely the real one: ask for the name first, the search dialog follows on Enter
+      editMode=true;persist();render();
+      document.querySelector(`[data-section="${CSS.escape(id)}"]`)?.scrollIntoView({block:'center'});
+      const inp=document.getElementById('catname-'+id);
+      if(inp){namingCat=id;inp.setAttribute('aria-label',t('edit.namePh'));inp.focus({preventScroll:true});inp.select();}
+      return;
+    }
     addHolding(id);
+    document.querySelector(`[data-section="${CSS.escape(id)}"]`)?.scrollIntoView({block:'center'});
   }
+  // Naming step of a new "Other" category: Enter keeps the name and opens the search dialog, Esc restores the default name; leaving the field ends the step.
+  let namingCat=null;
+  $('#sections').addEventListener('keydown',e=>{
+    const el=e.target;
+    if(!namingCat||!el.hasAttribute||!el.hasAttribute('data-rename-cat')||el.dataset.renameCat!==namingCat||e.isComposing||e.keyCode===229)return;
+    const c=state.categories.find(x=>x.id===namingCat);if(!c){namingCat=null;return;}
+    if(e.key==='Enter'){
+      e.preventDefault();namingCat=null;
+      if(!String(c.name).trim()){c.name=t('cat.other');c.nameKey='cat.other';persist();}
+      addHolding(c.id);
+      document.querySelector(`[data-section="${CSS.escape(c.id)}"]`)?.scrollIntoView({block:'center'});
+    }else if(e.key==='Escape'){
+      namingCat=null;c.name=t('cat.other');c.nameKey='cat.other';persist();el.value=c.name;el.select();
+    }
+  });
+  $('#sections').addEventListener('focusout',e=>{if(namingCat&&e.target.dataset&&e.target.dataset.renameCat===namingCat)namingCat=null;});
   document.addEventListener('click',e=>{const b=e.target.closest?.('[data-new-cat]');if(b)startCategory(b.dataset.newCat);});
   // "Create my own plan": an empty plan keeps budget, cents setting and the two preferences; everything else (incl. rebalance values) starts fresh.
-  $('#newPlan').addEventListener('click',()=>{
+  function startOwnPlan(){
     if(state.categories.length&&!confirm(t('confirm.newPlan')))return;
     state=validate({budget:state.budget,allowCents:state.allowCents,autoSort:state.autoSort,offerLogo:state.offerLogo,categories:[]});
-    editMode=false;persist();render();toast(t('toast.newPlan'));
+    endEditSession();persist();render();toast(t('toast.newPlan'));
     $('#emptyState button')?.focus({preventScroll:true});
-  });
+  }
+  $('#newPlan').addEventListener('click',startOwnPlan);$('#newPlanBanner').addEventListener('click',startOwnPlan);
   function moveInArray(array,id,delta){
     const index=array.findIndex(x=>x.id===id);if(index<0)return false;
     const next=clamp(index+delta,0,array.length-1);
@@ -2084,13 +2169,6 @@
   }
   $('#sections').addEventListener('pointerup',finishDrag);
   $('#sections').addEventListener('pointercancel',e=>{if(drag&&drag.pointer===e.pointerId){clearDrop();drag.source.classList.remove('dragging');document.body.style.userSelect='';drag=null;}});
-  $('#createCategory').addEventListener('click',()=>{
-    const name=$('#catName').value.trim();if(!name){$('#catName').focus();return toast(t('toast.catNameMissing'));}
-    const type=$('#catType').value;const id=uid();state.categories.push({id,name:name.slice(0,100),type,color:colors[(state.categories.length-4+colors.length)%colors.length],icon:typeEmoji[type],iconUrl:'',locked:false,rebalanceWith:'auto',rebalOff:false,weight:0,items:[]});
-    $('#catName').value='';persist();render();toast(t('toast.catCreated'));
-    document.querySelector(`[data-section="${CSS.escape(id)}"]`)?.scrollIntoView({behavior:'smooth',block:'center'});
-  });
-  $('#catName').addEventListener('keydown',e=>{if(e.key==='Enter')$('#createCategory').click();});
 
   // ---------------------------------------------------------------- search & image picker
   // No scraped ETF portals: they generally disallow cross-origin browser access.
@@ -2977,7 +3055,7 @@
   }
   // Entered values may have cents even in whole-euro mode, so sums show cents whenever they are not whole euros.
   function moneyV(n){const c=Math.round(n*100),f=state.allowCents||c%100!==0;return numFmt({style:'currency',currency:'EUR',minimumFractionDigits:f?2:0,maximumFractionDigits:f?2:0}).format(c/100);}
-  let rebalOpen=false,rebalSig='',rebalMap=new Map(),rebalAll=false;
+  let rebalSig='',rebalMap=new Map(),rebalAll=false;
   const rKey=(cat,item)=>JSON.stringify([cat,item]);
   const rebalItem=el=>state.categories.find(c=>c.id===el.dataset.cat)?.items.find(x=>x.id===el.dataset.item);
   const rebalPic=(cat,it)=>it.iconExternal===true&&cleanImg(it.iconUrl)?visualIcon('',it.icon||typeEmoji[cat.type]||'◇',false):assetPic(cat,it,.8);
@@ -3123,16 +3201,42 @@
     $('#rebalClear').disabled=!state.categories.some(c=>c.items.some(it=>typeof it.current==='number'));
   }
   function updateRebal(){
-    if(!rebalOpen)return; // closed: nothing is built or computed; opening builds everything from the current state
+    if(tab!=='rebalance')return; // Plan tab: nothing is built or computed; switching to Rebalance builds everything from the current state
     const m=rebalModel(),sig=lang+'|'+state.allowCents+'|'+m.cats.map(g=>g.cat.id+':'+g.cat.color+':'+g.rows.map(r=>r.item.id).join(',')).join('|');
     if(sig!==rebalSig){buildRebal(m);rebalSig=sig;}
     paintRebal(m);
   }
-  function setRebalOpen(open){
-    rebalOpen=open;$('#rebalToggle').setAttribute('aria-expanded',String(open));$('#rebalBody').classList.toggle('hidden',!open);
-    if(open){rebalSig='';updateRebal();}
+  // ---------------------------------------------------------------- tabs: Plan | Rebalance
+  // Two panels in the main section. Only the active one is visible (the other has `hidden`); the tab is kept in memory and mirrored in the URL hash
+  // (#rebalance; Plan = no hash) with replaceState, so a language switch (which keeps the hash) and deep links work without history entries.
+  const tabButtons=[...document.querySelectorAll('#tabs [role="tab"]')],tabScroll={};
+  const tabFromHash=()=>location.hash==='#rebalance'?'rebalance':'plan';
+  function setTab(next,o){
+    o=o||{};
+    if(next!=='plan'&&next!=='rebalance')return;
+    const changed=next!==tab;
+    if(changed){
+      tabScroll[tab]=window.scrollY;
+      if(next==='rebalance'&&editMode){endEditSession();render();} // like Done: changes are already saved, only the snapshot is dropped
+    }
+    tab=next;
+    tabButtons.forEach(b=>{const on=b.dataset.tab===next;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
+    $('#panelPlan').hidden=next!=='plan';$('#panelRebal').hidden=next!=='rebalance';
+    updateEditBar();
+    if(next==='rebalance'){rebalSig='';updateRebal();}
+    if(changed&&o.scroll!==false&&typeof tabScroll[next]==='number')window.scrollTo({top:tabScroll[next],left:0,behavior:'instant'});
+    if(o.hash!==false){try{const h=next==='rebalance'?'#rebalance':'';if(location.hash!==h)history.replaceState(history.state,'',location.pathname+location.search+h);}catch(e){}}
+    if(o.focus)tabButtons.find(b=>b.dataset.tab===next)?.focus();
   }
-  $('#rebalToggle').addEventListener('click',()=>setRebalOpen(!rebalOpen));
+  tabButtons.forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+  $('#tabs').addEventListener('keydown',e=>{
+    if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;
+    const i=tabButtons.indexOf(document.activeElement),n=tabButtons.length;if(i<0)return;
+    const j=e.key==='ArrowRight'?(i+1)%n:e.key==='ArrowLeft'?(i-1+n)%n:e.key==='Home'?0:e.key==='End'?n-1:-1;
+    if(j<0)return;
+    e.preventDefault();setTab(tabButtons[j].dataset.tab,{focus:true});
+  });
+  window.addEventListener('hashchange',()=>{const want=tabFromHash();if(want!==tab)setTab(want,{hash:false});});
   $('#rebalBody').addEventListener('input',e=>{
     const el=e.target;if(!el.hasAttribute)return;
     if(el.hasAttribute('data-rebal-cur')){
@@ -3233,7 +3337,7 @@
   $('#importJson').addEventListener('click',()=>$('#importFile').click());
   $('#importFile').addEventListener('change',async e=>{
     const f=e.target.files?.[0];if(!f)return;
-    try{if(f.size>1024*1024)throw Error(t('err.tooLarge'));const parsed=JSON.parse(await f.text()),imported=validate(parsed);if(!confirm(t(parsed.resetSnapshot?'confirm.import.snap':'confirm.import')))return;state=imported;editMode=false;
+    try{if(f.size>1024*1024)throw Error(t('err.tooLarge'));const parsed=JSON.parse(await f.text()),imported=validate(parsed);if(!confirm(t(parsed.resetSnapshot?'confirm.import.snap':'confirm.import')))return;state=imported;endEditSession();
       const prior=parsed.resetSnapshot;
       resetPoint=prior?validate(prior.portfolio||prior):clone(imported);
       resetSavedAt=prior?(prior.savedAt||null):new Date().toISOString();
@@ -3256,11 +3360,11 @@
   $('#saveResetPoint').addEventListener('click',()=>{resetPoint=validate(clone(state));resetSavedAt=new Date().toISOString();resetSource='manual';saveResetPointToStorage();updateResetLabel();toast(t('toast.resetSaved'));});
   $('#reset').addEventListener('click',()=>{
     if(!confirm(resetPoint?t('confirm.reset',resetFacts()):t('confirm.resetNone')))return;
-    state=validate(clone(resetPoint||DEFAULT));editMode=false;persist();render();toast(t('toast.resetDone'));
+    state=validate(clone(resetPoint||DEFAULT));endEditSession();persist();render();toast(t('toast.resetDone'));
   });
   $('#factoryReset').addEventListener('click',()=>{
     if(!confirm(t('confirm.factory')))return;
-    state=validate(clone(DEFAULT));resetPoint=null;resetSavedAt=null;resetSource=null;saveResetPointToStorage();editMode=false;persist();render();toast(t('toast.factoryDone'));
+    state=validate(clone(DEFAULT));resetPoint=null;resetSavedAt=null;resetSource=null;saveResetPointToStorage();endEditSession();persist();render();toast(t('toast.factoryDone'));
   });
 
   // ---------------------------------------------------------------- language switch
@@ -3296,6 +3400,7 @@
   try{if(!isAllowedHost(location.hostname))showCopyBanner();}catch(e){console.warn('Domain check skipped',e);}
   initConsent();
   render();
+  if(tabFromHash()==='rebalance')setTab('rebalance',{hash:false}); // deep link; no focus is moved
 })();
 </script>
 </body>
