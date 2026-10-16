@@ -3,7 +3,9 @@
 #   1. cp config/operator.example.json config/operator.json   (edit it)
 #   2. python3 -I tools/build.py                              (creates ./dist)
 #   3. cp docker-compose.example.yaml docker-compose.yaml     (the copy is git-ignored)
-#   4. docker compose up -d
+#   4. mkdir -p dist/data instruments-data instruments-cache          (once; see "Automatic instrument updates" below)
+#      cp -n dist/data/instruments.v1.json instruments-data/          (optional seed, if tools/build.py produced one)
+#   5. docker compose up -d
 #
 # The container publishes no port by default. Either uncomment the "ports" block below for a quick local
 # test (http://localhost:8080) or use the optional tunnel service.
@@ -14,11 +16,64 @@ services:
     restart: unless-stopped
     volumes:
       - ./dist:/usr/share/nginx/html:ro
+      # The instrument index is served from a separate, writable host folder (written by the instrument-updater service below).
+      # It is mounted over dist/data, so dist/data/ from tools/build.py is only the initial seed. The folder dist/data must exist
+      # (mkdir -p dist/data): Docker cannot create the mount point inside the read-only dist mount.
+      - ./instruments-data:/usr/share/nginx/html/data:ro
       - ./config/default.conf:/etc/nginx/conf.d/default.conf:ro
     # ports:
     #   - "127.0.0.1:8080:80"
     security_opt:
       - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Automatic instrument updates: rebuilds the instrument index (instruments.v1.json, the data behind the search) every night
+  # from the official reference data (ESMA FIRDS), without rebuilding or restarting the site.
+  #   - Runs python3 tools/fetch-instruments.py --refresh once a day at UPDATE_AT (local time of TZ), checks the result and only
+  #     then atomically replaces instruments-data/instruments.v1.json. On any problem the old file stays; one retry after 30 min.
+  #   - Needs outbound HTTPS only (no ports, no secrets). Downloads about 76 MB at most once a day, about 200 MB RAM while parsing.
+  #   - First start: if instruments-data/instruments.v1.json is missing it is built right away (takes a few minutes), or copy dist/data/.
+  #   - Check:      docker logs finplanr-instrument-updater      and      instruments-data/instruments.status.json
+  #   - Manual run: docker compose run --rm instrument-updater once       (add -e MIN_ROWS_RATIO=0 after a deliberate data-source change)
+  #   - Disable:    docker compose stop instrument-updater   (or delete this service block): the site keeps serving the last file.
+  # Set UPDATER_USER (default 1000:1000) to the uid:gid that owns ./instruments-data and ./instruments-cache.
+  instrument-updater:
+    image: python:3.12-slim-bookworm
+    container_name: finplanr-instrument-updater
+    restart: unless-stopped
+    entrypoint: ["python3", "-I", "-B", "/app/updater/run.py"]
+    command: ["daemon"]
+    working_dir: /app
+    user: "${UPDATER_USER:-1000:1000}"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    mem_limit: 512m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=Europe/Berlin
+      - UPDATE_AT=00:30
+      # Extra arguments for tools/fetch-instruments.py (shell-style quoting), normally empty.
+      - FETCH_ARGS=
+    volumes:
+      - ./tools:/app/tools:ro
+      - ./instrument-updater:/app/updater:ro
+      - ./instruments-data:/data
+      # Raw downloads (the fetch script keeps its cache in <project root>/build-cache = /app/build-cache here).
+      - ./instruments-cache:/app/build-cache
+    healthcheck:
+      test: ["CMD", "python3", "-I", "-B", "-c", "import os,sys,time; sys.exit(0 if time.time()-os.stat('/tmp/updater.alive').st_mtime < 300 else 1)"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
     logging:
       driver: json-file
       options:
