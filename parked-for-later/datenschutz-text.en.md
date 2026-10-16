@@ -1,6 +1,6 @@
 # Privacy Policy for Finplanr
 
-**Last updated: 15 October 2026**
+**Last updated: 16 October 2026**
 
 ## 1. Controller
 
@@ -130,16 +130,18 @@ According to TradingView, the widget sets no cookies; in our test it set none. I
 
 **Attribution:** Below the chart TradingView shows the note "Track all markets on TradingView". It is part of the widget and shown unchanged.
 
-## 7. Optional online search (CoinGecko, Wikidata, Wikimedia Commons)
+## 7. Search for holdings: instrument database and optional online search (CoinGecko, Wikidata, Wikimedia Commons)
 
-In edit mode you can use a search for a position to find stocks, ETFs and cryptocurrencies, identifiers (ISIN, WKN, ticker) and suitable images. In the search dialog you choose the source ("Stocks & ETFs" or "Crypto"); it defaults to the category type and you can switch it at any time. Searching the **built-in catalog** takes place locally in your browser and needs no consent. The **online search** only runs after your explicit consent (section 5): the dialog shows a consent box first, and no request is sent to any provider until you have confirmed it (or allowed the online search in the "Privacy settings"). The box names the providers and links to this privacy policy.
+In edit mode you can use a search for a position to find stocks, ETFs and cryptocurrencies, identifiers (ISIN, WKN, ticker) and suitable images. In the search dialog you choose the source ("Securities" or "Crypto"); it defaults to the category type and you can switch it at any time. The **instrument database** (source "Securities") and the built-in coin list are searched locally in your browser and need no consent. The **online search** only runs after your explicit consent (section 5): the dialog shows a consent box first, and no request is sent to any provider until you have confirmed it (or allowed the online search in the "Privacy settings"). The box names the providers and links to this privacy policy.
 
 **Logo offer after adding a holding:** When you apply a search result that comes without a logo (not for savings accounts), the dialog offers to look for a logo and shows a short second step. This logo search is an image search at Wikimedia Commons and is covered by the same consent as the rest of the online search: if you have not allowed it yet, the second step only shows the consent box with the choice "Allow online search" or "Skip", and nothing is requested before you confirm. Your search term is then the name of the holding without legal suffixes plus the word "logo" (for example "Apple logo"); you can change it before searching. Choosing "Skip", pressing Esc or closing the dialog keeps the holding without a logo. You can switch the offer off for good with the box "Don't offer a logo search when adding holdings" in that step or in Settings ("Offer a logo search when I add a holding"); the setting is stored in your browser together with your plan (section 4).
+
+**Instrument database (no consent needed):** For the source "Securities" Finplanr uses an instrument database. It is a static file (`/data/instruments.v1.json`) that belongs to our own website and is created in advance from official reference data. Sources: ESMA Financial Instruments Reference Data System (FIRDS), registers.esma.europa.eu (names, venues and classification condensed and transformed by Finplanr; not endorsed by ESMA), for Xetra tickers OpenFIGI (Bloomberg L.P.; open symbology, FIGI identifiers dedicated to the public domain) and for tickers of US stocks (Nasdaq, NYSE) Wikidata (structured data under CC0); for German ISINs the WKN is derived from the ISIN. These sources are queried by us in advance when the file is created, not when you visit the site, and no visitor data is involved. The date and the full attribution are shown at the bottom of the search dialog. When you open the search for this source, your browser loads the file from our server, as it does with any other file of the website; this is an ordinary request to our server (section 3), without cookies and without any search term. **Searching** the file takes place entirely in your browser: what you type is not sent to us or to any other provider, and it is not stored. Because no third party is involved, no consent is needed for this part. Like all files of the website, the file may be kept in the browser's ordinary cache for up to one day. If the file cannot be loaded, a small built-in list answers instead.
 
 The following services may be queried after your consent:
 
 - **CoinGecko** (api.coingecko.com), search for cryptocurrencies. Provider: Gecko Labs Pte. Ltd., Singapore (EU representative under Art. 27 GDPR: Euverify Ltd, Cork, Ireland). Privacy: https://www.coingecko.com/en/privacy
-- **Wikidata** (www.wikidata.org and its query service query.wikidata.org), search for security and company data (source "Stocks & ETFs"; the query service only receives the identifiers of the Wikidata entries found, not your search term), and **Wikimedia Commons** (commons.wikimedia.org), image search. Provider of these services: Wikimedia Foundation, Inc., USA. Privacy: https://foundation.wikimedia.org/wiki/Policy:Privacy_policy
+- **Wikidata** (www.wikidata.org and its query service query.wikidata.org), search for security and company data (source "Securities"; the query service only receives the identifiers of the Wikidata entries found, not your search term), and **Wikimedia Commons** (commons.wikimedia.org), image search. Provider of these services: Wikimedia Foundation, Inc., USA. Privacy: https://foundation.wikimedia.org/wiki/Policy:Privacy_policy
 
 **Data processed:** Your browser sends your search term and the technically necessary data directly to the respective provider: your IP address, browser and operating system details, and, as the origin of the request, the address "https://finplanr.net" (Finplanr sends no referrer with these requests). Our server neither sees nor stores your search term. The result lists may contain preview images (for example coin logos from coin-images.coingecko.com or images from thumb.wikimedia.org or upload.wikimedia.org), which your browser also loads directly from there.
 
@@ -153,7 +155,7 @@ The following services may be queried after your consent:
 
 **Third-country transfer:** CoinGecko is based in Singapore and the Wikimedia Foundation in the USA. There is no European Commission adequacy decision for Singapore. The Wikimedia Foundation's privacy policy names no certification under the EU-US Data Privacy Framework, and we have no standard contractual clauses with either provider. We therefore base the transfer solely on your explicit consent after being informed of the risks (**Art. 49(1)(a) GDPR**; the risks are described in section 5 and in the consent box). If you do not want this, do not consent to the online search.
 
-**Consequences:** If you do not consent, these connections do not occur. The app is fully usable without the online search (you can use the built-in catalog or enter identifiers and names by hand).
+**Consequences:** If you do not consent, these connections do not occur. The app is fully usable without the online search (you can use the instrument database or enter identifiers and names by hand).
 
 ## 8. Logos and external images
 
